@@ -9,7 +9,7 @@
 
 ## 1. Titolarità Esclusiva di ATON-FUX sul Codice OMNICLAUDE
 
-Tutti i file presenti in questo repository — inclusi, a titolo esemplificativo e non esaustivo, il server locale (`server.py`), l'interfaccia grafica web (`web/index.html`) con tema **Black/White Hack**, il configuratore del **Paracadute Modulare**, gli script di orchestrazione e diagnostica (`INSTALLA.bat`, `START.bat`, `START_CLAUDE.bat`, `START_OPENCODE.bat`, `FERMA.bat`, `LOGIN_CLAUDE.bat`) e la documentazione italiana — sono **opera originale creata da ATON-FUX**.
+Tutti i file presenti in questo repository — inclusi, a titolo esemplificativo e non esaustivo, il server locale (`server.py`), l'interfaccia grafica web (`web/index.html`) con selettore tema **Dark Cyber / Light Pro**, il configuratore del **Paracadute Modulare**, il modulo **Gemini Multi-Key Hub**, gli script di orchestrazione e diagnostica (`INSTALLA.bat`, `START.bat`, `START_CLAUDE.bat`, `START_OPENCODE.bat`, `FERMA.bat`, `LOGIN_CLAUDE.bat`) e la documentazione italiana — sono **opera originale creata da ATON-FUX**.
 
 Ai sensi della **GNU GPL v3.0 (Sezioni 5 e 7)**:
 - È obbligatorio citare **ATON-FUX** come creatore originale in qualsiasi copia, fork o distribuzione.

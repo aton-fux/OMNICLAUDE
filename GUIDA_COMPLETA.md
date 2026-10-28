@@ -2,10 +2,10 @@
   <img src="./assets/logo.png" width="124" height="124" alt="OMNICLAUDE Official Logo" />
 </div>
 
-# 📘 Guida Ufficiale Italiana: OMNICLAUDE — Hack Edition v2.0
+# 📘 Guida Ufficiale Italiana: OMNICLAUDE — Pro Edition v2.0
 **Creato da ATON-FUX** · Repository Ufficiale: [https://github.com/aton-fux/OMNICLAUDE](https://github.com/aton-fux/OMNICLAUDE)
 
-Benvenuto in **OMNICLAUDE**, il centro di controllo AI ideato da **ATON-FUX** per utilizzare **Claude Code** e **OpenCode** collegati a **motori AI Cloud gratuiti, Open Source, modelli Locali Ollama e al tuo account web Claude.ai**, con **Paracadute Modulare** anti-interruzione e scelta del tema **Black Hack / White Hack**.
+Benvenuto in **OMNICLAUDE**, il centro di controllo AI ideato da **ATON-FUX** per utilizzare **Claude Code** e **OpenCode** collegati a **motori AI Cloud gratuiti, Open Source, modelli Locali Ollama e al tuo account web Claude.ai**, con **Paracadute Modulare** anti-interruzione e scelta del tema **Dark Cyber / Light Pro**.
 
 ---
 
@@ -26,7 +26,7 @@ Benvenuto in **OMNICLAUDE**, il centro di controllo AI ideato da **ATON-FUX** pe
 
 1. Fai doppio click su **`START.bat`**.
 2. Si aprirà **OMNICLAUDE** nel browser (`http://localhost:3000`).
-3. In alto a destra puoi scegliere in qualsiasi momento lo stile **`🖤 BLACK HACK`** oppure **`🤍 WHITE HACK`**.
+3. In alto a destra puoi scegliere in qualsiasi momento lo stile **`🖤 DARK CYBER`** oppure **`🤍 LIGHT PRO`**.
 4. Nella **Pagina Iniziale**, subito sotto al box **Pronto per Programmare**, trovi tutte le card interattive di:
    - **☁️ Motori Cloud Gratuiti** (Paracadute Multi-Motore, Google Gemini Flash, Meta Llama 3.3 70B, DeepSeek V3, DeepSeek R1, Claude 3.5 Sonnet OAuth).
    - **🖥️ Motori Locali su questo PC (Ollama)** (tutti i modelli scaricati sulla tua macchina, 100% offline).

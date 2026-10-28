@@ -2,7 +2,7 @@
 
 <img src="./assets/logo.png" width="140" height="140" alt="OMNICLAUDE Official Cyber Brain Logo" />
 
-# ⚡ OMNICLAUDE — Hack Edition v2.0
+# ⚡ OMNICLAUDE — Pro Edition v2.0
 
 ### **AI Terminal Command Center per Claude Code & OpenCode con Gateway OmniRoute & Paracadute Modulare**
 
@@ -16,9 +16,9 @@
 
 ---
 
-### 🖼️ Anteprima Ufficiale ad Alta Risoluzione — Pagina Iniziale (`BLACK HACK THEME`)
+### 🖼️ Anteprima Ufficiale ad Alta Risoluzione — Pagina Iniziale (`DARK CYBER THEME`)
 
-![OMNICLAUDE Pagina Iniziale Black Hack](./assets/omniclaude-home-black.png)
+![OMNICLAUDE Pagina Iniziale Dark Cyber](./assets/omniclaude-home-black.png)
 
 </div>
 
@@ -28,10 +28,10 @@
 
 **OMNICLAUDE** (creato da **ATON-FUX**) è una suite di comando web leggera, portatile e a **zero dipendenze esterne** che permette di utilizzare i due migliori agenti di programmazione da terminale — **Claude Code** (di Anthropic) e **OpenCode** (TUI open-source) — collegandoli istantaneamente a **motori AI Cloud gratuiti** (Google Gemini Flash, Groq Llama 3.3 70B, DeepSeek V3/R1, OpenRouter), al proprio **account web Claude.ai (OAuth)** oppure a **modelli 100% Locali e Offline su GPU/CPU tramite Ollama**.
 
-### ✨ Punti di Forza Esclusivi della v2.0 (Hack Edition by ATON-FUX)
+### ✨ Punti di Forza Esclusivi della v2.0 (Pro Edition by ATON-FUX)
 
-1. **🎨 Stile & Tema Hack Moderno (`🖤 BLACK HACK` / `🤍 WHITE HACK`)**  
-   Interfaccia cyber-moderna ad alto contrasto con selettore istantaneo tra modalità **Black Hack** (nero ossidiana e verde/ciano neon) e **White Hack** (bianco cyber-lab nitido), con salvataggio automatico delle preferenze.
+1. **🎨 Stile & Tema Cyber Moderno (`🖤 DARK CYBER` / `🤍 LIGHT PRO`)**  
+   Interfaccia cyber-moderna ad alto contrasto con selettore istantaneo tra modalità **Dark Cyber** (nero ossidiana e verde/ciano neon) e **Light Pro** (bianco cyber-lab nitido), con salvataggio automatico delle preferenze.
 2. **🏠 Pagina Iniziale All-In-One Intelligente**  
    Sotto al box di lancio rapido **Pronto per Programmare** (`🚀 APRI CLAUDE CODE` e `⚡ APRI OPENCODE`), trovi direttamente le griglie complete e interattive di:
    - **☁️ Motori Cloud Gratuiti** (attivabili con 1 solo clic).
@@ -54,13 +54,13 @@
 
 ---
 
-## 🖼️ Galleria Interfaccia (Gemini Multi-Key Hub, White Hack & Paracadute Modulare)
+## 🖼️ Galleria Interfaccia (Gemini Multi-Key Hub, Light Pro & Paracadute Modulare)
 
 ### ⚡ Gemini Multi-Key Hub & Live Quota Rotator (`ZERO RATE-LIMIT`)
 ![OMNICLAUDE Gemini Multi-Key Hub](./assets/omniclaude-gemini-hub.png)
 
-### 🤍 Modalità `WHITE HACK` (Tema Chiaro ad Alto Contrasto)
-![OMNICLAUDE Pagina Iniziale White Hack](./assets/omniclaude-home-white.png)
+### 🤍 Modalità `LIGHT PRO` (Tema Chiaro ad Alto Contrasto)
+![OMNICLAUDE Pagina Iniziale Light Pro](./assets/omniclaude-home-white.png)
 
 ### 🛡️ Configuratore Modulare del Paracadute di Riserva
 ![OMNICLAUDE Paracadute Modulare](./assets/omniclaude-parachute.png)
@@ -102,7 +102,7 @@ cd OMNICLAUDE
 | **`INSTALLA.bat`** | ⚙️ **Installatore & Diagnostica:** installa e configura in automatico tutte le dipendenze necessarie su un nuovo PC. |
 | **`LOGIN_CLAUDE.bat`** | 🌐 **Login OAuth Claude Web:** collega il tuo account Claude.ai (Pro/Max) tramite browser senza usare chiavi API a consumo. |
 | **`server.py`** | 🧠 **Backend OMNICLAUDE:** server HTTP multithread scritto in Python puro (zero dipendenze esterne) per la gestione di modelli, chiavi, failover automatico Gemini, Paracadute modulare e processi. |
-| **`web/index.html`** | 💻 **Frontend Hack Edition v2.0:** interfaccia web reattiva con tema Black/White Hack, Gemini Multi-Key Hub, selezione motori in Home e configuratore Paracadute. |
+| **`web/index.html`** | 💻 **Frontend Pro Edition v2.0:** interfaccia web reattiva con selettore Dark Cyber / Light Pro, Gemini Multi-Key Hub, selezione motori in Home e configuratore Paracadute. |
 | **`gemini_keys.json`** | 🔐 **Pool Multi-Key Gemini Locale:** archiviazione sicura locale delle API key di Google Gemini e stato quota (protetto da `.gitignore`). |
 | **`config.example.env`** | 🔐 **Template Configurazione:** modello pulito per il file `config.env` locale (le tue chiavi personali restano solo sul tuo PC grazie a `.gitignore`). |
 

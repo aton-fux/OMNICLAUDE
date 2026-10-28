@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ─── THEME VARIABLES: BLACK HACK (DEFAULT) & WHITE HACK ─── */
+    /* ─── THEME VARIABLES: DARK CYBER (DEFAULT) & LIGHT PRO ─── */
     :root, [data-theme="black"] {
       --bg: #05080f;
       --bg-grid: rgba(0, 245, 155, 0.035);
@@ -177,7 +177,7 @@
 
     .topbar-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; flex-wrap: wrap; }
 
-    /* ─── THEME SWITCHER (BLACK / WHITE HACK) ─── */
+    /* ─── THEME SWITCHER (DARK CYBER / LIGHT PRO) ─── */
     .theme-switcher {
       display: inline-flex; align-items: center;
       background: var(--surface2);
@@ -654,7 +654,7 @@
         <div>
           <div class="logo-title-row">
             <h1>OMNICLAUDE</h1>
-            <span class="version-pill">HACK EDITION v2.0</span>
+            <span class="version-pill">PRO EDITION v2.0</span>
           </div>
           <p>AI Terminal Command Center · Claude Code &amp; OpenCode Gateway</p>
         </div>
@@ -671,10 +671,10 @@
     </div>
 
     <div class="topbar-right">
-      <!-- SELETTORE TEMA HACK BLACK / WHITE -->
-      <div class="theme-switcher" title="Personalizza Tema Hack Black o White">
-        <button class="theme-btn active" id="theme-btn-black" onclick="setTheme('black')">🖤 BLACK HACK</button>
-        <button class="theme-btn" id="theme-btn-white" onclick="setTheme('white')">🤍 WHITE HACK</button>
+      <!-- SELETTORE TEMA DARK / LIGHT -->
+      <div class="theme-switcher" title="Personalizza Tema Dark Cyber o Light Pro">
+        <button class="theme-btn active" id="theme-btn-black" onclick="setTheme('black')">🖤 DARK CYBER</button>
+        <button class="theme-btn" id="theme-btn-white" onclick="setTheme('white')">🤍 LIGHT PRO</button>
       </div>
 
       <div class="badge" id="badge-status">
@@ -1234,8 +1234,8 @@
 
         <div class="faq-item">
           <details>
-            <summary>Come passo dal tema BLACK HACK al tema WHITE HACK?</summary>
-            <div class="faq-body">In alto a destra nella barra principale trovi il selettore <strong>🖤 BLACK HACK / 🤍 WHITE HACK</strong>. La tua scelta viene memorizzata automaticamente dal browser.</div>
+            <summary>Come passo dal tema DARK CYBER al tema LIGHT PRO?</summary>
+            <div class="faq-body">In alto a destra nella barra principale trovi il selettore <strong>🖤 DARK CYBER / 🤍 LIGHT PRO</strong>. La tua scelta viene memorizzata automaticamente dal browser.</div>
           </details>
         </div>
 
@@ -1322,7 +1322,7 @@
   ];
   let parachuteDirty = false;
 
-  // ─── Theme Management (BLACK HACK / WHITE HACK) ───
+  // ─── Theme Management (DARK CYBER / LIGHT PRO) ───
   function setTheme(theme) {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("omniclaude_theme", theme);
