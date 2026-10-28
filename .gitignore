@@ -1,6 +1,7 @@
-# File di configurazione locale con chiavi API personali (NON caricare su GitHub)
+# File di configurazione locale con chiavi API personali e licenza (NON caricare su GitHub)
 config.env
 gemini_keys.json
+license.json
 *.env.local
 
 

@@ -36,12 +36,13 @@
    Sotto al box di lancio rapido **Pronto per Programmare** (`🚀 APRI CLAUDE CODE` e `⚡ APRI OPENCODE`), trovi direttamente le griglie complete e interattive di:
    - **☁️ Motori Cloud Gratuiti** (attivabili con 1 solo clic).
    - **🖥️ Motori Locali su questo PC (Ollama)** (rilevati automaticamente in tempo reale dal tuo hardware).
-3. **⚡ Gemini Multi-Key Hub & Live Quota Rotator (Novità Esclusiva Zero Rate-Limit)**  
-   Google Gemini offre 1 milione di token al giorno per account gratis, ma nei task intensivi di pair programming si può incappare nel limite giornaliero o al minuto (HTTP 429). Con il nuovo **Gemini Multi-Key Hub**:
+3. **⚡ Gemini Multi-Key Hub & Live Quota Rotator (Zero Rate-Limit · OMNICLAUDE PRO)**  
+   Google Gemini offre 1 milione di token al giorno per account gratis, ma nei task intensivi di pair programming si può incappare nel limite giornaliero o al minuto (HTTP 429). Con il **Gemini Multi-Key Hub** (disponibile con licenza **OMNICLAUDE PRO a 14,99€ Una Tantum**):
    - Aggiungi quante chiavi vuoi da diversi account Google con etichetta personalizzata;
    - Monitora in tempo reale con barra dinamica i **token consumati oggi** rispetto al milione gratuito;
    - **Failover Automatico in millisecondi**: se la chiave attiva esaurisce i token o va in 429, OMNICLAUDE passa istantaneamente alla chiave successiva in standby senza interrompere Claude Code o OpenCode!
    - Test live delle chiavi direttamente contro le API Google e auto-ripristino al termine del cooldown.
+   *(La versione Community gratuita consente 1 chiave Gemini; per account illimitati e rotazione continua a caldo attiva la licenza PRO)*.
 4. **🛡️ Paracadute di Riserva 100% Configurabile e Modulare**  
    Se un motore esaurisce i crediti o raggiunge il limite di richieste durante una sessione di programmazione, **OMNICLAUDE** passa automaticamente al motore successivo senza interrompere il lavoro. Dalla sezione **Paracadute Riserva** puoi:
    - Riordinare la priorità dei motori con le frecce **⬆️ / ⬇️**;

@@ -655,6 +655,7 @@
           <div class="logo-title-row">
             <h1>OMNICLAUDE</h1>
             <span class="version-pill">PRO EDITION v2.0</span>
+            <span class="tag" id="topbar-pro-badge" style="display:none;background:rgba(255,184,0,0.18);color:#ffb800;border:1px solid rgba(255,184,0,0.4);font-weight:800;font-size:10px;">⭐ PRO ATTIVO</span>
           </div>
           <p>AI Terminal Command Center · Claude Code &amp; OpenCode Gateway</p>
         </div>
@@ -1022,6 +1023,9 @@
             <button class="btn-secondary-cyber" onclick="testAllGeminiKeys()">🧪 Testa Tutte le Chiavi</button>
           </div>
         </div>
+
+        <!-- BANNER STATO LICENZA PRO / SBLOCCO (CREATO DA ATON-FUX) -->
+        <div id="gpool-pro-banner" style="margin-bottom: 20px;"></div>
 
         <!-- 4 CARDS KPI IN ALTO -->
         <div class="parachute-stats-grid" style="grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));">
@@ -2041,12 +2045,90 @@
     return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
+  async function promptActivateLicense() {
+    const key = prompt("🔑 Incolla qui il tuo Codice Licenza OMNICLAUDE PRO (acquistato su Gumroad o inviato da ATON-FUX):");
+    if (!key || !key.trim()) return;
+
+    showToast("Verifica licenza in corso...");
+    try {
+      const res = await fetch("/api/license/activate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ key: key.trim() })
+      });
+      const data = await res.json();
+      if (data.ok) {
+        alert("🎉 " + data.message);
+        loadGeminiPool(true);
+        loadStatus();
+      } else {
+        alert("❌ Attivazione fallita: " + (data.error || "Chiave non valida"));
+      }
+    } catch (err) {
+      alert("❌ Errore connessione durante la verifica licenza: " + err.message);
+    }
+  }
+
   async function loadGeminiPool(manual = false) {
     try {
       const res = await fetch("/api/gemini-pool");
       const d = await res.json();
       if (!d.ok) return;
       currentGeminiPool = d;
+
+      // PRO Status & Banner
+      const isPro = !!d.is_pro;
+      const lic = d.license || {};
+      const proBanner = document.getElementById("gpool-pro-banner");
+      const topbarPro = document.getElementById("topbar-pro-badge");
+      if (topbarPro) topbarPro.style.display = isPro ? "inline-block" : "none";
+
+      if (proBanner) {
+        if (!isPro) {
+          proBanner.innerHTML = `
+            <div style="background:linear-gradient(135deg,rgba(255,184,0,0.08),rgba(0,229,255,0.05));border:1px solid rgba(255,184,0,0.38);border-radius:12px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 0 16px rgba(255,184,0,0.08);">
+              <div style="max-width:680px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                  <span class="tag" style="background:rgba(255,184,0,0.2);color:#ffb800;border:1px solid rgba(255,184,0,0.5);font-weight:800;">⭐ OMNICLAUDE PRO EDITION</span>
+                  <span style="font-size:13px;font-weight:700;color:var(--text);">Zero Rate-Limit &amp; Multi-Account Failover Continuo</span>
+                </div>
+                <div style="font-size:12px;color:var(--muted2);line-height:1.5;">
+                  La versione base include 1 account gratuito. Con <strong>OMNICLAUDE PRO (14,99€ Una Tantum)</strong> puoi collegare account Google multipli: quando una chiave tocca il rate limit (429), il sistema ruota all'istante senza bloccare Claude Code!
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                <a href="${d.gumroad_url || 'https://atonfux.gumroad.com/l/omniclaude-pro'}" target="_blank" class="btn-primary-cyber" style="background:linear-gradient(135deg,#ffb800,#ff8800);color:#000;border:none;font-weight:800;padding:8px 16px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-size:12px;">
+                  🛒 Acquista Licenza (14,99€)
+                </a>
+                <button class="btn-secondary-cyber" onclick="promptActivateLicense()" style="border-color:rgba(255,184,0,0.5);color:#ffb800;font-size:12px;padding:8px 14px;">
+                  🔑 Inserisci Chiave PRO
+                </button>
+              </div>
+            </div>
+          `;
+        } else {
+          proBanner.innerHTML = `
+            <div style="background:linear-gradient(135deg,rgba(0,245,155,0.08),rgba(0,229,255,0.04));border:1px solid rgba(0,245,155,0.35);border-radius:12px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <span style="font-size:22px;">⭐</span>
+                <div>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span class="tag tag-green" style="font-weight:800;">🟢 LICENZA PRO ATTIVA</span>
+                    <span style="font-size:12.5px;font-weight:700;color:var(--text);">${escapeHtml(lic.licensed_to || 'ATON-FUX')}</span>
+                    <span class="tag tag-cyan" style="font-size:10px;">${escapeHtml(lic.license_type || 'Lifetime Pro')}</span>
+                  </div>
+                  <div style="font-size:11px;color:var(--muted2);margin-top:2px;">
+                    Chiave: <code>${escapeHtml(lic.license_key_masked || 'OMNI-PRO-***')}</code> · Rotazione Multi-Account illimitata e Zero Rate-Limit attivi.
+                  </div>
+                </div>
+              </div>
+              <div>
+                <span class="tag tag-green" style="font-size:11px;">PROTEZIONE 429 ATTIVA</span>
+              </div>
+            </div>
+          `;
+        }
+      }
 
       // Update KPI Cards
       const activeKey = d.keys.find(k => k.id === d.active_id) || d.keys[0];
@@ -2196,6 +2278,10 @@
         if (keyInp) keyInp.value = "";
         loadGeminiPool();
         loadStatus();
+      } else if (d.pro_required) {
+        if (confirm("⭐ OMNICLAUDE PRO RICHIESTO\n\n" + d.error + "\n\nVuoi aprire la pagina Gumroad per acquistare la licenza a 14,99€?")) {
+          window.open(d.gumroad_url || "https://atonfux.gumroad.com/l/omniclaude-pro", "_blank");
+        }
       } else {
         showToast(d.error || "Errore aggiunta chiave", true);
       }
@@ -2296,6 +2382,14 @@
         showToast("Auto-failover Gemini: " + (enabled ? "ABILITATO" : "DISATTIVATO"));
         loadGeminiPool();
         loadStatus();
+      } else if (d.pro_required) {
+        const foToggle = document.getElementById("gpool-failover-toggle");
+        if (foToggle) foToggle.checked = !enabled;
+        if (confirm("⭐ OMNICLAUDE PRO RICHIESTO\n\n" + d.error + "\n\nVuoi aprire la pagina Gumroad per acquistare la licenza a 14,99€?")) {
+          window.open(d.gumroad_url || "https://atonfux.gumroad.com/l/omniclaude-pro", "_blank");
+        }
+      } else {
+        showToast(d.error || "Errore aggiornamento impostazione failover", true);
       }
     } catch (e) {
       showToast("Errore aggiornamento impostazione failover", true);

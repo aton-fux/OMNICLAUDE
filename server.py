@@ -24,6 +24,7 @@ import urllib.request
 import uuid
 import datetime
 import sqlite3
+import license_manager
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -792,7 +793,19 @@ class Handler(BaseHTTPRequestHandler):
                     "today_tokens": g_db.get("today_tokens", 0),
                     "today_calls": g_db.get("today_calls", 0),
                     "total_tokens": g_db.get("total_tokens", 0),
-                }
+                },
+                "license": license_manager.load_license(),
+                "is_pro": license_manager.is_pro_active()
+            })
+            return
+
+        if parsed.path == "/api/license/status":
+            lic = license_manager.load_license()
+            self.send_json({
+                "ok": True,
+                "is_pro": license_manager.is_pro_active(),
+                "license": lic,
+                "gumroad_url": license_manager.GUMROAD_DEFAULT_URL
             })
             return
 
@@ -815,6 +828,9 @@ class Handler(BaseHTTPRequestHandler):
                 })
             self.send_json({
                 "ok": True,
+                "is_pro": license_manager.is_pro_active(),
+                "license": license_manager.load_license(),
+                "gumroad_url": license_manager.GUMROAD_DEFAULT_URL,
                 "auto_failover": pool.get("auto_failover", True),
                 "active_id": pool.get("active_id", ""),
                 "keys": keys_safe,
@@ -980,8 +996,32 @@ class Handler(BaseHTTPRequestHandler):
             self.send_json({"ok": True, "deleted": safe_model})
             return
 
+        if parsed.path == "/api/license/activate":
+            key = body.get("key", "").strip()
+            licensed_to = body.get("licensed_to", "").strip()
+            ok, msg, lic = license_manager.activate_license(key, licensed_to)
+            if ok:
+                self.send_json({"ok": True, "message": msg, "license": lic})
+            else:
+                self.send_json({"ok": False, "error": msg}, status=400)
+            return
+
+        if parsed.path == "/api/license/deactivate":
+            license_manager.remove_license()
+            self.send_json({"ok": True, "message": "Licenza rimossa con successo."})
+            return
+
         if parsed.path == "/api/gemini-pool/add":
-            name = body.get("name", "").strip() or f"Account Google #{len(load_gemini_pool().get('keys', [])) + 1}"
+            pool = load_gemini_pool()
+            if not license_manager.is_pro_active() and len(pool.get("keys", [])) >= 1:
+                self.send_json({
+                    "error": "La versione gratuita consente 1 sola chiave Gemini. Per aggiungere più account Google con rotazione automatica e Zero Rate-Limit, sblocca OMNICLAUDE PRO a 14,99€.",
+                    "pro_required": True,
+                    "gumroad_url": license_manager.GUMROAD_DEFAULT_URL
+                }, status=403)
+                return
+
+            name = body.get("name", "").strip() or f"Account Google #{len(pool.get('keys', [])) + 1}"
             key = body.get("key", "").strip()
             do_validate = body.get("validate", True)
             if not key:
@@ -1147,6 +1187,14 @@ class Handler(BaseHTTPRequestHandler):
             return
 
         if parsed.path == "/api/gemini-pool/toggle-failover":
+            if not license_manager.is_pro_active():
+                self.send_json({
+                    "error": "L'Auto-Failover continuo tra più account e il monitor anti-rate-limit sono funzionalità esclusive di OMNICLAUDE PRO.",
+                    "pro_required": True,
+                    "gumroad_url": license_manager.GUMROAD_DEFAULT_URL
+                }, status=403)
+                return
+
             enabled = bool(body.get("enabled", True))
             pool = load_gemini_pool()
             pool["auto_failover"] = enabled
