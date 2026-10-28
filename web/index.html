@@ -759,11 +759,34 @@
             <div class="engine-section-header">
               <div>
                 <div class="engine-section-title">🖥️ Motori Locali su questo PC (Ollama)</div>
-                <div class="engine-section-sub">Modelli 100% offline che girano sulla tua GPU/CPU locale con privacy totale.</div>
+                <div class="engine-section-sub">Rilevamento dinamico automatico dei modelli installati sul tuo PC (100% offline su GPU/CPU con privacy totale).</div>
               </div>
-              <span class="tag tag-amber" id="ollama-home-badge">100% OFFLINE</span>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                <span class="tag tag-amber" id="ollama-home-badge">100% OFFLINE</span>
+                <button class="btn-secondary-cyber" style="padding:5px 10px;font-size:11px;" onclick="loadStatus(true)" title="Rileva nuovamente i modelli installati su questo PC">🔄 Rileva Modelli PC</button>
+              </div>
             </div>
+
+            <!-- GRIGLIA MODELLI RILEVATI DINAMICAMENTE SUL PC DELL'UTENTE -->
             <div class="models-grid" id="local-models-grid"></div>
+
+            <!-- GUIDA & INSTALLATORE RAPIDO 1-CLICK MODELLI OLLAMA PER CHI NON LI HA -->
+            <div id="ollama-helper-bar" style="margin-top:14px; padding:14px 16px; border-radius:10px; background:var(--surface2); border:1px dashed var(--border-bright); display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+              <div>
+                <div style="font-size:12.5px; font-weight:800; color:var(--text); display:flex; align-items:center; gap:6px;">
+                  <span>📥</span> <span>Centro Installazione Rapida Motori Locali (Ollama 1-Click)</span>
+                </div>
+                <div style="font-size:11.5px; color:var(--muted2); margin-top:3px;">
+                  Non hai ancora motori locali o vuoi scaricarne uno nuovo per programmare offline? Clicca un modello consigliato per installarlo automaticamente:
+                </div>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                <button class="btn-add-pool" onclick="pullOllamaModel('qwen2.5-coder:1.5b')" title="Richiede solo ~1.2 GB RAM/VRAM - Ideale per qualsiasi PC">⚡ Scarica Qwen 2.5 Coder 1.5B (Leggero)</button>
+                <button class="btn-add-pool" onclick="pullOllamaModel('qwen2.5-coder:7b')" title="Richiede ~5 GB VRAM - Il miglior modello locale per coding">🚀 Scarica Qwen 2.5 Coder 7B (Consigliato)</button>
+                <button class="btn-add-pool" onclick="pullOllamaModel('deepseek-r1:8b')" title="Modello locale di ragionamento avanzato">🧠 Scarica DeepSeek-R1 8B</button>
+                <button class="btn-secondary-cyber" style="padding:6px 11px;font-size:11px;" onclick="installOllama()" title="Installa o aggiorna il motore Ollama sul tuo PC">💿 Installa Ollama sul PC</button>
+              </div>
+            </div>
           </section>
 
         </div>
@@ -1116,10 +1139,25 @@
   }
 
   // ─── Status Load ───
-  async function loadStatus() {
+  async function loadStatus(manualRefresh = false) {
     try {
       const res = await fetch("/api/status");
       currentStatus = await res.json();
+
+      // Modalità Demo Pulita (?demo=1) usata solo per screenshot pubblici senza esporre modelli personali dell'utente
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("demo") === "1") {
+        currentStatus.ollama = {
+          installed: true,
+          version: "ollama version 0.6.2",
+          models: [
+            "qwen2.5-coder:7b",
+            "deepseek-r1:8b",
+            "qwen2.5-coder:1.5b"
+          ]
+        };
+      }
+
       if (!parachuteDirty && Array.isArray(currentStatus.parachute_models) && currentStatus.parachute_models.length > 0) {
         editableParachuteModels = [...currentStatus.parachute_models];
         const stratSel = document.getElementById("parachute-strategy");
@@ -1128,6 +1166,10 @@
         }
       }
       applyStatus();
+      if (manualRefresh) {
+        const count = (currentStatus.ollama && currentStatus.ollama.models) ? currentStatus.ollama.models.length : 0;
+        showToast("🔄 Rilevamento completato: " + count + " modelli locali trovati su questo PC");
+      }
     } catch {
       document.getElementById("dot-status").className = "dot dot-red";
       document.getElementById("txt-status").textContent = "OmniRoute: Offline";
@@ -1424,7 +1466,7 @@
     });
   }
 
-  // ─── Local Models (Home) ───
+  // ─── Local Models (Home) — 100% Dynamic per User PC ───
   function renderLocalModels() {
     const c = document.getElementById("local-models-grid");
     if (!c) return;
@@ -1433,11 +1475,21 @@
     const badge = document.getElementById("ollama-home-badge");
 
     if (!ol.installed) {
-      if (badge) { badge.textContent = "OLLAMA NON RILEVATO"; badge.className = "tag tag-red"; }
+      if (badge) { badge.textContent = "OLLAMA NON INSTALLATO"; badge.className = "tag tag-red"; }
       c.innerHTML = `
-        <div class="model-card no-click" style="grid-column:1/-1">
-          <div class="mc-top"><div class="mc-name">Ollama non installato su questo PC</div><span class="tag tag-red">NON INSTALLATO</span></div>
-          <div class="mc-desc" style="margin-top:8px">Nessun problema: i motori Cloud gratuiti qui sopra funzionano subito! Se desideri usare modelli 100% offline sulla tua scheda video, scarica Ollama da <a href="https://ollama.com" target="_blank" style="color:var(--cyan)">ollama.com</a>.</div>
+        <div class="model-card no-click" style="grid-column:1/-1; border-color:var(--amber);">
+          <div class="mc-top">
+            <div>
+              <div class="mc-name">💿 Ollama non rilevato su questo PC — Vuoi usare motori AI 100% Offline?</div>
+              <div class="mc-prov">Guida &amp; Installazione Automatica Motori Locali</div>
+            </div>
+            <span class="tag tag-amber">OPZIONALE · 100% PRIVATO</span>
+          </div>
+          <div class="mc-desc" style="margin-top:6px; line-height:1.65;">
+            I <strong>Motori Cloud Gratuiti</strong> qui sopra funzionano già subito senza installare nulla! Se però possiedi una scheda video dedicata (o una buona CPU) e vuoi far girare modelli AI sul tuo PC senza internet:<br>
+            <strong>1️⃣ Passo 1:</strong> Clicca <strong>"💿 Installa Ollama sul PC"</strong> qui sotto (oppure scaricalo da <a href="https://ollama.com/download" target="_blank" style="color:var(--cyan);font-weight:700;">ollama.com/download ↗</a>).<br>
+            <strong>2️⃣ Passo 2:</strong> Clicca uno dei pulsanti <strong>"Scarica Qwen / DeepSeek"</strong> nella barra qui sotto: al termine del download i tuoi modelli appariranno automaticamente in questa griglia!
+          </div>
         </div>
       `;
       return;
@@ -1446,15 +1498,23 @@
     if (!ol.models || ol.models.length === 0) {
       if (badge) { badge.textContent = "OLLAMA ATTIVO · 0 MODELLI"; badge.className = "tag tag-amber"; }
       c.innerHTML = `
-        <div class="model-card no-click" style="grid-column:1/-1">
-          <div class="mc-top"><div class="mc-name">Ollama installato (${ol.version}) — Nessun modello locale scaricato</div><span class="tag tag-amber">PRONTO</span></div>
-          <div class="mc-desc" style="margin-top:8px">Per scaricare un modello locale di programmazione apri un terminale e digita:<br><code style="font-family:monospace;background:var(--code-bg);padding:2px 8px;border-radius:4px;color:var(--cyan)">ollama pull qwen2.5-coder:7b</code></div>
+        <div class="model-card no-click" style="grid-column:1/-1; border-color:var(--cyan);">
+          <div class="mc-top">
+            <div>
+              <div class="mc-name">✅ Ollama è installato su questo PC (${ol.version}) — Scarica il tuo primo Motore Locale!</div>
+              <div class="mc-prov">Nessun modello ancora presente sul disco locale</div>
+            </div>
+            <span class="tag tag-cyan">PRONTO AL DOWNLOAD</span>
+          </div>
+          <div class="mc-desc" style="margin-top:6px; line-height:1.65;">
+            Usa i pulsanti rapidi <strong>"⚡ Scarica Qwen 2.5 Coder"</strong> o <strong>"🧠 Scarica DeepSeek-R1"</strong> nel box qui sotto per scaricare automaticamente il tuo primo motore locale in 1 click, oppure esegui da terminale <code style="font-family:monospace;background:var(--code-bg);padding:2px 8px;border-radius:4px;color:var(--cyan)">ollama pull qwen2.5-coder:7b</code>.
+          </div>
         </div>
       `;
       return;
     }
 
-    if (badge) { badge.textContent = `✓ ${ol.models.length} MODELLI LOCALI PRONTI`; badge.className = "tag tag-green"; }
+    if (badge) { badge.textContent = `✓ ${ol.models.length} MODELLI RILEVATI SUL TUO PC`; badge.className = "tag tag-green"; }
 
     ol.models.forEach(mod => {
       const mid = "ollama/" + mod;
@@ -1468,7 +1528,7 @@
             <div><div class="mc-name">${mod}</div><div class="mc-prov">Ollama Locale · ${ol.version || ""}</div></div>
             ${active ? '<span class="tag tag-green">✓ ATTIVO</span>' : '<span class="tag tag-amber">LOCALE OFFLINE</span>'}
           </div>
-          <div class="mc-desc">Gira al 100% sul tuo hardware locale. Zero dati inviati online, zero costi, privacy assoluta.</div>
+          <div class="mc-desc">Rilevato dinamicamente sul tuo PC. Gira al 100% sul tuo hardware locale con zero costi e privacy assoluta.</div>
         </div>
         <div class="mc-foot">
           <div class="tags"><span class="tag tag-amber">PC HARDWARE</span><span class="tag tag-green">OFFLINE</span></div>
@@ -1477,6 +1537,39 @@
       `;
       c.appendChild(card);
     });
+  }
+
+  // ─── 1-Click Ollama Installer & Model Downloader ───
+  async function installOllama() {
+    try {
+      const r = await fetch("/api/install-ollama", { method: "POST" });
+      const d = await r.json();
+      if (d.ok) {
+        showToast("💿 Installazione Ollama avviata nella finestra terminale!");
+      } else {
+        showToast("Errore avvio installazione Ollama", true);
+      }
+    } catch (e) {
+      window.open("https://ollama.com/download", "_blank");
+    }
+  }
+
+  async function pullOllamaModel(modelName) {
+    try {
+      const r = await fetch("/api/pull-ollama-model", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ model: modelName })
+      });
+      const d = await r.json();
+      if (d.ok) {
+        showToast("📥 Download di " + modelName + " avviato nel terminale!");
+      } else {
+        showToast(d.error || "Errore avvio download modello", true);
+      }
+    } catch (e) {
+      showToast("Errore connessione al server locale", true);
+    }
   }
 
   // ─── API Calls ───

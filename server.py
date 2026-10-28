@@ -3,7 +3,8 @@ Created by ATON-FUX (https://github.com/aton-fux/OMNICLAUDE)
 License: GNU General Public License v3.0 (GPL-3.0)
 
 Zero external dependencies (uses Python standard library http.server, json, subprocess, shutil).
-Provides REST endpoints to control AI models, API keys, modular Parachute fallback chain, and process lifecycle.
+Provides REST endpoints to control AI models, API keys, modular Parachute fallback chain,
+dynamic Ollama local model detection/installation, and process lifecycle.
 """
 
 from __future__ import annotations
@@ -19,7 +20,7 @@ import time
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 # Protect against pythonw NoneType stdout/stderr crashes on Windows
 if sys.stdout is None:
@@ -36,6 +37,7 @@ DEFAULT_PARACHUTE_MODELS = "gemini/gemini-3.5-flash-lite,groq/llama-3.3-70b-vers
 DEFAULT_PARACHUTE_STRATEGY = "priority"
 
 CREATE_NO_WINDOW = 0x08000000
+CREATE_NEW_CONSOLE = 0x00000010
 
 STARTUPINFO_HIDE = subprocess.STARTUPINFO()
 STARTUPINFO_HIDE.dwFlags |= subprocess.STARTF_USESHOWWINDOW
@@ -90,6 +92,26 @@ def save_config(updates: dict[str, str]) -> None:
         f"PARACHUTE_STRATEGY={current.get('PARACHUTE_STRATEGY', DEFAULT_PARACHUTE_STRATEGY)}",
     ]
     CONFIG_FILE.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def sync_opencode_model(model_id: str) -> None:
+    """Ensure any selected model (including dynamic local Ollama models) is registered in OpenCode config."""
+    try:
+        local_cfg_path = DIR / "opencode.jsonc"
+        user_cfg_dir = Path(os.environ.get("USERPROFILE", "")) / ".config" / "opencode"
+        user_cfg_path = user_cfg_dir / "opencode.jsonc"
+
+        if local_cfg_path.exists():
+            data = json.loads(local_cfg_path.read_text(encoding="utf-8"))
+            models_dict = data.setdefault("provider", {}).setdefault("omniroute", {}).setdefault("models", {})
+            if model_id not in models_dict:
+                models_dict[model_id] = {"name": f"{model_id} (OMNICLAUDE)"}
+                local_cfg_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+            if user_cfg_dir.exists() or True:
+                user_cfg_dir.mkdir(parents=True, exist_ok=True)
+                user_cfg_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+    except Exception:
+        pass
 
 
 def is_port_listening(port: int) -> bool:
@@ -184,7 +206,7 @@ def get_oauth_status(force: bool = False) -> dict[str, bool]:
 
 def get_ollama_status(force: bool = False) -> dict:
     now = time.time()
-    if not force and (now - _CACHE["ollama"][0] < 20.0) and _CACHE["ollama"][1]:
+    if not force and (now - _CACHE["ollama"][0] < 12.0) and _CACHE["ollama"][1]:
         return _CACHE["ollama"][1]
 
     has_ollama = bool(shutil.which("ollama"))
@@ -221,8 +243,10 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urlparse(self.path)
+        qs = parse_qs(parsed.query)
 
         if parsed.path == "/api/status":
+            force_refresh = qs.get("refresh", ["0"])[0] == "1"
             cfg = get_config()
             port = int(cfg.get("OMNIROUTE_PORT", "20128"))
             running = is_port_listening(port)
@@ -231,9 +255,9 @@ class Handler(BaseHTTPRequestHandler):
             parachute_csv = cfg.get("PARACHUTE_MODELS", DEFAULT_PARACHUTE_MODELS)
             parachute_models = [m.strip() for m in parachute_csv.split(",") if m.strip()]
             parachute_strategy = cfg.get("PARACHUTE_STRATEGY", DEFAULT_PARACHUTE_STRATEGY)
-            keys = get_keys_status()
-            oauth_info = get_oauth_status()
-            ollama_info = get_ollama_status()
+            keys = get_keys_status(force=force_refresh)
+            oauth_info = get_oauth_status(force=force_refresh)
+            ollama_info = get_ollama_status(force=force_refresh)
             self.send_json({
                 "running": running,
                 "port": port,
@@ -287,6 +311,7 @@ class Handler(BaseHTTPRequestHandler):
             model = body.get("model")
             if model:
                 save_config({"DEFAULT_MODEL": model})
+                sync_opencode_model(model)
                 self.send_json({"ok": True, "model": model})
             else:
                 self.send_json({"error": "Modello non specificato"}, status=400)
@@ -341,6 +366,43 @@ class Handler(BaseHTTPRequestHandler):
             })
             return
 
+        if parsed.path == "/api/install-ollama":
+            # Opens an interactive console window that installs Ollama via winget or opens ollama.com
+            cmd_str = (
+                "title OMNICLAUDE - Installazione Automatica Ollama && color 0B && "
+                "echo ============================================================ && "
+                "echo   OMNICLAUDE - INSTALLAZIONE AUTOMATICA OLLAMA (100% OFFLINE) && "
+                "echo ============================================================ && "
+                "echo. && "
+                "winget install Ollama.Ollama -e --accept-source-agreements --accept-package-agreements || start https://ollama.com/download && "
+                "echo. && echo Installazione completata! Ora puoi scaricare i modelli dalla dashboard OMNICLAUDE. && pause"
+            )
+            subprocess.Popen(["cmd.exe", "/c", cmd_str], creationflags=CREATE_NEW_CONSOLE, cwd=str(DIR))
+            _CACHE["ollama"] = (0.0, {})
+            self.send_json({"ok": True, "message": "Installazione di Ollama avviata in una nuova finestra!"})
+            return
+
+        if parsed.path == "/api/pull-ollama-model":
+            model_name = body.get("model", "").strip()
+            if not model_name:
+                self.send_json({"error": "Specifica il nome del modello Ollama da scaricare"}, status=400)
+                return
+            # Sanitize basic shell chars
+            safe_model = "".join(c for c in model_name if c.isalnum() or c in ("-", "_", ":", ".", "/"))
+            cmd_str = (
+                f"title OMNICLAUDE - Download Modello Locale {safe_model} && color 0A && "
+                "echo ============================================================ && "
+                f"echo   SCARICAMENTO MODELLO LOCALE OLLAMA: {safe_model} && "
+                "echo ============================================================ && "
+                "echo. && "
+                f"ollama pull {safe_model} && "
+                "echo. && echo [COMPLETATO] Modello scaricato con successo! Torna su OMNICLAUDE per attivarlo. && pause"
+            )
+            subprocess.Popen(["cmd.exe", "/c", cmd_str], creationflags=CREATE_NEW_CONSOLE, cwd=str(DIR))
+            _CACHE["ollama"] = (0.0, {})
+            self.send_json({"ok": True, "model": safe_model})
+            return
+
         if parsed.path == "/api/set-key":
             prov = body.get("provider", "").strip().lower()
             key = body.get("key", "").strip()
@@ -358,7 +420,6 @@ class Handler(BaseHTTPRequestHandler):
         if parsed.path == "/api/launch-claude":
             ensure_omniroute()
             bat_path = DIR / "START_CLAUDE.bat"
-            CREATE_NEW_CONSOLE = 0x00000010
             subprocess.Popen(
                 ["cmd.exe", "/k", "call", str(bat_path)],
                 creationflags=CREATE_NEW_CONSOLE,
@@ -370,7 +431,6 @@ class Handler(BaseHTTPRequestHandler):
         if parsed.path == "/api/launch-opencode":
             ensure_omniroute()
             bat_path = DIR / "START_OPENCODE.bat"
-            CREATE_NEW_CONSOLE = 0x00000010
             subprocess.Popen(
                 ["cmd.exe", "/k", "call", str(bat_path)],
                 creationflags=CREATE_NEW_CONSOLE,
@@ -382,7 +442,6 @@ class Handler(BaseHTTPRequestHandler):
         if parsed.path == "/api/start-claude-oauth":
             ensure_omniroute()
             bat_path = DIR / "LOGIN_CLAUDE.bat"
-            CREATE_NEW_CONSOLE = 0x00000010
             subprocess.Popen(
                 ["cmd.exe", "/k", "call", str(bat_path)],
                 creationflags=CREATE_NEW_CONSOLE,
@@ -394,13 +453,11 @@ class Handler(BaseHTTPRequestHandler):
         if parsed.path == "/api/stop-all":
             def _shutdown():
                 time.sleep(0.5)
-                # 1. Kill Claude Code and OpenCode processes & console windows
                 _run(["taskkill", "/F", "/IM", "claude.exe"])
                 _run(["taskkill", "/F", "/IM", "opencode.exe"])
                 _run(["taskkill", "/F", "/FI", "WINDOWTITLE eq Claude Code*"])
                 _run(["taskkill", "/F", "/FI", "WINDOWTITLE eq OpenCode*"])
 
-                # 2. Release Ollama GPU VRAM
                 try:
                     ps = _run(["ollama", "ps"], timeout=4)
                     for ln in ps.stdout.splitlines():
@@ -412,13 +469,11 @@ class Handler(BaseHTTPRequestHandler):
                 except Exception:
                     pass
 
-                # 3. Stop OmniRoute cleanly
                 try:
                     _run(["omniroute.cmd", "stop"], timeout=6)
                 except Exception:
                     pass
 
-                # 4. Kill lingering port 20128
                 try:
                     p = _run(["cmd.exe", "/c", "netstat -ano | findstr :20128.*LISTENING"], timeout=3)
                     for ln in p.stdout.splitlines():
@@ -428,7 +483,6 @@ class Handler(BaseHTTPRequestHandler):
                 except Exception:
                     pass
 
-                # 5. Exit server
                 os._exit(0)
 
             threading.Thread(target=_shutdown, daemon=True).start()
