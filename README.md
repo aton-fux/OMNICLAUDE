@@ -36,19 +36,28 @@
    Sotto al box di lancio rapido **Pronto per Programmare** (`🚀 APRI CLAUDE CODE` e `⚡ APRI OPENCODE`), trovi direttamente le griglie complete e interattive di:
    - **☁️ Motori Cloud Gratuiti** (attivabili con 1 solo clic).
    - **🖥️ Motori Locali su questo PC (Ollama)** (rilevati automaticamente in tempo reale dal tuo hardware).
-3. **🛡️ Paracadute di Riserva 100% Configurabile e Modulare**  
+3. **⚡ Gemini Multi-Key Hub & Live Quota Rotator (Novità Esclusiva Zero Rate-Limit)**  
+   Google Gemini offre 1 milione di token al giorno per account gratis, ma nei task intensivi di pair programming si può incappare nel limite giornaliero o al minuto (HTTP 429). Con il nuovo **Gemini Multi-Key Hub**:
+   - Aggiungi quante chiavi vuoi da diversi account Google con etichetta personalizzata;
+   - Monitora in tempo reale con barra dinamica i **token consumati oggi** rispetto al milione gratuito;
+   - **Failover Automatico in millisecondi**: se la chiave attiva esaurisce i token o va in 429, OMNICLAUDE passa istantaneamente alla chiave successiva in standby senza interrompere Claude Code o OpenCode!
+   - Test live delle chiavi direttamente contro le API Google e auto-ripristino al termine del cooldown.
+4. **🛡️ Paracadute di Riserva 100% Configurabile e Modulare**  
    Se un motore esaurisce i crediti o raggiunge il limite di richieste durante una sessione di programmazione, **OMNICLAUDE** passa automaticamente al motore successivo senza interrompere il lavoro. Dalla sezione **Paracadute Riserva** puoi:
    - Riordinare la priorità dei motori con le frecce **⬆️ / ⬇️**;
    - Aggiungere o rimuovere qualsiasi motore **Cloud** o **Locale (Ollama)** presente nell'app;
    - Scegliere la strategia di instradamento (`Priority` a cascata, `Round-Robin`, `Least-Used`).
-4. **ℹ️ Guida Rapida Terminale Integrata nel Pannello Sinistro**  
+5. **ℹ️ Guida Rapida Terminale Integrata nel Pannello Sinistro**  
    Un pulsante dedicato nel menu laterale (`ℹ️ Come funziona il terminale`) raccoglie tutte le istruzioni operative e le scorciatoie essenziali, mantenendo la Home pulita e focalizzata sui motori.
-5. **🛑 Chiusura Totale e Pulizia Memoria RAM / VRAM (`100% Clean`)**  
+6. **🛑 Chiusura Totale e Pulizia Memoria RAM / VRAM (`100% Clean`)**  
    Con un clic su **`🛑 Chiudi Tutto`** (o tramite `FERMA.bat`), il sistema chiude i processi `claude.exe` e `opencode.exe`, scarica i modelli locali Ollama dalla scheda video (**liberando il 100% della VRAM GPU**) e arresta gateway e server web.
 
 ---
 
-## 🖼️ Galleria Interfaccia (White Hack & Paracadute Modulare)
+## 🖼️ Galleria Interfaccia (Gemini Multi-Key Hub, White Hack & Paracadute Modulare)
+
+### ⚡ Gemini Multi-Key Hub & Live Quota Rotator (`ZERO RATE-LIMIT`)
+![OMNICLAUDE Gemini Multi-Key Hub](./assets/omniclaude-gemini-hub.png)
 
 ### 🤍 Modalità `WHITE HACK` (Tema Chiaro ad Alto Contrasto)
 ![OMNICLAUDE Pagina Iniziale White Hack](./assets/omniclaude-home-white.png)
@@ -92,8 +101,9 @@ cd OMNICLAUDE
 | **`FERMA.bat`** | 🔴 **Arresto Totale & Pulizia RAM/VRAM:** termina tutti i processi, scarica i modelli dalla scheda grafica (VRAM) e libera le porte `3000` e `20128`. |
 | **`INSTALLA.bat`** | ⚙️ **Installatore & Diagnostica:** installa e configura in automatico tutte le dipendenze necessarie su un nuovo PC. |
 | **`LOGIN_CLAUDE.bat`** | 🌐 **Login OAuth Claude Web:** collega il tuo account Claude.ai (Pro/Max) tramite browser senza usare chiavi API a consumo. |
-| **`server.py`** | 🧠 **Backend OMNICLAUDE:** server HTTP multithread scritto in Python puro (zero dipendenze esterne) per la gestione di modelli, chiavi, Paracadute modulare e processi. |
-| **`web/index.html`** | 💻 **Frontend Hack Edition v2.0:** interfaccia web reattiva con tema Black/White Hack, selezione motori in Home e configuratore Paracadute. |
+| **`server.py`** | 🧠 **Backend OMNICLAUDE:** server HTTP multithread scritto in Python puro (zero dipendenze esterne) per la gestione di modelli, chiavi, failover automatico Gemini, Paracadute modulare e processi. |
+| **`web/index.html`** | 💻 **Frontend Hack Edition v2.0:** interfaccia web reattiva con tema Black/White Hack, Gemini Multi-Key Hub, selezione motori in Home e configuratore Paracadute. |
+| **`gemini_keys.json`** | 🔐 **Pool Multi-Key Gemini Locale:** archiviazione sicura locale delle API key di Google Gemini e stato quota (protetto da `.gitignore`). |
 | **`config.example.env`** | 🔐 **Template Configurazione:** modello pulito per il file `config.env` locale (le tue chiavi personali restano solo sul tuo PC grazie a `.gitignore`). |
 
 ---
@@ -123,7 +133,15 @@ OMNICLAUDE **non impone né ancora modelli locali fissi**:
    - Scegliere la variante/taglia di parametri adatta alla tua scheda video (es. `:1.5b`, `:7b`, `:14b`, `:32b`, `:latest`) e installarla in 1 click;
    - Incollare qualsiasi ID o URL diretto (`nome:tag` oppure `hf.co/autore/modello-gguf`) per scaricarlo e usarlo subito offline con Claude Code e OpenCode.
 
-### 3️⃣ Dove Ottenere le Chiavi API Gratuite
+### 4️⃣ ⚡ Gemini Multi-Key Hub & Rotazione Automatica (Zero Rate-Limit)
+Google Gemini offre 1 milione di token al giorno per account gratis, ma programmando intensamente si possono raggiungere i limiti di rate limit (HTTP 429). Con il **Gemini Multi-Key Hub**:
+1. Clicca su **`⚡ Gemini Multi-Key & Quota`** nel menu sinistro (o dal banner in Home).
+2. **Aggiungi quante chiavi vuoi** generate da account Google distinti (es. `Account Personale`, `Account Secondario`, `Account Dev`).
+3. Il sistema verifica istantaneamente la chiave tramite ping alle API ufficiali di Google.
+4. **Monitoraggio Quota Live:** visualizza i token consumati nella giornata rispetto al tetto di 1.000.000 token, con barra dinamica di riempimento.
+5. **Zero Rate-Limit Auto-Failover:** quando la chiave attiva raggiunge il rate limit (429) o esaurisce la quota, il daemon di OMNICLAUDE passa automaticamente in tempo reale alla chiave successiva disponibile senza che tu debba riavviare o perdere il contesto nel terminale! Al termine della finestra di rate limit, la chiave torna verde e riutilizzabile.
+
+### 5️⃣ Dove Ottenere le Chiavi API Gratuite
 Non serve inserire decine di chiavi: **te ne basta una sola** per iniziare!
 - **Google Gemini Flash (Consigliato — 1M token/giorno gratis):** ottieni la chiave gratuita in 20 secondi su [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey).
 - **Groq Cloud (Llama 3.3 70B — 300 token/sec gratis):** ottieni la chiave gratuita su [console.groq.com/keys](https://console.groq.com/keys).

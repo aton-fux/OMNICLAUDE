@@ -19,7 +19,11 @@ import subprocess
 import sys
 import threading
 import time
+import urllib.error
 import urllib.request
+import uuid
+import datetime
+import sqlite3
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -152,6 +156,343 @@ def sync_parachute_combo(models_csv: str, strategy: str = "priority") -> None:
         "--strategy", strategy,
         "--models", clean_models,
     ])
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# GEMINI MULTI-KEY HUB & FAILOVER ROTATOR ENGINE (Created by ATON-FUX)
+# ═══════════════════════════════════════════════════════════════════════════
+GEMINI_KEYS_FILE = DIR / "gemini_keys.json"
+OMNIROUTE_DIR = Path(os.environ.get("USERPROFILE", "")) / ".omniroute"
+OMNIROUTE_DB = OMNIROUTE_DIR / "storage.sqlite"
+_POOL_LOCK = threading.Lock()
+_LAST_PROCESSED_CALL_ID = ""
+
+
+def mask_key(k: str) -> str:
+    k = (k or "").strip()
+    if not k:
+        return ""
+    if len(k) <= 10:
+        return "********"
+    return k[:6] + "****" + k[-4:]
+
+
+def load_gemini_pool() -> dict:
+    with _POOL_LOCK:
+        if GEMINI_KEYS_FILE.exists():
+            try:
+                data = json.loads(GEMINI_KEYS_FILE.read_text(encoding="utf-8"))
+                if isinstance(data, dict) and "keys" in data:
+                    return data
+            except Exception:
+                pass
+
+        # Inizializza automaticamente dal config.env se presente
+        cfg = get_config()
+        initial_key = cfg.get("GEMINI_API_KEY", "").strip()
+        keys_list = []
+        if initial_key:
+            keys_list.append({
+                "id": "gemini_default",
+                "name": "Account Google #1 (Predefinito)",
+                "key": initial_key,
+                "status": "active",
+                "calls_count": 0,
+                "tokens_used": 0,
+                "last_status": 200,
+                "rate_limited_until": 0,
+                "error_message": "",
+                "last_checked": int(time.time()),
+            })
+        data = {
+            "auto_failover": True,
+            "active_id": "gemini_default" if keys_list else "",
+            "keys": keys_list,
+            "events": [
+                {
+                    "time": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    "type": "init",
+                    "message": "Pool Gemini inizializzato con failover automatico attivo (Zero Rate-Limit by ATON-FUX)."
+                }
+            ]
+        }
+        try:
+            GEMINI_KEYS_FILE.write_text(json.dumps(data, indent=2), encoding="utf-8")
+        except Exception:
+            pass
+        return data
+
+
+def save_gemini_pool(data: dict) -> None:
+    with _POOL_LOCK:
+        try:
+            GEMINI_KEYS_FILE.write_text(json.dumps(data, indent=2), encoding="utf-8")
+        except Exception:
+            pass
+
+
+def test_gemini_api_key(key: str) -> dict:
+    """Live verification of a Google Gemini API key via official models endpoint."""
+    key = (key or "").strip()
+    if not key:
+        return {"valid": False, "status": 400, "message": "Chiave API mancante"}
+    try:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models?key={quote(key)}"
+        req = urllib.request.Request(
+            url,
+            headers={
+                "User-Agent": "Mozilla/5.0 OMNICLAUDE/2.0 (by ATON-FUX)",
+                "Accept": "application/json",
+            },
+        )
+        with urllib.request.urlopen(req, timeout=6) as resp:
+            data = json.loads(resp.read().decode("utf-8", errors="replace"))
+            models = [
+                m.get("name", "").replace("models/", "")
+                for m in data.get("models", [])
+                if "gemini" in m.get("name", "").lower()
+            ]
+            return {
+                "valid": True,
+                "status": 200,
+                "models_count": len(models),
+                "sample_models": models[:6],
+                "message": f"Chiave valida! {len(models)} modelli Gemini attivi e pronti.",
+            }
+    except urllib.error.HTTPError as e:
+        body = ""
+        try:
+            body = e.read().decode("utf-8", errors="replace")
+            err_json = json.loads(body)
+            msg = err_json.get("error", {}).get("message") or body
+        except Exception:
+            msg = body or str(e)
+
+        if e.code == 429:
+            return {
+                "valid": True,
+                "status": 429,
+                "rate_limited": True,
+                "message": "Quota Esaurita o Rate Limit Raggiunto (HTTP 429 Too Many Requests / ResourceExhausted)",
+                "detail": msg,
+            }
+        elif e.code in (400, 403):
+            return {
+                "valid": False,
+                "status": e.code,
+                "invalid": True,
+                "message": "Chiave non valida o revocata (API_KEY_INVALID)",
+                "detail": msg,
+            }
+        else:
+            return {
+                "valid": False,
+                "status": e.code,
+                "message": f"Errore Google Gemini HTTP {e.code}",
+                "detail": msg,
+            }
+    except Exception as e:
+        return {
+            "valid": False,
+            "status": 0,
+            "message": f"Errore di connessione: {str(e)[:120]}",
+        }
+
+
+def get_gemini_db_stats() -> dict:
+    """Query live token counts and recent call status directly from OmniRoute SQLite database."""
+    out = {
+        "total_calls": 0,
+        "total_tokens": 0,
+        "today_calls": 0,
+        "today_tokens": 0,
+        "latest_status": 200,
+        "latest_model": "",
+        "latest_time": "",
+    }
+    if not OMNIROUTE_DB.exists():
+        return out
+    try:
+        today_start = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT00:00:00")
+        conn = sqlite3.connect(f"file:{OMNIROUTE_DB}?mode=ro", uri=True, timeout=1.5)
+        cur = conn.cursor()
+        row = cur.execute('''
+            SELECT 
+                COUNT(*),
+                COALESCE(SUM(tokens_in + tokens_out), 0),
+                COALESCE(SUM(CASE WHEN timestamp >= ? THEN tokens_in + tokens_out ELSE 0 END), 0),
+                COALESCE(SUM(CASE WHEN timestamp >= ? THEN 1 ELSE 0 END), 0)
+            FROM call_logs 
+            WHERE provider = 'gemini'
+        ''', (today_start, today_start)).fetchone()
+        if row:
+            out["total_calls"] = int(row[0] or 0)
+            out["total_tokens"] = int(row[1] or 0)
+            out["today_tokens"] = int(row[2] or 0)
+            out["today_calls"] = int(row[3] or 0)
+
+        latest = cur.execute('''
+            SELECT status, model, timestamp 
+            FROM call_logs 
+            WHERE provider = 'gemini' 
+            ORDER BY id DESC LIMIT 1
+        ''').fetchone()
+        if latest:
+            out["latest_status"] = latest[0]
+            out["latest_model"] = latest[1] or ""
+            out["latest_time"] = latest[2] or ""
+        conn.close()
+    except Exception:
+        pass
+    return out
+
+
+def switch_active_gemini_key(target_id: str, reason: str = "") -> dict:
+    """Switch active Gemini API key in pool, OmniRoute and config.env."""
+    pool = load_gemini_pool()
+    target_key = None
+    for k in pool.get("keys", []):
+        if k.get("id") == target_id:
+            target_key = k
+            break
+    if not target_key:
+        return {"ok": False, "error": f"Chiave ID {target_id} non trovata"}
+
+    actual_key = target_key.get("key", "").strip()
+    if actual_key:
+        ensure_omniroute()
+        _run(["omniroute.cmd", "keys", "add", "gemini", actual_key])
+        save_config({"GEMINI_API_KEY": actual_key})
+
+    for k in pool.get("keys", []):
+        if k.get("id") == target_id:
+            k["status"] = "active"
+        elif k.get("status") == "active":
+            k["status"] = "standby"
+
+    pool["active_id"] = target_id
+    now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    msg = f"Attivata chiave: {target_key.get('name')}" + (f" ({reason})" if reason else "")
+    events = pool.setdefault("events", [])
+    events.insert(0, {"time": now_str, "type": "switch", "message": msg})
+    pool["events"] = events[:30]
+    save_gemini_pool(pool)
+    _CACHE["keys"] = (0.0, {})
+    return {"ok": True, "active_id": target_id, "name": target_key.get("name")}
+
+
+def rotate_to_next_gemini_key(reason: str = "Rate Limit 429 rilevato") -> dict:
+    """Seamless failover to the next available healthy Gemini key in the pool."""
+    pool = load_gemini_pool()
+    keys = pool.get("keys", [])
+    if not keys:
+        return {"ok": False, "error": "Nessuna chiave configurata nel pool"}
+
+    active_id = pool.get("active_id", "")
+    now_ts = int(time.time())
+
+    curr_idx = -1
+    for i, k in enumerate(keys):
+        if k.get("id") == active_id:
+            curr_idx = i
+            break
+
+    # Segna la chiave attuale come rate_limited con cooldown di 5 minuti
+    if curr_idx >= 0:
+        keys[curr_idx]["status"] = "rate_limited"
+        keys[curr_idx]["rate_limited_until"] = now_ts + 300
+        keys[curr_idx]["error_message"] = reason
+
+    # Ricerca circolare della prossima chiave pronta
+    candidate = None
+    n = len(keys)
+    for offset in range(1, n + 1):
+        idx = (curr_idx + offset) % n
+        k = keys[idx]
+        if k.get("id") == active_id and n > 1:
+            continue
+        if k.get("status") == "invalid":
+            continue
+        rl_until = k.get("rate_limited_until", 0)
+        if rl_until > now_ts:
+            continue
+        candidate = k
+        break
+
+    if not candidate:
+        now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        events = pool.setdefault("events", [])
+        events.insert(0, {
+            "time": now_str,
+            "type": "error",
+            "message": f"Tutte le chiavi Gemini ({n}) sono esaurite o in cooldown! In attesa di ripristino quota."
+        })
+        pool["events"] = events[:30]
+        save_gemini_pool(pool)
+        return {"ok": False, "error": "Tutte le chiavi nel pool hanno esaurito la quota"}
+
+    res = switch_active_gemini_key(candidate["id"], reason=reason)
+    return res
+
+
+def _gemini_monitor_daemon():
+    """Background thread: monitors SQLite call_logs for 429 quota exhaustion and recovers cooled-down keys."""
+    global _LAST_PROCESSED_CALL_ID
+    # Inizializza con l'ultimo ID esistente per non scattare su vecchie chiamate storiche
+    if OMNIROUTE_DB.exists():
+        try:
+            conn = sqlite3.connect(f"file:{OMNIROUTE_DB}?mode=ro", uri=True, timeout=1.0)
+            row = conn.cursor().execute("SELECT id FROM call_logs WHERE provider = 'gemini' ORDER BY id DESC LIMIT 1").fetchone()
+            conn.close()
+            if row:
+                _LAST_PROCESSED_CALL_ID = row[0]
+        except Exception:
+            pass
+
+    while True:
+        try:
+            time.sleep(3.0)
+            pool = load_gemini_pool()
+            now_ts = int(time.time())
+            dirty = False
+
+            # 1. Ripristina le chiavi il cui cooldown è terminato
+            for k in pool.get("keys", []):
+                if k.get("status") == "rate_limited":
+                    until = k.get("rate_limited_until", 0)
+                    if until and now_ts >= until:
+                        k["status"] = "standby"
+                        k["rate_limited_until"] = 0
+                        dirty = True
+
+            if dirty:
+                save_gemini_pool(pool)
+
+            # 2. Se auto_failover è attivo, controlla errori 429 recenti da OmniRoute
+            if pool.get("auto_failover", True) and OMNIROUTE_DB.exists():
+                try:
+                    conn = sqlite3.connect(f"file:{OMNIROUTE_DB}?mode=ro", uri=True, timeout=1.0)
+                    cur = conn.cursor()
+                    row = cur.execute('''
+                        SELECT id, status, timestamp, error_summary, model
+                        FROM call_logs 
+                        WHERE provider = 'gemini' 
+                        ORDER BY id DESC LIMIT 1
+                    ''').fetchone()
+                    conn.close()
+
+                    if row:
+                        call_id, status, call_time, err_sum, model = row
+                        if call_id != _LAST_PROCESSED_CALL_ID:
+                            _LAST_PROCESSED_CALL_ID = call_id
+                            err_str = (err_sum or "").lower()
+                            if status in (429, 503) or "quota" in err_str or "exhausted" in err_str or "rate" in err_str:
+                                reason = f"Errore {status} su {model}: {err_sum or 'Quota esaurita'}"
+                                rotate_to_next_gemini_key(reason=reason)
+                except Exception:
+                    pass
+        except Exception:
+            pass
 
 
 _CACHE: dict[str, tuple[float, any]] = {
@@ -424,6 +765,16 @@ class Handler(BaseHTTPRequestHandler):
             keys = get_keys_status(force=force_refresh)
             oauth_info = get_oauth_status(force=force_refresh)
             ollama_info = get_ollama_status(force=force_refresh)
+
+            # Gemini Multi-Key Hub snapshot
+            g_pool = load_gemini_pool()
+            g_db = get_gemini_db_stats()
+            active_g_name = ""
+            for k in g_pool.get("keys", []):
+                if k.get("id") == g_pool.get("active_id"):
+                    active_g_name = k.get("name", "")
+                    break
+
             self.send_json({
                 "running": running,
                 "port": port,
@@ -434,6 +785,42 @@ class Handler(BaseHTTPRequestHandler):
                 "keys": keys,
                 "oauth": oauth_info,
                 "ollama": ollama_info,
+                "gemini_hub": {
+                    "keys_count": len(g_pool.get("keys", [])),
+                    "active_name": active_g_name or "Nessuna chiave attiva",
+                    "auto_failover": g_pool.get("auto_failover", True),
+                    "today_tokens": g_db.get("today_tokens", 0),
+                    "today_calls": g_db.get("today_calls", 0),
+                    "total_tokens": g_db.get("total_tokens", 0),
+                }
+            })
+            return
+
+        if parsed.path == "/api/gemini-pool":
+            pool = load_gemini_pool()
+            db_stats = get_gemini_db_stats()
+            keys_safe = []
+            for k in pool.get("keys", []):
+                keys_safe.append({
+                    "id": k.get("id"),
+                    "name": k.get("name"),
+                    "masked_key": mask_key(k.get("key")),
+                    "status": k.get("status"),
+                    "calls_count": k.get("calls_count", 0),
+                    "tokens_used": k.get("tokens_used", 0),
+                    "last_status": k.get("last_status", 200),
+                    "rate_limited_until": k.get("rate_limited_until", 0),
+                    "error_message": k.get("error_message", ""),
+                    "last_checked": k.get("last_checked", 0),
+                })
+            self.send_json({
+                "ok": True,
+                "auto_failover": pool.get("auto_failover", True),
+                "active_id": pool.get("active_id", ""),
+                "keys": keys_safe,
+                "events": pool.get("events", [])[:20],
+                "db_stats": db_stats,
+                "daily_free_limit": 1000000,
             })
             return
 
@@ -593,6 +980,188 @@ class Handler(BaseHTTPRequestHandler):
             self.send_json({"ok": True, "deleted": safe_model})
             return
 
+        if parsed.path == "/api/gemini-pool/add":
+            name = body.get("name", "").strip() or f"Account Google #{len(load_gemini_pool().get('keys', [])) + 1}"
+            key = body.get("key", "").strip()
+            do_validate = body.get("validate", True)
+            if not key:
+                self.send_json({"error": "Inserisci una chiave API Google Gemini valida (AIza...)"}, status=400)
+                return
+
+            val_res = test_gemini_api_key(key) if do_validate else {"valid": True, "status": 200, "message": "Non testata"}
+            if do_validate and not val_res.get("valid") and not val_res.get("rate_limited"):
+                self.send_json({
+                    "error": f"Chiave non valida secondo Google AI Studio: {val_res.get('message')}",
+                    "details": val_res
+                }, status=400)
+                return
+
+            pool = load_gemini_pool()
+            for existing in pool.get("keys", []):
+                if existing.get("key") == key:
+                    self.send_json({"error": "Questa chiave API è già presente nel pool!"}, status=400)
+                    return
+
+            new_id = f"gemini_{int(time.time())}_{uuid.uuid4().hex[:4]}"
+            is_first = len(pool.get("keys", [])) == 0
+            status = "active" if is_first else ("rate_limited" if val_res.get("rate_limited") else "standby")
+            new_entry = {
+                "id": new_id,
+                "name": name,
+                "key": key,
+                "status": status,
+                "calls_count": 0,
+                "tokens_used": 0,
+                "last_status": val_res.get("status", 200),
+                "rate_limited_until": int(time.time()) + 300 if val_res.get("rate_limited") else 0,
+                "error_message": val_res.get("message", ""),
+                "last_checked": int(time.time()),
+            }
+            pool.setdefault("keys", []).append(new_entry)
+            now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            events = pool.setdefault("events", [])
+            events.insert(0, {
+                "time": now_str,
+                "type": "add",
+                "message": f"Aggiunta nuova chiave: {name} ({mask_key(key)})"
+            })
+            pool["events"] = events[:30]
+
+            if is_first:
+                pool["active_id"] = new_id
+                save_config({"GEMINI_API_KEY": key})
+                ensure_omniroute()
+                _run(["omniroute.cmd", "keys", "add", "gemini", key])
+
+            save_gemini_pool(pool)
+            self.send_json({"ok": True, "key_id": new_id, "name": name, "status": status, "validation": val_res})
+            return
+
+        if parsed.path == "/api/gemini-pool/delete":
+            target_id = body.get("id", "").strip()
+            pool = load_gemini_pool()
+            keys = pool.get("keys", [])
+            new_keys = [k for k in keys if k.get("id") != target_id]
+            if len(new_keys) == len(keys):
+                self.send_json({"error": "Chiave non trovata"}, status=404)
+                return
+            pool["keys"] = new_keys
+            if pool.get("active_id") == target_id:
+                if new_keys:
+                    new_active = new_keys[0]
+                    pool["active_id"] = new_active["id"]
+                    new_active["status"] = "active"
+                    save_config({"GEMINI_API_KEY": new_active["key"]})
+                    _run(["omniroute.cmd", "keys", "add", "gemini", new_active["key"]])
+                else:
+                    pool["active_id"] = ""
+                    save_config({"GEMINI_API_KEY": ""})
+            now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            events = pool.setdefault("events", [])
+            events.insert(0, {
+                "time": now_str,
+                "type": "delete",
+                "message": f"Rimossa chiave dal pool (ID: {target_id})"
+            })
+            pool["events"] = events[:30]
+            save_gemini_pool(pool)
+            self.send_json({"ok": True, "deleted": target_id, "active_id": pool.get("active_id", "")})
+            return
+
+        if parsed.path == "/api/gemini-pool/set-active":
+            target_id = body.get("id", "").strip()
+            res = switch_active_gemini_key(target_id, reason="Attivazione manuale dall'interfaccia utente")
+            self.send_json(res)
+            return
+
+        if parsed.path == "/api/gemini-pool/test-key":
+            target_id = body.get("id", "").strip()
+            raw_key = body.get("key", "").strip()
+            key_to_test = raw_key
+            pool = load_gemini_pool()
+            target_obj = None
+            if target_id:
+                for k in pool.get("keys", []):
+                    if k.get("id") == target_id:
+                        target_obj = k
+                        key_to_test = k.get("key")
+                        break
+            res = test_gemini_api_key(key_to_test)
+            if target_obj:
+                target_obj["last_status"] = res.get("status", 0)
+                target_obj["last_checked"] = int(time.time())
+                if res.get("valid"):
+                    target_obj["error_message"] = ""
+                    if target_obj.get("status") in ("invalid", "rate_limited"):
+                        target_obj["status"] = "standby"
+                        target_obj["rate_limited_until"] = 0
+                elif res.get("rate_limited"):
+                    target_obj["status"] = "rate_limited"
+                    target_obj["rate_limited_until"] = int(time.time()) + 300
+                    target_obj["error_message"] = res.get("message", "")
+                else:
+                    target_obj["status"] = "invalid"
+                    target_obj["error_message"] = res.get("message", "")
+                save_gemini_pool(pool)
+            self.send_json({"ok": True, "result": res})
+            return
+
+        if parsed.path == "/api/gemini-pool/test-all":
+            pool = load_gemini_pool()
+            keys = pool.get("keys", [])
+            threads = []
+            results = {}
+
+            def _worker(item):
+                res = test_gemini_api_key(item.get("key"))
+                results[item.get("id")] = res
+
+            for k in keys:
+                t = threading.Thread(target=_worker, args=(k,))
+                threads.append(t)
+                t.start()
+            for t in threads:
+                t.join(timeout=8)
+
+            now_ts = int(time.time())
+            for k in keys:
+                r = results.get(k.get("id"))
+                if r:
+                    k["last_status"] = r.get("status", 0)
+                    k["last_checked"] = now_ts
+                    if r.get("valid"):
+                        k["error_message"] = ""
+                        if k.get("status") in ("invalid", "rate_limited"):
+                            k["status"] = "standby"
+                            k["rate_limited_until"] = 0
+                    elif r.get("rate_limited"):
+                        k["status"] = "rate_limited"
+                        k["rate_limited_until"] = now_ts + 300
+                        k["error_message"] = r.get("message", "")
+                    else:
+                        k["status"] = "invalid"
+                        k["error_message"] = r.get("message", "")
+
+            save_gemini_pool(pool)
+            self.send_json({"ok": True, "results": results})
+            return
+
+        if parsed.path == "/api/gemini-pool/toggle-failover":
+            enabled = bool(body.get("enabled", True))
+            pool = load_gemini_pool()
+            pool["auto_failover"] = enabled
+            now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            events = pool.setdefault("events", [])
+            events.insert(0, {
+                "time": now_str,
+                "type": "config",
+                "message": f"Auto-failover Gemini impostato su: {'ATTIVO' if enabled else 'DISATTIVO'}"
+            })
+            pool["events"] = events[:30]
+            save_gemini_pool(pool)
+            self.send_json({"ok": True, "auto_failover": enabled})
+            return
+
         if parsed.path == "/api/set-key":
             prov = body.get("provider", "").strip().lower()
             key = body.get("key", "").strip()
@@ -601,6 +1170,29 @@ class Handler(BaseHTTPRequestHandler):
                 _run(["omniroute.cmd", "keys", "add", prov, key])
                 if prov == "gemini":
                     save_config({"GEMINI_API_KEY": key})
+                    # Sincronizza anche con il pool Gemini
+                    pool = load_gemini_pool()
+                    found = False
+                    for k in pool.get("keys", []):
+                        if k.get("key") == key:
+                            switch_active_gemini_key(k.get("id"), reason="Aggiornata da pannello chiavi")
+                            found = True
+                            break
+                    if not found:
+                        new_id = f"gemini_{int(time.time())}_{uuid.uuid4().hex[:4]}"
+                        pool.setdefault("keys", []).append({
+                            "id": new_id,
+                            "name": f"Account Google #{len(pool.get('keys', [])) + 1}",
+                            "key": key,
+                            "status": "active",
+                            "calls_count": 0,
+                            "tokens_used": 0,
+                            "last_status": 200,
+                            "rate_limited_until": 0,
+                            "error_message": "",
+                            "last_checked": int(time.time()),
+                        })
+                        switch_active_gemini_key(new_id, reason="Aggiunta da pannello chiavi")
                 _CACHE["keys"] = (0.0, {})
                 self.send_json({"ok": True, "provider": prov})
             else:
@@ -694,6 +1286,11 @@ class Handler(BaseHTTPRequestHandler):
 def main():
     WEB_DIR.mkdir(parents=True, exist_ok=True)
     ensure_omniroute()
+
+    # Avvia daemon di monitoraggio quota e failover automatico Gemini (Zero Rate-Limit by ATON-FUX)
+    mon_thread = threading.Thread(target=_gemini_monitor_daemon, daemon=True)
+    mon_thread.start()
+
     server = ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
     try:
         server.serve_forever()

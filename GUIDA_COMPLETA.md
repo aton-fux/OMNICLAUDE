@@ -43,6 +43,20 @@ Nella sezione **`🛡️ Paracadute Riserva`** del pannello sinistro puoi costru
 
 ---
 
+## ⚡ Gemini Multi-Key Hub & Quota Tracker (Zero Rate-Limit)
+
+Google Gemini offre ben **1.000.000 di token gratuiti al giorno** per ciascun account Google AI Studio, rendendolo il motore d'elezione per Claude Code e OpenCode. Tuttavia, in sessioni di refactoring o programmazione intensiva, si rischia di raggiungere il rate limit (15 richieste al minuto o quota giornaliera).
+
+**OMNICLAUDE include una soluzione chirurgica:**
+1. **Pannello Dedicato `⚡ Gemini Multi-Key & Quota`:** accessibile dal menu a sinistra o dal banner neon in Home.
+2. **Multi-Account Pool:** puoi registrare 2, 3 o più API Key gratuite da diversi account Google AI Studio, ciascuna con il proprio nome personalizzato (es. *Personale*, *Lavoro*, *Dev*).
+3. **Monitoraggio Quota Live:** una barra dinamica colorata mostra in tempo reale i token utilizzati nella giornata rispetto alla soglia di 1 milione.
+4. **Auto-Failover Istantaneo (Zero Interruzioni):** quando la chiave attiva riceve un errore di limite (HTTP 429 / Quota Esaurita), il monitor background di OMNICLAUDE commuta all'istante sulla chiave standby successiva aggiornando il gateway. Claude Code o OpenCode continuano a scrivere codice senza crashare o perdere la sessione!
+5. **Cooldown e Ripristino Intelligente:** la chiave esaurita entra in stato temporaneo di raffreddamento e ritorna automaticamente disponibile appena la quota o il rate limit si sblocca.
+6. **Privacy Assoluta:** tutte le chiavi sono custodite in locale nel file `gemini_keys.json` (escluso da Git via `.gitignore`) e mostrate nell'interfaccia con mascheratura di sicurezza.
+
+---
+
 ## ℹ️ Come Funziona il Terminale (Pannello Sinistro)
 
 Nel pannello sinistro trovi il pulsante dedicato **`ℹ️ Come funziona il terminale`** che ti ricorda in ogni momento:

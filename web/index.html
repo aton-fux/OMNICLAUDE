@@ -693,6 +693,9 @@
       <button class="nav-item active" onclick="showPanel('avvia')">
         <span class="nav-icon">🚀</span> Home &amp; Motori AI
       </button>
+      <button class="nav-item" onclick="showPanel('gemini-pool')">
+        <span class="nav-icon">⚡</span> Gemini Multi-Key &amp; Quota
+      </button>
       <button class="nav-item" onclick="showPanel('parachute')">
         <span class="nav-icon">🛡️</span> Paracadute Riserva
       </button>
@@ -775,6 +778,27 @@
 
         <!-- MOTORI SPOSTATI NELLO SPAZIO SOTTO A PRONTO PER PROGRAMMARE -->
         <div class="home-engines-wrapper">
+
+          <!-- BANNER NOVITÀ: GEMINI MULTI-KEY ROTATOR & ZERO RATE-LIMIT -->
+          <div style="background:var(--surface); border:1px solid var(--cyan-dim); border-radius:12px; padding:14px 18px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="font-size:26px;">⚡</span>
+              <div>
+                <div style="font-size:13.5px; font-weight:800; color:var(--text); display:flex; align-items:center; gap:8px;">
+                  <span>Gemini Multi-Key Hub &amp; Failover Automatico</span>
+                  <span class="tag tag-cyan">NOVITÀ ASSOLUTA</span>
+                  <span class="tag tag-green">ZERO RATE-LIMIT</span>
+                </div>
+                <div style="font-size:11.5px; color:var(--muted2); margin-top:2px;">
+                  Aggiungi account Google gratuiti multipli: se una chiave finisce i token (429), OMNICLAUDE passa all'altra in 0.1s senza fermare Claude Code!
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+              <span id="gemini-home-badge" class="tag tag-green">CARICAMENTO QUOTA...</span>
+              <button class="btn-primary-cyber" style="padding:6px 14px; font-size:11.5px;" onclick="showPanel('gemini-pool')">⚡ Gestisci Multi-Key &amp; Quota →</button>
+            </div>
+          </div>
 
           <!-- 1. MOTORI CLOUD GRATUITI -->
           <section class="engine-section-box">
@@ -977,6 +1001,132 @@
         </div>
       </div>
 
+      <!-- ─── PANEL: GEMINI MULTI-KEY HUB & LIVE QUOTA (CREATED BY ATON-FUX) ─── -->
+      <div class="panel" id="panel-gemini-pool">
+        <div class="page-header-banner">
+          <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+            <div style="font-size:36px;line-height:1;">⚡</div>
+            <div>
+              <div class="panel-title" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                <span>Gemini Multi-Key Hub &amp; Live Quota</span>
+                <span class="tag tag-cyan">FAILOVER ZERO RATE-LIMIT</span>
+                <span class="tag tag-green">CREATO DA ATON-FUX</span>
+              </div>
+              <div class="panel-sub">
+                Aggiungi account Google AI Studio multipli gratuiti: se una chiave esaurisce la quota (HTTP 429), OMNICLAUDE passa istantaneamente alla successiva senza interrompere Claude Code!
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <button class="btn-secondary-cyber" onclick="loadGeminiPool(true)">🔄 Aggiorna Live</button>
+            <button class="btn-secondary-cyber" onclick="testAllGeminiKeys()">🧪 Testa Tutte le Chiavi</button>
+          </div>
+        </div>
+
+        <!-- 4 CARDS KPI IN ALTO -->
+        <div class="parachute-stats-grid" style="grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));">
+          <!-- Card 1: Chiave Attiva -->
+          <div class="pstat-card">
+            <div class="pstat-label">Chiave Attiva in Uso</div>
+            <div class="pstat-val" id="gpool-kpi-active" style="font-size:15px;color:var(--cyan);word-break:break-all;">Caricamento...</div>
+            <div style="font-size:11px;color:var(--muted2);margin-top:4px;" id="gpool-kpi-active-sub">Prefisso mascherato</div>
+          </div>
+
+          <!-- Card 2: Quota Token Oggi -->
+          <div class="pstat-card">
+            <div class="pstat-label">Token Consumati Oggi</div>
+            <div class="pstat-val" id="gpool-kpi-tokens" style="color:var(--green);">0 / 1.000.000</div>
+            <div style="width:100%;height:6px;background:var(--border-subtle);border-radius:3px;margin-top:6px;overflow:hidden;">
+              <div id="gpool-token-bar" style="width:0%;height:100%;background:var(--green);transition:width 0.4s ease;"></div>
+            </div>
+            <div style="font-size:10.5px;color:var(--muted2);margin-top:4px;" id="gpool-token-pct">0% del limite giornaliero gratuito</div>
+          </div>
+
+          <!-- Card 3: Auto-Failover Switch -->
+          <div class="pstat-card">
+            <div class="pstat-label">Auto-Failover su Errore 429</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;">
+              <span id="gpool-failover-badge" class="tag tag-green">ATTIVO</span>
+              <label style="cursor:pointer;display:inline-flex;align-items:center;">
+                <input type="checkbox" id="gpool-failover-toggle" onchange="toggleGeminiFailover(this.checked)" checked style="cursor:pointer;accent-color:var(--cyan);">
+                <span style="font-size:11.5px;font-weight:700;color:var(--text);margin-left:6px;">Abilita</span>
+              </label>
+            </div>
+            <div style="font-size:11px;color:var(--muted2);margin-top:4px;">Rotazione istantanea senza blocchi</div>
+          </div>
+
+          <!-- Card 4: Chiavi nel Pool -->
+          <div class="pstat-card">
+            <div class="pstat-label">Chiavi nel Pool</div>
+            <div class="pstat-val" id="gpool-kpi-count" style="color:var(--purple);">0</div>
+            <div style="font-size:11px;color:var(--muted2);margin-top:4px;" id="gpool-kpi-breakdown">0 pronte · 0 in cooldown</div>
+          </div>
+        </div>
+
+        <!-- LAYOUT A DUE COLONNE: FORM AGGIUNTA + ELENCO CHIAVI -->
+        <div style="display:grid; grid-template-columns: 1fr 1.6fr; gap:20px; margin-top:20px;">
+          <!-- COLONNA SINISTRA: AGGIUNGI CHIAVE -->
+          <div class="config-box">
+            <div class="config-box-title">
+              <span>➕ Aggiungi Account Gemini</span>
+              <span class="tag tag-green">GRATIS</span>
+            </div>
+            <div class="config-box-sub">
+              Crea una chiave gratuita da qualsiasi account Google su <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--cyan);text-decoration:underline;">Google AI Studio ↗</a> e incollala qui:
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:14px;">
+              <div>
+                <label style="font-size:11.5px;font-weight:700;color:var(--muted2);display:block;margin-bottom:4px;">Nome Account / Etichetta:</label>
+                <input class="key-input" type="text" id="gpool-add-name" placeholder="es. Account Google Personale 2, Lavoro, ecc." style="width:100%;">
+              </div>
+              <div>
+                <label style="font-size:11.5px;font-weight:700;color:var(--muted2);display:block;margin-bottom:4px;">API Key (AIza...):</label>
+                <input class="key-input" type="password" id="gpool-add-key" placeholder="Incolla chiave AIzaSy..." style="width:100%;">
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <input type="checkbox" id="gpool-add-validate" checked style="accent-color:var(--cyan);cursor:pointer;">
+                <label for="gpool-add-validate" style="font-size:12px;color:var(--text);cursor:pointer;">Verifica chiave con Google prima di aggiungere</label>
+              </div>
+              <button class="btn-primary-cyber" style="width:100%;padding:10px 14px;margin-top:4px;" onclick="addGeminiKeyToPool()">➕ Aggiungi Chiave al Pool</button>
+            </div>
+
+            <div style="margin-top:18px;padding:12px;background:var(--surface2);border-radius:8px;font-size:11.5px;color:var(--muted2);line-height:1.5;">
+              💡 <strong style="color:var(--text);">Segreto per Token Infiniti:</strong> Google AI Studio regala 1 milione di token al giorno per ciascun account Google. Inserendo 3 account diversi in questo pool, hai <strong>3 milioni di token al giorno</strong> a costo zero!
+            </div>
+          </div>
+
+          <!-- COLONNA DESTRA: ELENCO CHIAVI CON STATO E AZIONI -->
+          <div class="config-box">
+            <div class="config-box-title">
+              <span>📋 Chiavi Configurate nel Pool</span>
+              <span class="tag tag-cyan" id="gpool-keys-count-badge">0 Chiavi</span>
+            </div>
+            <div class="config-box-sub">
+              Tutte le chiavi salvate localmente nel tuo PC. Il failover passa automaticamente alla prossima chiave se una finisce la quota.
+            </div>
+
+            <div id="gpool-keys-list" style="display:flex;flex-direction:column;gap:10px;margin-top:14px;max-height:420px;overflow-y:auto;padding-right:4px;">
+              <!-- Cards generate via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- LOG EVENTI LIVE ROTAZIONE -->
+        <div class="engine-section-box" style="margin-top:20px;">
+          <div class="engine-section-header">
+            <div>
+              <div class="engine-section-title">📡 Registro Eventi &amp; Failover Live</div>
+              <div class="engine-section-sub">Cronologia in tempo reale delle rotazioni automatiche e test di validità effettuati.</div>
+            </div>
+            <span class="tag tag-purple">LIVE LOGGER</span>
+          </div>
+          <div id="gpool-events-log" style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--code-bg);border:1px solid var(--border-subtle);border-radius:8px;padding:12px;max-height:160px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;">
+            <div style="color:var(--muted2);">In attesa di eventi...</div>
+          </div>
+        </div>
+      </div>
+
       <!-- ─── PANEL: KEYS ─── -->
       <div class="panel" id="panel-keys">
         <div class="page-header-banner">
@@ -1006,6 +1156,12 @@
           <div class="key-row">
             <input class="key-input" type="password" id="key-gemini" placeholder="Chiave Google Gemini (AIza...)">
             <button class="btn-save" onclick="saveKey('gemini')">Salva / Aggiorna</button>
+          </div>
+          <div style="margin-top:10px; display:flex; align-items:center; justify-content:space-between; background:var(--surface2); padding:8px 12px; border-radius:6px; border:1px solid var(--border-subtle); flex-wrap:wrap; gap:8px;">
+            <div style="font-size:12px; color:var(--muted2);">
+              ⚡ <strong>Novità Esclusiva:</strong> Configura più account Google gratuiti con <strong>Failover Automatico Zero Rate-Limit</strong> e monitoraggio token live!
+            </div>
+            <button class="btn-secondary-cyber" style="padding:4px 10px; font-size:11px;" onclick="showPanel('gemini-pool')">⚡ Apri Gemini Multi-Key Hub →</button>
           </div>
         </div>
 
@@ -1201,6 +1357,9 @@
     if (name === "parachute") {
       renderModularParachute();
     }
+    if (name === "gemini-pool") {
+      loadGeminiPool();
+    }
   }
 
   // ─── Toast ───
@@ -1276,6 +1435,16 @@
         btnP.className = "btn-toggle off";
         btnP.textContent = "⚪ DISATTIVO — Clicca per attivare";
       }
+    }
+
+    // Gemini Hub Badge in Home
+    const ghBadge = document.getElementById("gemini-home-badge");
+    if (ghBadge && s.gemini_hub) {
+      const gh = s.gemini_hub;
+      const count = gh.keys_count || 0;
+      const tokStr = gh.today_tokens > 0 ? (gh.today_tokens.toLocaleString() + " TOK OGGI") : "1M GRATIS/GG";
+      ghBadge.textContent = `⚡ ${count} ACCOUNT · ${tokStr} · FAILOVER ${gh.auto_failover ? "ON" : "OFF"}`;
+      ghBadge.className = "tag " + (gh.auto_failover ? "tag-green" : "tag-amber");
     }
 
     // Keys status tags
@@ -1518,6 +1687,18 @@
       if (m.id === "combo/paracadute-gratis" && Array.isArray(currentStatus.parachute_models)) {
         descText = "Catena attiva: " + currentStatus.parachute_models.join(" → ");
       }
+      if (m.keyName === "gemini" && currentStatus.gemini_hub) {
+        const gh = currentStatus.gemini_hub;
+        descText += `<div style="margin-top:6px;font-size:11.5px;color:var(--cyan);display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+          <span>⚡ <strong>${gh.keys_count}</strong> account nel pool</span>
+          <span>·</span>
+          <span>Attiva: <strong>${escapeHtml(gh.active_name || 'N/D')}</strong></span>
+        </div>`;
+      }
+
+      const extraGeminiBtn = (m.keyName === "gemini")
+        ? `<button class="btn-step" style="width:auto;padding:2px 8px;font-size:10.5px;color:var(--cyan);margin-right:auto;" onclick="event.stopPropagation();showPanel('gemini-pool')">⚡ Pool Multi-Key</button>`
+        : '';
 
       card.innerHTML = `
         <div>
@@ -1529,6 +1710,7 @@
         </div>
         <div class="mc-foot">
           <div class="tags">${m.tags.map(t => `<span class="tag ${t.cls}">${t.label}</span>`).join("")}</div>
+          ${extraGeminiBtn}
           <span style="color:var(--cyan);font-weight:700;font-size:11.5px;font-family:'JetBrains Mono',monospace;">${active ? "● IN USO" : "ATTIVA →"}</span>
         </div>
       `;
@@ -1847,6 +2029,277 @@
     if (!confirm("Vuoi arrestare OmniRoute, il server web OMNICLAUDE e tutti i servizi AI liberando RAM e VRAM?")) return;
     try { await fetch("/api/stop-all", { method: "POST" }); } catch {}
     document.getElementById("shutdown-overlay").style.display = "flex";
+  }
+
+  // ═════════════════════════════════════════════════════════════════════════
+  // GEMINI MULTI-KEY & QUOTA POOL ENGINE (Created by ATON-FUX)
+  // ═════════════════════════════════════════════════════════════════════════
+  let currentGeminiPool = { keys: [], events: [], auto_failover: true };
+
+  function escapeHtml(str) {
+    if (!str) return "";
+    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  async function loadGeminiPool(manual = false) {
+    try {
+      const res = await fetch("/api/gemini-pool");
+      const d = await res.json();
+      if (!d.ok) return;
+      currentGeminiPool = d;
+
+      // Update KPI Cards
+      const activeKey = d.keys.find(k => k.id === d.active_id) || d.keys[0];
+      const kpiActive = document.getElementById("gpool-kpi-active");
+      const kpiActiveSub = document.getElementById("gpool-kpi-active-sub");
+      if (kpiActive) {
+        if (activeKey) {
+          kpiActive.textContent = activeKey.name;
+          if (kpiActiveSub) kpiActiveSub.textContent = activeKey.masked_key + (activeKey.status === "active" ? " · ● IN USO" : "");
+        } else {
+          kpiActive.textContent = "Nessuna chiave";
+          if (kpiActiveSub) kpiActiveSub.textContent = "Aggiungi un account per iniziare";
+        }
+      }
+
+      // Tokens Today
+      const stats = d.db_stats || {};
+      const todayTokens = stats.today_tokens || 0;
+      const limit = d.daily_free_limit || 1000000;
+      const pct = Math.min(100, Math.round((todayTokens / limit) * 100));
+      const kpiTokens = document.getElementById("gpool-kpi-tokens");
+      const tokenBar = document.getElementById("gpool-token-bar");
+      const tokenPct = document.getElementById("gpool-token-pct");
+      if (kpiTokens) kpiTokens.textContent = todayTokens.toLocaleString() + " / " + (limit / 1000).toLocaleString() + "k";
+      if (tokenBar) {
+        tokenBar.style.width = pct + "%";
+        tokenBar.style.background = pct > 90 ? "var(--red)" : (pct > 70 ? "var(--amber)" : "var(--green)");
+      }
+      if (tokenPct) {
+        tokenPct.textContent = pct + "% quota consumata oggi · " + (stats.today_calls || 0) + " chiamate API effettuate";
+      }
+
+      // Failover Toggle
+      const foToggle = document.getElementById("gpool-failover-toggle");
+      const foBadge = document.getElementById("gpool-failover-badge");
+      if (foToggle) foToggle.checked = !!d.auto_failover;
+      if (foBadge) {
+        foBadge.textContent = d.auto_failover ? "ATTIVO" : "DISATTIVATO";
+        foBadge.className = "tag " + (d.auto_failover ? "tag-green" : "tag-red");
+      }
+
+      // Keys Count & Breakdown
+      const readyCount = d.keys.filter(k => k.status === "active" || k.status === "standby").length;
+      const cdCount = d.keys.filter(k => k.status === "rate_limited").length;
+      const kpiCount = document.getElementById("gpool-kpi-count");
+      const kpiBreakdown = document.getElementById("gpool-kpi-breakdown");
+      const countBadge = document.getElementById("gpool-keys-count-badge");
+      if (kpiCount) kpiCount.textContent = d.keys.length;
+      if (kpiBreakdown) kpiBreakdown.textContent = readyCount + " pronte · " + cdCount + " in cooldown";
+      if (countBadge) countBadge.textContent = d.keys.length + " Chiav" + (d.keys.length === 1 ? "e" : "i");
+
+      // Render Keys List
+      const list = document.getElementById("gpool-keys-list");
+      if (list) {
+        list.innerHTML = "";
+        if (d.keys.length === 0) {
+          list.innerHTML = '<div style="color:var(--muted2);padding:14px;text-align:center;">Nessuna chiave nel pool. Incolla la tua prima chiave a sinistra!</div>';
+        } else {
+          d.keys.forEach(k => {
+            const isActive = k.id === d.active_id || k.status === "active";
+            const isRateLimited = k.status === "rate_limited";
+            const isInvalid = k.status === "invalid";
+
+            let tagCls = "tag-cyan";
+            let tagLabel = "🟡 STANDBY (Di Riserva)";
+            if (isActive) { tagCls = "tag-green"; tagLabel = "🟢 ATTIVA (In Uso)"; }
+            else if (isRateLimited) { tagCls = "tag-red"; tagLabel = "🔴 RATE-LIMIT (429)"; }
+            else if (isInvalid) { tagCls = "tag-red"; tagLabel = "❌ NON VALIDA"; }
+
+            const card = document.createElement("div");
+            card.style.cssText = `background:var(--surface2);border:1px solid ${isActive ? "var(--cyan)" : "var(--border-subtle)"};border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;box-shadow:${isActive ? "0 0 10px rgba(0,240,255,0.12)" : "none"};`;
+
+            card.innerHTML = `
+              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="font-size:18px;">🔑</span>
+                  <div>
+                    <div style="font-weight:700;font-size:13px;color:var(--text);">${escapeHtml(k.name)}</div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted2);">${k.masked_key || '••••••••'}</div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                  <span class="tag ${tagCls}">${tagLabel}</span>
+                  ${!isActive ? `<button class="btn-primary-cyber" style="padding:4px 10px;font-size:11px;" onclick="setActiveGeminiKey('${k.id}')" title="Imposta subito come chiave primaria">▶️ Usa Ora</button>` : ''}
+                  <button class="btn-secondary-cyber" style="padding:4px 8px;font-size:11px;" onclick="testSingleGeminiKey('${k.id}')" title="Testa chiave con Google API">🧪</button>
+                  <button class="btn-secondary-cyber" style="padding:4px 8px;font-size:11px;color:var(--red);" onclick="deleteGeminiKey('${k.id}', '${escapeHtml(k.name)}')" title="Rimuovi dal pool">🗑️</button>
+                </div>
+              </div>
+              <div style="font-size:11px;color:var(--muted2);display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px dashed var(--border-subtle);padding-top:6px;">
+                <span>Chiamate: <strong style="color:var(--text);">${k.calls_count || 0}</strong></span>
+                <span>Token stimati: <strong style="color:var(--text);">${(k.tokens_used || 0).toLocaleString()}</strong></span>
+                ${k.error_message ? `<span style="color:var(--red);">${escapeHtml(k.error_message)}</span>` : '<span style="color:var(--green);">✓ Nessun errore</span>'}
+              </div>
+            `;
+            list.appendChild(card);
+          });
+        }
+      }
+
+      // Render Events Log
+      const log = document.getElementById("gpool-events-log");
+      if (log && Array.isArray(d.events)) {
+        if (d.events.length === 0) {
+          log.innerHTML = '<div style="color:var(--muted2);">Nessun evento registrato.</div>';
+        } else {
+          log.innerHTML = d.events.map(ev => {
+            let color = "var(--text)";
+            if (ev.type === "switch" || ev.type === "failover") color = "var(--cyan)";
+            else if (ev.type === "add") color = "var(--green)";
+            else if (ev.type === "error") color = "var(--red)";
+            return `<div style="line-height:1.4;"><span style="color:var(--muted2);">[${escapeHtml(ev.time)}]</span> <span style="color:${color};font-weight:600;">${escapeHtml(ev.message)}</span></div>`;
+          }).join("");
+        }
+      }
+
+      if (manual) showToast("⚡ Pool Gemini e quote aggiornate!");
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function addGeminiKeyToPool() {
+    const nameInp = document.getElementById("gpool-add-name");
+    const keyInp = document.getElementById("gpool-add-key");
+    const valChk = document.getElementById("gpool-add-validate");
+
+    const name = nameInp ? nameInp.value.trim() : "";
+    const key = keyInp ? keyInp.value.trim() : "";
+    const validate = valChk ? valChk.checked : true;
+
+    if (!key) {
+      showToast("Incolla una chiave API Google valida (AIza...)!", true);
+      return;
+    }
+
+    showToast("Verifica e salvataggio chiave in corso...");
+    try {
+      const res = await fetch("/api/gemini-pool/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: name, key: key, validate: validate })
+      });
+      const d = await res.json();
+      if (d.ok) {
+        showToast("✓ Chiave aggiunta con successo al pool!");
+        if (nameInp) nameInp.value = "";
+        if (keyInp) keyInp.value = "";
+        loadGeminiPool();
+        loadStatus();
+      } else {
+        showToast(d.error || "Errore aggiunta chiave", true);
+      }
+    } catch (e) {
+      showToast("Errore di connessione al server", true);
+    }
+  }
+
+  async function setActiveGeminiKey(id) {
+    try {
+      const res = await fetch("/api/gemini-pool/set-active", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: id })
+      });
+      const d = await res.json();
+      if (d.ok) {
+        showToast("✓ Chiave attivata con successo: " + (d.name || id));
+        loadGeminiPool();
+        loadStatus();
+      } else {
+        showToast(d.error || "Errore attivazione chiave", true);
+      }
+    } catch (e) {
+      showToast("Errore di rete", true);
+    }
+  }
+
+  async function deleteGeminiKey(id, name) {
+    if (!confirm(`Vuoi davvero rimuovere "${name}" dal pool Gemini?`)) return;
+    try {
+      const res = await fetch("/api/gemini-pool/delete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: id })
+      });
+      const d = await res.json();
+      if (d.ok) {
+        showToast("✓ Chiave rimossa dal pool");
+        loadGeminiPool();
+        loadStatus();
+      } else {
+        showToast(d.error || "Errore rimozione chiave", true);
+      }
+    } catch (e) {
+      showToast("Errore di rete", true);
+    }
+  }
+
+  async function testSingleGeminiKey(id) {
+    showToast("Test chiave su Google API in corso...");
+    try {
+      const res = await fetch("/api/gemini-pool/test-key", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: id })
+      });
+      const d = await res.json();
+      if (d.ok && d.result) {
+        const r = d.result;
+        if (r.valid) {
+          showToast(`🟢 ${r.message}`);
+        } else if (r.rate_limited) {
+          showToast(`🔴 Rate limit 429: ${r.message}`, true);
+        } else {
+          showToast(`❌ Non valida: ${r.message}`, true);
+        }
+        loadGeminiPool();
+      }
+    } catch (e) {
+      showToast("Errore durante il test della chiave", true);
+    }
+  }
+
+  async function testAllGeminiKeys() {
+    showToast("Test di tutte le chiavi del pool in parallelo...");
+    try {
+      const res = await fetch("/api/gemini-pool/test-all", { method: "POST" });
+      const d = await res.json();
+      if (d.ok) {
+        showToast("✓ Tutte le chiavi testate e aggiornate!");
+        loadGeminiPool();
+      }
+    } catch (e) {
+      showToast("Errore test chiavi", true);
+    }
+  }
+
+  async function toggleGeminiFailover(enabled) {
+    try {
+      const res = await fetch("/api/gemini-pool/toggle-failover", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ enabled: enabled })
+      });
+      const d = await res.json();
+      if (d.ok) {
+        showToast("Auto-failover Gemini: " + (enabled ? "ABILITATO" : "DISATTIVATO"));
+        loadGeminiPool();
+        loadStatus();
+      }
+    } catch (e) {
+      showToast("Errore aggiornamento impostazione failover", true);
+    }
   }
 
   // ─── Init ───
