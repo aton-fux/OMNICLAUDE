@@ -805,7 +805,8 @@ class Handler(BaseHTTPRequestHandler):
                 "ok": True,
                 "is_pro": license_manager.is_pro_active(),
                 "license": lic,
-                "gumroad_url": license_manager.GUMROAD_DEFAULT_URL
+                "gumroad_url": license_manager.GUMROAD_DEFAULT_URL,
+                "store_url": license_manager.STORE_URL
             })
             return
 
@@ -831,6 +832,7 @@ class Handler(BaseHTTPRequestHandler):
                 "is_pro": license_manager.is_pro_active(),
                 "license": license_manager.load_license(),
                 "gumroad_url": license_manager.GUMROAD_DEFAULT_URL,
+                "store_url": license_manager.STORE_URL,
                 "auto_failover": pool.get("auto_failover", True),
                 "active_id": pool.get("active_id", ""),
                 "keys": keys_safe,
@@ -1017,7 +1019,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json({
                     "error": "La versione gratuita consente 1 sola chiave Gemini. Per aggiungere più account Google con rotazione automatica e Zero Rate-Limit, sblocca OMNICLAUDE PRO a 14,99€.",
                     "pro_required": True,
-                    "gumroad_url": license_manager.GUMROAD_DEFAULT_URL
+                    "gumroad_url": license_manager.GUMROAD_DEFAULT_URL,
+                    "store_url": license_manager.STORE_URL
                 }, status=403)
                 return
 
@@ -1191,7 +1194,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json({
                     "error": "L'Auto-Failover continuo tra più account e il monitor anti-rate-limit sono funzionalità esclusive di OMNICLAUDE PRO.",
                     "pro_required": True,
-                    "gumroad_url": license_manager.GUMROAD_DEFAULT_URL
+                    "gumroad_url": license_manager.GUMROAD_DEFAULT_URL,
+                    "store_url": license_manager.STORE_URL
                 }, status=403)
                 return
 
