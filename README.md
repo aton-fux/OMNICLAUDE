@@ -42,7 +42,7 @@
    - Monitora in tempo reale con barra dinamica i **token consumati oggi** rispetto al milione gratuito;
    - **Failover Automatico in millisecondi**: se la chiave attiva esaurisce i token o va in 429, OMNICLAUDE passa istantaneamente alla chiave successiva in standby senza interrompere Claude Code o OpenCode!
    - Test live delle chiavi direttamente contro le API Google e auto-ripristino al termine del cooldown.
-   *(La versione Community gratuita consente 1 chiave Gemini; per account illimitati e rotazione continua a caldo attiva la licenza PRO)*.
+   *(La versione Community gratuita consente 1 chiave Gemini; per sbloccare account illimitati e rotazione continua a caldo visita la 👉 [Vetrina Ufficiale OMNICLAUDE PRO](https://aton-fux.github.io/omniclaude-store/) oppure [Acquista la Licenza a 14,99€](https://atonfux.gumroad.com/l/omniclaude-pro))*.
 4. **🛡️ Paracadute di Riserva 100% Configurabile e Modulare**  
    Se un motore esaurisce i crediti o raggiunge il limite di richieste durante una sessione di programmazione, **OMNICLAUDE** passa automaticamente al motore successivo senza interrompere il lavoro. Dalla sezione **Paracadute Riserva** puoi:
    - Riordinare la priorità dei motori con le frecce **⬆️ / ⬇️**;
