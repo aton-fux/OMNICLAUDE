@@ -1,0 +1,9 @@
+# File di configurazione locale con chiavi API personali (NON caricare su GitHub)
+config.env
+
+# Cache Python e file temporanei
+__pycache__/
+*.py[cod]
+*$py.class
+.DS_Store
+Thumbs.db
