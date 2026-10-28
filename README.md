@@ -2,7 +2,7 @@
 
 <img src="./assets/logo.png" width="140" height="140" alt="OMNICLAUDE Official Cyber Brain Logo" />
 
-# ⚡ OMNICLAUDE — Pro Edition v2.0
+# ⚡ OMNICLAUDE — AI Terminal Command Center (Free & INFINITY Edition)
 
 ### **AI Terminal Command Center per Claude Code & OpenCode con Gateway OmniRoute & Paracadute Modulare**
 
@@ -28,7 +28,7 @@
 
 **OMNICLAUDE** (creato da **ATON-FUX**) è una suite di comando web leggera, portatile e a **zero dipendenze esterne** che permette di utilizzare i due migliori agenti di programmazione da terminale — **Claude Code** (di Anthropic) e **OpenCode** (TUI open-source) — collegandoli istantaneamente a **motori AI Cloud gratuiti** (Google Gemini Flash, Groq Llama 3.3 70B, DeepSeek V3/R1, OpenRouter), al proprio **account web Claude.ai (OAuth)** oppure a **modelli 100% Locali e Offline su GPU/CPU tramite Ollama**.
 
-### ✨ Punti di Forza Esclusivi della v2.0 (Pro Edition by ATON-FUX)
+### ✨ Punti di Forza Esclusivi di OMNICLAUDE & OMNICLAUDE INFINITY (by ATON-FUX)
 
 1. **🎨 Stile & Tema Cyber Moderno (`🖤 DARK CYBER` / `🤍 LIGHT PRO`)**  
    Interfaccia cyber-moderna ad alto contrasto con selettore istantaneo tra modalità **Dark Cyber** (nero ossidiana e verde/ciano neon) e **Light Pro** (bianco cyber-lab nitido), con salvataggio automatico delle preferenze.
@@ -42,7 +42,7 @@
    - Monitora in tempo reale con barra dinamica i **token consumati oggi** rispetto al milione gratuito;
    - **Failover Automatico in millisecondi**: se la chiave attiva esaurisce i token o va in 429, OMNICLAUDE passa istantaneamente alla chiave successiva in standby senza interrompere Claude Code o OpenCode!
    - Test live delle chiavi direttamente contro le API Google e auto-ripristino al termine del cooldown.
-   *(La versione Community gratuita consente 1 chiave Gemini; per sbloccare account illimitati e rotazione continua a caldo visita la 👉 [Vetrina Ufficiale OMNICLAUDE INFINITY](https://aton-fux.github.io/omniclaude-store/) oppure [Acquista la Licenza a 14,99€](https://kronostone.gumroad.com/l/omniclaude-pro))*.
+   *(La versione Community gratuita consente 1 chiave Gemini; per sbloccare account illimitati e rotazione continua a caldo visita la 👉 [Vetrina Ufficiale OMNICLAUDE INFINITY](https://aton-fux.github.io/OMNICLAUDE/) oppure [Acquista la Licenza a 14,99€](https://kronostone.gumroad.com/l/omniclaude-pro))*.
 4. **🛡️ Paracadute di Riserva 100% Configurabile e Modulare**  
    Se un motore esaurisce i crediti o raggiunge il limite di richieste durante una sessione di programmazione, **OMNICLAUDE** passa automaticamente al motore successivo senza interrompere il lavoro. Dalla sezione **Paracadute Riserva** puoi:
    - Riordinare la priorità dei motori con le frecce **⬆️ / ⬇️**;
@@ -103,7 +103,7 @@ cd OMNICLAUDE
 | **`INSTALLA.bat`** | ⚙️ **Installatore & Diagnostica:** installa e configura in automatico tutte le dipendenze necessarie su un nuovo PC. |
 | **`LOGIN_CLAUDE.bat`** | 🌐 **Login OAuth Claude Web:** collega il tuo account Claude.ai (Pro/Max) tramite browser senza usare chiavi API a consumo. |
 | **`server.py`** | 🧠 **Backend OMNICLAUDE:** server HTTP multithread scritto in Python puro (zero dipendenze esterne) per la gestione di modelli, chiavi, failover automatico Gemini, Paracadute modulare e processi. |
-| **`web/index.html`** | 💻 **Frontend Pro Edition v2.0:** interfaccia web reattiva con selettore Dark Cyber / Light Pro, Gemini Multi-Key Hub, selezione motori in Home e configuratore Paracadute. |
+| **`web/index.html`** | 💻 **Frontend OMNICLAUDE Suite v2.0 (Bilingue IT/EN):** interfaccia web reattiva con selettore Dark Cyber / Light Pro, Gemini Multi-Key Hub, selezione motori in Home e configuratore Paracadute. |
 | **`gemini_keys.json`** | 🔐 **Pool Multi-Key Gemini Locale:** archiviazione sicura locale delle API key di Google Gemini e stato quota (protetto da `.gitignore`). |
 | **`config.example.env`** | 🔐 **Template Configurazione:** modello pulito per il file `config.env` locale (le tue chiavi personali restano solo sul tuo PC grazie a `.gitignore`). |
 

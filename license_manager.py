@@ -29,7 +29,7 @@ LICENSE_FILE = DIR / "license.json"
 _MASTER_SECRET = b"ATON-FUX_OMNICLAUDE_PRO_2026_MASTER_CRYPT_KEY_v2"
 GUMROAD_PRODUCT_PERMALINK = "omniclaude-pro"
 GUMROAD_DEFAULT_URL = "https://kronostone.gumroad.com/l/omniclaude-pro"
-STORE_URL = "https://aton-fux.github.io/omniclaude-store/"
+STORE_URL = "https://aton-fux.github.io/OMNICLAUDE/"
 
 # Creator Master Keys (can be used by ATON-FUX anywhere)
 CREATOR_MASTER_KEYS = {

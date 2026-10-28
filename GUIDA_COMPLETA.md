@@ -2,7 +2,7 @@
   <img src="./assets/logo.png" width="124" height="124" alt="OMNICLAUDE Official Logo" />
 </div>
 
-# 📘 Guida Ufficiale Italiana: OMNICLAUDE — Pro Edition v2.0
+# 📘 Guida Ufficiale: OMNICLAUDE (Free) & OMNICLAUDE INFINITY
 **Creato da ATON-FUX** · Repository Ufficiale: [https://github.com/aton-fux/OMNICLAUDE](https://github.com/aton-fux/OMNICLAUDE)
 
 Benvenuto in **OMNICLAUDE**, il centro di controllo AI ideato da **ATON-FUX** per utilizzare **Claude Code** e **OpenCode** collegati a **motori AI Cloud gratuiti, Open Source, modelli Locali Ollama e al tuo account web Claude.ai**, con **Paracadute Modulare** anti-interruzione e scelta del tema **Dark Cyber / Light Pro**.
@@ -53,7 +53,7 @@ Google Gemini offre ben **1.000.000 di token gratuiti al giorno** per ciascun ac
 3. **Monitoraggio Quota Live:** una barra dinamica colorata mostra in tempo reale i token utilizzati nella giornata rispetto alla soglia di 1 milione.
 4. **Auto-Failover Istantaneo (Zero Interruzioni):** quando la chiave attiva riceve un errore di limite (HTTP 429 / Quota Esaurita), il monitor background di OMNICLAUDE commuta all'istante sulla chiave standby successiva aggiornando il gateway. Claude Code o OpenCode continuano a scrivere codice senza crashare o perdere la sessione!
 5. **Cooldown e Ripristino Intelligente:** la chiave esaurita entra in stato temporaneo di raffreddamento e ritorna automaticamente disponibile appena la quota o il rate limit si sblocca.
-6. **Attivazione Istantanea:** inserisci il codice licenza ricevuto dopo l'acquisto su Gumroad o fornito da **ATON-FUX** cliccando su *"🔑 Inserisci Chiave PRO"* per sbloccare la rotazione a vita.
+6. **Attivazione Istantanea:** inserisci il codice licenza ricevuto dopo l'acquisto su Gumroad o fornito da **ATON-FUX** cliccando su *"🔑 Attiva Licenza INFINITY"* per sbloccare la rotazione a vita.
 7. **Privacy Assoluta:** tutte le chiavi sono custodite in locale nel file `gemini_keys.json` (escluso da Git via `.gitignore`) e mostrate nell'interfaccia con mascheratura di sicurezza.
 
 ---

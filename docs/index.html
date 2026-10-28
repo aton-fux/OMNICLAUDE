@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="meta-title">OMNICLAUDE INFINITY — Official Store | Created by ATON-FUX</title>
+  <meta name="description" content="Get OMNICLAUDE INFINITY lifetime license for 14.99€. Zero Rate-Limit for Claude Code & OpenCode, Multi-Account Google Gemini and seamless Auto-Failover.">
+  <link rel="icon" type="image/png" href="./assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #05080f;
+      --surface: #0b111e;
+      --surface2: #111a2e;
+      --surface3: #16223b;
+      --border: rgba(0, 245, 155, 0.16);
+      --border-cyan: rgba(0, 229, 255, 0.22);
+      --border-gold: rgba(255, 184, 0, 0.35);
+      --green: #00f59b;
+      --cyan: #00e5ff;
+      --gold: #ffb800;
+      --text: #f0f4fc;
+      --muted: #8b9bb4;
+      --muted2: #5c6c84;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(ellipse at 50% -20%, rgba(0, 229, 255, 0.15), transparent 70%),
+        radial-gradient(ellipse at 80% 60%, rgba(0, 245, 155, 0.08), transparent 60%);
+      min-height: 100vh;
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+    /* ─── TOPBAR ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(5, 8, 15, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 18px; letter-spacing: 0.05em;
+    }
+    .nav-brand img { width: 36px; height: 36px; border-radius: 8px; }
+    .nav-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 800;
+      padding: 3px 8px; border-radius: 5px; background: rgba(255, 184, 0, 0.15);
+      color: var(--gold); border: 1px solid rgba(255, 184, 0, 0.4);
+    }
+    .lang-pill-group {
+      display: inline-flex; align-items: center; background: var(--surface2);
+      border: 1px solid var(--border-cyan); border-radius: 8px; padding: 3px; gap: 2px;
+    }
+    .lang-btn {
+      background: transparent; border: none; color: var(--muted); font-size: 12px; font-weight: 700;
+      padding: 5px 10px; border-radius: 6px; cursor: pointer; transition: all 0.2s;
+    }
+    .lang-btn.active {
+      background: var(--surface3); color: var(--cyan); box-shadow: 0 0 10px rgba(0, 229, 255, 0.25);
+    }
+    .btn-buy-nav {
+      background: linear-gradient(135deg, #ffb800, #ff8800);
+      color: #000; font-weight: 800; font-size: 13px;
+      padding: 9px 18px; border-radius: 8px; border: none;
+      cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px;
+      box-shadow: 0 0 16px rgba(255, 184, 0, 0.3);
+    }
+    .btn-buy-nav:hover { transform: translateY(-1px); box-shadow: 0 0 24px rgba(255, 184, 0, 0.5); }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 70px 0 50px; text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface2); border: 1px solid var(--border-gold);
+      padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700;
+      color: var(--gold); margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 56px); font-weight: 900; line-height: 1.15;
+      letter-spacing: -0.02em; margin-bottom: 20px;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #00f59b, #00e5ff 60%, #ffb800);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: clamp(16px, 2vw, 20px); color: var(--muted);
+      max-width: 780px; margin: 0 auto 36px;
+    }
+    .hero-cta {
+      display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 40px;
+    }
+    .btn-main-cta {
+      background: linear-gradient(135deg, #00f59b, #00e5ff);
+      color: #000; font-weight: 900; font-size: 16px;
+      padding: 16px 32px; border-radius: 10px; border: none; cursor: pointer;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+      box-shadow: 0 0 28px rgba(0, 245, 155, 0.35); transition: all 0.2s;
+    }
+    .btn-main-cta:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(0, 245, 155, 0.55); color: #000; }
+    .btn-sec-cta {
+      background: var(--surface2); color: var(--text); border: 1px solid var(--border-cyan);
+      font-weight: 700; font-size: 15px; padding: 15px 26px; border-radius: 10px;
+      cursor: pointer; text-decoration: none; transition: all 0.2s;
+    }
+    .btn-sec-cta:hover { background: var(--surface3); border-color: var(--cyan); }
+
+    .hero-meta {
+      display: flex; align-items: center; justify-content: center; gap: 24px;
+      font-size: 13px; color: var(--muted); flex-wrap: wrap;
+    }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 6px; }
+
+    /* ─── SCREENSHOT SHOWCASE ─── */
+    .showcase-box {
+      margin: 40px auto 70px; border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--border-cyan);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 229, 255, 0.15);
+      background: var(--surface);
+    }
+    .showcase-bar {
+      background: var(--surface2); padding: 10px 16px; display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted2);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .showcase-box img { width: 100%; height: auto; display: block; }
+    .preview-tab {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--muted2);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Inter', sans-serif;
+    }
+    .preview-tab.active, .preview-tab:hover {
+      background: var(--cyan);
+      color: #0b0f19;
+      border-color: var(--cyan);
+    }
+
+    /* ─── SAVINGS CALCULATOR ─── */
+    .savings-card {
+      background: linear-gradient(135deg, rgba(0, 245, 155, 0.08), rgba(0, 229, 255, 0.04));
+      border: 1px solid var(--border); border-radius: 16px; padding: 32px;
+      margin-bottom: 80px; text-align: center;
+    }
+    .savings-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 24px;
+    }
+    .savings-col {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+    }
+    .savings-val { font-size: 28px; font-weight: 900; color: var(--green); margin: 6px 0; }
+
+    /* ─── COMPARISON MATRIX ─── */
+    .section-title { text-align: center; margin-bottom: 40px; }
+    .section-title h2 { font-size: clamp(26px, 3.5vw, 40px); font-weight: 900; margin-bottom: 12px; }
+    .section-title p { color: var(--muted); font-size: 16px; max-width: 650px; margin: 0 auto; }
+
+    .matrix-table {
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+      margin-bottom: 90px;
+    }
+    .matrix-table th, .matrix-table td {
+      padding: 16px 20px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .matrix-table th { background: var(--surface2); font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .matrix-table th.col-pro { color: var(--gold); background: rgba(255, 184, 0, 0.1); }
+    .matrix-table tr:last-child td { border-bottom: none; }
+    .check-yes { color: var(--green); font-weight: 800; }
+    .check-no { color: var(--muted2); }
+
+    /* ─── PRICING CARD ─── */
+    .pricing-wrap {
+      max-width: 620px; margin: 0 auto 90px;
+      background: linear-gradient(135deg, rgba(255, 184, 0, 0.09), rgba(0, 229, 255, 0.05));
+      border: 2px solid var(--gold); border-radius: 20px; padding: 40px;
+      box-shadow: 0 0 50px rgba(255, 184, 0, 0.18); text-align: center; position: relative;
+    }
+    .pricing-pill {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--gold); color: #000; font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 900; padding: 4px 16px; border-radius: 20px; letter-spacing: 0.06em;
+    }
+    .pricing-price { font-size: 58px; font-weight: 900; line-height: 1; margin: 16px 0 8px; color: #fff; }
+    .pricing-price span { font-size: 20px; color: var(--muted); font-weight: 600; }
+    .pricing-sub { color: var(--green); font-weight: 700; font-size: 14px; margin-bottom: 24px; }
+    .pricing-features {
+      text-align: left; margin: 0 auto 30px; max-width: 440px; display: flex; flex-direction: column; gap: 12px;
+    }
+    .pricing-item { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+    .pricing-item span:first-child { flex-shrink: 0; }
+
+    .btn-buy-big {
+      display: block; width: 100%; max-width: 440px; margin: 0 auto 16px;
+      background: linear-gradient(135deg, #ffb800, #ff8800);
+      color: #000; font-weight: 900; font-size: 18px; padding: 18px 24px;
+      border-radius: 12px; text-decoration: none; box-shadow: 0 0 30px rgba(255, 184, 0, 0.4);
+      transition: all 0.2s;
+    }
+    .btn-buy-big:hover { transform: translateY(-2px); box-shadow: 0 0 45px rgba(255, 184, 0, 0.65); color: #000; }
+
+    .direct-pay-box {
+      margin-top: 24px; padding: 18px; border-radius: 12px;
+      background: rgba(0, 0, 0, 0.35); border: 1px dashed var(--border-cyan);
+      font-size: 13px; color: var(--muted); line-height: 1.6; text-align: left;
+    }
+
+    /* ─── FAQ ─── */
+    .faq-grid { max-width: 780px; margin: 0 auto 90px; display: flex; flex-direction: column; gap: 12px; }
+    .faq-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 22px;
+    }
+    .faq-card summary { font-weight: 700; font-size: 15px; cursor: pointer; color: var(--text); }
+    .faq-card p { margin-top: 10px; font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border); padding: 40px 0; text-align: center;
+      background: var(--surface); font-size: 13px; color: var(--muted2);
+    }
+    .footer-author {
+      font-size: 15px; font-weight: 800; color: var(--green); margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <nav>
+    <div class="container nav-inner">
+      <div class="nav-brand">
+        <img src="./assets/logo.png" alt="OMNICLAUDE Cyber Logo">
+        <span>OMNICLAUDE</span>
+        <span class="nav-tag">INFINITY STORE</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="lang-pill-group">
+          <button class="lang-btn active" id="btn-lang-it" onclick="setLang('it')">🇮🇹 IT</button>
+          <button class="lang-btn" id="btn-lang-en" onclick="setLang('en')">🇬🇧 EN</button>
+        </div>
+        <a href="https://github.com/aton-fux/OMNICLAUDE" target="_blank" style="font-size:13px;font-weight:600;color:var(--muted);">GitHub</a>
+        <a href="#acquista" class="btn-buy-nav" data-i18n="nav_buy_btn">🛒 Acquista Licenza 14,99€</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero container">
+    <div class="hero-badge">
+      <span data-i18n="hero_badge">🛡️ ZERO RATE-LIMIT PER CLAUDE CODE &amp; OPENCODE</span>
+    </div>
+    <h1 data-i18n="hero_title">
+      Programma con Claude Code <br>
+      <span class="gradient-text">Senza Limiti e Senza Interruzioni.</span>
+    </h1>
+    <p data-i18n="hero_desc">
+      Sblocca il <strong>Gemini Multi-Key Hub &amp; Quota Rotator</strong> di OMNICLAUDE: connetti account Google gratuiti multipli. Quando una chiave tocca il limite 429, il sistema commuta in millisecondi a quella successiva.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#acquista" class="btn-main-cta">
+        <span data-i18n="hero_cta_buy">⚡ Sblocca OMNICLAUDE INFINITY (14,99€)</span>
+      </a>
+      <a href="https://github.com/aton-fux/OMNICLAUDE" target="_blank" class="btn-sec-cta">
+        <span data-i18n="hero_cta_community">📂 Esplora la Versione Community</span>
+      </a>
+    </div>
+
+    <div class="hero-meta">
+      <span data-i18n="meta_lifetime">✅ Licenza a Vita (Una Tantum)</span>
+      <span data-i18n="meta_nosub">✅ Nessun Abbonamento Mensile</span>
+      <span data-i18n="meta_3pcs">✅ Fino a 3 PC Personali</span>
+      <span data-i18n="meta_instant">✅ Consegna Istantanea Chiave</span>
+    </div>
+
+    <!-- SHOWCASE SCREENSHOT -->
+    <div class="showcase-box">
+      <div class="showcase-bar">
+        <span class="dot" style="background:#ff5f56;"></span>
+        <span class="dot" style="background:#ffbd2e;"></span>
+        <span class="dot" style="background:#27c93f;"></span>
+        <span style="margin-left:6px;" id="showcase-title">omniclaude://gemini-multi-key-hub</span>
+        <div style="margin-left:auto;display:flex;gap:6px;">
+          <button id="tab-btn-gemini" class="preview-tab active" onclick="switchPreview('gemini')">⚡ Gemini Multi-Key</button>
+          <button id="tab-btn-home" class="preview-tab" onclick="switchPreview('home')">🚀 Home</button>
+          <button id="tab-btn-parachute" class="preview-tab" onclick="switchPreview('parachute')">🛡️ Paracadute</button>
+        </div>
+      </div>
+      <img id="showcase-img" src="./assets/omniclaude-gemini-hub.png" alt="OMNICLAUDE Live UI Preview">
+    </div>
+  </section>
+
+  <!-- TOKEN SAVINGS -->
+  <section class="container">
+    <div class="savings-card">
+      <h3 style="font-size:24px;font-weight:800;" data-i18n="savings_title">💸 Quanto Risparmi con OMNICLAUDE INFINITY?</h3>
+      <p style="color:var(--muted);max-width:680px;margin:8px auto 0;" data-i18n="savings_desc">
+        Con 3 account gratuiti Google AI Studio ottieni fino a <strong>3.000.000 di token gratis al giorno</strong>. Zero costi per Claude Code, zero abbonamenti da 20$/mese.
+      </p>
+      <div class="savings-grid">
+        <div class="savings-col">
+          <div style="font-size:12px;color:var(--muted2);text-transform:uppercase;font-weight:700;" data-i18n="sav_col1_lbl">Abbonamento Claude Pro</div>
+          <div class="savings-val" style="color:#ff5f56;">240$ / anno</div>
+          <div style="font-size:12px;color:var(--muted);" data-i18n="sav_col1_sub">Costo ricorrente mensile fisso</div>
+        </div>
+        <div class="savings-col">
+          <div style="font-size:12px;color:var(--muted2);text-transform:uppercase;font-weight:700;" data-i18n="sav_col2_lbl">API Anthropic a Consumo</div>
+          <div class="savings-val" style="color:#ffbd2e;">~45$ / mese</div>
+          <div style="font-size:12px;color:var(--muted);" data-i18n="sav_col2_sub">Per 500k token/giorno di refactoring</div>
+        </div>
+        <div class="savings-col" style="border-color:var(--green);background:rgba(0,245,155,0.06);">
+          <div style="font-size:12px;color:var(--green);text-transform:uppercase;font-weight:800;">OMNICLAUDE INFINITY</div>
+          <div class="savings-val" style="color:var(--green);">14,99€ Una Tantum</div>
+          <div style="font-size:12px;color:var(--green);font-weight:700;" data-i18n="sav_col3_sub">Per sempre. Risparmio &gt; 95%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE -->
+  <section class="container">
+    <div class="section-title">
+      <h2 data-i18n="comp_title">Scegli il Tuo Livello di Produttività</h2>
+      <p data-i18n="comp_desc">La versione Community è aperta a tutti su GitHub. La versione INFINITY sblocca l'autonomia infinita anti-interruzione.</p>
+    </div>
+
+    <table class="matrix-table">
+      <thead>
+        <tr>
+          <th data-i18n="tbl_feature">Funzionalità</th>
+          <th>Community Free</th>
+          <th class="col-pro">⭐ OMNICLAUDE INFINITY (14,99€)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-i18n="f_launch">Lancio Claude Code &amp; OpenCode</td>
+          <td class="check-yes" data-i18n="yes_inc">✓ Incluso</td>
+          <td class="check-yes" data-i18n="yes_inc">✓ Incluso</td>
+        </tr>
+        <tr>
+          <td data-i18n="f_ollama">Modelli 100% Locali Ollama su GPU/CPU</td>
+          <td class="check-yes" data-i18n="f_ollama_sub">✓ Rilevamento Dinamico</td>
+          <td class="check-yes" data-i18n="f_ollama_sub">✓ Rilevamento Dinamico</td>
+        </tr>
+        <tr>
+          <td data-i18n="f_para">Paracadute Modulare Base</td>
+          <td class="check-yes" data-i18n="f_para_com">✓ Priorità Manuale</td>
+          <td class="check-yes" data-i18n="f_para_inf">✓ Priorità &amp; Modulare</td>
+        </tr>
+        <tr>
+          <td data-i18n="f_acc">Account Google Gemini Connettibili</td>
+          <td data-i18n="f_acc_com">1 Solo Account</td>
+          <td class="check-yes" style="color:var(--gold);" data-i18n="f_acc_inf">⭐ ACCOUNT ILLIMITATI</td>
+        </tr>
+        <tr>
+          <td data-i18n="f_failover">Auto-Failover su Blocco HTTP 429</td>
+          <td class="check-no" data-i18n="f_fail_com">✕ Manuale</td>
+          <td class="check-yes" style="color:var(--gold);" data-i18n="f_fail_inf">⭐ ISTANTANEO (Zero Interruzioni)</td>
+        </tr>
+        <tr>
+          <td data-i18n="f_cooldown">Monitor Quota Live &amp; Cooldown Intelligente</td>
+          <td class="check-no" data-i18n="f_cool_com">✕ Assente</td>
+          <td class="check-yes" style="color:var(--gold);" data-i18n="f_cool_inf">⭐ Attivo in Tempo Reale</td>
+        </tr>
+        <tr>
+          <td data-i18n="f_updates">Aggiornamenti Futuri a Vita</td>
+          <td class="check-yes">✓ GitHub</td>
+          <td class="check-yes" data-i18n="f_upd_inf">✓ Supporto &amp; Aggiornamenti Inclusi</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PRICING CARD -->
+  <section class="container" id="acquista">
+    <div class="pricing-wrap">
+      <div class="pricing-pill" data-i18n="pill_lifetime">ACCESSO A VITA LIFETIME</div>
+      <h3 style="font-size:26px;font-weight:900;">OMNICLAUDE INFINITY</h3>
+      <div class="pricing-price">14,99€ <span data-i18n="price_sub">/ una tantum</span></div>
+      <div class="pricing-sub" data-i18n="price_tagline">Nessun costo mensile · Consegna istantanea chiave licenza</div>
+
+      <div class="pricing-features">
+        <div class="pricing-item">
+          <span>⚡</span>
+          <span data-i18n="feat_1"><strong>Zero Rate-Limit:</strong> rotazione automatica continua tra account</span>
+        </div>
+        <div class="pricing-item">
+          <span>⚡</span>
+          <span data-i18n="feat_2"><strong>Account Illimitati:</strong> aggiungi quante API Key Gemini vuoi</span>
+        </div>
+        <div class="pricing-item">
+          <span>⚡</span>
+          <span data-i18n="feat_3"><strong>Fino a 3 PC:</strong> usa la chiave su fisso, portatile e postazione dev</span>
+        </div>
+        <div class="pricing-item">
+          <span>⚡</span>
+          <span data-i18n="feat_4"><strong>Privacy al 100%:</strong> chiavi custodite solo in locale sul tuo PC</span>
+        </div>
+      </div>
+
+      <!-- BOTTONE GUMROAD ACQUISTO -->
+      <a href="https://kronostone.gumroad.com/l/omniclaude-pro" target="_blank" class="btn-buy-big" data-i18n="btn_buy_card">
+        🛒 Acquista con Carta o PayPal (14,99€)
+      </a>
+
+      <!-- BOTTONE WHATSAPP ORDINE DIRETTO -->
+      <a href="https://wa.me/393510171617?text=Ciao%20ATON-FUX!%20Vorrei%20acquistare%20la%20licenza%20OMNICLAUDE%20INFINITY%20a%2014,99%E2%82%AC" target="_blank" class="btn-buy-big" style="background:linear-gradient(135deg,#25d366,#128c7e);color:#ffffff;box-shadow:0 0 30px rgba(37,211,102,0.4);margin-top:12px;" data-i18n="btn_wa_order">
+        💬 Ordina su WhatsApp (+39 351 017 1617)
+      </a>
+
+      <div class="direct-pay-box" data-i18n="direct_pay_box">
+        <strong>Preferisci pagare direttamente con PayPal personale, Postepay o Bonifico?</strong><br>
+        Scrivi direttamente all'autore <strong>ATON-FUX</strong> su WhatsApp al <a href="https://wa.me/393510171617?text=Ciao%20ATON-FUX!%20Vorrei%20acquistare%20la%20licenza%20OMNICLAUDE%20INFINITY%20a%2014,99%E2%82%AC" target="_blank" style="color:#25d366;font-weight:800;text-decoration:underline;">+39 351 017 1617</a> (oppure apri una <a href="https://github.com/aton-fux/OMNICLAUDE/issues" target="_blank">Issue su GitHub</a>). Ricevi i dati di pagamento e la tua chiave personale in 2 minuti!
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="container">
+    <div class="section-title">
+      <h2 data-i18n="faq_title">Domande Frequenti (FAQ)</h2>
+    </div>
+
+    <div class="faq-grid">
+      <details class="faq-card" open>
+        <summary data-i18n="faq_q1">Come ricevo e attivo la mia chiave di licenza?</summary>
+        <p data-i18n="faq_a1">Appena completato l'acquisto su Gumroad o WhatsApp riceverai il tuo codice licenza univoco (es. <code>OMNI-INF-XXXX-XXXXXXXX</code>). Apri OMNICLAUDE nel browser, vai nella scheda <strong>"⚡ Gemini Multi-Key &amp; Quota"</strong>, incolla il codice nel box di attivazione e clicca Attiva!</p>
+      </details>
+
+      <details class="faq-card">
+        <summary data-i18n="faq_q2">Cosa succede se cambio computer o formatto?</summary>
+        <p data-i18n="faq_a2">Nessun problema! Puoi utilizzare la tua licenza su un massimo di <strong>3 PC personali</strong>. Basterà reinserire il tuo codice licenza sulla nuova postazione per riattivare la modalità INFINITY a vita.</p>
+      </details>
+
+      <details class="faq-card">
+        <summary data-i18n="faq_q3">Perché OMNICLAUDE usa Google Gemini Flash?</summary>
+        <p data-i18n="faq_a3">Google offre generosamente 1.000.000 di token gratuiti al giorno per ciascun account Google AI Studio, con finestre di contesto enormi e grandissima velocità nel coding. OMNICLAUDE sfrutta legalmente questa quota combinando più account per garantirti codice illimitato.</p>
+      </details>
+
+      <details class="faq-card">
+        <summary data-i18n="faq_q4">Le mie chiavi API sono al sicuro?</summary>
+        <p data-i18n="faq_a4">Assolutamente sì al 100%. Nessuna chiave viene inviata a server esterni: vengono salvate unicamente in locale nella cartella del tuo computer in un file protetto da <code>.gitignore</code>.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-author">OMNICLAUDE INFINITY — Ideato, Progettato e Creato da ATON-FUX</div>
+      <div>Repository Ufficiale: <a href="https://github.com/aton-fux/OMNICLAUDE" target="_blank">github.com/aton-fux/OMNICLAUDE</a></div>
+      <div style="margin-top:12px;font-size:11.5px;color:var(--muted2);" data-i18n="footer_legal">
+        Licenza Commerciale Proprietaria ATON-FUX per il Modulo INFINITY. Tutti i marchi registrati (Claude®, Anthropic®, Google Gemini®, Ollama®) appartengono ai rispettivi proprietari.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      it: {
+        meta_title: "OMNICLAUDE INFINITY — Store Ufficiale | Creato da ATON-FUX",
+        nav_buy_btn: "🛒 Acquista Licenza 14,99€",
+        hero_badge: "🛡️ ZERO RATE-LIMIT PER CLAUDE CODE & OPENCODE",
+        hero_title: 'Programma con Claude Code <br><span class="gradient-text">Senza Limiti e Senza Interruzioni.</span>',
+        hero_desc: 'Sblocca il <strong>Gemini Multi-Key Hub &amp; Quota Rotator</strong> di OMNICLAUDE: connetti account Google gratuiti multipli. Quando una chiave tocca il limite 429, il sistema commuta in millisecondi a quella successiva.',
+        hero_cta_buy: "⚡ Sblocca OMNICLAUDE INFINITY (14,99€)",
+        hero_cta_community: "📂 Esplora la Versione Community",
+        meta_lifetime: "✅ Licenza a Vita (Una Tantum)",
+        meta_nosub: "✅ Nessun Abbonamento Mensile",
+        meta_3pcs: "✅ Fino a 3 PC Personali",
+        meta_instant: "✅ Consegna Istantanea Chiave",
+        savings_title: "💸 Quanto Risparmi con OMNICLAUDE INFINITY?",
+        savings_desc: "Con 3 account gratuiti Google AI Studio ottieni fino a <strong>3.000.000 di token gratis al giorno</strong>. Zero costi per Claude Code, zero abbonamenti da 20$/mese.",
+        sav_col1_lbl: "Abbonamento Claude Pro",
+        sav_col1_sub: "Costo ricorrente mensile fisso",
+        sav_col2_lbl: "API Anthropic a Consumo",
+        sav_col2_sub: "Per 500k token/giorno di refactoring",
+        sav_col3_sub: "Per sempre. Risparmio > 95%",
+        comp_title: "Scegli il Tuo Livello di Produttività",
+        comp_desc: "La versione Community è aperta a tutti su GitHub. La versione INFINITY sblocca l'autonomia infinita anti-interruzione.",
+        tbl_feature: "Funzionalità",
+        yes_inc: "✓ Incluso",
+        f_launch: "Lancio Claude Code & OpenCode",
+        f_ollama: "Modelli 100% Locali Ollama su GPU/CPU",
+        f_ollama_sub: "✓ Rilevamento Dinamico",
+        f_para: "Paracadute Modulare Base",
+        f_para_com: "✓ Priorità Manuale",
+        f_para_inf: "✓ Priorità & Modulare",
+        f_acc: "Account Google Gemini Connettibili",
+        f_acc_com: "1 Solo Account",
+        f_acc_inf: "⭐ ACCOUNT ILLIMITATI",
+        f_failover: "Auto-Failover su Blocco HTTP 429",
+        f_fail_com: "✕ Manuale",
+        f_fail_inf: "⭐ ISTANTANEO (Zero Interruzioni)",
+        f_cooldown: "Monitor Quota Live & Cooldown Intelligente",
+        f_cool_com: "✕ Assente",
+        f_cool_inf: "⭐ Attivo in Tempo Reale",
+        f_updates: "Aggiornamenti Futuri a Vita",
+        f_upd_inf: "✓ Supporto & Aggiornamenti Inclusi",
+        pill_lifetime: "ACCESSO A VITA LIFETIME",
+        price_sub: "/ una tantum",
+        price_tagline: "Nessun costo mensile · Consegna istantanea chiave licenza",
+        feat_1: "<strong>Zero Rate-Limit:</strong> rotazione automatica continua tra account",
+        feat_2: "<strong>Account Illimitati:</strong> aggiungi quante API Key Gemini vuoi",
+        feat_3: "<strong>Fino a 3 PC:</strong> usa la chiave su fisso, portatile e postazione dev",
+        feat_4: "<strong>Privacy al 100%:</strong> chiavi custodite solo in locale sul tuo PC",
+        btn_buy_card: "🛒 Acquista con Carta o PayPal (14,99€)",
+        btn_wa_order: "💬 Ordina su WhatsApp (+39 351 017 1617)",
+        direct_pay_box: `<strong>Preferisci pagare direttamente con PayPal personale, Postepay o Bonifico?</strong><br>Scrivi direttamente all'autore <strong>ATON-FUX</strong> su WhatsApp al <a href="https://wa.me/393510171617?text=Ciao%20ATON-FUX!%20Vorrei%20acquistare%20la%20licenza%20OMNICLAUDE%20INFINITY%20a%2014,99%E2%82%AC" target="_blank" style="color:#25d366;font-weight:800;text-decoration:underline;">+39 351 017 1617</a> (oppure apri una <a href="https://github.com/aton-fux/OMNICLAUDE/issues" target="_blank">Issue su GitHub</a>). Ricevi i dati di pagamento e la tua chiave personale in 2 minuti!`,
+        faq_title: "Domande Frequenti (FAQ)",
+        faq_q1: "Come ricevo e attivo la mia chiave di licenza?",
+        faq_a1: "Appena completato l'acquisto su Gumroad o WhatsApp riceverai il tuo codice licenza univoco (es. <code>OMNI-INF-XXXX-XXXXXXXX</code>). Apri OMNICLAUDE nel browser, vai nella scheda <strong>\"⚡ Gemini Multi-Key &amp; Quota\"</strong>, incolla il codice nel box di attivazione e clicca Attiva!",
+        faq_q2: "Cosa succede se cambio computer o formatto?",
+        faq_a2: "Nessun problema! Puoi utilizzare la tua licenza su un massimo di <strong>3 PC personali</strong>. Basterà reinserire il tuo codice licenza sulla nuova postazione per riattivare la modalità INFINITY a vita.",
+        faq_q3: "Perché OMNICLAUDE usa Google Gemini Flash?",
+        faq_a3: "Google offre generosamente 1.000.000 di token gratuiti al giorno per ciascun account Google AI Studio, con finestre di contesto enormi e grandissima velocità nel coding. OMNICLAUDE sfrutta legalmente questa quota combinando più account per garantirti codice illimitato.",
+        faq_q4: "Le mie chiavi API sono al sicuro?",
+        faq_a4: "Assolutamente sì al 100%. Nessuna chiave viene inviata a server esterni: vengono salvate unicamente in locale nella cartella del tuo computer in un file protetto da <code>.gitignore</code>.",
+        footer_legal: "Licenza Commerciale Proprietaria ATON-FUX per il Modulo INFINITY. Tutti i marchi registrati (Claude®, Anthropic®, Google Gemini®, Ollama®) appartengono ai rispettivi proprietari."
+      },
+      en: {
+        meta_title: "OMNICLAUDE INFINITY — Official Store | Created by ATON-FUX",
+        nav_buy_btn: "🛒 Buy License 14.99€",
+        hero_badge: "🛡️ ZERO RATE-LIMIT FOR CLAUDE CODE & OPENCODE",
+        hero_title: 'Code with Claude Code <br><span class="gradient-text">Without Limits or Interruptions.</span>',
+        hero_desc: 'Unlock OMNICLAUDE\'s <strong>Gemini Multi-Key Hub &amp; Quota Rotator</strong>: connect multiple free Google accounts. When a key hits HTTP 429 rate limit, the system fails over in milliseconds to the next active key.',
+        hero_cta_buy: "⚡ Unlock OMNICLAUDE INFINITY (14.99€)",
+        hero_cta_community: "📂 Explore Community Version",
+        meta_lifetime: "✅ Lifetime License (One-Time)",
+        meta_nosub: "✅ Zero Monthly Subscriptions",
+        meta_3pcs: "✅ Up to 3 Personal Machines",
+        meta_instant: "✅ Instant Key Delivery",
+        savings_title: "💸 How Much Do You Save with OMNICLAUDE INFINITY?",
+        savings_desc: "With 3 free Google AI Studio accounts you get up to <strong>3,000,000 free tokens every single day</strong>. Zero Claude Code billing, zero $20/mo subscriptions.",
+        sav_col1_lbl: "Claude Pro Subscription",
+        sav_col1_sub: "Recurring fixed monthly bill",
+        sav_col2_lbl: "Anthropic Pay-as-you-go API",
+        sav_col2_sub: "For ~500k tokens/day refactoring",
+        sav_col3_sub: "Forever. Over 95% total savings",
+        comp_title: "Choose Your Productivity Tier",
+        comp_desc: "The Community version is free on GitHub. The INFINITY tier unlocks zero-interruption infinite coding autonomy.",
+        tbl_feature: "Feature",
+        yes_inc: "✓ Included",
+        f_launch: "Claude Code & OpenCode Launchers",
+        f_ollama: "100% Local Ollama Models on GPU/CPU",
+        f_ollama_sub: "✓ Dynamic Detection",
+        f_para: "Core Modular Parachute",
+        f_para_com: "✓ Manual Priority",
+        f_para_inf: "✓ Priority & Full Modular",
+        f_acc: "Connectable Google Gemini Accounts",
+        f_acc_com: "1 Account Only",
+        f_acc_inf: "⭐ UNLIMITED ACCOUNTS",
+        f_failover: "Auto-Failover on HTTP 429 Quota Exceeded",
+        f_fail_com: "✕ Manual",
+        f_fail_inf: "⭐ INSTANT ZERO-DELAY (Seamless)",
+        f_cooldown: "Live Quota Monitor & Smart Cooldown",
+        f_cool_com: "✕ None",
+        f_cool_inf: "⭐ Real-Time Live Watcher",
+        f_updates: "Lifetime Future Updates",
+        f_upd_inf: "✓ Full Updates & Support Included",
+        pill_lifetime: "LIFETIME ONE-TIME ACCESS",
+        price_sub: "/ one-time",
+        price_tagline: "No monthly fees · Instant license key dispatch",
+        feat_1: "<strong>Zero Rate-Limit:</strong> seamless rotation across all your accounts",
+        feat_2: "<strong>Unlimited Accounts:</strong> register as many Gemini API keys as you need",
+        feat_3: "<strong>Up to 3 Machines:</strong> activate on your desktop, laptop & dev workstation",
+        feat_4: "<strong>100% Privacy:</strong> keys stay strictly on your local PC",
+        btn_buy_card: "🛒 Buy with Card or PayPal (14.99€)",
+        btn_wa_order: "💬 Order on WhatsApp (+39 351 017 1617)",
+        direct_pay_box: `<strong>Prefer direct payment via personal PayPal, Postepay or Bank Transfer?</strong><br>Contact the author <strong>ATON-FUX</strong> directly on WhatsApp at <a href="https://wa.me/393510171617?text=Hi%20ATON-FUX!%20I%20would%20like%20to%20purchase%20OMNICLAUDE%20INFINITY%20license%20(14.99%E2%82%AC)" target="_blank" style="color:#25d366;font-weight:800;text-decoration:underline;">+39 351 017 1617</a> (or open a <a href="https://github.com/aton-fux/OMNICLAUDE/issues" target="_blank">GitHub Issue</a>). Get payment details and your personal license in 2 minutes!`,
+        faq_title: "Frequently Asked Questions (FAQ)",
+        faq_q1: "How do I receive and activate my license key?",
+        faq_a1: "As soon as your order completes on Gumroad or WhatsApp, you receive your unique license code (e.g. <code>OMNI-INF-XXXX-XXXXXXXX</code>). Open OMNICLAUDE in your browser, head to <strong>\"⚡ Gemini Multi-Key &amp; Quota\"</strong>, paste your key into the activation box and click Activate!",
+        faq_q2: "What happens if I format or upgrade my PC?",
+        faq_a2: "No problem at all! Your license covers up to <strong>3 personal machines</strong>. Simply input your license code on your new machine to re-enable INFINITY mode for life.",
+        faq_q3: "Why does OMNICLAUDE use Google Gemini Flash?",
+        faq_a3: "Google generously provides 1,000,000 free tokens per day for each Google AI Studio account, with massive context windows and blazing coding speed. OMNICLAUDE cleanly bridges multiple accounts to give you endless coding capacity.",
+        faq_q4: "Are my API keys stored securely?",
+        faq_a4: "100% yes. No keys are ever transmitted to external servers: they are strictly stored locally on your machine in a file excluded by <code>.gitignore</code>.",
+        footer_legal: "ATON-FUX Proprietary Commercial License for INFINITY Module. All registered trademarks (Claude®, Anthropic®, Google Gemini®, Ollama®) belong to their respective holders."
+      }
+    };
+
+    function setLang(lang) {
+      localStorage.setItem("omniclaude_store_lang", lang);
+      document.getElementById("btn-lang-it").classList.toggle("active", lang === "it");
+      document.getElementById("btn-lang-en").classList.toggle("active", lang === "en");
+      document.documentElement.lang = lang;
+
+      const dict = translations[lang] || translations.it;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key] !== undefined) {
+          el.innerHTML = dict[key];
+        }
+      });
+      document.title = dict.meta_title;
+    }
+
+    function switchPreview(type) {
+      const img = document.getElementById("showcase-img");
+      const title = document.getElementById("showcase-title");
+      document.querySelectorAll(".preview-tab").forEach(b => b.classList.remove("active"));
+      if (type === "gemini") {
+        img.src = "./assets/omniclaude-gemini-hub.png";
+        title.textContent = "omniclaude://gemini-multi-key-hub";
+        document.getElementById("tab-btn-gemini").classList.add("active");
+      } else if (type === "home") {
+        img.src = "./assets/omniclaude-home-black.png";
+        title.textContent = "omniclaude://home-engine-selector";
+        document.getElementById("tab-btn-home").classList.add("active");
+      } else if (type === "parachute") {
+        img.src = "./assets/omniclaude-parachute.png";
+        title.textContent = "omniclaude://modular-parachute";
+        document.getElementById("tab-btn-parachute").classList.add("active");
+      }
+    }
+
+    // Initialize from storage or browser preference
+    const savedLang = localStorage.getItem("omniclaude_store_lang") || (navigator.language.startsWith("it") ? "it" : "en");
+    setLang(savedLang);
+  </script>
+</body>
+</html>
