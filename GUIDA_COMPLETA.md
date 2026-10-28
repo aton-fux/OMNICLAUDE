@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/logo.png" width="120" height="120" alt="OMNICLAUDE Official Logo" style="border-radius: 20px;" />
+  <img src="./assets/logo.png" width="124" height="124" alt="OMNICLAUDE Official Logo" />
 </div>
 
 # 📘 Guida Ufficiale Italiana: OMNICLAUDE — Hack Edition v2.0

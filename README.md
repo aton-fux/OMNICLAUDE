@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./assets/logo.png" width="136" height="136" alt="OMNICLAUDE Official Cyber Brain Logo" style="border-radius: 24px;" />
+<img src="./assets/logo.png" width="140" height="140" alt="OMNICLAUDE Official Cyber Brain Logo" />
 
 # ⚡ OMNICLAUDE — Hack Edition v2.0
 

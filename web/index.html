@@ -103,34 +103,36 @@
     .logo-group { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
     .logo { display: flex; align-items: center; gap: 12px; }
     .logo-icon {
-      width: 44px; height: 44px; border-radius: 11px;
-      background: #04070e;
-      border: 1.5px solid var(--cyan);
+      width: 46px; height: 46px;
+      background: transparent;
+      border: none;
       display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
-      box-shadow: 0 0 18px rgba(0, 229, 255, 0.35), 0 0 12px rgba(179, 102, 255, 0.25);
       flex-shrink: 0;
     }
     .logo-icon img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
+      width: 100%; height: 100%; object-fit: contain; display: block;
+      filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.45));
     }
     .page-banner-logo {
-      width: 48px; height: 48px; border-radius: 12px;
-      border: 1.5px solid var(--purple);
-      box-shadow: 0 0 18px rgba(179, 102, 255, 0.35), 0 0 12px rgba(0, 229, 255, 0.25);
-      object-fit: cover; flex-shrink: 0; background: #04070e;
+      width: 52px; height: 52px;
+      background: transparent;
+      border: none;
+      object-fit: contain; flex-shrink: 0;
+      filter: drop-shadow(0 0 10px rgba(179, 102, 255, 0.45));
     }
     .hero-logo-emblem {
-      width: 72px; height: 72px; border-radius: 16px;
-      border: 1.5px solid var(--cyan);
-      box-shadow: 0 0 26px rgba(0, 229, 255, 0.4), 0 0 18px rgba(179, 102, 255, 0.35);
-      object-fit: cover; margin: 0 auto 12px; display: block; background: #04070e;
+      width: 78px; height: 78px;
+      background: transparent;
+      border: none;
+      object-fit: contain; margin: 0 auto 10px; display: block;
+      filter: drop-shadow(0 0 14px rgba(0, 229, 255, 0.5));
     }
     .sidebar-logo-emblem {
-      width: 40px; height: 40px; border-radius: 10px;
-      border: 1px solid var(--cyan);
-      box-shadow: 0 0 14px rgba(0, 229, 255, 0.3);
-      object-fit: cover; margin: 0 auto 6px; display: block; background: #04070e;
+      width: 44px; height: 44px;
+      background: transparent;
+      border: none;
+      object-fit: contain; margin: 0 auto 6px; display: block;
+      filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.4));
     }
     .logo-title-row { display: flex; align-items: center; gap: 10px; }
     .logo h1 {
