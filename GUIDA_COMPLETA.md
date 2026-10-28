@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="./assets/logo.png" width="120" height="120" alt="OMNICLAUDE Official Logo" style="border-radius: 20px;" />
+</div>
+
 # 📘 Guida Ufficiale Italiana: OMNICLAUDE — Hack Edition v2.0
 **Creato da ATON-FUX** · Repository Ufficiale: [https://github.com/aton-fux/OMNICLAUDE](https://github.com/aton-fux/OMNICLAUDE)
 

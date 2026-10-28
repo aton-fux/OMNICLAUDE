@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OMNICLAUDE — AI Command Center | Creato da ATON-FUX</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/logo-favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/logo-favicon-64.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="160x160" href="/logo-hero-160.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -99,12 +103,34 @@
     .logo-group { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
     .logo { display: flex; align-items: center; gap: 12px; }
     .logo-icon {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: linear-gradient(135deg, var(--green), var(--cyan));
+      width: 44px; height: 44px; border-radius: 11px;
+      background: #04070e;
+      border: 1.5px solid var(--cyan);
       display: flex; align-items: center; justify-content: center;
-      font-size: 20px; font-weight: 900; color: var(--btn-launch-text);
-      box-shadow: 0 0 16px var(--green-glow);
+      overflow: hidden;
+      box-shadow: 0 0 18px rgba(0, 229, 255, 0.35), 0 0 12px rgba(179, 102, 255, 0.25);
       flex-shrink: 0;
+    }
+    .logo-icon img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .page-banner-logo {
+      width: 48px; height: 48px; border-radius: 12px;
+      border: 1.5px solid var(--purple);
+      box-shadow: 0 0 18px rgba(179, 102, 255, 0.35), 0 0 12px rgba(0, 229, 255, 0.25);
+      object-fit: cover; flex-shrink: 0; background: #04070e;
+    }
+    .hero-logo-emblem {
+      width: 72px; height: 72px; border-radius: 16px;
+      border: 1.5px solid var(--cyan);
+      box-shadow: 0 0 26px rgba(0, 229, 255, 0.4), 0 0 18px rgba(179, 102, 255, 0.35);
+      object-fit: cover; margin: 0 auto 12px; display: block; background: #04070e;
+    }
+    .sidebar-logo-emblem {
+      width: 40px; height: 40px; border-radius: 10px;
+      border: 1px solid var(--cyan);
+      box-shadow: 0 0 14px rgba(0, 229, 255, 0.3);
+      object-fit: cover; margin: 0 auto 6px; display: block; background: #04070e;
     }
     .logo-title-row { display: flex; align-items: center; gap: 10px; }
     .logo h1 {
@@ -620,7 +646,9 @@
   <header class="topbar">
     <div class="logo-group">
       <div class="logo">
-        <div class="logo-icon">⚡</div>
+        <div class="logo-icon">
+          <img src="/logo-topbar-88.png" width="44" height="44" alt="OMNICLAUDE Logo">
+        </div>
         <div>
           <div class="logo-title-row">
             <h1>OMNICLAUDE</h1>
@@ -682,6 +710,7 @@
 
       <!-- BOX RISERVATO AUTORE NELLA SIDEBAR -->
       <div class="sidebar-author-card">
+        <img src="/logo-topbar-88.png" width="40" height="40" class="sidebar-logo-emblem" alt="OMNICLAUDE Logo">
         <div class="sa-label">⚡ Progetto Ufficiale ⚡</div>
         <div class="sa-name">ATON-FUX</div>
         <div class="sa-sub">OMNICLAUDE Open Source Suite<br>Licenza Protetta GNU GPL v3</div>
@@ -695,13 +724,15 @@
       <!-- ─── PANEL: PAGINA INIZIALE (AVVIA + MOTORI CLOUD + MOTORI LOCALI) ─── -->
       <div class="panel active" id="panel-avvia">
         <div class="page-header-banner">
-          <div>
-            <div class="panel-title">
-              <span>⚡</span>
-              <span class="cyber-accent">OMNICLAUDE</span>
-              <span>— Pagina Iniziale &amp; Scelta Motore</span>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <img src="/logo-hero-160.png" width="48" height="48" class="page-banner-logo" alt="OMNICLAUDE Logo">
+            <div>
+              <div class="panel-title">
+                <span class="cyber-accent">OMNICLAUDE</span>
+                <span>— Pagina Iniziale &amp; Scelta Motore</span>
+              </div>
+              <div class="panel-sub">Orchestratore universale per Claude Code &amp; OpenCode con gateway OmniRoute e Paracadute Modulare.</div>
             </div>
-            <div class="panel-sub">Orchestratore universale per Claude Code &amp; OpenCode con gateway OmniRoute e Paracadute Modulare.</div>
           </div>
           <div class="author-reserved-box" style="cursor:default;">
             <span class="crown">👑</span>
@@ -724,6 +755,7 @@
 
         <!-- PRONTO PER PROGRAMMARE -->
         <div class="launch-hero">
+          <img src="/logo-hero-160.png" width="72" height="72" class="hero-logo-emblem" alt="OMNICLAUDE Cyber Brain Logo">
           <h2>Pronto per Programmare</h2>
           <p>Scegli quale strumento da terminale preferisci aprire: entrambi usano il gateway OmniRoute con zero costi a consumo!</p>
           <div class="launch-buttons">
@@ -1065,7 +1097,7 @@
 
 <!-- Shutdown Overlay -->
 <div id="shutdown-overlay">
-  <div class="icon">🛑</div>
+  <img src="/logo-hero-160.png" width="76" height="76" class="hero-logo-emblem" style="margin-bottom:16px;" alt="OMNICLAUDE Logo">
   <h2>Tutti i Servizi OMNICLAUDE Arrestati</h2>
   <p>OmniRoute, i terminali AI e il Centro di Controllo sono stati fermati con successo. RAM e VRAM sono state liberate.</p>
   <p class="hint">Per riavviare: doppio click su START.bat nella cartella.</p>

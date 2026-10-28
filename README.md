@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="./assets/logo.png" width="136" height="136" alt="OMNICLAUDE Official Cyber Brain Logo" style="border-radius: 24px;" />
+
 # ⚡ OMNICLAUDE — Hack Edition v2.0
 
 ### **AI Terminal Command Center per Claude Code & OpenCode con Gateway OmniRoute & Paracadute Modulare**
