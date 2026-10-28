@@ -2441,95 +2441,221 @@
   }
 
   
+  
   // ═════════════════════════════════════════════════════════════════════════
-  // 🌐 MULTILINGUAL I18N SYSTEM (ITALIAN / ENGLISH)
+  // 🌐 ADVANCED MULTILINGUAL TRANSLATION ENGINE (ATON-FUX)
   // ═════════════════════════════════════════════════════════════════════════
   let currentAppLang = localStorage.getItem('omniclaude_app_lang') || 'it';
 
-  const I18N_DICT = {
-    it: {
-      sb_nav_main: "Navigazione Principale",
-      nav_home: "Home & Motori AI",
-      nav_gpool: "Gemini Multi-Key & Quota",
-      nav_parachute: "Paracadute Riserva",
-      nav_terminal: "Come funziona il terminale",
-      sb_config: "Configurazione",
-      nav_keys: "Chiavi API & OAuth",
-      nav_guide: "Guida & FAQ",
-      sb_lang: "Lingua / Language",
-      topbar_sub: "AI Terminal Command Center · Claude Code & OpenCode Gateway",
-      btn_stop_all: "🛑 Chiudi Tutto",
-      hdr_avvia: "— Pagina Iniziale & Scelta Motore",
-      sub_avvia: "Orchestratore universale per Claude Code & OpenCode con gateway OmniRoute e Paracadute Modulare.",
-      hdr_gpool: "— Gemini Multi-Key Hub & Quota Rotator",
-      sub_gpool: "Gestione avanzata multi-account Google Gemini con failover automatico anti-429 e bilanciamento quota.",
-      hdr_para: "— Paracadute Modulare di Riserva",
-      sub_para: "Failover automatico a cascata: se il motore primario va in errore o supera i limiti, subentra la riserva.",
-      hdr_term: "— Come Funziona il Terminale",
-      sub_term: "Architettura, porte locali, comando CLI generato e flusso delle richieste tra Claude Code e OmniRoute.",
-      hdr_keys: "— Configurazione Chiavi API & Provider",
-      sub_keys: "Inserisci le credenziali dei provider cloud per abilitarli nei motori di Claude Code e OpenCode.",
-      hdr_guide: "— Guida Ufficiale & Risoluzione Problemi",
-      sub_guide: "Manuale passo-passo creato da ATON-FUX per l'utilizzo ottimale di Claude Code, OpenCode e OmniRoute.",
-      card_ready_title: "🚀 Pronto per Programmare",
-      card_ready_sub: "Seleziona il modello desiderato, verifica la connessione e lancia Claude Code o OpenCode con un clic.",
-      btn_launch_claude: "🚀 Lancia Claude Code",
-      btn_launch_opencode: "💻 Lancia OpenCode",
-      btn_test_conn: "⚡ Test Connessione",
-      card_cloud_title: "☁️ Motori Cloud Principali",
-      card_local_title: "💻 Modelli Locali Ollama (100% Offline)",
-      gpool_title_sub: "Zero Rate-Limit & Multi-Account Failover Continuo",
-      gpool_desc: "La versione base include 1 account gratuito. Con <strong>OMNICLAUDE INFINITY (14,99€ Una Tantum)</strong> puoi collegare account Google multipli: quando una chiave tocca il rate limit (429), il sistema ruota all'istante senza bloccare Claude Code!",
-      gpool_btn_web: "🌐 Vetrina Web",
-      gpool_btn_wa: "💬 WhatsApp",
-      gpool_btn_buy: "🛒 Acquista Licenza (14,99€)",
-      gpool_btn_enter_key: "🔑 Inserisci Chiave INFINITY",
-      gpool_active_badge: "🟢 LICENZA INFINITY ATTIVA",
-      gpool_active_sub: "Rotazione Multi-Account illimitata e Zero Rate-Limit attivi.",
-      gpool_shield_active: "PROTEZIONE 429 ATTIVA"
-    },
-    en: {
-      sb_nav_main: "Main Navigation",
-      nav_home: "Home & AI Engines",
-      nav_gpool: "Gemini Multi-Key & Quota",
-      nav_parachute: "Backup Parachute",
-      nav_terminal: "Terminal Architecture",
-      sb_config: "Configuration",
-      nav_keys: "API Keys & OAuth",
-      nav_guide: "Guide & FAQ",
-      sb_lang: "Language / Lingua",
-      topbar_sub: "AI Terminal Command Center · Claude Code & OpenCode Gateway",
-      btn_stop_all: "🛑 Stop All",
-      hdr_avvia: "— Home & Engine Selector",
-      sub_avvia: "Universal orchestrator for Claude Code & OpenCode with OmniRoute gateway and Modular Parachute.",
-      hdr_gpool: "— Gemini Multi-Key Hub & Quota Rotator",
-      sub_gpool: "Multi-account Google Gemini pool manager with auto-failover against HTTP 429 and live quota balancing.",
-      hdr_para: "— Modular Fallback Parachute",
-      sub_para: "Automatic cascading failover: if primary engine fails or exhausts quota, emergency backup takes over instantly.",
-      hdr_term: "— Terminal Architecture & Operation",
-      sub_term: "Architecture, local ports, generated CLI commands and request routing between Claude Code and OmniRoute.",
-      hdr_keys: "— API Keys & Provider Setup",
-      sub_keys: "Configure credentials for cloud providers to enable them in Claude Code and OpenCode engines.",
-      hdr_guide: "— Official Guide & Troubleshooting",
-      sub_guide: "Step-by-step user manual crafted by ATON-FUX for getting the best performance from Claude Code and OpenCode.",
-      card_ready_title: "🚀 Ready to Code",
-      card_ready_sub: "Select your desired AI model, verify connection and launch Claude Code or OpenCode with one click.",
-      btn_launch_claude: "🚀 Launch Claude Code",
-      btn_launch_opencode: "💻 Launch OpenCode",
-      btn_test_conn: "⚡ Test Connection",
-      card_cloud_title: "☁️ Primary Cloud Engines",
-      card_local_title: "💻 Local Ollama Models (100% Offline)",
-      gpool_title_sub: "Zero Rate-Limit & Continuous Multi-Account Failover",
-      gpool_desc: "The base community tier includes 1 free account. With <strong>OMNICLAUDE INFINITY (14.99€ One-Time)</strong> you can connect unlimited Google accounts: when a key hits 429 quota, the engine fails over seamlessly in milliseconds!",
-      gpool_btn_web: "🌐 Store Page",
-      gpool_btn_wa: "💬 WhatsApp",
-      gpool_btn_buy: "🛒 Buy License (14.99€)",
-      gpool_btn_enter_key: "🔑 Enter INFINITY Key",
-      gpool_active_badge: "🟢 INFINITY LICENSE ACTIVE",
-      gpool_active_sub: "Unlimited Multi-Account failover and Zero Rate-Limit shield active.",
-      gpool_shield_active: "429 SHIELD ACTIVE"
-    }
+  const DICT_IT_TO_EN = {
+    // Topbar & Nav
+    "Navigazione Principale": "Main Navigation",
+    "Home & Motori AI": "Home & AI Engines",
+    "Gemini Multi-Key & Quota": "Gemini Multi-Key & Quota",
+    "Paracadute Riserva": "Backup Parachute",
+    "Paracadute Modulare di Riserva": "Modular Fallback Parachute",
+    "Come funziona il terminale": "Terminal Architecture",
+    "Come Funziona il Terminale": "Terminal Architecture",
+    "Configurazione": "Configuration",
+    "Chiavi API & OAuth": "API Keys & OAuth",
+    "Guida & FAQ": "Guide & FAQ",
+    "Guida Ufficiale & Risoluzione Problemi": "Official Guide & Troubleshooting",
+    "Lingua / Language": "Language / Lingua",
+    "Progetto Ufficiale": "Official Project",
+    "OMNICLAUDE Open Source Suite": "OMNICLAUDE Open Source Suite",
+    "Licenza Protetta GNU GPL v3": "Protected GNU GPL v3 License",
+    "Posto Riservato · Official Author": "Reserved Spot · Official Author",
+    "CREATO DA ATON-FUX": "CREATED BY ATON-FUX",
+    "AI Terminal Command Center · Claude Code & OpenCode Gateway": "AI Terminal Command Center · Claude Code & OpenCode Gateway",
+    "Chiudi Tutto": "Stop All",
+    "🛑 Chiudi Tutto": "🛑 Stop All",
+    "DARK CYBER": "DARK CYBER",
+    "LIGHT PRO": "LIGHT PRO",
+    "OmniRoute: Online": "OmniRoute: Online",
+    "OmniRoute: Non attivo": "OmniRoute: Offline",
+    "Terminale: Aperto": "Terminal: Open",
+    "Terminale: Non avviato": "Terminal: Inactive",
+    "INFINITY v2.0": "INFINITY v2.0",
+    "⭐ INFINITY ATTIVO": "⭐ INFINITY ACTIVE",
+
+    // Panel Headers & Subtitles
+    "— Pagina Iniziale & Scelta Motore": "— Home & Engine Selector",
+    "Orchestratore universale per Claude Code & OpenCode con gateway OmniRoute e Paracadute Modulare.": "Universal orchestrator for Claude Code & OpenCode with OmniRoute gateway and Modular Parachute.",
+    "— Gemini Multi-Key Hub & Quota Rotator": "— Gemini Multi-Key Hub & Quota Rotator",
+    "Gestione avanzata multi-account Google Gemini con failover automatico anti-429 e bilanciamento quota.": "Google Gemini multi-account management with auto-failover against 429 rate limit and live quota balancing.",
+    "— Paracadute Modulare di Riserva": "— Modular Fallback Parachute",
+    "Failover automatico a cascata: se il motore primario va in errore o supera i limiti, subentra la riserva.": "Cascading automatic failover: if primary engine fails or exhausts quota, emergency backup takes over instantly.",
+    "— Come Funziona il Terminale": "— Terminal Architecture & Operation",
+    "Architettura, porte locali, comando CLI generato e flusso delle richieste tra Claude Code e OmniRoute.": "Architecture, local ports, generated CLI command and request routing between Claude Code and OmniRoute.",
+    "— Configurazione Chiavi API & Provider": "— API Keys & Provider Setup",
+    "Inserisci le credenziali dei provider cloud per abilitarli nei motori di Claude Code e OpenCode.": "Configure cloud provider credentials to enable them in Claude Code and OpenCode engines.",
+    "— Guida Ufficiale & Risoluzione Problemi": "— Official Guide & Troubleshooting",
+    "Manuale passo-passo creato da ATON-FUX per l'utilizzo ottimale di Claude Code, OpenCode e OmniRoute.": "Step-by-step user manual crafted by ATON-FUX for getting the best performance from Claude Code and OpenCode.",
+
+    // Action Cards & Buttons (Avvia Panel)
+    "Pronto per Programmare": "Ready to Code",
+    "🚀 Pronto per Programmare": "🚀 Ready to Code",
+    "Seleziona il modello desiderato, verifica la connessione e lancia Claude Code o OpenCode con un clic.": "Select your desired model, verify connection and launch Claude Code or OpenCode with one click.",
+    "Lancia Claude Code": "Launch Claude Code",
+    "🚀 Lancia Claude Code": "🚀 Launch Claude Code",
+    "Lancia OpenCode": "Launch OpenCode",
+    "💻 Lancia OpenCode": "💻 Launch OpenCode",
+    "Test Connessione": "Test Connection",
+    "⚡ Test Connessione": "⚡ Test Connection",
+    "Motori Cloud Principali": "Primary Cloud Engines",
+    "☁️ Motori Cloud Principali": "☁️ Primary Cloud Engines",
+    "Modelli Locali Ollama (100% Offline)": "Local Ollama Models (100% Offline)",
+    "💻 Modelli Locali Ollama (100% Offline)": "💻 Local Ollama Models (100% Offline)",
+    "Paracadute di Riserva": "Backup Parachute",
+    "🛡️ Paracadute di Riserva": "🛡️ Backup Parachute",
+    "Motore Primario Scelto": "Selected Primary Engine",
+    "Motore Paracadute (Fallback)": "Parachute Engine (Fallback)",
+    "Attiva Paracadute Automatico": "Enable Automatic Parachute",
+    "Seleziona questo motore": "Select this engine",
+    "Motore Attivo": "Active Engine",
+    "In Uso": "In Use",
+    "Disponibile": "Available",
+    "100% OFFLINE": "100% OFFLINE",
+    "Nessun modello trovato in locale": "No local models found",
+    "Installa / Aggiorna Ollama": "Install / Update Ollama",
+    "Modello personalizzato Ollama:": "Custom Ollama model:",
+    "Aggiungi": "Add",
+    "+ Aggiungi": "+ Add",
+
+    // Gemini Pool
+    "CHIAVE ATTIVA ORA": "CURRENT ACTIVE KEY",
+    "RICHIESTE TOTALI": "TOTAL REQUESTS",
+    "STATO AUTO-FAILOVER": "AUTO-FAILOVER STATUS",
+    "CHIAVI REGISTRATE": "REGISTERED KEYS",
+    "ABILITATO": "ENABLED",
+    "DISABILITATO": "DISABLED",
+    "Aggiungi Chiave al Pool": "Add Key to Pool",
+    "➕ Aggiungi Chiave al Pool": "➕ Add Key to Pool",
+    "Nome Chiave (es. Account Personale)": "Key Label (e.g. Personal Account)",
+    "Incolla API Key Gemini (AIzaSy...)": "Paste Gemini API Key (AIzaSy...)",
+    "Valida subito chiave con Google": "Validate key immediately with Google",
+    "Aggiungi al Pool": "Add to Pool",
+    "➕ Aggiungi al Pool": "➕ Add to Pool",
+    "Test Tutte le Chiavi": "Test All Keys",
+    "⚡ Test Tutte le Chiavi": "⚡ Test All Keys",
+    "Auto-Failover su Errore 429": "Auto-Failover on HTTP 429",
+    "Rotazione automatica tra account quando il limite quota giornaliero viene superato.": "Automatic rotation between accounts when daily quota limit is reached.",
+    "Storico Eventi & Rotazioni": "Event Log & Rotations",
+    "📜 Storico Eventi & Rotazioni": "📜 Event Log & Rotations",
+    "Nessun evento registrato finora.": "No events recorded yet.",
+    "Nome / Account": "Label / Account",
+    "Chiave Mascherata": "Masked Key",
+    "Stato Quota": "Quota Status",
+    "Azioni": "Actions",
+    "Imposta come Attiva": "Set as Active",
+    "Testa": "Test",
+    "Elimina": "Delete",
+    "Attiva": "Active",
+    "In Cooldown": "In Cooldown",
+    "Pronta": "Ready",
+    "Non inserita": "Not provided",
+    "Chiave Attiva in Uso": "Active Key in Use",
+    "Chiamate:": "Calls:",
+    "0 / 1.000.000": "0 / 1,000,000",
+    "0% del limite giornaliero gratuito": "0% of daily free limit",
+    "CARICAMENTO QUOTA...": "LOADING QUOTA...",
+    "Caricamento...": "Loading...",
+
+    // INFINITY Banner & Badges
+    "⭐ OMNICLAUDE INFINITY EDITION": "⭐ OMNICLAUDE INFINITY EDITION",
+    "⭐ OMNICLAUDE INFINITY": "⭐ OMNICLAUDE INFINITY",
+    "Zero Rate-Limit & Multi-Account Failover Continuo": "Zero Rate-Limit & Seamless Auto-Failover",
+    "Vetrina Web": "Official Store",
+    "🌐 Vetrina Web": "🌐 Official Store",
+    "Acquista Licenza (14,99€)": "Buy License (14.99€)",
+    "🛒 Acquista Licenza (14,99€)": "🛒 Buy License (14.99€)",
+    "Inserisci Chiave INFINITY": "Enter INFINITY Key",
+    "🔑 Inserisci Chiave INFINITY": "🔑 Enter INFINITY Key",
+    "🟢 LICENZA INFINITY ATTIVA": "🟢 INFINITY LICENSE ACTIVE",
+    "PROTEZIONE 429 ATTIVA": "429 SHIELD ACTIVE",
+    "Rotazione Multi-Account illimitata e Zero Rate-Limit attivi.": "Unlimited Multi-Account rotation and Zero Rate-Limit shield active.",
+
+    // Parachute panel & Guide
+    "Catena di Priorità Paracadute": "Parachute Priority Chain",
+    "Salva Modifiche Paracadute": "Save Parachute Settings",
+    "Salva Chiavi API": "Save API Keys",
+    "Strategia Paracadute": "Parachute Strategy"
   };
+
+  // Build reverse dictionary for English -> Italian restoration
+  const DICT_EN_TO_IT = {};
+  for (const [it, en] of Object.entries(DICT_IT_TO_EN)) {
+    DICT_EN_TO_IT[en] = it;
+  }
+
+  function translateDom(targetNode, lang) {
+    if (!targetNode) return;
+    const isEn = lang === 'en';
+
+    const walker = document.createTreeWalker(
+      targetNode,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+
+    let node;
+    while ((node = walker.nextNode())) {
+      const parent = node.parentElement;
+      if (!parent) continue;
+      const tag = parent.tagName.toUpperCase();
+      if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'CODE' || tag === 'PRE') continue;
+
+      const text = node.textContent;
+      const trimmed = text.trim();
+      if (!trimmed) continue;
+
+      if (isEn) {
+        // Save original Italian text if not already stored
+        if (!node._orig_it) {
+          node._orig_it = text;
+        }
+        if (DICT_IT_TO_EN[trimmed]) {
+          const replacement = DICT_IT_TO_EN[trimmed];
+          node.textContent = text.replace(trimmed, replacement);
+        }
+      } else {
+        // Restore Italian text
+        if (node._orig_it) {
+          node.textContent = node._orig_it;
+        } else if (DICT_EN_TO_IT[trimmed]) {
+          node.textContent = text.replace(trimmed, DICT_EN_TO_IT[trimmed]);
+        }
+      }
+    }
+
+    // Also translate placeholders
+    targetNode.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(inp => {
+      const ph = inp.getAttribute('placeholder');
+      if (!ph) return;
+      if (isEn) {
+        if (!inp._orig_ph) inp._orig_ph = ph;
+        if (DICT_IT_TO_EN[ph]) inp.setAttribute('placeholder', DICT_IT_TO_EN[ph]);
+      } else {
+        if (inp._orig_ph) inp.setAttribute('placeholder', inp._orig_ph);
+        else if (DICT_EN_TO_IT[ph]) inp.setAttribute('placeholder', DICT_EN_TO_IT[ph]);
+      }
+    });
+
+    // Also translate buttons with value
+    targetNode.querySelectorAll('button, a').forEach(btn => {
+      const title = btn.getAttribute('title');
+      if (title) {
+        if (isEn) {
+          if (!btn._orig_title) btn._orig_title = title;
+          if (DICT_IT_TO_EN[title]) btn.setAttribute('title', DICT_IT_TO_EN[title]);
+        } else {
+          if (btn._orig_title) btn.setAttribute('title', btn._orig_title);
+          else if (DICT_EN_TO_IT[title]) btn.setAttribute('title', DICT_EN_TO_IT[title]);
+        }
+      }
+    });
+  }
 
   function setAppLanguage(lang) {
     currentAppLang = lang === 'en' ? 'en' : 'it';
@@ -2540,18 +2666,31 @@
     if (btnIt) btnIt.classList.toggle('active', currentAppLang === 'it');
     if (btnEn) btnEn.classList.toggle('active', currentAppLang === 'en');
 
-    const dict = I18N_DICT[currentAppLang] || I18N_DICT.it;
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (dict[key]) {
-        el.innerHTML = dict[key];
-      }
-    });
+    // Run DOM translation across entire app
+    translateDom(document.querySelector('.app') || document.body, currentAppLang);
 
-    // Re-render dynamic elements that use language
+    // Re-render dynamic cards
     if (typeof loadGeminiPool === 'function') {
       loadGeminiPool();
     }
+  }
+
+  // Observe dynamic content additions so they automatically get translated
+  const appObserver = new MutationObserver(mutations => {
+    if (currentAppLang === 'en') {
+      mutations.forEach(m => {
+        m.addedNodes.forEach(node => {
+          if (node.nodeType === 1) { // Element node
+            translateDom(node, 'en');
+          }
+        });
+      });
+    }
+  });
+
+  const appRoot = document.querySelector('.app') || document.body;
+  if (appRoot) {
+    appObserver.observe(appRoot, { childList: true, subtree: true });
   }
 
   // ─── Init ───
