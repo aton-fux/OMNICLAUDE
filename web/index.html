@@ -2445,7 +2445,8 @@
   // =========================================================================
   // 🌐 ADVANCED MULTILINGUAL TRANSLATION ENGINE (ATON-FUX)
   // =========================================================================
-  let currentAppLang = localStorage.getItem('omniclaude_app_lang') || 'it';
+  const _initialUrlParams = new URLSearchParams(window.location.search);
+  let currentAppLang = _initialUrlParams.get('lang') || localStorage.getItem('omniclaude_app_lang') || 'it';
 
   // Rich HTML block replacements (exact innerHTML normalization)
   const HTML_IT_TO_EN = {
@@ -2454,10 +2455,10 @@
       'The interactive <strong>Claude Code</strong> or <strong>OpenCode</strong> terminal opens in a dedicated console. Type your prompts in English/Italian or your commands and press <kbd>Enter</kbd>.',
     'Con il <strong>Paracadute attivo</strong>, il gateway OmniRoute cambia motore automaticamente seguendo la tua catena modulare senza mai interrompere il lavoro.':
       'With <strong>Backup Parachute active</strong>, the OmniRoute gateway automatically switches engines following your modular chain without interrupting work.',
-    'Vai nella <strong>Home &amp; Motori AI</strong> sotto a "Pronto per Programmare" (sezioni Motori Cloud Gratuiti o Motori Locali), clicca il motore preferito e avvia il terminale.':
-      'Go to <strong>Home &amp; AI Engines</strong> under "Ready to Code" (Free Cloud Engines or Local Engines), click your preferred engine and launch terminal.',
-    'Usa il pulsante rosso <strong>🛑 Chiudi Tutto</strong> in alto a destra per liberare RAM e VRAM al 100%, oppure digita <code>exit</code> nel terminale.':
-      'Use the red <strong>🛑 Stop All</strong> button at top-right to free 100% RAM &amp; VRAM, or type <code>exit</code> in the terminal.',
+    'Vai nella <strong>Home &amp; Motori AI</strong> sotto a "Pronto per Programmare" (sezioni <em>Motori Cloud Gratuiti</em> o <em>Motori Locali</em>), clicca il motore preferito e avvia il terminale.':
+      'Go to <strong>Home &amp; AI Engines</strong> under "Ready to Code" (sections <em>Free Cloud Engines</em> or <em>Local Engines</em>), click your preferred engine and launch terminal.',
+    'Usa il pulsante rosso <strong>"Chiudi Tutto"</strong> in alto a destra per liberare RAM e VRAM al 100%, oppure digita <code style="font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)">exit</code> nel terminale.':
+      'Use the red <strong>"Stop All"</strong> button at top-right to free 100% RAM &amp; VRAM, or type <code style="font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)">exit</code> in the terminal.',
 
     // FAQ Items
     '<strong>OMNICLAUDE</strong> è il centro di comando web e orchestratore locale ideato da <strong>ATON-FUX</strong> per utilizzare <strong>Claude Code</strong> e <strong>OpenCode</strong> collegati a motori AI Cloud gratuiti (Gemini, Groq, DeepSeek, OpenRouter) e modelli Locali (Ollama), con sistema <strong>Paracadute Modulare</strong> anti-interruzione e gestione automatica della memoria RAM/VRAM.':
