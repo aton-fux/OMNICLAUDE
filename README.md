@@ -113,6 +113,14 @@ cd OMNICLAUDE
 3. Nella colonna di destra (**➕ Aggiungi Motore dall'App**) puoi aggiungere con un clic qualsiasi motore Cloud o qualsiasi modello locale **Ollama** installato sul tuo PC, oppure inserire un ID modello personalizzato (es. da OpenRouter).
 4. Clicca su **`💾 Salva, Sincronizza & Attiva Paracadute`**.
 
+### 3️⃣ Motore di Ricerca & Installazione Libera Modelli Locali (Ollama · HuggingFace GGUF · GitHub)
+OMNICLAUDE **non impone né ancora modelli locali fissi**:
+1. Nella sezione **🖥️ Motori Locali su questo PC (Ollama)** della Pagina Iniziale, il sistema rileva dinamicamente solo i modelli effettivamente installati sul tuo PC (con possibilità di attivarli o disinstallarli `🗑️`).
+2. Tramite l'**Hub Modulare di Ricerca Multi-Sorgente** integrato puoi:
+   - Cercare in tempo reale qualsiasi modello su **📚 Ollama Library**, **🤗 HuggingFace Hub (GGUF Direct Pull)** e **🐙 GitHub Repositories**;
+   - Scegliere la variante/taglia di parametri adatta alla tua scheda video (es. `:1.5b`, `:7b`, `:14b`, `:32b`, `:latest`) e installarla in 1 click;
+   - Incollare qualsiasi ID o URL diretto (`nome:tag` oppure `hf.co/autore/modello-gguf`) per scaricarlo e usarlo subito offline con Claude Code e OpenCode.
+
 ### 3️⃣ Dove Ottenere le Chiavi API Gratuite
 Non serve inserire decine di chiavi: **te ne basta una sola** per iniziare!
 - **Google Gemini Flash (Consigliato — 1M token/giorno gratis):** ottieni la chiave gratuita in 20 secondi su [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey).

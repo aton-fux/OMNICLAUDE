@@ -9,18 +9,21 @@ dynamic Ollama local model detection/installation, and process lifecycle.
 
 from __future__ import annotations
 
+import html
 import json
 import os
+import re
 import shutil
 import socket
 import subprocess
 import sys
 import threading
 import time
+import urllib.request
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, quote, urlparse
 
 # Protect against pythonw NoneType stdout/stderr crashes on Windows
 if sys.stdout is None:
@@ -230,6 +233,169 @@ def get_ollama_status(force: bool = False) -> dict:
     return res
 
 
+def _http_get_text(url: str, timeout: int = 6) -> str:
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) OMNICLAUDE/2.0",
+            "Accept": "application/json, text/html, */*",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        return resp.read().decode("utf-8", errors="replace")
+
+
+def search_ollama_library(query: str) -> list[dict]:
+    """Live search on official Ollama Library (https://ollama.com/search)."""
+    results: list[dict] = []
+    try:
+        url = f"https://ollama.com/search?q={quote(query.strip())}"
+        raw_html = _http_get_text(url, timeout=6)
+        # Split by result item blocks in ollama.com/search
+        blocks = re.split(r'<li[^>]*x-test-model[^>]*>', raw_html)
+        for blk in blocks[1:15]:
+            m_name = re.search(r'x-test-search-response-title[^>]*>([^<]+)<', blk)
+            if not m_name:
+                m_href = re.search(r'href="/library/([^"/]+)"', blk)
+                name = m_href.group(1).strip() if m_href else ""
+            else:
+                name = html.unescape(m_name.group(1).strip())
+            if not name:
+                continue
+
+            m_desc = re.search(r'<p[^>]*class="[^"]*max-w-lg[^"]*"[^>]*>(.*?)</p>', blk, re.S)
+            if not m_desc:
+                m_desc = re.search(r'<p[^>]*>(.*?)</p>', blk, re.S)
+            desc = ""
+            if m_desc:
+                desc = re.sub(r"<[^>]+>", "", m_desc.group(1)).strip()
+                desc = html.unescape(re.sub(r"\s+", " ", desc))
+
+            sizes = re.findall(r'x-test-size[^>]*>([^<]+)<', blk)
+            sizes = [s.strip() for s in sizes if s.strip()]
+            pulls_m = re.search(r'x-test-pull-count[^>]*>([^<]+)<', blk)
+            pulls = pulls_m.group(1).strip() if pulls_m else ""
+
+            # Build pullable variants (default or specific parameter sizes)
+            default_tag = sizes[0] if sizes else "latest"
+            pull_id = f"{name}:{default_tag}" if ":" not in name and sizes else name
+
+            results.append({
+                "source": "ollama",
+                "source_label": "📚 Ollama Library",
+                "name": name,
+                "pull_id": pull_id,
+                "variants": [f"{name}:{s}" for s in sizes[:6]] if sizes else [name],
+                "desc": desc or f"Modello ufficiale dalla libreria Ollama ({name}).",
+                "stats": f"⬇ {pulls} pulls" if pulls else "Libreria Ufficiale",
+                "url": f"https://ollama.com/library/{name}",
+                "installable": True,
+            })
+    except Exception:
+        pass
+    return results
+
+
+def search_huggingface_gguf(query: str) -> list[dict]:
+    """Live search on HuggingFace Hub for GGUF models directly pullable by Ollama (ollama pull hf.co/...)."""
+    results: list[dict] = []
+    try:
+        q = query.strip() or "coder"
+        url = f"https://huggingface.co/api/models?search={quote(q)}&filter=gguf&sort=downloads&direction=-1&limit=12"
+        raw = _http_get_text(url, timeout=6)
+        data = json.loads(raw)
+        if isinstance(data, list):
+            for item in data[:12]:
+                repo_id = item.get("id") or item.get("modelId") or ""
+                if not repo_id:
+                    continue
+                downloads = item.get("downloads", 0)
+                likes = item.get("likes", 0)
+                tags = [t for t in (item.get("tags") or []) if t not in ("gguf", "region:us")][:4]
+                pull_id = f"hf.co/{repo_id}"
+                results.append({
+                    "source": "huggingface",
+                    "source_label": "🤗 HuggingFace GGUF",
+                    "name": repo_id,
+                    "pull_id": pull_id,
+                    "variants": [pull_id],
+                    "desc": f"Repository GGUF su HuggingFace installabile direttamente in Ollama ({', '.join(tags) if tags else 'GGUF Quantized'}).",
+                    "stats": f"⬇ {downloads:,} · ♥ {likes}",
+                    "url": f"https://huggingface.co/{repo_id}",
+                    "installable": True,
+                })
+    except Exception:
+        pass
+    return results
+
+
+def search_github_models(query: str) -> list[dict]:
+    """Live search on GitHub for Ollama / GGUF / Local AI model repositories & tools."""
+    results: list[dict] = []
+    try:
+        q = query.strip() or "ollama model"
+        gh_q = f"{q} ollama OR gguf"
+        url = f"https://api.github.com/search/repositories?q={quote(gh_q)}&sort=stars&order=desc&per_page=9"
+        raw = _http_get_text(url, timeout=6)
+        data = json.loads(raw)
+        for item in (data.get("items") or [])[:9]:
+            full_name = item.get("full_name", "")
+            html_url = item.get("html_url", "")
+            desc = item.get("description") or "Repository GitHub per modelli AI / Ollama / GGUF."
+            stars = item.get("stargazers_count", 0)
+            results.append({
+                "source": "github",
+                "source_label": "🐙 GitHub Repo",
+                "name": full_name,
+                "pull_id": "",
+                "variants": [],
+                "desc": desc,
+                "stats": f"★ {stars:,} stars",
+                "url": html_url,
+                "installable": False,
+            })
+    except Exception:
+        pass
+    return results
+
+
+def search_models_multi(query: str, source: str = "all") -> list[dict]:
+    """Search models dynamically across Ollama Library, HuggingFace GGUF, and GitHub."""
+    source = (source or "all").lower().strip()
+    out: list[dict] = []
+    threads: list[threading.Thread] = []
+    buckets: dict[str, list[dict]] = {"ollama": [], "huggingface": [], "github": []}
+
+    if source in ("all", "ollama"):
+        t1 = threading.Thread(target=lambda: buckets["ollama"].extend(search_ollama_library(query)))
+        threads.append(t1)
+        t1.start()
+    if source in ("all", "huggingface"):
+        t2 = threading.Thread(target=lambda: buckets["huggingface"].extend(search_huggingface_gguf(query)))
+        threads.append(t2)
+        t2.start()
+    if source in ("all", "github"):
+        t3 = threading.Thread(target=lambda: buckets["github"].extend(search_github_models(query)))
+        threads.append(t3)
+        t3.start()
+
+    for t in threads:
+        t.join(timeout=7)
+
+    if source == "ollama":
+        return buckets["ollama"]
+    if source == "huggingface":
+        return buckets["huggingface"]
+    if source == "github":
+        return buckets["github"]
+
+    # Interleave or combine cleanly when source == "all"
+    out.extend(buckets["ollama"][:8])
+    out.extend(buckets["huggingface"][:6])
+    out.extend(buckets["github"][:4])
+    return out
+
+
 class Handler(BaseHTTPRequestHandler):
     def end_headers(self):
         self.send_header("Access-Control-Allow-Origin", "*")
@@ -269,6 +435,13 @@ class Handler(BaseHTTPRequestHandler):
                 "oauth": oauth_info,
                 "ollama": ollama_info,
             })
+            return
+
+        if parsed.path == "/api/search-models":
+            q = qs.get("q", [""])[0].strip()
+            source = qs.get("source", ["all"])[0].strip()
+            items = search_models_multi(q, source)
+            self.send_json({"ok": True, "query": q, "source": source, "results": items})
             return
 
         # Serve static files from web/
@@ -385,8 +558,14 @@ class Handler(BaseHTTPRequestHandler):
         if parsed.path == "/api/pull-ollama-model":
             model_name = body.get("model", "").strip()
             if not model_name:
-                self.send_json({"error": "Specifica il nome del modello Ollama da scaricare"}, status=400)
+                self.send_json({"error": "Specifica il nome o link del modello da scaricare"}, status=400)
                 return
+            # Convert full HuggingFace URL or ollama pull prefix if user pasted it
+            for prefix in ("ollama pull ", "ollama run "):
+                if model_name.lower().startswith(prefix):
+                    model_name = model_name[len(prefix):].strip()
+            model_name = re.sub(r"^https?://(www\.)?huggingface\.co/", "hf.co/", model_name, flags=re.I)
+            model_name = re.sub(r"^https?://(www\.)?ollama\.com/library/", "", model_name, flags=re.I)
             # Sanitize basic shell chars
             safe_model = "".join(c for c in model_name if c.isalnum() or c in ("-", "_", ":", ".", "/"))
             cmd_str = (
@@ -396,11 +575,22 @@ class Handler(BaseHTTPRequestHandler):
                 "echo ============================================================ && "
                 "echo. && "
                 f"ollama pull {safe_model} && "
-                "echo. && echo [COMPLETATO] Modello scaricato con successo! Torna su OMNICLAUDE per attivarlo. && pause"
+                "echo. && echo [COMPLETATO] Modello installato con successo! Torna su OMNICLAUDE e clicca 'Rileva Modelli PC'. && pause"
             )
             subprocess.Popen(["cmd.exe", "/c", cmd_str], creationflags=CREATE_NEW_CONSOLE, cwd=str(DIR))
             _CACHE["ollama"] = (0.0, {})
             self.send_json({"ok": True, "model": safe_model})
+            return
+
+        if parsed.path == "/api/delete-ollama-model":
+            model_name = body.get("model", "").strip()
+            if not model_name:
+                self.send_json({"error": "Specifica il modello da rimuovere"}, status=400)
+                return
+            safe_model = "".join(c for c in model_name if c.isalnum() or c in ("-", "_", ":", ".", "/"))
+            _run(["ollama", "rm", safe_model], timeout=8)
+            _CACHE["ollama"] = (0.0, {})
+            self.send_json({"ok": True, "deleted": safe_model})
             return
 
         if parsed.path == "/api/set-key":
