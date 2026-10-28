@@ -1,11 +1,12 @@
 @echo off
 chcp 65001 >nul
-title Arresto Completo e Pulizia Memoria (RAM / VRAM)
+title OMNICLAUDE — Arresto Completo e Pulizia Memoria (Creato da ATON-FUX)
 color 0C
 
 echo.
 echo ============================================================
-echo   ARRESTO COMPLETO E PULIZIA RISORSE (RAM / VRAM)
+echo   OMNICLAUDE — ARRESTO COMPLETO E PULIZIA RISORSE
+echo   Creato da ATON-FUX (https://github.com/aton-fux/OMNICLAUDE)
 echo ============================================================
 echo.
 

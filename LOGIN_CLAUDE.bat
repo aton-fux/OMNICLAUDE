@@ -1,10 +1,11 @@
 @echo off
 chcp 65001 >nul
-title Login Account Claude Web (OAuth) - OmniRoute
+title OMNICLAUDE — Login Claude Web OAuth (Creato da ATON-FUX)
 color 0B
 
 echo ================================================================
-echo    LOGIN ACCOUNT CLAUDE WEB / PRO (OAuth Senza Chiavi a Consumo)
+echo    OMNICLAUDE — LOGIN CLAUDE WEB / PRO (OAuth Senza Costi API)
+echo    Creato da ATON-FUX (https://github.com/aton-fux/OMNICLAUDE)
 echo ================================================================
 echo.
 echo Questa procedura collega il tuo account Claude.ai (Free o Pro).

@@ -697,7 +697,7 @@
       <a class="author-reserved-box" href="https://github.com/aton-fux/OMNICLAUDE" target="_blank" title="Repository Ufficiale GitHub di ATON-FUX">
         <span class="crown">🛡️</span>
         <div>
-          <div class="author-label">Posto Riservato · Official Author</div>
+          <div class="author-label" data-i18n="author_label">Posto Riservato · Official Author</div>
           <div class="author-name">CREATO DA ATON-FUX</div>
         </div>
       </a>
@@ -835,7 +835,7 @@
               </div>
             </div>
             <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-              <span id="gemini-home-badge" class="tag tag-green">CARICAMENTO QUOTA...</span>
+              <span id="gemini-home-badge" class="tag tag-green" data-i18n="badge_loading_quota">CARICAMENTO QUOTA...</span>
               <button class="btn-primary-cyber" style="padding:6px 14px; font-size:11.5px;" onclick="showPanel('gemini-pool')" data-i18n="btn_manage_gpool">⚡ Gestisci Multi-Key &amp; Quota →</button>
             </div>
           </div>
@@ -954,7 +954,7 @@
           <div class="config-box">
             <div class="config-box-title">
               <span data-i18n="active_chain_title">⛓️ Catena di Fallback Attiva</span>
-              <span class="tag tag-cyan" id="chain-count-badge">3 Motori</span>
+              <span class="tag tag-cyan" id="chain-count-badge" data-i18n="badge_three_engines">3 Motori</span>
             </div>
             <div class="config-box-sub" data-i18n="active_chain_sub">Usa le frecce ⬆️ ⬇️ per cambiare la priorità dei motori o ✕ per rimuoverli. Il primo motore è il Primario, i successivi sono le Riserve automatiche.</div>
 
@@ -1082,7 +1082,7 @@
             <div style="width:100%;height:6px;background:var(--border-subtle);border-radius:3px;margin-top:6px;overflow:hidden;">
               <div id="gpool-token-bar" style="width:0%;height:100%;background:var(--green);transition:width 0.4s ease;"></div>
             </div>
-            <div style="font-size:10.5px;color:var(--muted2);margin-top:4px;" id="gpool-token-pct">0% del limite giornaliero gratuito</div>
+            <div style="font-size:10.5px;color:var(--muted2);margin-top:4px;" id="gpool-token-pct" data-i18n="gpool_token_pct_def">0% del limite giornaliero gratuito</div>
           </div>
 
           <!-- Card 3: Auto-Failover Switch -->
@@ -1143,7 +1143,7 @@
           <div class="config-box">
             <div class="config-box-title">
               <span data-i18n="configured_keys_title">📋 Chiavi Configurate nel Pool</span>
-              <span class="tag tag-cyan" id="gpool-keys-count-badge">0 Chiavi</span>
+              <span class="tag tag-cyan" id="gpool-keys-count-badge" data-i18n="badge_zero_keys">0 Chiavi</span>
             </div>
             <div class="config-box-sub" data-i18n="configured_keys_sub">
               Tutte le chiavi salvate localmente nel tuo PC. Il failover passa automaticamente alla prossima chiave se una finisce la quota.
@@ -1578,11 +1578,13 @@
       }
     } catch {
       document.getElementById("dot-status").className = "dot dot-red";
-      document.getElementById("txt-status").textContent = "OmniRoute: Offline";
+      document.getElementById("txt-status").textContent = (currentAppLang === 'en' ? "OmniRoute: Offline" : "OmniRoute: Offline");
+      setTimeout(() => { if (!currentStatus || !currentStatus.running) loadStatus(); }, 1500);
     }
   }
 
   function applyStatus() {
+    if (!currentStatus || Object.keys(currentStatus).length === 0) return;
     const s = currentStatus;
     const isEn = (currentAppLang === 'en');
 
@@ -2805,7 +2807,12 @@
   "tag_free": "GRATIS",
   "title_search_ollama": "Apri la libreria ufficiale Ollama nel browser",
   "title_search_hf": "Esplora tutti i modelli GGUF su HuggingFace",
-  "title_search_gh": "Cerca repository e Modelfile su GitHub"
+  "title_search_gh": "Cerca repository e Modelfile su GitHub",
+  "author_label": "Posto Riservato · Autore Ufficiale",
+  "badge_loading_quota": "CARICAMENTO QUOTA...",
+  "badge_three_engines": "3 Motori",
+  "badge_zero_keys": "0 Chiavi",
+  "gpool_token_pct_def": "0% del limite giornaliero gratuito"
 };
 
   const I18N_EN = {
@@ -2958,7 +2965,12 @@
   "tag_free": "FREE",
   "title_search_ollama": "Open official Ollama library in browser",
   "title_search_hf": "Explore all GGUF models on HuggingFace",
-  "title_search_gh": "Search repositories and Modelfiles on GitHub"
+  "title_search_gh": "Search repositories and Modelfiles on GitHub",
+  "author_label": "Reserved Seat · Official Author",
+  "badge_loading_quota": "LOADING QUOTA...",
+  "badge_three_engines": "3 Engines",
+  "badge_zero_keys": "0 Keys",
+  "gpool_token_pct_def": "0% of daily free quota limit"
 };
 
   function setAppLanguage(lang) {
@@ -2991,8 +3003,10 @@
     });
 
     // 4. Update status & dynamic cards in active language immediately
-    applyStatus();
-    if (typeof loadGeminiPool === 'function') {
+    if (currentStatus && Object.keys(currentStatus).length > 0) {
+      applyStatus();
+    }
+    if (typeof loadGeminiPool === 'function' && currentGeminiPool && Object.keys(currentGeminiPool).length > 0) {
       loadGeminiPool();
     }
   }
