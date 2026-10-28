@@ -687,7 +687,7 @@
           <div class="logo-title-row">
             <h1>OMNICLAUDE</h1>
             <span class="version-pill">INFINITY v2.0</span>
-            <span class="tag" id="topbar-pro-badge" style="display:none;background:rgba(255,184,0,0.18);color:#ffb800;border:1px solid rgba(255,184,0,0.4);font-weight:800;font-size:10px;">⭐ INFINITY ATTIVO</span>
+            <span class="tag" id="topbar-pro-badge" style="display:none;background:rgba(255,184,0,0.18);color:#ffb800;border:1px solid rgba(255,184,0,0.4);font-weight:800;font-size:10px;" data-i18n="badge_infinity_active">⭐ INFINITY ATTIVO</span>
           </div>
           <p><span data-i18n="topbar_sub">AI Terminal Command Center · Claude Code &amp; OpenCode Gateway</span></p>
         </div>
@@ -756,9 +756,9 @@
       <!-- BOX RISERVATO AUTORE NELLA SIDEBAR -->
       <div class="sidebar-author-card">
         <img src="/logo-topbar-88.png" width="40" height="40" class="sidebar-logo-emblem" alt="OMNICLAUDE Logo">
-        <div class="sa-label">⚡ Progetto Ufficiale ⚡</div>
+        <div class="sa-label" data-i18n="side_official_proj">⚡ Progetto Ufficiale ⚡</div>
         <div class="sa-name">ATON-FUX</div>
-        <div class="sa-sub">OMNICLAUDE Open Source Suite<br>Licenza Protetta GNU GPL v3</div>
+        <div class="sa-sub" data-i18n="side_suite_sub">OMNICLAUDE Open Source Suite<br>Licenza Protetta GNU GPL v3</div>
         <a href="https://github.com/aton-fux/OMNICLAUDE" target="_blank">github.com/aton-fux/OMNICLAUDE ↗</a>
       </div>
     </nav>
@@ -782,7 +782,7 @@
           <div class="author-reserved-box" style="cursor:default;">
             <span class="crown">👑</span>
             <div>
-              <div class="author-label">Architettura &amp; Design</div>
+              <div class="author-label" data-i18n="author_label">Architettura &amp; Design</div>
               <div class="author-name">CREATO DA ATON-FUX</div>
             </div>
           </div>
@@ -790,7 +790,7 @@
 
         <div class="active-model-bar">
           <div>
-            <div class="label">Motore Attualmente Attivo (per Claude Code &amp; OpenCode)</div>
+            <div class="label" data-i18n="active_model_lbl">Motore Attualmente Attivo (per Claude Code &amp; OpenCode)</div>
             <div class="value" id="active-model-val">Caricamento...</div>
           </div>
           <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
@@ -801,17 +801,17 @@
         <!-- PRONTO PER PROGRAMMARE -->
         <div class="launch-hero">
           <img src="/logo-hero-160.png" width="72" height="72" class="hero-logo-emblem" alt="OMNICLAUDE Cyber Brain Logo">
-          <h2>Pronto per Programmare</h2>
-          <p>Scegli quale strumento da terminale preferisci aprire: entrambi usano il gateway OmniRoute con zero costi a consumo!</p>
+          <h2 data-i18n="ready_to_code_h2">Pronto per Programmare</h2>
+          <p data-i18n="ready_to_code_p">Scegli quale strumento da terminale preferisci aprire: entrambi usano il gateway OmniRoute con zero costi a consumo!</p>
           <div class="launch-buttons">
-            <button class="btn-launch" onclick="launchClaude()">
+            <button class="btn-launch" onclick="launchClaude()" data-i18n="btn_open_claude">
               🚀 APRI CLAUDE CODE
             </button>
-            <button class="btn-launch-opencode" onclick="launchOpenCode()">
+            <button class="btn-launch-opencode" onclick="launchOpenCode()" data-i18n="btn_open_opencode">
               ⚡ APRI OPENCODE
             </button>
           </div>
-          <div style="font-size:12.5px; color:var(--muted2); line-height:1.6;">
+          <div style="font-size:12.5px; color:var(--muted2); line-height:1.6;" data-i18n="hero_footer_hint">
             💡 <strong style="color:var(--text);">Claude Code</strong>: L'interfaccia Anthropic per pair programming &amp; bash · <strong style="color:var(--text);">OpenCode</strong>: L'agente TUI open source moderno.
           </div>
         </div>
@@ -825,18 +825,18 @@
               <span style="font-size:26px;">⚡</span>
               <div>
                 <div style="font-size:13.5px; font-weight:800; color:var(--text); display:flex; align-items:center; gap:8px;">
-                  <span>Gemini Multi-Key Hub &amp; Failover Automatico</span>
-                  <span class="tag tag-cyan">NOVITÀ ASSOLUTA</span>
-                  <span class="tag tag-green">ZERO RATE-LIMIT</span>
+                  <span data-i18n="gemini_banner_title">Gemini Multi-Key Hub &amp; Failover Automatico</span>
+                  <span class="tag tag-cyan" data-i18n="tag_exclusive">NOVITÀ ASSOLUTA</span>
+                  <span class="tag tag-green" data-i18n="tag_zero_rl">ZERO RATE-LIMIT</span>
                 </div>
                 <div style="font-size:11.5px; color:var(--muted2); margin-top:2px;">
-                  Aggiungi account Google gratuiti multipli: se una chiave finisce i token (429), OMNICLAUDE passa all'altra in 0.1s senza fermare Claude Code!
+                  <span data-i18n="gemini_banner_desc">Aggiungi account Google gratuiti multipli: se una chiave finisce i token (429), OMNICLAUDE passa all'altra in 0.1s senza fermare Claude Code!</span>
                 </div>
               </div>
             </div>
             <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
               <span id="gemini-home-badge" class="tag tag-green">CARICAMENTO QUOTA...</span>
-              <button class="btn-primary-cyber" style="padding:6px 14px; font-size:11.5px;" onclick="showPanel('gemini-pool')">⚡ Gestisci Multi-Key &amp; Quota →</button>
+              <button class="btn-primary-cyber" style="padding:6px 14px; font-size:11.5px;" onclick="showPanel('gemini-pool')" data-i18n="btn_manage_gpool">⚡ Gestisci Multi-Key &amp; Quota →</button>
             </div>
           </div>
 
@@ -844,10 +844,10 @@
           <section class="engine-section-box">
             <div class="engine-section-header">
               <div>
-                <div class="engine-section-title">☁️ Motori Cloud Gratuiti</div>
-                <div class="engine-section-sub">Clicca qualsiasi motore per attivarlo istantaneamente sia su <strong>Claude Code</strong> che su <strong>OpenCode</strong>.</div>
+                <div class="engine-section-title" data-i18n="cloud_engines_title">☁️ Motori Cloud Gratuiti</div>
+                <div class="engine-section-sub" data-i18n="cloud_engines_sub">Clicca qualsiasi motore per attivarlo istantaneamente sia su <strong>Claude Code</strong> che su <strong>OpenCode</strong>.</div>
               </div>
-              <span class="tag tag-green">ZERO COSTI API A CONSUMO</span>
+              <span class="tag tag-green" data-i18n="tag_zero_api_cost">ZERO COSTI API A CONSUMO</span>
             </div>
             <div class="models-grid" id="cloud-models-grid"></div>
           </section>
@@ -856,13 +856,13 @@
           <section class="engine-section-box">
             <div class="engine-section-header">
               <div>
-                <div class="engine-section-title">🖥️ Motori Locali su questo PC (Ollama)</div>
-                <div class="engine-section-sub">Rilevamento dinamico dei modelli presenti sul tuo PC + Motore di Ricerca &amp; Installazione Libera da <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> e <strong>GitHub</strong>.</div>
+                <div class="engine-section-title" data-i18n="local_engines_title">🖥️ Motori Locali su questo PC (Ollama)</div>
+                <div class="engine-section-sub" data-i18n="local_engines_sub">Rilevamento dinamico dei modelli presenti sul tuo PC + Motore di Ricerca &amp; Installazione Libera da <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> e <strong>GitHub</strong>.</div>
               </div>
               <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
                 <span class="tag tag-amber" id="ollama-home-badge">100% OFFLINE</span>
-                <button class="btn-secondary-cyber" style="padding:5px 10px;font-size:11px;" onclick="loadStatus(true)" title="Scansiona nuovamente i modelli installati su questo PC">🔄 Rileva Modelli PC</button>
-                <button class="btn-secondary-cyber" style="padding:5px 10px;font-size:11px;" onclick="installOllama()" title="Installa o aggiorna il motore Ollama sul tuo PC">💿 Installa / Aggiorna Ollama</button>
+                <button class="btn-secondary-cyber" style="padding:5px 10px;font-size:11px;" onclick="loadStatus(true)" title="Scansiona nuovamente i modelli installati su questo PC" data-i18n="btn_detect_models">🔄 Rileva Modelli PC</button>
+                <button class="btn-secondary-cyber" style="padding:5px 10px;font-size:11px;" onclick="installOllama()" title="Installa o aggiorna il motore Ollama sul tuo PC" data-i18n="btn_install_ollama">💿 Installa / Aggiorna Ollama</button>
               </div>
             </div>
 
@@ -875,17 +875,17 @@
                 <div>
                   <div style="font-size:13.5px; font-weight:800; color:var(--text); display:flex; align-items:center; gap:8px;">
                     <span>🌐</span>
-                    <span>Esplora, Cerca &amp; Installa Qualsiasi Modello Locale (Ollama · HuggingFace GGUF · GitHub)</span>
-                    <span class="tag tag-cyan">MODULARE &amp; LIBERO</span>
+                    <span data-i18n="search_hub_title">Esplora, Cerca &amp; Installa Qualsiasi Modello Locale (Ollama · HuggingFace GGUF · GitHub)</span>
+                    <span class="tag tag-cyan" data-i18n="tag_modular_free">MODULARE &amp; LIBERO</span>
                   </div>
                   <div style="font-size:11.5px; color:var(--muted2); margin-top:3px;">
-                    Nessun modello imposto: cerca liberamente qualsiasi motore AI nel mondo o incolla il nome/link da Ollama, HuggingFace o GitHub per installarlo sul tuo PC.
+                    <span data-i18n="search_hub_sub">Nessun modello imposto: cerca liberamente qualsiasi motore AI nel mondo o incolla il nome/link da Ollama, HuggingFace o GitHub per installarlo sul tuo PC.</span>
                   </div>
                 </div>
                 <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
-                  <button class="btn-step" style="width:auto;padding:5px 10px;font-size:11px;" onclick="openExternalSearch('ollama')" title="Apri la libreria ufficiale Ollama nel browser">📚 Ollama.com ↗</button>
-                  <button class="btn-step" style="width:auto;padding:5px 10px;font-size:11px;" onclick="openExternalSearch('huggingface')" title="Esplora tutti i modelli GGUF su HuggingFace">🤗 HuggingFace GGUF ↗</button>
-                  <button class="btn-step" style="width:auto;padding:5px 10px;font-size:11px;" onclick="openExternalSearch('github')" title="Cerca repository e Modelfile su GitHub">🐙 GitHub Models ↗</button>
+                  <button class="btn-step" style="width:auto;padding:5px 10px;font-size:11px;" onclick="openExternalSearch('ollama')" title="Apri la libreria ufficiale Ollama nel browser" data-i18n-title="title_search_ollama">📚 Ollama.com ↗</button>
+                  <button class="btn-step" style="width:auto;padding:5px 10px;font-size:11px;" onclick="openExternalSearch('huggingface')" title="Esplora tutti i modelli GGUF su HuggingFace" data-i18n-title="title_search_hf">🤗 HuggingFace GGUF ↗</button>
+                  <button class="btn-step" style="width:auto;padding:5px 10px;font-size:11px;" onclick="openExternalSearch('github')" title="Cerca repository e Modelfile su GitHub" data-i18n-title="title_search_gh">🐙 GitHub Models ↗</button>
                 </div>
               </div>
 
@@ -895,16 +895,16 @@
                   class="key-input"
                   type="text"
                   id="model-search-query"
-                  placeholder="🔍 Cerca qualsiasi modello (es. coder, llama, mistral, gemma, uncensored, phi, vision, deepseek...)"
+                  placeholder="🔍 Cerca qualsiasi modello (es. coder, llama, mistral, gemma, uncensored, phi, vision, deepseek...)" data-i18n-ph="ph_model_search"
                   onkeydown="if(event.key==='Enter') searchModelsOnline()"
                 >
                 <select id="model-search-source" class="strategy-select" style="max-width:230px; padding:10px 12px;" onchange="searchModelsOnline()">
-                  <option value="all">🌐 Tutte le Sorgenti</option>
-                  <option value="ollama">📚 Ollama Library</option>
-                  <option value="huggingface">🤗 HuggingFace GGUF</option>
-                  <option value="github">🐙 GitHub Repositories</option>
+                  <option value="all" data-i18n="src_all">🌐 Tutte le Sorgenti</option>
+                  <option value="ollama" data-i18n="src_ollama">📚 Ollama Library</option>
+                  <option value="huggingface" data-i18n="src_hf">🤗 HuggingFace GGUF</option>
+                  <option value="github" data-i18n="src_gh">🐙 GitHub Repositories</option>
                 </select>
-                <button class="btn-primary-cyber" style="flex:0 0 auto; padding:10px 18px;" onclick="searchModelsOnline()">🔍 Cerca Modelli</button>
+                <button class="btn-primary-cyber" style="flex:0 0 auto; padding:10px 18px;" onclick="searchModelsOnline()" data-i18n="btn_search_models">🔍 Cerca Modelli</button>
               </div>
 
               <!-- CONTENITORE RISULTATI RICERCA LIVE -->
@@ -912,7 +912,7 @@
 
               <!-- BARRA 2: INSTALLAZIONE DIRETTA DA ID / TAG / LINK HUGGINGFACE O OLLAMA -->
               <div style="padding-top:12px; border-top:1px solid var(--border-subtle); display:grid; grid-template-columns: auto 1fr auto; gap:10px; align-items:center;">
-                <div style="font-size:11.5px; font-weight:700; color:var(--muted2); white-space:nowrap;">
+                <div style="font-size:11.5px; font-weight:700; color:var(--muted2); white-space:nowrap;" data-i18n="direct_install_label">
                   ⚡ Installazione Diretta (ID / URL):
                 </div>
                 <input
@@ -922,7 +922,7 @@
                   placeholder="Incolla qualsiasi modello o URL (es. nome-modello:tag oppure hf.co/autore/modello-gguf)"
                   onkeydown="if(event.key==='Enter') pullCustomInputModel()"
                 >
-                <button class="btn-save" onclick="pullCustomInputModel()">📥 Scarica &amp; Installa sul PC</button>
+                <button class="btn-save" onclick="pullCustomInputModel()" data-i18n="btn_pull_custom">📥 Scarica &amp; Installa sul PC</button>
               </div>
             </div>
           </section>
@@ -934,17 +934,17 @@
       <div class="panel" id="panel-parachute">
         <div class="page-header-banner">
           <div>
-            <div class="panel-title">🛡️ Paracadute di Riserva (Configurabile &amp; Modulare)</div>
-            <div class="panel-sub">Zero interruzioni: se un motore finisce i crediti, il prossimo parte automaticamente secondo la tua configurazione.</div>
+            <div class="panel-title" data-i18n="parachute_title">🛡️ Paracadute di Riserva (Configurabile &amp; Modulare)</div>
+            <div class="panel-sub" data-i18n="parachute_sub">Zero interruzioni: se un motore finisce i crediti, il prossimo parte automaticamente secondo la tua configurazione.</div>
           </div>
         </div>
 
         <div class="parachute-hero">
           <div class="parachute-row">
-            <h2>Stato Fallback Automatico Multi-Motore (`combo/paracadute-gratis`)</h2>
+            <h2 data-i18n="parachute_status_h2">Stato Fallback Automatico Multi-Motore (`combo/paracadute-gratis`)</h2>
             <button class="btn-toggle on" id="btn-parachute" onclick="toggleParachute()">✅ ATTIVO — Clicca per disattivare</button>
           </div>
-          <div class="parachute-desc">
+          <div class="parachute-desc" data-i18n="parachute_desc">
             Personalizza liberamente l'ordine dei motori, la strategia di instradamento e quali modelli Cloud o Locali (Ollama) includere nella catena di sicurezza. Ogni modifica viene sincronizzata direttamente con il gateway <strong>OmniRoute</strong>.
           </div>
         </div>
@@ -953,43 +953,43 @@
           <!-- COLONNA SINISTRA: CATENA ATTIVA ORDINABILE -->
           <div class="config-box">
             <div class="config-box-title">
-              <span>⛓️ Catena di Fallback Attiva</span>
+              <span data-i18n="active_chain_title">⛓️ Catena di Fallback Attiva</span>
               <span class="tag tag-cyan" id="chain-count-badge">3 Motori</span>
             </div>
-            <div class="config-box-sub">Usa le frecce ⬆️ ⬇️ per cambiare la priorità dei motori o ✕ per rimuoverli. Il primo motore è il Primario, i successivi sono le Riserve automatiche.</div>
+            <div class="config-box-sub" data-i18n="active_chain_sub">Usa le frecce ⬆️ ⬇️ per cambiare la priorità dei motori o ✕ per rimuoverli. Il primo motore è il Primario, i successivi sono le Riserve automatiche.</div>
 
             <div class="strategy-bar">
-              <label for="parachute-strategy">Strategia Gateway:</label>
+              <label for="parachute-strategy" data-i18n="gateway_strategy_lbl">Strategia Gateway:</label>
               <select id="parachute-strategy" class="strategy-select">
-                <option value="priority">🎯 Priority (Cascata sequenziale 1° → 2° → 3°)</option>
-                <option value="round-robin">🔄 Round-Robin (Alterna richieste in modo equo)</option>
-                <option value="least-used">⚖️ Least-Used (Usa il motore meno carico)</option>
+                <option value="priority" data-i18n="strat_opt_priority">🎯 Priority (Cascata sequenziale 1° → 2° → 3°)</option>
+                <option value="round-robin" data-i18n="strat_opt_rr">🔄 Round-Robin (Alterna richieste in modo equo)</option>
+                <option value="least-used" data-i18n="strat_opt_lu">⚖️ Least-Used (Usa il motore meno carico)</option>
               </select>
             </div>
 
             <div class="chain" id="modular-chain-list"></div>
 
             <div class="chain-actions-footer">
-              <button class="btn-primary-cyber" onclick="saveModularParachute(true)">💾 Salva, Sincronizza &amp; Attiva Paracadute</button>
-              <button class="btn-secondary-cyber" onclick="resetModularParachute()">🔄 Default</button>
+              <button class="btn-primary-cyber" onclick="saveModularParachute(true)" data-i18n="btn_save_parachute">💾 Salva, Sincronizza &amp; Attiva Paracadute</button>
+              <button class="btn-secondary-cyber" onclick="resetModularParachute()" data-i18n="btn_reset_parachute">🔄 Default</button>
             </div>
           </div>
 
           <!-- COLONNA DESTRA: CATALOGO MOTORI DELL'APP DA AGGIUNGERE -->
           <div class="config-box">
             <div class="config-box-title">
-              <span>➕ Aggiungi Motore dall'App</span>
+              <span data-i18n="add_engine_app_title">➕ Aggiungi Motore dall'App</span>
               <span class="tag tag-purple">MODULARE</span>
             </div>
-            <div class="config-box-sub">Seleziona qualsiasi motore Cloud o Locale (Ollama) rilevato nell'app per aggiungerlo alla tua catena Paracadute:</div>
+            <div class="config-box-sub" data-i18n="add_engine_app_sub">Seleziona qualsiasi motore Cloud o Locale (Ollama) rilevato nell'app per aggiungerlo alla tua catena Paracadute:</div>
 
             <div class="pool-list" id="parachute-pool-list"></div>
 
             <div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--border-subtle);">
-              <div style="font-size:12px; font-weight:700; margin-bottom:8px; color:var(--text);">🔧 Aggiungi ID Modello Personalizzato (OmniRoute / OpenRouter)</div>
+              <div style="font-size:12px; font-weight:700; margin-bottom:8px; color:var(--text);" data-i18n="custom_model_title">🔧 Aggiungi ID Modello Personalizzato (OmniRoute / OpenRouter)</div>
               <div class="key-row">
-                <input class="key-input" type="text" id="custom-parachute-model" placeholder="es. openrouter/qwen/qwen-2.5-coder-32b-instruct:free">
-                <button class="btn-save" onclick="addCustomParachuteModel()">+ Aggiungi</button>
+                <input class="key-input" type="text" id="custom-parachute-model" placeholder="es. openrouter/qwen/qwen-2.5-coder-32b-instruct:free" data-i18n-ph="ph_custom_parachute">
+                <button class="btn-save" onclick="addCustomParachuteModel()" data-i18n="btn_add_custom">+ Aggiungi</button>
               </div>
             </div>
           </div>
@@ -1000,43 +1000,43 @@
       <div class="panel" id="panel-terminal-info">
         <div class="page-header-banner">
           <div>
-            <div class="panel-title">ℹ️ Come funziona il terminale</div>
-            <div class="panel-sub">Guida rapida operativa per l'utilizzo di Claude Code e OpenCode con OMNICLAUDE.</div>
+            <div class="panel-title" data-i18n="ti_panel_title">ℹ️ Come funziona il terminale</div>
+            <div class="panel-sub" data-i18n="ti_panel_sub">Guida rapida operativa per l'utilizzo di Claude Code e OpenCode con OMNICLAUDE.</div>
           </div>
         </div>
 
         <div class="terminal-info-grid">
           <div class="term-step-card">
             <div class="term-step-icon">🟢</div>
-            <div class="term-step-title">Si apre una finestra nera</div>
-            <div class="term-step-desc">Il terminale <strong>Claude Code</strong> o <strong>OpenCode</strong> interattivo si apre in una console dedicata. Scrivi i tuoi prompt in italiano o i tuoi comandi e premi <kbd>Invio</kbd>.</div>
+            <div class="term-step-title" data-i18n="ti_step1_title">Si apre una finestra nera</div>
+            <div class="term-step-desc" data-i18n="ti_step1_desc">Il terminale <strong>Claude Code</strong> o <strong>OpenCode</strong> interattivo si apre in una console dedicata. Scrivi i tuoi prompt in italiano o i tuoi comandi e premi <kbd>Invio</kbd>.</div>
           </div>
 
           <div class="term-step-card">
             <div class="term-step-icon">🛡️</div>
-            <div class="term-step-title">Se il motore finisce i crediti</div>
-            <div class="term-step-desc">Con il <strong>Paracadute attivo</strong>, il gateway OmniRoute cambia motore automaticamente seguendo la tua catena modulare senza mai interrompere il lavoro.</div>
+            <div class="term-step-title" data-i18n="ti_step2_title">Se il motore finisce i crediti</div>
+            <div class="term-step-desc" data-i18n="ti_step2_desc">Con il <strong>Paracadute attivo</strong>, il gateway OmniRoute cambia motore automaticamente seguendo la tua catena modulare senza mai interrompere il lavoro.</div>
           </div>
 
           <div class="term-step-card">
             <div class="term-step-icon">🔄</div>
-            <div class="term-step-title">Per cambiare motore</div>
-            <div class="term-step-desc">Vai nella <strong>Home &amp; Motori AI</strong> sotto a "Pronto per Programmare" (sezioni <em>Motori Cloud Gratuiti</em> o <em>Motori Locali</em>), clicca il motore preferito e avvia il terminale.</div>
+            <div class="term-step-title" data-i18n="ti_step3_title">Per cambiare motore</div>
+            <div class="term-step-desc" data-i18n="ti_step3_desc">Vai nella <strong>Home &amp; Motori AI</strong> sotto a "Pronto per Programmare" (sezioni <em>Motori Cloud Gratuiti</em> o <em>Motori Locali</em>), clicca il motore preferito e avvia il terminale.</div>
           </div>
 
           <div class="term-step-card">
             <div class="term-step-icon">🛑</div>
-            <div class="term-step-title">Per chiudere tutto</div>
-            <div class="term-step-desc">Usa il pulsante rosso <strong>"Chiudi Tutto"</strong> in alto a destra per liberare RAM e VRAM al 100%, oppure digita <code style="font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)">exit</code> nel terminale.</div>
+            <div class="term-step-title" data-i18n="ti_step4_title">Per chiudere tutto</div>
+            <div class="term-step-desc" data-i18n="ti_step4_desc">Usa il pulsante rosso <strong>"Chiudi Tutto"</strong> in alto a destra per liberare RAM e VRAM al 100%, oppure digita <code style="font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)">exit</code> nel terminale.</div>
           </div>
         </div>
 
         <div class="engine-section-box">
-          <div class="engine-section-title" style="margin-bottom:10px;">⚡ Scorciatoie Utili dentro il Terminale</div>
+          <div class="engine-section-title" style="margin-bottom:10px;" data-i18n="ti_shortcuts_title">⚡ Scorciatoie Utili dentro il Terminale</div>
           <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--muted2);line-height:1.6;">
-            <div>• Digita <code style="font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)">/help</code> per vedere tutti i comandi disponibili in Claude Code o OpenCode.</div>
-            <div>• Digita <code style="font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)">/compact</code> per comprimere la memoria della conversazione nelle sessioni lunghe.</div>
-            <div>• Digita <code style="font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)">exit</code> oppure premi <kbd>Ctrl+C</kbd> due volte per chiudere la sessione da terminale.</div>
+            <div data-i18n="ti_short1">• Digita <code style="font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)">/help</code> per vedere tutti i comandi disponibili in Claude Code o OpenCode.</div>
+            <div data-i18n="ti_short2">• Digita <code style="font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)">/compact</code> per comprimere la memoria della conversazione nelle sessioni lunghe.</div>
+            <div data-i18n="ti_short3">• Digita <code style="font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)">exit</code> oppure premi <kbd>Ctrl+C</kbd> due volte per chiudere la sessione da terminale.</div>
           </div>
         </div>
       </div>
@@ -1048,18 +1048,18 @@
             <div style="font-size:36px;line-height:1;">⚡</div>
             <div>
               <div class="panel-title" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-                <span>Gemini Multi-Key Hub &amp; Live Quota</span>
-                <span class="tag tag-cyan">FAILOVER ZERO RATE-LIMIT</span>
+                <span data-i18n="gpool_hdr_title">Gemini Multi-Key Hub &amp; Live Quota</span>
+                <span class="tag tag-cyan" data-i18n="gpool_hdr_tag1">FAILOVER ZERO RATE-LIMIT</span>
                 <span class="tag tag-green">CREATO DA ATON-FUX</span>
               </div>
-              <div class="panel-sub">
+              <div class="panel-sub" data-i18n="gpool_hdr_sub">
                 Aggiungi account Google AI Studio multipli gratuiti: se una chiave esaurisce la quota (HTTP 429), OMNICLAUDE passa istantaneamente alla successiva senza interrompere Claude Code!
               </div>
             </div>
           </div>
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-            <button class="btn-secondary-cyber" onclick="loadGeminiPool(true)">🔄 Aggiorna Live</button>
-            <button class="btn-secondary-cyber" onclick="testAllGeminiKeys()">🧪 Testa Tutte le Chiavi</button>
+            <button class="btn-secondary-cyber" onclick="loadGeminiPool(true)" data-i18n="btn_refresh_gpool">🔄 Aggiorna Live</button>
+            <button class="btn-secondary-cyber" onclick="testAllGeminiKeys()" data-i18n="btn_test_all_keys">🧪 Testa Tutte le Chiavi</button>
           </div>
         </div>
 
@@ -1070,14 +1070,14 @@
         <div class="parachute-stats-grid" style="grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));">
           <!-- Card 1: Chiave Attiva -->
           <div class="pstat-card">
-            <div class="pstat-label">Chiave Attiva in Uso</div>
+            <div class="pstat-label" data-i18n="kpi_active_key">Chiave Attiva in Uso</div>
             <div class="pstat-val" id="gpool-kpi-active" style="font-size:15px;color:var(--cyan);word-break:break-all;">Caricamento...</div>
             <div style="font-size:11px;color:var(--muted2);margin-top:4px;" id="gpool-kpi-active-sub">Prefisso mascherato</div>
           </div>
 
           <!-- Card 2: Quota Token Oggi -->
           <div class="pstat-card">
-            <div class="pstat-label">Token Consumati Oggi</div>
+            <div class="pstat-label" data-i18n="kpi_tokens_today">Token Consumati Oggi</div>
             <div class="pstat-val" id="gpool-kpi-tokens" style="color:var(--green);">0 / 1.000.000</div>
             <div style="width:100%;height:6px;background:var(--border-subtle);border-radius:3px;margin-top:6px;overflow:hidden;">
               <div id="gpool-token-bar" style="width:0%;height:100%;background:var(--green);transition:width 0.4s ease;"></div>
@@ -1087,20 +1087,20 @@
 
           <!-- Card 3: Auto-Failover Switch -->
           <div class="pstat-card">
-            <div class="pstat-label">Auto-Failover su Errore 429</div>
+            <div class="pstat-label" data-i18n="kpi_failover">Auto-Failover su Errore 429</div>
             <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;">
               <span id="gpool-failover-badge" class="tag tag-green">ATTIVO</span>
               <label style="cursor:pointer;display:inline-flex;align-items:center;">
                 <input type="checkbox" id="gpool-failover-toggle" onchange="toggleGeminiFailover(this.checked)" checked style="cursor:pointer;accent-color:var(--cyan);">
-                <span style="font-size:11.5px;font-weight:700;color:var(--text);margin-left:6px;">Abilita</span>
+                <span style="font-size:11.5px;font-weight:700;color:var(--text);margin-left:6px;" data-i18n="lbl_enable">Abilita</span>
               </label>
             </div>
-            <div style="font-size:11px;color:var(--muted2);margin-top:4px;">Rotazione istantanea senza blocchi</div>
+            <div style="font-size:11px;color:var(--muted2);margin-top:4px;" data-i18n="lbl_rotation_sub">Rotazione istantanea senza blocchi</div>
           </div>
 
           <!-- Card 4: Chiavi nel Pool -->
           <div class="pstat-card">
-            <div class="pstat-label">Chiavi nel Pool</div>
+            <div class="pstat-label" data-i18n="kpi_keys_pool">Chiavi nel Pool</div>
             <div class="pstat-val" id="gpool-kpi-count" style="color:var(--purple);">0</div>
             <div style="font-size:11px;color:var(--muted2);margin-top:4px;" id="gpool-kpi-breakdown">0 pronte · 0 in cooldown</div>
           </div>
@@ -1111,30 +1111,30 @@
           <!-- COLONNA SINISTRA: AGGIUNGI CHIAVE -->
           <div class="config-box">
             <div class="config-box-title">
-              <span>➕ Aggiungi Account Gemini</span>
+              <span data-i18n="add_gemini_title">➕ Aggiungi Account Gemini</span>
               <span class="tag tag-green">GRATIS</span>
             </div>
-            <div class="config-box-sub">
+            <div class="config-box-sub" data-i18n="add_gemini_sub">
               Crea una chiave gratuita da qualsiasi account Google su <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--cyan);text-decoration:underline;">Google AI Studio ↗</a> e incollala qui:
             </div>
 
             <div style="display:flex;flex-direction:column;gap:12px;margin-top:14px;">
               <div>
-                <label style="font-size:11.5px;font-weight:700;color:var(--muted2);display:block;margin-bottom:4px;">Nome Account / Etichetta:</label>
-                <input class="key-input" type="text" id="gpool-add-name" placeholder="es. Account Google Personale 2, Lavoro, ecc." style="width:100%;">
+                <label style="font-size:11.5px;font-weight:700;color:var(--muted2);display:block;margin-bottom:4px;" data-i18n="lbl_gpool_name">Nome Account / Etichetta:</label>
+                <input class="key-input" type="text" id="gpool-add-name" placeholder="es. Account Google Personale 2, Lavoro, ecc." data-i18n-ph="ph_gpool_name" style="width:100%;">
               </div>
               <div>
-                <label style="font-size:11.5px;font-weight:700;color:var(--muted2);display:block;margin-bottom:4px;">API Key (AIza...):</label>
-                <input class="key-input" type="password" id="gpool-add-key" placeholder="Incolla chiave AIzaSy..." style="width:100%;">
+                <label style="font-size:11.5px;font-weight:700;color:var(--muted2);display:block;margin-bottom:4px;" data-i18n="lbl_gpool_key">API Key (AIza...):</label>
+                <input class="key-input" type="password" id="gpool-add-key" placeholder="Incolla chiave AIzaSy..." data-i18n-ph="ph_gpool_key" style="width:100%;">
               </div>
               <div style="display:flex;align-items:center;gap:8px;">
                 <input type="checkbox" id="gpool-add-validate" checked style="accent-color:var(--cyan);cursor:pointer;">
-                <label for="gpool-add-validate" style="font-size:12px;color:var(--text);cursor:pointer;">Verifica chiave con Google prima di aggiungere</label>
+                <label for="gpool-add-validate" style="font-size:12px;color:var(--text);cursor:pointer;" data-i18n="lbl_gpool_val">Verifica chiave con Google prima di aggiungere</label>
               </div>
-              <button class="btn-primary-cyber" style="width:100%;padding:10px 14px;margin-top:4px;" onclick="addGeminiKeyToPool()">➕ Aggiungi Chiave al Pool</button>
+              <button class="btn-primary-cyber" style="width:100%;padding:10px 14px;margin-top:4px;" onclick="addGeminiKeyToPool()" data-i18n="btn_add_gemini_pool">➕ Aggiungi Chiave al Pool</button>
             </div>
 
-            <div style="margin-top:18px;padding:12px;background:var(--surface2);border-radius:8px;font-size:11.5px;color:var(--muted2);line-height:1.5;">
+            <div style="margin-top:18px;padding:12px;background:var(--surface2);border-radius:8px;font-size:11.5px;color:var(--muted2);line-height:1.5;" data-i18n="gemini_secret_box">
               💡 <strong style="color:var(--text);">Segreto per Token Infiniti:</strong> Google AI Studio regala 1 milione di token al giorno per ciascun account Google. Inserendo 3 account diversi in questo pool, hai <strong>3 milioni di token al giorno</strong> a costo zero!
             </div>
           </div>
@@ -1142,10 +1142,10 @@
           <!-- COLONNA DESTRA: ELENCO CHIAVI CON STATO E AZIONI -->
           <div class="config-box">
             <div class="config-box-title">
-              <span>📋 Chiavi Configurate nel Pool</span>
+              <span data-i18n="configured_keys_title">📋 Chiavi Configurate nel Pool</span>
               <span class="tag tag-cyan" id="gpool-keys-count-badge">0 Chiavi</span>
             </div>
-            <div class="config-box-sub">
+            <div class="config-box-sub" data-i18n="configured_keys_sub">
               Tutte le chiavi salvate localmente nel tuo PC. Il failover passa automaticamente alla prossima chiave se una finisce la quota.
             </div>
 
@@ -1159,8 +1159,8 @@
         <div class="engine-section-box" style="margin-top:20px;">
           <div class="engine-section-header">
             <div>
-              <div class="engine-section-title">📡 Registro Eventi &amp; Failover Live</div>
-              <div class="engine-section-sub">Cronologia in tempo reale delle rotazioni automatiche e test di validità effettuati.</div>
+              <div class="engine-section-title" data-i18n="events_log_title">📡 Registro Eventi &amp; Failover Live</div>
+              <div class="engine-section-sub" data-i18n="events_log_sub">Cronologia in tempo reale delle rotazioni automatiche e test di validità effettuati.</div>
             </div>
             <span class="tag tag-purple">LIVE LOGGER</span>
           </div>
@@ -1174,73 +1174,73 @@
       <div class="panel" id="panel-keys">
         <div class="page-header-banner">
           <div>
-            <div class="panel-title">🔑 Chiavi API &amp; Login OAuth</div>
-            <div class="panel-sub">Inserisci le chiavi API per i motori che vuoi usare. Ti basta UNA sola chiave per iniziare (Gemini o Groq).</div>
+            <div class="panel-title" data-i18n="keys_panel_title">🔑 Chiavi API &amp; Login OAuth</div>
+            <div class="panel-sub" data-i18n="keys_panel_sub">Inserisci le chiavi API per i motori che vuoi usare. Ti basta UNA sola chiave per iniziare (Gemini o Groq).</div>
           </div>
         </div>
 
         <div class="key-card" style="border:1px solid var(--purple); background:var(--purple-dim);">
           <div class="key-header">
-            <div class="key-title">Anthropic Claude.ai (Abbonamento Web Pro / Max) <span class="tag tag-purple" id="claude-oauth-status-tag">OAuth Web</span></div>
-            <a class="key-link" href="https://claude.ai" target="_blank">Apri Claude.ai ↗</a>
+            <div class="key-title"><span data-i18n="key_claude_title">Anthropic Claude.ai (Abbonamento Web Pro / Max)</span> <span class="tag tag-purple" id="claude-oauth-status-tag">OAuth Web</span></div>
+            <a class="key-link" href="https://claude.ai" target="_blank" data-i18n="link_open_claude">Apri Claude.ai ↗</a>
           </div>
-          <div class="key-desc">Collega il tuo account web Claude Pro/Max tramite OAuth ufficiale senza pagare API a consumo. Se usi un account gratuito, utilizza <strong>Google Gemini Flash</strong>, <strong>Groq Llama 3.3</strong> o i <strong>modelli locali Ollama</strong> a costo zero!</div>
+          <div class="key-desc" data-i18n="key_claude_desc">Collega il tuo account web Claude Pro/Max tramite OAuth ufficiale senza pagare API a consumo. Se usi un account gratuito, utilizza <strong>Google Gemini Flash</strong>, <strong>Groq Llama 3.3</strong> o i <strong>modelli locali Ollama</strong> a costo zero!</div>
           <div class="key-row">
-            <button class="btn-save" style="background:var(--surface); border-color:var(--purple); color:var(--purple);" onclick="startClaudeOAuth()">🌐 Connetti Account Claude (Login Web)</button>
+            <button class="btn-save" style="background:var(--surface); border-color:var(--purple); color:var(--purple);" onclick="startClaudeOAuth()" data-i18n="btn_claude_oauth">🌐 Connetti Account Claude (Login Web)</button>
           </div>
         </div>
 
         <div class="key-card">
           <div class="key-header">
-            <div class="key-title">Google Gemini <span class="tag tag-green" id="gemini-status-tag">Verifica...</span></div>
-            <a class="key-link" href="https://aistudio.google.com/app/apikey" target="_blank">Ottieni / Rinnova chiave gratis ↗</a>
+            <div class="key-title"><span data-i18n="key_gemini_title">Google Gemini</span> <span class="tag tag-green" id="gemini-status-tag" data-i18n="tag_status_verifying">Verifica...</span></div>
+            <a class="key-link" href="https://aistudio.google.com/app/apikey" target="_blank" data-i18n="link_get_gemini">Ottieni / Rinnova chiave gratis ↗</a>
           </div>
-          <div class="key-desc">Con 1 milione di token gratuiti al giorno su Google AI Studio, puoi programmare senza limiti. Inserisci o aggiorna qui sotto la tua chiave `AIza...`.</div>
+          <div class="key-desc" data-i18n="key_gemini_desc">Con 1 milione di token gratuiti al giorno su Google AI Studio, puoi programmare senza limiti. Inserisci o aggiorna qui sotto la tua chiave `AIza...`.</div>
           <div class="key-row">
-            <input class="key-input" type="password" id="key-gemini" placeholder="Chiave Google Gemini (AIza...)">
-            <button class="btn-save" onclick="saveKey('gemini')">Salva / Aggiorna</button>
+            <input class="key-input" type="password" id="key-gemini" placeholder="Chiave Google Gemini (AIza...)" data-i18n-ph="ph_key_gemini">
+            <button class="btn-save" onclick="saveKey('gemini')" data-i18n="btn_save_gemini">Salva / Aggiorna</button>
           </div>
           <div style="margin-top:10px; display:flex; align-items:center; justify-content:space-between; background:var(--surface2); padding:8px 12px; border-radius:6px; border:1px solid var(--border-subtle); flex-wrap:wrap; gap:8px;">
-            <div style="font-size:12px; color:var(--muted2);">
+            <div style="font-size:12px; color:var(--muted2);" data-i18n="key_gemini_hint">
               ⚡ <strong>Novità Esclusiva:</strong> Configura più account Google gratuiti con <strong>Failover Automatico Zero Rate-Limit</strong> e monitoraggio token live!
             </div>
-            <button class="btn-secondary-cyber" style="padding:4px 10px; font-size:11px;" onclick="showPanel('gemini-pool')">⚡ Apri Gemini Multi-Key Hub →</button>
+            <button class="btn-secondary-cyber" style="padding:4px 10px; font-size:11px;" onclick="showPanel('gemini-pool')" data-i18n="btn_open_gemini_hub">⚡ Apri Gemini Multi-Key Hub →</button>
           </div>
         </div>
 
         <div class="key-card">
           <div class="key-header">
-            <div class="key-title">Groq Cloud (Llama 3.3 70B) <span class="tag tag-cyan" id="groq-status-tag">Chiave non inserita</span></div>
-            <a class="key-link" href="https://console.groq.com/keys" target="_blank">Gratis in 10 sec ↗</a>
+            <div class="key-title"><span data-i18n="key_groq_title">Groq Cloud (Llama 3.3 70B)</span> <span class="tag tag-cyan" id="groq-status-tag" data-i18n="tag_key_not_provided">Chiave non inserita</span></div>
+            <a class="key-link" href="https://console.groq.com/keys" target="_blank" data-i18n="link_get_groq">Gratis in 10 sec ↗</a>
           </div>
-          <div class="key-desc">Groq è il motore più veloce disponibile (300 token/sec). Con questa chiave rafforzi il Paracadute di Riserva aggiungendo un motore ultra-rapido.</div>
+          <div class="key-desc" data-i18n="key_groq_desc">Groq è il motore più veloce disponibile (300 token/sec). Con questa chiave rafforzi il Paracadute di Riserva aggiungendo un motore ultra-rapido.</div>
           <div class="key-row">
-            <input class="key-input" type="password" id="key-groq" placeholder="Chiave Groq (gsk_...)">
-            <button class="btn-save" onclick="saveKey('groq')">Salva</button>
+            <input class="key-input" type="password" id="key-groq" placeholder="Chiave Groq (gsk_...)" data-i18n-ph="ph_key_groq">
+            <button class="btn-save" onclick="saveKey('groq')" data-i18n="btn_save">Salva</button>
           </div>
         </div>
 
         <div class="key-card">
           <div class="key-header">
-            <div class="key-title">DeepSeek (R1 + V3) <span class="tag tag-purple" id="deepseek-status-tag">Chiave non inserita</span></div>
-            <a class="key-link" href="https://platform.deepseek.com/api_keys" target="_blank">Ottieni chiave ↗</a>
+            <div class="key-title"><span data-i18n="key_deepseek_title">DeepSeek (R1 + V3)</span> <span class="tag tag-purple" id="deepseek-status-tag" data-i18n="tag_key_not_provided">Chiave non inserita</span></div>
+            <a class="key-link" href="https://platform.deepseek.com/api_keys" target="_blank" data-i18n="link_get_deepseek">Ottieni chiave ↗</a>
           </div>
-          <div class="key-desc">Sblocca i modelli DeepSeek R1 (ragionamento logico avanzato) e DeepSeek V3 (specializzato in programmazione). Ottimo nella catena Paracadute.</div>
+          <div class="key-desc" data-i18n="key_deepseek_desc">Sblocca i modelli DeepSeek R1 (ragionamento logico avanzato) e DeepSeek V3 (specializzato in programmazione). Ottimo nella catena Paracadute.</div>
           <div class="key-row">
-            <input class="key-input" type="password" id="key-deepseek" placeholder="Chiave DeepSeek (sk-...)">
-            <button class="btn-save" onclick="saveKey('deepseek')">Salva</button>
+            <input class="key-input" type="password" id="key-deepseek" placeholder="Chiave DeepSeek (sk-...)" data-i18n-ph="ph_key_deepseek">
+            <button class="btn-save" onclick="saveKey('deepseek')" data-i18n="btn_save">Salva</button>
           </div>
         </div>
 
         <div class="key-card">
           <div class="key-header">
-            <div class="key-title">OpenRouter (400+ modelli) <span class="tag tag-amber" id="openrouter-status-tag">Opzionale</span></div>
-            <a class="key-link" href="https://openrouter.ai/keys" target="_blank">Ottieni chiave ↗</a>
+            <div class="key-title"><span data-i18n="key_openrouter_title">OpenRouter (400+ modelli)</span> <span class="tag tag-amber" id="openrouter-status-tag" data-i18n="tag_optional">Opzionale</span></div>
+            <a class="key-link" href="https://openrouter.ai/keys" target="_blank" data-i18n="link_get_openrouter">Ottieni chiave ↗</a>
           </div>
-          <div class="key-desc">Con OpenRouter sblocchi centinaia di modelli aggiuntivi tra cui Qwen 2.5 Coder, Mistral e Llama `:free` accessibili con un solo account.</div>
+          <div class="key-desc" data-i18n="key_openrouter_desc">Con OpenRouter sblocchi centinaia di modelli aggiuntivi tra cui Qwen 2.5 Coder, Mistral e Llama `:free` accessibili con un solo account.</div>
           <div class="key-row">
-            <input class="key-input" type="password" id="key-openrouter" placeholder="Chiave OpenRouter (sk-or-...)">
-            <button class="btn-save" onclick="saveKey('openrouter')">Salva</button>
+            <input class="key-input" type="password" id="key-openrouter" placeholder="Chiave OpenRouter (sk-or-...)" data-i18n-ph="ph_key_openrouter">
+            <button class="btn-save" onclick="saveKey('openrouter')" data-i18n="btn_save">Salva</button>
           </div>
         </div>
       </div>
@@ -1249,43 +1249,43 @@
       <div class="panel" id="panel-guide">
         <div class="page-header-banner">
           <div>
-            <div class="panel-title">📖 Guida Ufficiale &amp; FAQ — OMNICLAUDE</div>
-            <div class="panel-sub">Documentazione rapida ideata e curata da <strong>ATON-FUX</strong>.</div>
+            <div class="panel-title" data-i18n="guide_panel_title">📖 Guida Ufficiale &amp; FAQ — OMNICLAUDE</div>
+            <div class="panel-sub" data-i18n="guide_panel_sub">Documentazione rapida ideata e curata da <strong>ATON-FUX</strong>.</div>
           </div>
         </div>
 
         <div class="faq-item">
           <details open>
-            <summary>Cos'è OMNICLAUDE creato da ATON-FUX?</summary>
-            <div class="faq-body"><strong>OMNICLAUDE</strong> è il centro di comando web e orchestratore locale ideato da <strong>ATON-FUX</strong> per utilizzare <strong>Claude Code</strong> e <strong>OpenCode</strong> collegati a motori AI Cloud gratuiti (Gemini, Groq, DeepSeek, OpenRouter) e modelli Locali (Ollama), con sistema <strong>Paracadute Modulare</strong> anti-interruzione e gestione automatica della memoria RAM/VRAM.</div>
+            <summary data-i18n="faq_q1">Cos'è OMNICLAUDE creato da ATON-FUX?</summary>
+            <div class="faq-body" data-i18n="faq_a1"><strong>OMNICLAUDE</strong> è il centro di comando web e orchestratore locale ideato da <strong>ATON-FUX</strong> per utilizzare <strong>Claude Code</strong> e <strong>OpenCode</strong> collegati a motori AI Cloud gratuiti (Gemini, Groq, DeepSeek, OpenRouter) e modelli Locali (Ollama), con sistema <strong>Paracadute Modulare</strong> anti-interruzione e gestione automatica della memoria RAM/VRAM.</div>
           </details>
         </div>
 
         <div class="faq-item">
           <details>
-            <summary>Come personalizzo il Paracadute di Riserva?</summary>
-            <div class="faq-body">Apri la voce <strong>🛡️ Paracadute Riserva</strong> nel pannello sinistro. Puoi riordinare i motori con le frecce ⬆️ ⬇️, rimuovere quelli che non usi, aggiungere modelli Cloud o Locali (Ollama) dal catalogo dell'app e scegliere la strategia (es. <code>Priority</code> a cascata o <code>Round-Robin</code>). Clicca su <strong>Salva, Sincronizza &amp; Attiva Paracadute</strong> per applicare subito la catena al gateway OmniRoute.</div>
+            <summary data-i18n="faq_q2">Come personalizzo il Paracadute di Riserva?</summary>
+            <div class="faq-body" data-i18n="faq_a2">Apri la voce <strong>🛡️ Paracadute Riserva</strong> nel pannello sinistro. Puoi riordinare i motori con le frecce ⬆️ ⬇️, rimuovere quelli che non usi, aggiungere modelli Cloud o Locali (Ollama) dal catalogo dell'app e scegliere la strategia (es. <code>Priority</code> a cascata o <code>Round-Robin</code>). Clicca su <strong>Salva, Sincronizza &amp; Attiva Paracadute</strong> per applicare subito la catena al gateway OmniRoute.</div>
           </details>
         </div>
 
         <div class="faq-item">
           <details>
-            <summary>Cosa succede se premo "Apri Claude Code" o "Apri OpenCode" e non vedo la finestra?</summary>
-            <div class="faq-body">La finestra del terminale potrebbe aprirsi dietro al browser: premi <kbd>Alt+Tab</kbd> oppure controlla l'icona del terminale nella barra delle applicazioni di Windows.</div>
+            <summary data-i18n="faq_q3">Cosa succede se premo "Apri Claude Code" o "Apri OpenCode" e non vedo la finestra?</summary>
+            <div class="faq-body" data-i18n="faq_a3">La finestra del terminale potrebbe aprirsi dietro al browser: premi <kbd>Alt+Tab</kbd> oppure controlla l'icona del terminale nella barra delle applicazioni di Windows.</div>
           </details>
         </div>
 
         <div class="faq-item">
           <details>
-            <summary>Come passo dal tema DARK CYBER al tema LIGHT PRO?</summary>
-            <div class="faq-body">In alto a destra nella barra principale trovi il selettore <strong>🖤 DARK CYBER / 🤍 LIGHT PRO</strong>. La tua scelta viene memorizzata automaticamente dal browser.</div>
+            <summary data-i18n="faq_q4">Come passo dal tema DARK CYBER al tema LIGHT PRO?</summary>
+            <div class="faq-body" data-i18n="faq_a4">In alto a destra nella barra principale trovi il selettore <strong>🖤 DARK CYBER / 🤍 LIGHT PRO</strong>. La tua scelta viene memorizzata automaticamente dal browser.</div>
           </details>
         </div>
 
         <div class="faq-item">
           <details>
-            <summary>Come chiudo tutti i servizi liberando il 100% di RAM e VRAM?</summary>
-            <div class="faq-body">Clicca il pulsante rosso <strong>🛑 Chiudi Tutto</strong> in alto a destra oppure esegui <code>FERMA.bat</code>. Il sistema chiude Claude Code, OpenCode, scarica i modelli Ollama dalla scheda video (VRAM) e arresta OmniRoute e il server web.</div>
+            <summary data-i18n="faq_q5">Come chiudo tutti i servizi liberando il 100% di RAM e VRAM?</summary>
+            <div class="faq-body" data-i18n="faq_a5">Clicca il pulsante rosso <strong>🛑 Chiudi Tutto</strong> in alto a destra oppure esegui <code>FERMA.bat</code>. Il sistema chiude Claude Code, OpenCode, scarica i modelli Ollama dalla scheda video (VRAM) e arresta OmniRoute e il server web.</div>
           </details>
         </div>
       </div>
@@ -1299,9 +1299,9 @@
 <!-- Shutdown Overlay -->
 <div id="shutdown-overlay">
   <img src="/logo-hero-160.png" width="76" height="76" class="hero-logo-emblem" style="margin-bottom:16px;" alt="OMNICLAUDE Logo">
-  <h2>Tutti i Servizi OMNICLAUDE Arrestati</h2>
-  <p>OmniRoute, i terminali AI e il Centro di Controllo sono stati fermati con successo. RAM e VRAM sono state liberate.</p>
-  <p class="hint">Per riavviare: doppio click su START.bat nella cartella.</p>
+  <h2 data-i18n="shutdown_h2">Tutti i Servizi OMNICLAUDE Arrestati</h2>
+  <p data-i18n="shutdown_p1">OmniRoute, i terminali AI e il Centro di Controllo sono stati fermati con successo. RAM e VRAM sono state liberate.</p>
+  <p class="hint" data-i18n="shutdown_p2">Per riavviare: doppio click su START.bat nella cartella.</p>
 </div>
 
 <script>
@@ -1356,6 +1356,86 @@
     }
   ];
 
+
+  const CLOUD_MODELS_I18N = {
+    it: {
+      "combo/paracadute-gratis": {
+        name: "🛡️ Paracadute Multi-Motore",
+        prov: "OmniRoute Modular Auto-Fallback",
+        desc: "Usa la tua catena modulare di motori configurata nella sezione Paracadute. Zero interruzioni se finiscono i crediti.",
+        tags: [{ label: "CONSIGLIATO", cls: "tag-green" }, { label: "MODULARE", cls: "tag-cyan" }]
+      },
+      "gemini/gemini-3.5-flash-lite": {
+        name: "Google Gemini Flash",
+        prov: "Google AI Studio",
+        desc: "Il motore cloud veloce e affidabile con 1 milione di token gratuiti ogni giorno.",
+        tags: [{ label: "FREE TIER", cls: "tag-green" }, { label: "1M TOKENS/GG", cls: "tag-cyan" }]
+      },
+      "groq/llama-3.3-70b-versatile": {
+        name: "Meta Llama 3.3 70B",
+        prov: "Groq Cloud LPU",
+        desc: "Open Source di Meta su LPU ultra-veloci di Groq (300 token/sec). Ideale per refactoring e debug istantaneo.",
+        tags: [{ label: "OPEN SOURCE", cls: "tag-cyan" }, { label: "300 TOK/S", cls: "tag-amber" }]
+      },
+      "deepseek/deepseek-chat": {
+        name: "DeepSeek V3",
+        prov: "DeepSeek AI",
+        desc: "Modello Open Weights specializzato nella scrittura pulita di codice, refactoring e creazione file.",
+        tags: [{ label: "OPEN WEIGHTS", cls: "tag-purple" }, { label: "CODING", cls: "tag-green" }]
+      },
+      "deepseek/deepseek-reasoner": {
+        name: "DeepSeek R1",
+        prov: "DeepSeek AI",
+        desc: "Specializzato in ragionamento logico e architetturale avanzato per problemi complessi.",
+        tags: [{ label: "OPEN WEIGHTS", cls: "tag-purple" }, { label: "REASONING", cls: "tag-cyan" }]
+      },
+      "anthropic/claude-3-5-sonnet-20241022": {
+        name: "Claude 3.5 Sonnet (Web OAuth)",
+        prov: "Anthropic Claude.ai",
+        desc: "Usa il tuo abbonamento web Claude Pro/Max collegato via OAuth ufficiale senza costi API a consumo.",
+        tags: [{ label: "ABBONAMENTO WEB", cls: "tag-purple" }, { label: "TOP QUALITY", cls: "tag-green" }]
+      }
+    },
+    en: {
+      "combo/paracadute-gratis": {
+        name: "🛡️ Multi-Engine Parachute",
+        prov: "OmniRoute Modular Auto-Fallback",
+        desc: "Uses your modular engine chain configured in the Parachute section. Zero interruptions if credits run out.",
+        tags: [{ label: "RECOMMENDED", cls: "tag-green" }, { label: "MODULAR", cls: "tag-cyan" }]
+      },
+      "gemini/gemini-3.5-flash-lite": {
+        name: "Google Gemini Flash",
+        prov: "Google AI Studio",
+        desc: "Fast and reliable cloud engine with 1 million free tokens every day.",
+        tags: [{ label: "FREE TIER", cls: "tag-green" }, { label: "1M TOKENS/DAY", cls: "tag-cyan" }]
+      },
+      "groq/llama-3.3-70b-versatile": {
+        name: "Meta Llama 3.3 70B",
+        prov: "Groq Cloud LPU",
+        desc: "Meta's flagship open source model on ultra-fast Groq LPUs (300 tok/s). Ideal for instant refactoring & debug.",
+        tags: [{ label: "OPEN SOURCE", cls: "tag-cyan" }, { label: "300 TOK/S", cls: "tag-amber" }]
+      },
+      "deepseek/deepseek-chat": {
+        name: "DeepSeek V3",
+        prov: "DeepSeek AI",
+        desc: "Specialized open weights coding model for clean syntax, architectural design, and instant file generation.",
+        tags: [{ label: "OPEN WEIGHTS", cls: "tag-purple" }, { label: "CODING", cls: "tag-green" }]
+      },
+      "deepseek/deepseek-reasoner": {
+        name: "DeepSeek R1",
+        prov: "DeepSeek AI",
+        desc: "Specialized in deep reasoning, chain-of-thought analysis, and complex architectural debugging.",
+        tags: [{ label: "OPEN WEIGHTS", cls: "tag-purple" }, { label: "REASONING", cls: "tag-cyan" }]
+      },
+      "anthropic/claude-3-5-sonnet-20241022": {
+        name: "Claude 3.5 Sonnet (Web OAuth)",
+        prov: "Anthropic Claude.ai",
+        desc: "Use your existing Claude Pro/Max web subscription via official OAuth with zero consumption API costs.",
+        tags: [{ label: "WEB SUBSCRIPTION", cls: "tag-purple" }, { label: "TOP QUALITY", cls: "tag-green" }]
+      }
+    }
+  };
+
   let currentStatus = {};
   let activePanel = "avvia";
   let editableParachuteModels = [
@@ -1406,15 +1486,69 @@
   }
 
   // ─── Toast ───
+  const TOAST_EN = {
+    "La catena deve contenere almeno 1 motore!": "The chain must contain at least 1 engine!",
+    "Questo motore è già presente nella catena!": "This engine is already in the chain!",
+    "Inserisci un ID modello valido!": "Enter a valid model ID!",
+    "Catena ripristinata ai valori predefiniti (clicca Salva per applicare)": "Chain reset to defaults (click Save to apply)",
+    "Catena Paracadute Modulare salvata e sincronizzata!": "Modular Fallback Parachute saved and synced!",
+    "Errore salvataggio Paracadute": "Error saving Parachute configuration",
+    "Errore di connessione al server": "Server connection error",
+    "Inserisci il nome del modello o l'URL HuggingFace/Ollama da installare!": "Enter model name or HuggingFace/Ollama URL to install!",
+    "Installazione Ollama avviata nella finestra terminale!": "Ollama installation launched in terminal window!",
+    "Errore avvio installazione Ollama": "Error launching Ollama installation",
+    "Errore avvio download modello": "Error launching model download",
+    "Errore connessione al server locale": "Error connecting to local server",
+    "Errore rimozione modello": "Error removing model",
+    "Errore cambio motore": "Error switching engine",
+    "Paracadute ATTIVATO!": "Parachute ACTIVATED!",
+    "Paracadute disattivato": "Parachute deactivated",
+    "Errore toggle paracadute": "Error toggling parachute",
+    "Inserisci prima la chiave!": "Please enter the key first!",
+    "Errore salvataggio chiave": "Error saving key",
+    "Finestra di Login Claude Web aperta!": "Claude Web Login window opened!",
+    "Errore avvio login Claude": "Error launching Claude login",
+    "Finestra Claude Code aperta!": "Claude Code window opened!",
+    "Errore apertura terminale": "Error opening terminal",
+    "Server offline — fai doppio click su START.bat": "Server offline — double click START.bat",
+    "Finestra OpenCode aperta!": "OpenCode window opened!",
+    "Errore apertura OpenCode": "Error opening OpenCode",
+    "Server offline — fai doppio click su START_OPENCODE.bat": "Server offline — double click START_OPENCODE.bat",
+    "Verifica licenza in corso...": "Verifying license...",
+    "Pool Gemini e quote aggiornate!": "Gemini pool and quotas updated!",
+    "Incolla una chiave API Google valida (AIza...)!": "Paste a valid Google API key (AIza...)!",
+    "Verifica e salvataggio chiave in corso...": "Validating and saving key...",
+    "Chiave aggiunta con successo al pool!": "Key successfully added to pool!",
+    "Errore aggiunta chiave": "Error adding key",
+    "Errore attivazione chiave": "Error activating key",
+    "Errore di rete": "Network error",
+    "Chiave rimossa dal pool": "Key removed from pool",
+    "Errore rimozione chiave": "Error removing key",
+    "Test chiave su Google API in corso...": "Testing key with Google API...",
+    "Errore durante il test della chiave": "Error testing key",
+    "Test di tutte le chiavi del pool in parallelo...": "Testing all pool keys in parallel...",
+    "Tutte le chiavi testate e aggiornate!": "All keys tested and updated!",
+    "Errore test chiavi": "Error testing keys",
+    "Errore aggiornamento impostazione failover": "Error updating failover setting"
+  };
+
   function showToast(msg, isErr = false) {
     const t = document.getElementById("toast");
-    t.textContent = msg;
+    let displayMsg = msg;
+    if (currentAppLang === 'en') {
+      for (const [itKey, enVal] of Object.entries(TOAST_EN)) {
+        if (displayMsg.includes(itKey)) {
+          displayMsg = displayMsg.replace(itKey, enVal);
+          break;
+        }
+      }
+    }
+    t.textContent = displayMsg;
     t.className = isErr ? "error" : "";
     t.style.display = "block";
     setTimeout(() => { t.style.display = "none"; }, 3200);
   }
 
-  // ─── Status Load ───
   async function loadStatus(manualRefresh = false) {
     try {
       const res = await fetch("/api/status" + (manualRefresh ? "?refresh=1" : ""));
@@ -1450,22 +1584,28 @@
 
   function applyStatus() {
     const s = currentStatus;
+    const isEn = (currentAppLang === 'en');
 
     // Topbar badge
     document.getElementById("dot-status").className = s.running ? "dot dot-green" : "dot dot-red";
-    document.getElementById("txt-status").textContent = s.running ? "OmniRoute: Online" : "OmniRoute: Offline";
+    document.getElementById("txt-status").textContent = s.running ? "OmniRoute: Online" : (isEn ? "OmniRoute: Offline" : "OmniRoute: Offline");
 
     // Active model bar
     document.getElementById("active-model-val").textContent = s.model || "—";
 
     // Parachute badge mini
     const pMini = document.getElementById("parachute-badge-mini");
-    if (s.is_parachute) {
-      pMini.textContent = "✅ Paracadute ON (" + (s.parachute_models ? s.parachute_models.length : 3) + " motori)";
-      pMini.className = "mini-badge mini-green";
-    } else {
-      pMini.textContent = "⚪ Paracadute OFF (Clicca per configurare)";
-      pMini.className = "mini-badge mini-amber";
+    if (pMini) {
+      if (s.is_parachute) {
+        const enginesCount = s.parachute_models ? s.parachute_models.length : 3;
+        pMini.textContent = isEn ? `🛡️ Parachute ON (${enginesCount} engines)` : `🛡️ Paracadute ON (${enginesCount} motori)`;
+        pMini.className = "mini-badge mini-green";
+        pMini.title = isEn ? "Click to configure the Parachute" : "Clicca per configurare il Paracadute";
+      } else {
+        pMini.textContent = isEn ? "🛡️ Parachute OFF (Click to configure)" : "🛡️ Paracadute OFF (Clicca per configurare)";
+        pMini.className = "mini-badge mini-amber";
+        pMini.title = isEn ? "Click to configure the Parachute" : "Clicca per configurare il Paracadute";
+      }
     }
 
     // Parachute panel toggle button
@@ -1473,10 +1613,10 @@
     if (btnP) {
       if (s.is_parachute) {
         btnP.className = "btn-toggle on";
-        btnP.textContent = "✅ ATTIVO — Clicca per disattivare";
+        btnP.textContent = isEn ? "✓ ACTIVE — Click to deactivate" : "✅ ATTIVO — Clicca per disattivare";
       } else {
         btnP.className = "btn-toggle off";
-        btnP.textContent = "⚪ DISATTIVO — Clicca per attivare";
+        btnP.textContent = isEn ? "✕ INACTIVE — Click to activate" : "✕ DISATTIVO — Clicca per attivare";
       }
     }
 
@@ -1485,8 +1625,12 @@
     if (ghBadge && s.gemini_hub) {
       const gh = s.gemini_hub;
       const count = gh.keys_count || 0;
-      const tokStr = gh.today_tokens > 0 ? (gh.today_tokens.toLocaleString() + " TOK OGGI") : "1M GRATIS/GG";
-      ghBadge.textContent = `⚡ ${count} ACCOUNT · ${tokStr} · FAILOVER ${gh.auto_failover ? "ON" : "OFF"}`;
+      const tokStr = gh.today_tokens > 0 
+        ? (gh.today_tokens.toLocaleString() + (isEn ? " TOK TODAY" : " TOK OGGI"))
+        : (isEn ? "1M FREE/DAY" : "1M GRATIS/GG");
+      const foStr = gh.auto_failover ? "ON" : "OFF";
+      const accountsWord = isEn ? (count === 1 ? "ACCOUNT" : "ACCOUNTS") : "ACCOUNT";
+      ghBadge.textContent = `⚡ ${count} ${accountsWord} · ${tokStr} · FAILOVER ${foStr}`;
       ghBadge.className = "tag " + (gh.auto_failover ? "tag-green" : "tag-amber");
     }
 
@@ -1494,22 +1638,22 @@
     if (s.keys) {
       const gemTag = document.getElementById("gemini-status-tag");
       if (gemTag) {
-        gemTag.textContent = s.keys.gemini ? "✓ Chiave Attiva" : "Chiave non inserita";
+        gemTag.textContent = s.keys.gemini ? (isEn ? "✓ Key Active" : "✓ Chiave Attiva") : (isEn ? "Key not provided" : "Chiave non inserita");
         gemTag.className = s.keys.gemini ? "tag tag-green" : "tag tag-amber";
       }
       const groqTag = document.getElementById("groq-status-tag");
       if (groqTag) {
-        groqTag.textContent = s.keys.groq ? "✓ Chiave Attiva" : "Chiave non inserita";
+        groqTag.textContent = s.keys.groq ? (isEn ? "✓ Key Active" : "✓ Chiave Attiva") : (isEn ? "Key not provided" : "Chiave non inserita");
         groqTag.className = s.keys.groq ? "tag tag-green" : "tag tag-cyan";
       }
       const dsTag = document.getElementById("deepseek-status-tag");
       if (dsTag) {
-        dsTag.textContent = s.keys.deepseek ? "✓ Chiave Attiva" : "Chiave non inserita";
+        dsTag.textContent = s.keys.deepseek ? (isEn ? "✓ Key Active" : "✓ Chiave Attiva") : (isEn ? "Key not provided" : "Chiave non inserita");
         dsTag.className = s.keys.deepseek ? "tag tag-green" : "tag tag-purple";
       }
       const orTag = document.getElementById("openrouter-status-tag");
       if (orTag) {
-        orTag.textContent = s.keys.openrouter ? "✓ Chiave Attiva" : "Opzionale";
+        orTag.textContent = s.keys.openrouter ? (isEn ? "✓ Key Active" : "✓ Chiave Attiva") : (isEn ? "Optional" : "Opzionale");
         orTag.className = s.keys.openrouter ? "tag tag-green" : "tag tag-amber";
       }
     }
@@ -1517,7 +1661,7 @@
     if (s.oauth && s.oauth.claude) {
       const cTag = document.getElementById("claude-oauth-status-tag");
       if (cTag) {
-        cTag.textContent = "✓ Account Connesso";
+        cTag.textContent = isEn ? "✓ Account Connected" : "✓ Account Connesso";
         cTag.className = "tag tag-green";
       }
     }
@@ -1529,57 +1673,58 @@
     }
   }
 
-  // ─── Helper: Get metadata & readiness for any model ID ───
   function getModelMeta(modelId) {
+    const isEn = (currentAppLang === 'en');
     const found = CLOUD_MODELS.find(m => m.id === modelId);
+    const localized = found ? ((CLOUD_MODELS_I18N[currentAppLang] || CLOUD_MODELS_I18N.it)[found.id] || found) : null;
     const keys = currentStatus.keys || {};
     const oauth = currentStatus.oauth || {};
 
-    if (found) {
+    if (found && localized) {
       let ready = true;
-      let statusLabel = "✓ PRONTO";
+      let statusLabel = isEn ? "✓ READY" : "✓ PRONTO";
       let statusCls = "tag-green";
-      if (found.keyName === "gemini" && !keys.gemini) { ready = false; statusLabel = "🔑 Richiede Chiave Gemini"; statusCls = "tag-amber"; }
-      if (found.keyName === "groq" && !keys.groq) { ready = false; statusLabel = "🔑 Richiede Chiave Groq"; statusCls = "tag-amber"; }
-      if (found.keyName === "deepseek" && !keys.deepseek) { ready = false; statusLabel = "🔑 Richiede Chiave DeepSeek"; statusCls = "tag-amber"; }
-      if (found.keyName === "claude_oauth" && !oauth.claude) { ready = false; statusLabel = "🌐 Richiede Login OAuth"; statusCls = "tag-purple"; }
-      return { name: found.name, prov: found.prov, ready, statusLabel, statusCls };
+      if (found.keyName === "gemini" && !keys.gemini) { ready = false; statusLabel = isEn ? "⚠ Requires Gemini Key" : "⚠ Richiede Chiave Gemini"; statusCls = "tag-amber"; }
+      if (found.keyName === "groq" && !keys.groq) { ready = false; statusLabel = isEn ? "⚠ Requires Groq Key" : "⚠ Richiede Chiave Groq"; statusCls = "tag-amber"; }
+      if (found.keyName === "deepseek" && !keys.deepseek) { ready = false; statusLabel = isEn ? "⚠ Requires DeepSeek Key" : "⚠ Richiede Chiave DeepSeek"; statusCls = "tag-amber"; }
+      if (found.keyName === "claude_oauth" && !oauth.claude) { ready = false; statusLabel = isEn ? "⚠ Requires OAuth Login" : "⚠ Richiede Login OAuth"; statusCls = "tag-purple"; }
+      return { name: localized.name, prov: localized.prov, ready, statusLabel, statusCls };
     }
 
     if (modelId.startsWith("ollama/")) {
       const rawName = modelId.replace("ollama/", "");
       return {
         name: "🖥️ " + rawName,
-        prov: "Ollama Locale (100% Offline)",
+        prov: isEn ? "Local Ollama (100% Offline)" : "Ollama Locale (100% Offline)",
         ready: true,
-        statusLabel: "✓ LOCALE PRONTO",
+        statusLabel: isEn ? "✓ LOCAL READY" : "✓ LOCALE PRONTO",
         statusCls: "tag-green"
       };
     }
 
     return {
       name: modelId.split("/").pop() || modelId,
-      prov: "Motore Custom OmniRoute",
+      prov: isEn ? "Custom OmniRoute Engine" : "Motore Custom OmniRoute",
       ready: true,
       statusLabel: "CUSTOM",
       statusCls: "tag-cyan"
     };
   }
 
-  // ─── Render Modular Parachute Builder ───
   function renderModularParachute() {
     const chainContainer = document.getElementById("modular-chain-list");
     const poolContainer = document.getElementById("parachute-pool-list");
     const countBadge = document.getElementById("chain-count-badge");
     if (!chainContainer || !poolContainer) return;
+    const isEn = (currentAppLang === 'en');
 
-    countBadge.textContent = editableParachuteModels.length + (editableParachuteModels.length === 1 ? " Motore" : " Motori");
+    countBadge.textContent = editableParachuteModels.length + (isEn ? (editableParachuteModels.length === 1 ? " Engine" : " Engines") : (editableParachuteModels.length === 1 ? " Motore" : " Motori"));
 
     // 1. Render Active Chain Steps
     chainContainer.innerHTML = "";
     editableParachuteModels.forEach((modId, idx) => {
       const meta = getModelMeta(modId);
-      const roleLabel = idx === 0 ? "PRIMARIO" : `RISERVA #${idx}`;
+      const roleLabel = idx === 0 ? (isEn ? "PRIMARY" : "PRIMARIO") : (isEn ? `BACKUP #${idx}` : `RISERVA #${idx}`);
       const roleCls = idx === 0 ? "tag-green" : "tag-cyan";
 
       const step = document.createElement("div");
@@ -1596,9 +1741,9 @@
           <div class="chain-sub">${meta.prov}</div>
         </div>
         <div class="chain-controls">
-          <button class="btn-step" title="Sposta Su" onclick="moveParachuteModel(${idx}, -1)" ${idx === 0 ? "disabled" : ""}>⬆️</button>
-          <button class="btn-step" title="Sposta Giù" onclick="moveParachuteModel(${idx}, 1)" ${idx === editableParachuteModels.length - 1 ? "disabled" : ""}>⬇️</button>
-          <button class="btn-step del" title="Rimuovi dalla catena" onclick="removeParachuteModel(${idx})" ${editableParachuteModels.length <= 1 ? "disabled" : ""}>✕</button>
+          <button class="btn-step" title="${isEn ? 'Move Up' : 'Sposta Su'}" onclick="moveParachuteModel(${idx}, -1)" ${idx === 0 ? "disabled" : ""}>⬆️</button>
+          <button class="btn-step" title="${isEn ? 'Move Down' : 'Sposta Giù'}" onclick="moveParachuteModel(${idx}, 1)" ${idx === editableParachuteModels.length - 1 ? "disabled" : ""}>⬇️</button>
+          <button class="btn-step del" title="${isEn ? 'Remove from chain' : 'Rimuovi dalla catena'}" onclick="removeParachuteModel(${idx})" ${editableParachuteModels.length <= 1 ? "disabled" : ""}>✕</button>
         </div>
       `;
       chainContainer.appendChild(step);
@@ -1607,12 +1752,13 @@
     // 2. Build Modular Pool of all app models (Cloud + Local Ollama)
     const allAppModels = [];
     CLOUD_MODELS.filter(m => m.id !== "combo/paracadute-gratis").forEach(m => {
-      allAppModels.push({ id: m.id, name: m.name, prov: m.prov });
+      const localized = (CLOUD_MODELS_I18N[currentAppLang] || CLOUD_MODELS_I18N.it)[m.id] || m;
+      allAppModels.push({ id: m.id, name: localized.name, prov: localized.prov });
     });
     const ol = currentStatus.ollama || { installed: false, models: [] };
     if (ol.installed && Array.isArray(ol.models)) {
       ol.models.forEach(mod => {
-        allAppModels.push({ id: "ollama/" + mod, name: "🖥️ " + mod, prov: "Ollama Locale (PC)" });
+        allAppModels.push({ id: "ollama/" + mod, name: "🖥️ " + mod, prov: isEn ? "Local Ollama (PC)" : "Ollama Locale (PC)" });
       });
     }
 
@@ -1621,13 +1767,15 @@
       const inChain = editableParachuteModels.includes(item.id);
       const row = document.createElement("div");
       row.className = "pool-item";
+      const inChainText = isEn ? "✓ In Chain" : "✓ Nella Catena";
+      const addText = isEn ? "+ Add" : "+ Aggiungi";
       row.innerHTML = `
         <div class="pool-item-info">
           <div class="pool-item-name">${item.name}</div>
           <div class="pool-item-id">${item.id} · ${item.prov}</div>
         </div>
         <button class="btn-add-pool" ${inChain ? "disabled" : ""} onclick="addParachuteModel('${item.id}')">
-          ${inChain ? "✓ Nella Catena" : "+ Aggiungi"}
+          ${inChain ? inChainText : addText}
         </button>
       `;
       poolContainer.appendChild(row);
@@ -1720,41 +1868,50 @@
     const c = document.getElementById("cloud-models-grid");
     if (!c) return;
     c.innerHTML = "";
+    const isEn = (currentAppLang === 'en');
+    const dict = CLOUD_MODELS_I18N[currentAppLang] || CLOUD_MODELS_I18N.it;
+
     CLOUD_MODELS.forEach(m => {
       const active = currentStatus.model === m.id;
       const card = document.createElement("div");
       card.className = "model-card" + (active ? " active" : "");
       card.onclick = () => selectModel(m.id);
 
-      let descText = m.desc;
+      const localized = dict[m.id] || m;
+      let descText = localized.desc;
       if (m.id === "combo/paracadute-gratis" && Array.isArray(currentStatus.parachute_models)) {
-        descText = "Catena attiva: " + currentStatus.parachute_models.join(" → ");
+        descText = (isEn ? "Active chain: " : "Catena attiva: ") + currentStatus.parachute_models.join(" ➔ ");
       }
       if (m.keyName === "gemini" && currentStatus.gemini_hub) {
         const gh = currentStatus.gemini_hub;
+        const countLabel = isEn ? "accounts in pool" : "account nel pool";
+        const activeLabel = isEn ? "Active:" : "Attiva:";
         descText += `<div style="margin-top:6px;font-size:11.5px;color:var(--cyan);display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
-          <span>⚡ <strong>${gh.keys_count}</strong> account nel pool</span>
+          <span>⚡ <strong>${gh.keys_count}</strong> ${countLabel}</span>
           <span>·</span>
-          <span>Attiva: <strong>${escapeHtml(gh.active_name || 'N/D')}</strong></span>
+          <span>${activeLabel} <strong>${escapeHtml(gh.active_name || 'N/D')}</strong></span>
         </div>`;
       }
 
       const extraGeminiBtn = (m.keyName === "gemini")
-        ? `<button class="btn-step" style="width:auto;padding:2px 8px;font-size:10.5px;color:var(--cyan);margin-right:auto;" onclick="event.stopPropagation();showPanel('gemini-pool')">⚡ Pool Multi-Key</button>`
+        ? `<button class="btn-step" style="width:auto;padding:2px 8px;font-size:10.5px;color:var(--cyan);margin-right:auto;" onclick="event.stopPropagation();showPanel('gemini-pool')">${isEn ? '⚡ Multi-Key Pool' : '⚡ Pool Multi-Key'}</button>`
         : '';
+
+      const activeTag = isEn ? '✓ ACTIVE' : '✓ ATTIVO';
+      const actionLabel = active ? (isEn ? "● IN USE" : "● IN USO") : (isEn ? "ACTIVATE ➔" : "ATTIVA ➔");
 
       card.innerHTML = `
         <div>
           <div class="mc-top">
-            <div><div class="mc-name">${m.name}</div><div class="mc-prov">${m.prov}</div></div>
-            ${active ? '<span class="tag tag-green">✓ ATTIVO</span>' : ''}
+            <div><div class="mc-name">${localized.name}</div><div class="mc-prov">${localized.prov}</div></div>
+            ${active ? `<span class="tag tag-green">${activeTag}</span>` : ''}
           </div>
           <div class="mc-desc">${descText}</div>
         </div>
         <div class="mc-foot">
-          <div class="tags">${m.tags.map(t => `<span class="tag ${t.cls}">${t.label}</span>`).join("")}</div>
+          <div class="tags">${localized.tags.map(t => `<span class="tag ${t.cls}">${t.label}</span>`).join("")}</div>
           ${extraGeminiBtn}
-          <span style="color:var(--cyan);font-weight:700;font-size:11.5px;font-family:'JetBrains Mono',monospace;">${active ? "● IN USO" : "ATTIVA →"}</span>
+          <span style="color:var(--cyan);font-weight:700;font-size:11.5px;font-family:'JetBrains Mono',monospace;">${actionLabel}</span>
         </div>
       `;
       c.appendChild(card);
@@ -1768,22 +1925,27 @@
     c.innerHTML = "";
     const ol = currentStatus.ollama || { installed: false, models: [] };
     const badge = document.getElementById("ollama-home-badge");
+    const isEn = (currentAppLang === 'en');
 
     if (!ol.installed) {
-      if (badge) { badge.textContent = "OLLAMA NON INSTALLATO"; badge.className = "tag tag-red"; }
+      if (badge) {
+        badge.textContent = isEn ? "OLLAMA NOT INSTALLED" : "OLLAMA NON INSTALLATO";
+        badge.className = "tag tag-red";
+      }
       c.innerHTML = `
         <div class="model-card no-click" style="grid-column:1/-1; border-color:var(--amber);">
           <div class="mc-top">
             <div>
-              <div class="mc-name">💿 Ollama non rilevato su questo PC — Vuoi eseguire motori AI 100% Offline?</div>
-              <div class="mc-prov">Sistema Modulare di Rilevamento &amp; Installazione Motori Locali</div>
+              <div class="mc-name">${isEn ? "⚠️ Ollama not detected on this PC · Want to run 100% Offline AI models?" : "⚠️ Ollama non rilevato su questo PC · Vuoi eseguire motori AI 100% Offline?"}</div>
+              <div class="mc-prov">${isEn ? "Modular Detection & Local Engine Installation System" : "Sistema Modulare di Rilevamento & Installazione Motori Locali"}</div>
             </div>
-            <span class="tag tag-amber">OPZIONALE · 100% PRIVATO</span>
+            <span class="tag tag-amber">${isEn ? "OPTIONAL · 100% PRIVATE" : "OPZIONALE · 100% PRIVATO"}</span>
           </div>
           <div class="mc-desc" style="margin-top:6px; line-height:1.65;">
-            I <strong>Motori Cloud Gratuiti</strong> qui sopra sono già pronti all'uso! Se desideri usare modelli locali sulla tua GPU/CPU:<br>
-            <strong>1️⃣ Passo 1:</strong> Clicca <strong>"💿 Installa / Aggiorna Ollama"</strong> in alto a destra in questo box (o scaricalo da <a href="https://ollama.com/download" target="_blank" style="color:var(--cyan);font-weight:700;">ollama.com/download ↗</a>).<br>
-            <strong>2️⃣ Passo 2:</strong> Usa il <strong>Motore di Ricerca Multi-Sorgente</strong> qui sotto per cercare e installare qualsiasi modello da <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> o <strong>GitHub</strong>!
+            ${isEn 
+              ? "The <strong>Free Cloud Engines</strong> above are already ready to use! If you wish to run local models on your GPU/CPU:<br><strong>1️⃣ Step 1:</strong> Click <strong>&quot;💿 Install / Update Ollama&quot;</strong> at top right of this box (or download from <a href='https://ollama.com/download' target='_blank' style='color:var(--cyan);font-weight:700;'>ollama.com/download ↗</a>).<br><strong>2️⃣ Step 2:</strong> Use the <strong>Multi-Source Search Engine</strong> below to discover and install any model from <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> or <strong>GitHub</strong>!"
+              : "I <strong>Motori Cloud Gratuiti</strong> qui sopra sono già pronti all'uso! Se desideri usare modelli locali sulla tua GPU/CPU:<br><strong>1️⃣ Passo 1:</strong> Clicca <strong>&quot;💿 Installa / Aggiorna Ollama&quot;</strong> in alto a destra in questo box (o scaricalo da <a href='https://ollama.com/download' target='_blank' style='color:var(--cyan);font-weight:700;'>ollama.com/download ↗</a>).<br><strong>2️⃣ Passo 2:</strong> Usa il <strong>Motore di Ricerca Multi-Sorgente</strong> qui sotto per cercare e installare qualsiasi modello da <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> o <strong>GitHub</strong>!"
+            }
           </div>
         </div>
       `;
@@ -1791,25 +1953,34 @@
     }
 
     if (!ol.models || ol.models.length === 0) {
-      if (badge) { badge.textContent = "OLLAMA ATTIVO · RILEVAMENTO DINAMICO PC"; badge.className = "tag tag-cyan"; }
+      if (badge) {
+        badge.textContent = isEn ? "OLLAMA ACTIVE · DYNAMIC PC SCAN" : "OLLAMA ATTIVO · RILEVAMENTO DINAMICO PC";
+        badge.className = "tag tag-cyan";
+      }
       c.innerHTML = `
         <div class="model-card no-click" style="grid-column:1/-1; border-color:var(--cyan);">
           <div class="mc-top">
             <div>
-              <div class="mc-name">🖥️ Rilevamento Dinamico PC Attivo (${ol.version || "Ollama Online"}) — Nessun Modello Ancorato</div>
-              <div class="mc-prov">I modelli installati sul tuo PC appariranno automaticamente in questa griglia</div>
+              <div class="mc-name">${isEn ? `🟢 Dynamic PC Detection Active (${ol.version || "Ollama Online"}) · No Local Models Downloaded` : `🟢 Rilevamento Dinamico PC Attivo (${ol.version || "Ollama Online"}) · Nessun Modello Ancorato`}</div>
+              <div class="mc-prov">${isEn ? "Models installed on your PC will automatically appear in this grid" : "I modelli installati sul tuo PC appariranno automaticamente in questa griglia"}</div>
             </div>
-            <span class="tag tag-cyan">MODULARE &amp; PERSONALIZZABILE</span>
+            <span class="tag tag-cyan">${isEn ? "MODULAR & CUSTOMIZABLE" : "MODULARE & PERSONALIZZABILE"}</span>
           </div>
           <div class="mc-desc" style="margin-top:6px; line-height:1.65;">
-            Questa sezione non impone modelli predefiniti: mostra automaticamente i motori presenti sul tuo PC. Usa la barra <strong>🌐 Esplora, Cerca &amp; Installa Qualsiasi Modello Locale</strong> qui sotto per cercare liberamente su <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> o <strong>GitHub</strong> e installare i modelli che preferisci!
+            ${isEn 
+              ? "This section never enforces hardcoded models: it automatically mirrors models on your PC. Use the <strong>🔍 Explore, Search & Install Any Local Model</strong> search hub below to browse <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> or <strong>GitHub</strong> and install your favorite models!"
+              : "Questa sezione non impone modelli predefiniti: mostra automaticamente i motori presenti sul tuo PC. Usa la barra <strong>🔍 Esplora, Cerca &amp; Installa Qualsiasi Modello Locale</strong> qui sotto per cercare liberamente su <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> o <strong>GitHub</strong> e installare i modelli che preferisci!"
+            }
           </div>
         </div>
       `;
       return;
     }
 
-    if (badge) { badge.textContent = `✓ ${ol.models.length} MODELLI RILEVATI SUL TUO PC`; badge.className = "tag tag-green"; }
+    if (badge) {
+      badge.textContent = isEn ? `🟢 ${ol.models.length} MODELS DETECTED ON YOUR PC` : `🟢 ${ol.models.length} MODELLI RILEVATI SUL TUO PC`;
+      badge.className = "tag tag-green";
+    }
 
     ol.models.forEach(mod => {
       const mid = "ollama/" + mod;
@@ -1817,21 +1988,27 @@
       const card = document.createElement("div");
       card.className = "model-card" + (active ? " active" : "");
       card.onclick = () => selectModel(mid);
-      const safeModAttr = mod.replace(/'/g, "\\'");
+      const safeModAttr = mod.replace(/'/g, "\'");
+      const activeTag = isEn ? '✓ ACTIVE' : '✓ ATTIVO';
+      const offlineTag = isEn ? 'LOCAL OFFLINE' : 'LOCALE OFFLINE';
+      const delTitle = isEn ? "Uninstall this model from PC" : "Disinstalla questo modello dal PC";
+      const desc = isEn ? "Dynamically detected on your PC. Runs 100% locally on your hardware with zero costs and absolute privacy." : "Rilevato dinamicamente sul tuo PC. Gira al 100% sul tuo hardware locale con zero costi e privacy assoluta.";
+      const actionLabel = active ? (isEn ? "● IN USE" : "● IN USO") : (isEn ? "ACTIVATE ➔" : "ATTIVA ➔");
+
       card.innerHTML = `
         <div>
           <div class="mc-top">
-            <div><div class="mc-name">${mod}</div><div class="mc-prov">Ollama Locale · ${ol.version || ""}</div></div>
+            <div><div class="mc-name">${mod}</div><div class="mc-prov">${isEn ? "Local Ollama" : "Ollama Locale"} · ${ol.version || ""}</div></div>
             <div style="display:flex;align-items:center;gap:6px;">
-              ${active ? '<span class="tag tag-green">✓ ATTIVO</span>' : '<span class="tag tag-amber">LOCALE OFFLINE</span>'}
-              <button class="btn-step del" style="width:24px;height:24px;font-size:11px;" title="Disinstalla questo modello dal PC" onclick="event.stopPropagation(); deleteOllamaModel('${safeModAttr}')">🗑️</button>
+              ${active ? `<span class="tag tag-green">${activeTag}</span>` : `<span class="tag tag-amber">${offlineTag}</span>`}
+              <button class="btn-step del" style="width:24px;height:24px;font-size:11px;" title="${delTitle}" onclick="event.stopPropagation(); deleteOllamaModel('${safeModAttr}')">🗑️</button>
             </div>
           </div>
-          <div class="mc-desc">Rilevato dinamicamente sul tuo PC. Gira al 100% sul tuo hardware locale con zero costi e privacy assoluta.</div>
+          <div class="mc-desc">${desc}</div>
         </div>
         <div class="mc-foot">
           <div class="tags"><span class="tag tag-amber">PC HARDWARE</span><span class="tag tag-green">OFFLINE</span></div>
-          <span style="color:var(--cyan);font-weight:700;font-size:11.5px;font-family:'JetBrains Mono',monospace;">${active ? "● IN USO" : "ATTIVA →"}</span>
+          <span style="color:var(--cyan);font-weight:700;font-size:11.5px;font-family:'JetBrains Mono',monospace;">${actionLabel}</span>
         </div>
       `;
       c.appendChild(card);
@@ -1844,14 +2021,18 @@
     const srcSel = document.getElementById("model-search-source");
     const resBox = document.getElementById("model-search-results");
     if (!resBox) return;
+    const isEn = (currentAppLang === 'en');
 
     const query = qInput ? qInput.value.trim() : "";
     const source = srcSel ? srcSel.value : "all";
 
     resBox.style.display = "flex";
+    const sourceText = source === 'all' 
+      ? (isEn ? 'Ollama Library, HuggingFace GGUF and GitHub' : 'Ollama Library, HuggingFace GGUF e GitHub')
+      : source.toUpperCase();
     resBox.innerHTML = `
       <div style="padding:14px; border-radius:9px; background:var(--surface); border:1px solid var(--border); font-size:12.5px; color:var(--cyan); font-family:'JetBrains Mono',monospace;">
-        ⏳ Ricerca live in corso su ${source === 'all' ? 'Ollama Library, HuggingFace GGUF e GitHub' : source.toUpperCase()}...
+        ⚡ ${isEn ? 'Live search in progress on' : 'Ricerca live in corso su'} ${sourceText}...
       </div>
     `;
 
@@ -1863,7 +2044,10 @@
       if (items.length === 0) {
         resBox.innerHTML = `
           <div style="padding:14px; border-radius:9px; background:var(--surface); border:1px solid var(--border); font-size:12.5px; color:var(--muted2);">
-            Nessun risultato diretto trovato per "<strong>${query || 'ricerca vuota'}</strong>". Puoi incollare qualsiasi ID modello o link HuggingFace/Ollama direttamente nel campo <strong>Installazione Diretta</strong> qui sotto!
+            ${isEn 
+              ? `No direct results found for "<strong>${escapeHtml(query || 'empty search')}</strong>". You can paste any model ID or HuggingFace/Ollama link directly into the <strong>Direct Install</strong> field below!`
+              : `Nessun risultato diretto trovato per "<strong>${escapeHtml(query || 'ricerca vuota')}</strong>". Puoi incollare qualsiasi ID modello o link HuggingFace/Ollama direttamente nel campo <strong>Installazione Diretta</strong> qui sotto!`
+            }
           </div>
         `;
         return;
@@ -1891,8 +2075,11 @@
         }
 
         const actionBtnHtml = item.installable
-          ? `<button class="btn-add-pool" onclick="pullFromSearchResult('${selectId}', '${(item.pull_id || item.name).replace(/'/g, "\\'")}')">📥 Installa sul PC</button>`
-          : `<a href="${item.url}" target="_blank" class="btn-add-pool" style="text-decoration:none;display:inline-flex;align-items:center;">🐙 Apri su GitHub ↗</a>`;
+          ? `<button class="btn-add-pool" onclick="pullFromSearchResult('${selectId}', '${(item.pull_id || item.name).replace(/'/g, "\'")}')">${isEn ? '📥 Install on PC' : '📥 Installa sul PC'}</button>`
+          : `<a href="${item.url}" target="_blank" class="btn-add-pool" style="text-decoration:none;display:inline-flex;align-items:center;">${isEn ? '🔗 Open on GitHub ↗' : '🔗 Apri su GitHub ↗'}</a>`;
+
+        const officialSheet = isEn ? "Official Page ↗" : "Scheda Ufficiale ↗";
+        const cmdLabel = isEn ? "Command:" : "Comando:";
 
         row.innerHTML = `
           <div class="pool-item-info" style="flex:1;">
@@ -1900,10 +2087,10 @@
               <span class="pool-item-name" style="font-size:13px;">${item.name}</span>
               <span class="tag ${badgeCls}">${item.source_label}</span>
               ${item.stats ? `<span class="tag tag-green">${item.stats}</span>` : ""}
-              <a href="${item.url}" target="_blank" style="font-size:11px; color:var(--cyan); text-decoration:none; font-weight:700;">Scheda Ufficiale ↗</a>
+              <a href="${item.url}" target="_blank" style="font-size:11px; color:var(--cyan); text-decoration:none; font-weight:700;">${officialSheet}</a>
             </div>
             <div style="font-size:11.5px; color:var(--muted2); margin-top:4px; line-height:1.45;">${item.desc}</div>
-            ${item.pull_id ? `<div class="pool-item-id" style="margin-top:4px;">Comando: ollama pull ${item.pull_id}</div>` : ""}
+            ${item.pull_id ? `<div class="pool-item-id" style="margin-top:4px;">${cmdLabel} ollama pull ${item.pull_id}</div>` : ""}
           </div>
           <div style="display:flex; align-items:center; gap:8px; flex-shrink:0; flex-wrap:wrap;">
             ${variantSelectorHtml}
@@ -1915,7 +2102,10 @@
     } catch (e) {
       resBox.innerHTML = `
         <div style="padding:14px; border-radius:9px; background:var(--surface); border:1px solid var(--red); font-size:12.5px; color:var(--red);">
-          Errore durante la ricerca online. Verifica la connessione internet o usa i pulsanti Ollama.com / HuggingFace / GitHub in alto a destra.
+          ${isEn 
+            ? "Error during online search. Check internet connection or use Ollama.com / HuggingFace / GitHub buttons at top right."
+            : "Errore durante la ricerca online. Verifica la connessione internet o usa i pulsanti Ollama.com / HuggingFace / GitHub in alto a destra."
+          }
         </div>
       `;
     }
@@ -2085,13 +2275,14 @@
   }
 
   async function promptActivateLicense() {
-    const msgPrompt = currentAppLang === 'en' 
+    const isEn = (currentAppLang === 'en');
+    const msgPrompt = isEn 
       ? "🔑 Paste your OMNICLAUDE INFINITY License Key here (purchased on Gumroad or sent by ATON-FUX):"
       : "🔑 Incolla qui il tuo Codice Licenza OMNICLAUDE INFINITY (acquistato su Gumroad o inviato da ATON-FUX):";
     const key = prompt(msgPrompt);
     if (!key || !key.trim()) return;
 
-    showToast("Verifica licenza in corso...");
+    showToast(isEn ? "Verifying license..." : "Verifica licenza in corso...");
     try {
       const res = await fetch("/api/license/activate", {
         method: "POST",
@@ -2100,14 +2291,14 @@
       });
       const data = await res.json();
       if (data.ok) {
-        alert("🎉 " + data.message);
+        alert("✅ " + data.message);
         loadGeminiPool(true);
         loadStatus();
       } else {
-        alert("❌ Attivazione fallita: " + (data.error || "Chiave non valida"));
+        alert((isEn ? "✕ Activation failed: " : "✕ Attivazione fallita: ") + (data.error || (isEn ? "Invalid Key" : "Chiave non valida")));
       }
     } catch (err) {
-      alert("❌ Errore connessione durante la verifica licenza: " + err.message);
+      alert((isEn ? "✕ Connection error during license verification: " : "✕ Errore connessione durante la verifica licenza: ") + err.message);
     }
   }
 
@@ -2117,6 +2308,7 @@
       const d = await res.json();
       if (!d.ok) return;
       currentGeminiPool = d;
+      const isEn = (currentAppLang === 'en');
 
       // PRO Status & Banner
       const isPro = !!d.is_pro;
@@ -2131,21 +2323,23 @@
             <div style="background:linear-gradient(135deg,rgba(255,184,0,0.08),rgba(0,229,255,0.05));border:1px solid rgba(255,184,0,0.38);border-radius:12px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 0 16px rgba(255,184,0,0.08);">
               <div style="max-width:680px;">
                 <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-                  <span class="tag" style="background:rgba(255,184,0,0.2);color:#ffb800;border:1px solid rgba(255,184,0,0.5);font-weight:800;">⭐ OMNICLAUDE INFINITY EDITION</span>
-                  <span style="font-size:13px;font-weight:700;color:var(--text);">Zero Rate-Limit &amp; Multi-Account Failover Continuo</span>
+                  <span class="tag" style="background:rgba(255,184,0,0.2);color:#ffb800;border:1px solid rgba(255,184,0,0.5);font-weight:800;">⚡ OMNICLAUDE INFINITY EDITION</span>
+                  <span style="font-size:13px;font-weight:700;color:var(--text);">${isEn ? "Zero Rate-Limit & Continuous Multi-Account Failover" : "Zero Rate-Limit &amp; Multi-Account Failover Continuo"}</span>
                 </div>
                 <div style="font-size:12px;color:var(--muted2);line-height:1.5;">
-                  La versione base include 1 account gratuito. Con <strong>OMNICLAUDE INFINITY (14,99€ Una Tantum)</strong> puoi collegare account Google multipli: quando una chiave tocca il rate limit (429), il sistema ruota all'istante senza bloccare Claude Code!
+                  ${isEn 
+                    ? "The free edition includes 1 Google account. With <strong>OMNICLAUDE INFINITY (€14.99 One-Time)</strong> connect multiple Google accounts: when one key hits rate limit (429), the system rotates instantly with zero interruption to Claude Code!"
+                    : "La versione base include 1 account gratuito. Con <strong>OMNICLAUDE INFINITY (14,99€ Una Tantum)</strong> puoi collegare account Google multipli: quando una chiave tocca il rate limit (429), il sistema ruota all'istante senza bloccare Claude Code!"}
                 </div>
               </div>
               <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-                <a href="${d.store_url || 'https://aton-fux.github.io/OMNICLAUDE/'}" target="_blank" class="btn-secondary-cyber" style="border-color:rgba(0,229,255,0.45);color:var(--cyan);font-size:12px;padding:8px 14px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">🌐 Vetrina Web</a>
+                <a href="${d.store_url || 'https://aton-fux.github.io/OMNICLAUDE/'}" target="_blank" class="btn-secondary-cyber" style="border-color:rgba(0,229,255,0.45);color:var(--cyan);font-size:12px;padding:8px 14px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">${isEn ? '🛒 Web Storefront' : '🛒 Vetrina Web'}</a>
                 <a href="https://wa.me/393510171617?text=Ciao%20ATON-FUX!%20Vorrei%20acquistare%20la%20licenza%20OMNICLAUDE%20INFINITY" target="_blank" class="btn-secondary-cyber" style="border-color:rgba(37,211,102,0.5);color:#25d366;font-size:12px;padding:8px 14px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">💬 WhatsApp</a>
                 <a href="${d.gumroad_url || 'https://kronostone.gumroad.com/l/omniclaude-pro'}" target="_blank" class="btn-primary-cyber" style="background:linear-gradient(135deg,#ffb800,#ff8800);color:#000;border:none;font-weight:800;padding:8px 16px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-size:12px;">
-                  🛒 Acquista Licenza (14,99€)
+                  ${isEn ? '⚡ Get License (€14.99)' : '⚡ Acquista Licenza (14,99€)'}
                 </a>
                 <button class="btn-secondary-cyber" onclick="promptActivateLicense()" style="border-color:rgba(255,184,0,0.5);color:#ffb800;font-size:12px;padding:8px 14px;">
-                  🔑 Inserisci Chiave INFINITY
+                  ${isEn ? '🔑 Enter INFINITY Key' : '🔑 Inserisci Chiave INFINITY'}
                 </button>
               </div>
             </div>
@@ -2154,20 +2348,20 @@
           proBanner.innerHTML = `
             <div style="background:linear-gradient(135deg,rgba(0,245,155,0.08),rgba(0,229,255,0.04));border:1px solid rgba(0,245,155,0.35);border-radius:12px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
               <div style="display:flex;align-items:center;gap:12px;">
-                <span style="font-size:22px;">⭐</span>
+                <span style="font-size:22px;">👑</span>
                 <div>
                   <div style="display:flex;align-items:center;gap:8px;">
-                    <span class="tag tag-green" style="font-weight:800;">🟢 ${currentAppLang === 'en' ? 'INFINITY LICENSE ACTIVE' : 'LICENZA INFINITY ATTIVA'}</span>
+                    <span class="tag tag-green" style="font-weight:800;">✓ ${isEn ? 'INFINITY LICENSE ACTIVE' : 'LICENZA INFINITY ATTIVA'}</span>
                     <span style="font-size:12.5px;font-weight:700;color:var(--text);">${escapeHtml(lic.licensed_to || 'ATON-FUX')}</span>
                     <span class="tag tag-cyan" style="font-size:10px;">${escapeHtml(lic.license_type || 'Lifetime Infinity')}</span>
                   </div>
                   <div style="font-size:11px;color:var(--muted2);margin-top:2px;">
-                    ${currentAppLang === 'en' ? 'Key' : 'Chiave'}: <code>${escapeHtml(lic.license_key_masked || 'OMNI-INF-***')}</code> · ${currentAppLang === 'en' ? 'Unlimited Multi-Account rotation and Zero Rate-Limit active.' : 'Rotazione Multi-Account illimitata e Zero Rate-Limit attivi.'}
+                    ${isEn ? 'Key' : 'Chiave'}: <code>${escapeHtml(lic.license_key_masked || 'OMNI-INF-***')}</code> · ${isEn ? 'Unlimited Multi-Account rotation and Zero Rate-Limit active.' : 'Rotazione Multi-Account illimitata e Zero Rate-Limit attivi.'}
                   </div>
                 </div>
               </div>
               <div>
-                <span class="tag tag-green" style="font-size:11px;">${currentAppLang === 'en' ? '429 SHIELD ACTIVE' : 'PROTEZIONE 429 ATTIVA'}</span>
+                <span class="tag tag-green" style="font-size:11px;">${isEn ? '429 SHIELD ACTIVE' : 'PROTEZIONE 429 ATTIVA'}</span>
               </div>
             </div>
           `;
@@ -2181,10 +2375,10 @@
       if (kpiActive) {
         if (activeKey) {
           kpiActive.textContent = activeKey.name;
-          if (kpiActiveSub) kpiActiveSub.textContent = activeKey.masked_key + (activeKey.status === "active" ? " · ● IN USO" : "");
+          if (kpiActiveSub) kpiActiveSub.textContent = activeKey.masked_key + (activeKey.status === "active" ? (isEn ? " · ● IN USE" : " · ● IN USO") : "");
         } else {
-          kpiActive.textContent = "Nessuna chiave";
-          if (kpiActiveSub) kpiActiveSub.textContent = "Aggiungi un account per iniziare";
+          kpiActive.textContent = isEn ? "No keys" : "Nessuna chiave";
+          if (kpiActiveSub) kpiActiveSub.textContent = isEn ? "Add an account to begin" : "Aggiungi un account per iniziare";
         }
       }
 
@@ -2202,7 +2396,9 @@
         tokenBar.style.background = pct > 90 ? "var(--red)" : (pct > 70 ? "var(--amber)" : "var(--green)");
       }
       if (tokenPct) {
-        tokenPct.textContent = pct + "% quota consumata oggi · " + (stats.today_calls || 0) + " chiamate API effettuate";
+        tokenPct.textContent = isEn 
+          ? `${pct}% quota consumed today · ${(stats.today_calls || 0)} API calls made`
+          : `${pct}% quota consumata oggi · ${(stats.today_calls || 0)} chiamate API effettuate`;
       }
 
       // Failover Toggle
@@ -2210,7 +2406,7 @@
       const foBadge = document.getElementById("gpool-failover-badge");
       if (foToggle) foToggle.checked = !!d.auto_failover;
       if (foBadge) {
-        foBadge.textContent = d.auto_failover ? "ATTIVO" : "DISATTIVATO";
+        foBadge.textContent = d.auto_failover ? (isEn ? "ACTIVE" : "ATTIVO") : (isEn ? "DISABLED" : "DISATTIVATO");
         foBadge.className = "tag " + (d.auto_failover ? "tag-green" : "tag-red");
       }
 
@@ -2221,15 +2417,21 @@
       const kpiBreakdown = document.getElementById("gpool-kpi-breakdown");
       const countBadge = document.getElementById("gpool-keys-count-badge");
       if (kpiCount) kpiCount.textContent = d.keys.length;
-      if (kpiBreakdown) kpiBreakdown.textContent = readyCount + " pronte · " + cdCount + " in cooldown";
-      if (countBadge) countBadge.textContent = d.keys.length + " Chiav" + (d.keys.length === 1 ? "e" : "i");
+      if (kpiBreakdown) {
+        kpiBreakdown.textContent = isEn 
+          ? `${readyCount} ready · ${cdCount} in cooldown`
+          : `${readyCount} pronte · ${cdCount} in cooldown`;
+      }
+      if (countBadge) {
+        countBadge.textContent = d.keys.length + (isEn ? (d.keys.length === 1 ? " Key" : " Keys") : (d.keys.length === 1 ? " Chiave" : " Chiavi"));
+      }
 
       // Render Keys List
       const list = document.getElementById("gpool-keys-list");
       if (list) {
         list.innerHTML = "";
         if (d.keys.length === 0) {
-          list.innerHTML = '<div style="color:var(--muted2);padding:14px;text-align:center;">Nessuna chiave nel pool. Incolla la tua prima chiave a sinistra!</div>';
+          list.innerHTML = `<div style="color:var(--muted2);padding:14px;text-align:center;">${isEn ? 'No keys in the pool. Paste your first key on the left!' : 'Nessuna chiave nel pool. Incolla la tua prima chiave a sinistra!'}</div>`;
         } else {
           d.keys.forEach(k => {
             const isActive = k.id === d.active_id || k.status === "active";
@@ -2237,13 +2439,20 @@
             const isInvalid = k.status === "invalid";
 
             let tagCls = "tag-cyan";
-            let tagLabel = "🟡 STANDBY (Di Riserva)";
-            if (isActive) { tagCls = "tag-green"; tagLabel = "🟢 ATTIVA (In Uso)"; }
-            else if (isRateLimited) { tagCls = "tag-red"; tagLabel = "🔴 RATE-LIMIT (429)"; }
-            else if (isInvalid) { tagCls = "tag-red"; tagLabel = "❌ NON VALIDA"; }
+            let tagLabel = isEn ? "⏸ STANDBY (Backup)" : "⏸ STANDBY (Di Riserva)";
+            if (isActive) { tagCls = "tag-green"; tagLabel = isEn ? "✓ ACTIVE (In Use)" : "✓ ATTIVA (In Uso)"; }
+            else if (isRateLimited) { tagCls = "tag-red"; tagLabel = "⚠ RATE-LIMIT (429)"; }
+            else if (isInvalid) { tagCls = "tag-red"; tagLabel = isEn ? "✕ INVALID" : "✕ NON VALIDA"; }
 
             const card = document.createElement("div");
             card.style.cssText = `background:var(--surface2);border:1px solid ${isActive ? "var(--cyan)" : "var(--border-subtle)"};border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;box-shadow:${isActive ? "0 0 10px rgba(0,240,255,0.12)" : "none"};`;
+
+            const useBtn = !isActive ? `<button class="btn-primary-cyber" style="padding:4px 10px;font-size:11px;" onclick="setActiveGeminiKey('${k.id}')" title="${isEn ? 'Set as primary key now' : 'Imposta subito come chiave primaria'}">${isEn ? '👉 Use Now' : '👉 Usa Ora'}</button>` : '';
+            const testTitle = isEn ? "Test key with Google API" : "Testa chiave con Google API";
+            const delTitle = isEn ? "Remove from pool" : "Rimuovi dal pool";
+            const callsLabel = isEn ? "Calls:" : "Chiamate:";
+            const tokensLabel = isEn ? "Estimated tokens:" : "Token stimati:";
+            const noErrLabel = isEn ? "✓ No errors" : "✓ Nessun errore";
 
             card.innerHTML = `
               <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
@@ -2256,15 +2465,15 @@
                 </div>
                 <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
                   <span class="tag ${tagCls}">${tagLabel}</span>
-                  ${!isActive ? `<button class="btn-primary-cyber" style="padding:4px 10px;font-size:11px;" onclick="setActiveGeminiKey('${k.id}')" title="Imposta subito come chiave primaria">▶️ Usa Ora</button>` : ''}
-                  <button class="btn-secondary-cyber" style="padding:4px 8px;font-size:11px;" onclick="testSingleGeminiKey('${k.id}')" title="Testa chiave con Google API">🧪</button>
-                  <button class="btn-secondary-cyber" style="padding:4px 8px;font-size:11px;color:var(--red);" onclick="deleteGeminiKey('${k.id}', '${escapeHtml(k.name)}')" title="Rimuovi dal pool">🗑️</button>
+                  ${useBtn}
+                  <button class="btn-secondary-cyber" style="padding:4px 8px;font-size:11px;" onclick="testSingleGeminiKey('${k.id}')" title="${testTitle}">🧪</button>
+                  <button class="btn-secondary-cyber" style="padding:4px 8px;font-size:11px;color:var(--red);" onclick="deleteGeminiKey('${k.id}', '${escapeHtml(k.name)}')" title="${delTitle}">🗑️</button>
                 </div>
               </div>
               <div style="font-size:11px;color:var(--muted2);display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px dashed var(--border-subtle);padding-top:6px;">
-                <span>Chiamate: <strong style="color:var(--text);">${k.calls_count || 0}</strong></span>
-                <span>Token stimati: <strong style="color:var(--text);">${(k.tokens_used || 0).toLocaleString()}</strong></span>
-                ${k.error_message ? `<span style="color:var(--red);">${escapeHtml(k.error_message)}</span>` : '<span style="color:var(--green);">✓ Nessun errore</span>'}
+                <span>${callsLabel} <strong style="color:var(--text);">${k.calls_count || 0}</strong></span>
+                <span>${tokensLabel} <strong style="color:var(--text);">${(k.tokens_used || 0).toLocaleString()}</strong></span>
+                ${k.error_message ? `<span style="color:var(--red);">${escapeHtml(k.error_message)}</span>` : `<span style="color:var(--green);">${noErrLabel}</span>`}
               </div>
             `;
             list.appendChild(card);
@@ -2276,7 +2485,7 @@
       const log = document.getElementById("gpool-events-log");
       if (log && Array.isArray(d.events)) {
         if (d.events.length === 0) {
-          log.innerHTML = '<div style="color:var(--muted2);">Nessun evento registrato.</div>';
+          log.innerHTML = `<div style="color:var(--muted2);">${isEn ? 'No events recorded.' : 'Nessun evento registrato.'}</div>`;
         } else {
           log.innerHTML = d.events.map(ev => {
             let color = "var(--text)";
@@ -2288,7 +2497,7 @@
         }
       }
 
-      if (manual) showToast("⚡ Pool Gemini e quote aggiornate!");
+      if (manual) showToast(isEn ? "✓ Gemini pool and quotas updated!" : "✓ Pool Gemini e quote aggiornate!");
     } catch (e) {
       console.error(e);
     }
@@ -2445,358 +2654,315 @@
   // =========================================================================
   // 🌐 ADVANCED MULTILINGUAL TRANSLATION ENGINE (ATON-FUX)
   // =========================================================================
-  const _initialUrlParams = new URLSearchParams(window.location.search);
-  let currentAppLang = _initialUrlParams.get('lang') || localStorage.getItem('omniclaude_app_lang') || 'it';
+  // ─── Comprehensive Bilingual Engine (Created by ATON-FUX) ───
+  const I18N_IT = {
+  "topbar_sub": "AI Terminal Command Center · Claude Code &amp; OpenCode Gateway",
+  "btn_stop_all": "🛑 Chiudi Tutto",
+  "sb_nav_main": "Navigazione Principale",
+  "nav_home": "🏠 Home &amp; Motori AI",
+  "nav_gpool": "⚡ Gemini Multi-Key &amp; Quota",
+  "nav_parachute": "🛡️ Paracadute Riserva",
+  "nav_terminal": "ℹ️ Come funziona il terminale",
+  "sb_config": "Configurazione",
+  "nav_keys": "🔑 Chiavi API &amp; OAuth",
+  "nav_guide": "📖 Guida &amp; FAQ",
+  "sb_lang": "Lingua / Language",
+  "author_label": "Architettura &amp; Design",
+  "hdr_avvia": "🚀 Pagina Iniziale &amp; Scelta Motore",
+  "sub_avvia": "Orchestratore universale per Claude Code &amp; OpenCode con gateway OmniRoute e Paracadute Modulare.",
+  "active_model_lbl": "Motore Attualmente Attivo (per Claude Code &amp; OpenCode)",
+  "gemini_banner_title": "Gemini Multi-Key Hub &amp; Failover Automatico",
+  "tag_exclusive": "NOVITÀ ASSOLUTA",
+  "tag_zero_rl": "ZERO RATE-LIMIT",
+  "gemini_banner_desc": "Aggiungi account Google gratuiti multipli: se una chiave finisce i token (429), OMNICLAUDE passa all'altra in 0.1s senza fermare Claude Code!",
+  "btn_manage_gpool": "⚡ Gestisci Multi-Key &amp; Quota →",
+  "ready_to_code_h2": "Pronto per Programmare",
+  "ready_to_code_p": "Scegli quale strumento da terminale preferisci aprire: entrambi usano il gateway OmniRoute con zero costi a consumo!",
+  "btn_open_claude": "🚀 APRI CLAUDE CODE",
+  "btn_open_opencode": "⚡ APRI OPENCODE",
+  "hero_footer_hint": "💡 <strong style=\"color:var(--text);\">Claude Code</strong>: L'interfaccia Anthropic per pair programming &amp; bash · <strong style=\"color:var(--text);\">OpenCode</strong>: L'agente TUI open source moderno.",
+  "cloud_engines_title": "☁️ Motori Cloud Gratuiti",
+  "cloud_engines_sub": "Clicca qualsiasi motore per attivarlo istantaneamente sia su <strong>Claude Code</strong> che su <strong>OpenCode</strong>.",
+  "tag_zero_api_cost": "ZERO COSTI API A CONSUMO",
+  "local_engines_title": "🖥️ Motori Locali su questo PC (Ollama)",
+  "local_engines_sub": "Rilevamento dinamico dei modelli presenti sul tuo PC + Motore di Ricerca &amp; Installazione Libera da <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> e <strong>GitHub</strong>.",
+  "btn_detect_models": "🔄 Rileva Modelli PC",
+  "btn_install_ollama": "💿 Installa / Aggiorna Ollama",
+  "search_hub_title": "Esplora, Cerca &amp; Installa Qualsiasi Modello Locale (Ollama · HuggingFace GGUF · GitHub)",
+  "tag_modular_free": "MODULARE &amp; LIBERO",
+  "search_hub_sub": "Nessun modello imposto: cerca liberamente qualsiasi motore AI nel mondo o incolla il nome/link da Ollama, HuggingFace o GitHub per installarlo sul tuo PC.",
+  "src_all": "🌐 Tutte le Sorgenti",
+  "src_ollama": "📚 Ollama Library",
+  "src_hf": "🤗 HuggingFace GGUF",
+  "src_gh": "🐙 GitHub Repositories",
+  "btn_search_models": "🔍 Cerca Modelli",
+  "direct_install_label": "⚡ Installazione Diretta (ID / URL):",
+  "btn_pull_custom": "📥 Scarica &amp; Installa sul PC",
+  "ph_model_search": "🔍 Cerca qualsiasi modello (es. coder, llama, mistral, gemma, uncensored, phi, vision, deepseek...)",
+  "ph_direct_install": "Es: codellama:7b, hf.co/bartowski/DeepSeek-R1-Distill-Qwen-7B-GGUF o link GitHub",
+  "ph_custom_parachute": "es. openrouter/qwen/qwen-2.5-coder-32b-instruct:free",
+  "ph_gpool_name": "es. Account Google Personale 2, Lavoro, ecc.",
+  "ph_gpool_key": "Incolla chiave AIzaSy...",
+  "ph_key_gemini": "Chiave Google Gemini (AIza...)",
+  "ph_key_groq": "Chiave Groq (gsk_...)",
+  "ph_key_deepseek": "Chiave DeepSeek (sk-...)",
+  "ph_key_openrouter": "Chiave OpenRouter (sk-or-...)",
+  "parachute_title": "🛡️ Paracadute di Riserva (Configurabile &amp; Modulare)",
+  "parachute_sub": "Zero interruzioni: se un motore finisce i crediti, il prossimo parte automaticamente secondo la tua configurazione.",
+  "parachute_status_h2": "Stato Fallback Automatico Multi-Motore (`combo/paracadute-gratis`)",
+  "parachute_desc": "Personalizza liberamente l'ordine dei motori, la strategia di instradamento e quali modelli Cloud o Locali (Ollama) includere nella catena di sicurezza. Ogni modifica viene sincronizzata direttamente con il gateway <strong>OmniRoute</strong>.",
+  "active_chain_title": "⛓️ Catena di Fallback Attiva",
+  "active_chain_sub": "Usa le frecce ⬆️ ⬇️ per cambiare la priorità dei motori o ✕ per rimuoverli. Il primo motore è il Primario, i successivi sono le Riserve automatiche.",
+  "gateway_strategy_lbl": "Strategia Gateway:",
+  "strat_opt_priority": "🎯 Priority (Cascata sequenziale 1° → 2° → 3°)",
+  "strat_opt_rr": "🔄 Round-Robin (Alterna richieste in modo equo)",
+  "strat_opt_lu": "⚖️ Least-Used (Usa il motore meno carico)",
+  "btn_save_parachute": "💾 Salva, Sincronizza &amp; Attiva Paracadute",
+  "btn_reset_parachute": "🔄 Default",
+  "add_engine_app_title": "➕ Aggiungi Motore dall'App",
+  "add_engine_app_sub": "Seleziona qualsiasi motore Cloud o Locale (Ollama) rilevato nell'app per aggiungerlo alla tua catena Paracadute:",
+  "custom_model_title": "🔧 Aggiungi ID Modello Personalizzato (OmniRoute / OpenRouter)",
+  "btn_add_custom": "+ Aggiungi",
+  "ti_panel_title": "ℹ️ Come funziona il terminale",
+  "ti_panel_sub": "Guida rapida operativa per l'utilizzo di Claude Code e OpenCode con OMNICLAUDE.",
+  "ti_step1_title": "Si apre una finestra nera",
+  "ti_step1_desc": "Il terminale <strong>Claude Code</strong> o <strong>OpenCode</strong> interattivo si apre in una console dedicata. Scrivi i tuoi prompt in italiano o i tuoi comandi e premi <kbd>Invio</kbd>.",
+  "ti_step2_title": "Se il motore finisce i crediti",
+  "ti_step2_desc": "Con il <strong>Paracadute attivo</strong>, il gateway OmniRoute cambia motore automaticamente seguendo la tua catena modulare senza mai interrompere il lavoro.",
+  "ti_step3_title": "Per cambiare motore",
+  "ti_step3_desc": "Vai nella <strong>Home &amp; Motori AI</strong> sotto a \"Pronto per Programmare\" (sezioni <em>Motori Cloud Gratuiti</em> o <em>Motori Locali</em>), clicca il motore preferito e avvia il terminale.",
+  "ti_step4_title": "Per chiudere tutto",
+  "ti_step4_desc": "Usa il pulsante rosso <strong>\"Chiudi Tutto\"</strong> in alto a destra per liberare RAM e VRAM al 100%, oppure digita <code style=\"font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)\">exit</code> nel terminale.",
+  "ti_shortcuts_title": "⚡ Scorciatoie Utili dentro il Terminale",
+  "ti_short1": "• Digita <code style=\"font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)\">/help</code> per vedere tutti i comandi disponibili in Claude Code o OpenCode.",
+  "ti_short2": "• Digita <code style=\"font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)\">/compact</code> per comprimere la memoria della conversazione nelle sessioni lunghe.",
+  "ti_short3": "• Digita <code style=\"font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)\">exit</code> oppure premi <kbd>Ctrl+C</kbd> due volte per chiudere la sessione da terminale.",
+  "gpool_hdr_title": "Gemini Multi-Key Hub &amp; Live Quota",
+  "gpool_hdr_tag1": "FAILOVER ZERO RATE-LIMIT",
+  "gpool_hdr_sub": "Aggiungi account Google AI Studio multipli gratuiti: se una chiave esaurisce la quota (HTTP 429), OMNICLAUDE passa istantaneamente alla successiva senza interrompere Claude Code!",
+  "btn_refresh_gpool": "🔄 Aggiorna Live",
+  "btn_test_all_keys": "🧪 Testa Tutte le Chiavi",
+  "kpi_active_key": "Chiave Attiva in Uso",
+  "kpi_tokens_today": "Token Consumati Oggi",
+  "kpi_failover": "Auto-Failover su Errore 429",
+  "lbl_enable": "Abilita",
+  "lbl_rotation_sub": "Rotazione istantanea senza blocchi",
+  "kpi_keys_pool": "Chiavi nel Pool",
+  "add_gemini_title": "➕ Aggiungi Account Gemini",
+  "add_gemini_sub": "Crea una chiave gratuita da qualsiasi account Google su <a href=\"https:#aistudio.google.com/app/apikey\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline;\">Google AI Studio ↗</a> e incollala qui:",
+  "lbl_gpool_name": "Nome Account / Etichetta:",
+  "lbl_gpool_key": "API Key (AIza...):",
+  "lbl_gpool_val": "Verifica chiave con Google prima di aggiungere",
+  "btn_add_gemini_pool": "➕ Aggiungi Chiave al Pool",
+  "gemini_secret_box": "💡 <strong style=\"color:var(--text);\">Segreto per Token Infiniti:</strong> Google AI Studio regala 1 milione di token al giorno per ciascun account Google. Inserendo 3 account diversi in questo pool, hai <strong>3 milioni di token al giorno</strong> a costo zero!",
+  "configured_keys_title": "📋 Chiavi Configurate nel Pool",
+  "configured_keys_sub": "Tutte le chiavi salvate localmente nel tuo PC. Il failover passa automaticamente alla prossima chiave se una finisce la quota.",
+  "events_log_title": "📡 Registro Eventi &amp; Failover Live",
+  "events_log_sub": "Cronologia in tempo reale delle rotazioni automatiche e test di validità effettuati.",
+  "keys_panel_title": "🔑 Chiavi API &amp; Login OAuth",
+  "keys_panel_sub": "Inserisci le chiavi API per i motori che vuoi usare. Ti basta UNA sola chiave per iniziare (Gemini o Groq).",
+  "key_claude_title": "Anthropic Claude.ai (Abbonamento Web Pro / Max)",
+  "link_open_claude": "Apri Claude.ai ↗",
+  "key_claude_desc": "Collega il tuo account web Claude Pro/Max tramite OAuth ufficiale senza pagare API a consumo. Se usi un account gratuito, utilizza <strong>Google Gemini Flash</strong>, <strong>Groq Llama 3.3</strong> o i <strong>modelli locali Ollama</strong> a costo zero!",
+  "btn_claude_oauth": "🌐 Connetti Account Claude (Login Web)",
+  "key_gemini_title": "Google Gemini",
+  "link_get_gemini": "Ottieni / Rinnova chiave gratis ↗",
+  "key_gemini_desc": "Con 1 milione di token gratuiti al giorno su Google AI Studio, puoi programmare senza limiti. Inserisci o aggiorna qui sotto la tua chiave `AIza...`.",
+  "btn_save_gemini": "Salva / Aggiorna",
+  "key_gemini_hint": "⚡ <strong>Novità Esclusiva:</strong> Configura più account Google gratuiti con <strong>Failover Automatico Zero Rate-Limit</strong> e monitoraggio token live!",
+  "btn_open_gemini_hub": "⚡ Apri Gemini Multi-Key Hub →",
+  "key_groq_title": "Groq Cloud (Llama 3.3 70B)",
+  "link_get_groq": "Gratis in 10 sec ↗",
+  "key_groq_desc": "Groq è il motore più veloce disponibile (300 token/sec). Con questa chiave rafforzi il Paracadute di Riserva aggiungendo un motore ultra-rapido.",
+  "btn_save": "Salva",
+  "key_deepseek_title": "DeepSeek (R1 + V3)",
+  "link_get_deepseek": "Ottieni chiave ↗",
+  "key_deepseek_desc": "Sblocca i modelli DeepSeek R1 (ragionamento logico avanzato) e DeepSeek V3 (specializzato in programmazione). Ottimo nella catena Paracadute.",
+  "key_openrouter_title": "OpenRouter (400+ modelli)",
+  "link_get_openrouter": "Ottieni chiave ↗",
+  "key_openrouter_desc": "Con OpenRouter sblocchi centinaia di modelli aggiuntivi tra cui Qwen 2.5 Coder, Mistral e Llama `:free` accessibili con un solo account.",
+  "guide_panel_title": "📖 Guida Ufficiale &amp; FAQ — OMNICLAUDE",
+  "guide_panel_sub": "Documentazione rapida ideata e curata da <strong>ATON-FUX</strong>.",
+  "faq_q1": "Cos'è OMNICLAUDE creato da ATON-FUX?",
+  "faq_a1": "<strong>OMNICLAUDE</strong> è il centro di comando web e orchestratore locale ideato da <strong>ATON-FUX</strong> per utilizzare <strong>Claude Code</strong> e <strong>OpenCode</strong> collegati a motori AI Cloud gratuiti (Gemini, Groq, DeepSeek, OpenRouter) e modelli Locali (Ollama), con sistema <strong>Paracadute Modulare</strong> anti-interruzione e gestione automatica della memoria RAM/VRAM.",
+  "faq_q2": "Come personalizzo il Paracadute di Riserva?",
+  "faq_a2": "Apri la voce <strong>🛡️ Paracadute Riserva</strong> nel pannello sinistro. Puoi riordinare i motori con le frecce ⬆️ ⬇️, rimuovere quelli che non usi, aggiungere modelli Cloud o Locali (Ollama) dal catalogo dell'app e scegliere la strategia (es. <code>Priority</code> a cascata o <code>Round-Robin</code>). Clicca su <strong>Salva, Sincronizza &amp; Attiva Paracadute</strong> per applicare subito la catena al gateway OmniRoute.",
+  "faq_q3": "Cosa succede se premo \"Apri Claude Code\" o \"Apri OpenCode\" e non vedo la finestra?",
+  "faq_a3": "La finestra del terminale potrebbe aprirsi dietro al browser: premi <kbd>Alt+Tab</kbd> oppure controlla l'icona del terminale nella barra delle applicazioni di Windows.",
+  "faq_q4": "Come passo dal tema DARK CYBER al tema LIGHT PRO?",
+  "faq_a4": "In alto a destra nella barra principale trovi il selettore <strong>🖤 DARK CYBER / 🤍 LIGHT PRO</strong>. La tua scelta viene memorizzata automaticamente dal browser.",
+  "faq_q5": "Come chiudo tutti i servizi liberando il 100% di RAM e VRAM?",
+  "faq_a5": "Clicca il pulsante rosso <strong>🛑 Chiudi Tutto</strong> in alto a destra oppure esegui <code>FERMA.bat</code>. Il sistema chiude Claude Code, OpenCode, scarica i modelli Ollama dalla scheda video (VRAM) e arresta OmniRoute e il server web.",
+  "shutdown_h2": "Tutti i Servizi OMNICLAUDE Arrestati",
+  "shutdown_p1": "OmniRoute, i terminali AI e il Centro di Controllo sono stati fermati con successo. RAM e VRAM sono state liberate.",
+  "shutdown_p2": "Per riavviare: doppio click su START.bat nella cartella.",
+  "badge_infinity_active": "⭐ INFINITY ATTIVO",
+  "side_official_proj": "⚡ Progetto Ufficiale ⚡",
+  "side_suite_sub": "OMNICLAUDE Open Source Suite<br>Licenza Protetta GNU GPL v3",
+  "tag_status_verifying": "Verifica...",
+  "tag_key_not_provided": "Chiave non inserita",
+  "tag_optional": "Opzionale",
+  "tag_free": "GRATIS",
+  "title_search_ollama": "Apri la libreria ufficiale Ollama nel browser",
+  "title_search_hf": "Esplora tutti i modelli GGUF su HuggingFace",
+  "title_search_gh": "Cerca repository e Modelfile su GitHub"
+};
 
-  // Rich HTML block replacements (exact innerHTML normalization)
-  const HTML_IT_TO_EN = {
-    // Terminal Info cards
-    'Il terminale <strong>Claude Code</strong> o <strong>OpenCode</strong> interattivo si apre in una console dedicata. Scrivi i tuoi prompt in italiano o i tuoi comandi e premi <kbd>Invio</kbd>.':
-      'The interactive <strong>Claude Code</strong> or <strong>OpenCode</strong> terminal opens in a dedicated console. Type your prompts in English/Italian or your commands and press <kbd>Enter</kbd>.',
-    'Con il <strong>Paracadute attivo</strong>, il gateway OmniRoute cambia motore automaticamente seguendo la tua catena modulare senza mai interrompere il lavoro.':
-      'With <strong>Backup Parachute active</strong>, the OmniRoute gateway automatically switches engines following your modular chain without interrupting work.',
-    'Vai nella <strong>Home &amp; Motori AI</strong> sotto a "Pronto per Programmare" (sezioni <em>Motori Cloud Gratuiti</em> o <em>Motori Locali</em>), clicca il motore preferito e avvia il terminale.':
-      'Go to <strong>Home &amp; AI Engines</strong> under "Ready to Code" (sections <em>Free Cloud Engines</em> or <em>Local Engines</em>), click your preferred engine and launch terminal.',
-    'Usa il pulsante rosso <strong>"Chiudi Tutto"</strong> in alto a destra per liberare RAM e VRAM al 100%, oppure digita <code style="font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)">exit</code> nel terminale.':
-      'Use the red <strong>"Stop All"</strong> button at top-right to free 100% RAM &amp; VRAM, or type <code style="font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)">exit</code> in the terminal.',
-
-    // FAQ Items
-    '<strong>OMNICLAUDE</strong> è il centro di comando web e orchestratore locale ideato da <strong>ATON-FUX</strong> per utilizzare <strong>Claude Code</strong> e <strong>OpenCode</strong> collegati a motori AI Cloud gratuiti (Gemini, Groq, DeepSeek, OpenRouter) e modelli Locali (Ollama), con sistema <strong>Paracadute Modulare</strong> anti-interruzione e gestione automatica della memoria RAM/VRAM.':
-      '<strong>OMNICLAUDE</strong> is the web command center and local orchestrator created by <strong>ATON-FUX</strong> to run <strong>Claude Code</strong> and <strong>OpenCode</strong> connected to free Cloud AI engines (Gemini, Groq, DeepSeek, OpenRouter) and Local models (Ollama), featuring a <strong>Modular Parachute</strong> failover shield and automated RAM/VRAM management.',
-    'Apri la voce <strong>🛡️ Paracadute Riserva</strong> nel pannello sinistro. Puoi riordinare i motori con le frecce ⬆️ ⬇️, rimuovere quelli che non usi, aggiungere modelli Cloud o Locali (Ollama) dal catalogo dell\'app e scegliere la strategia (es. <code>Priority</code> a cascata o <code>Round-Robin</code>). Clicca su <strong>Salva, Sincronizza &amp; Attiva Paracadute</strong> per applicare subito la catena al gateway OmniRoute.':
-      'Open the <strong>🛡️ Backup Parachute</strong> tab in the left sidebar. Reorder engines with ⬆️ ⬇️ arrows, remove ones you don\'t use, add Cloud or Local (Ollama) models from the app catalog, and choose the routing strategy (e.g. <code>Priority</code> cascade or <code>Round-Robin</code>). Click <strong>Save, Sync &amp; Activate Parachute</strong> to instantly apply changes to OmniRoute.',
-    'La finestra del terminale potrebbe aprirsi dietro al browser: premi <kbd>Alt+Tab</kbd> oppure controlla l\'icona del terminale nella barra delle applicazioni di Windows.':
-      'The terminal window might have opened behind your browser: press <kbd>Alt+Tab</kbd> or check the terminal icon in your Windows taskbar.',
-    'In alto a destra nella barra principale trovi il selettore <strong>🖤 DARK CYBER / 🤍 LIGHT PRO</strong>. La tua scelta viene memorizzata automaticamente dal browser.':
-      'At top-right of the main bar you will find the <strong>🖤 DARK CYBER / 🤍 LIGHT PRO</strong> toggle. Your choice is automatically remembered by the browser.',
-    'Clicca il pulsante rosso <strong>🛑 Chiudi Tutto</strong> in alto a destra oppure esegui <code>FERMA.bat</code>. Il sistema chiude Claude Code, OpenCode, scarica i modelli Ollama dalla scheda video (VRAM) e arresta OmniRoute e il server web.':
-      'Click the red <strong>🛑 Stop All</strong> button at top-right or run <code>FERMA.bat</code>. The system closes Claude Code, OpenCode, unloads Ollama models from VRAM, and shuts down OmniRoute and the web server.',
-
-    // Keys panel
-    'Collega il tuo account web Claude Pro/Max tramite OAuth ufficiale senza pagare API a consumo. Se usi un account gratuito, utilizza <strong>Google Gemini</strong> o i <strong>modelli locali Ollama</strong> a costo zero!':
-      'Connect your Claude Pro/Max web account via official OAuth with zero pay-per-token API costs. If using a free account, use <strong>Google Gemini</strong> or <strong>local Ollama models</strong> for 100% free!',
-    'Con 1 milione di token gratuiti al giorno su Google AI Studio, puoi programmare senza limiti. Inserisci o aggiorna qui sotto la tua chiave <code>AIza...</code>.':
-      'With 1 million free tokens per day on Google AI Studio, code without limits. Enter or update your <code>AIza...</code> key below.',
-    'Groq è il motore più veloce disponibile (300 token/sec). Con questa chiave rafforzi il Paracadute di Riserva aggiungendo un motore ultra-rapido.':
-      'Groq is the fastest engine available (300 tokens/sec). With this key you supercharge the Backup Parachute with ultra-fast inference.',
-    'Sblocca i modelli DeepSeek R1 (ragionamento logico avanzato) e DeepSeek V3 (specializzato in programmazione). Ottimo nella catena Paracadute.':
-      'Unlock DeepSeek R1 (advanced reasoning) and DeepSeek V3 (coding specialist). Excellent in the Parachute chain.',
-    'Con OpenRouter sblocchi centinaia di modelli aggiuntivi tra cui Qwen 2.5 Coder, Mistral e Llama <code>:free</code> accessibili con un solo account.':
-      'OpenRouter unlocks hundreds of additional models including Qwen 2.5 Coder, Mistral, and Llama <code>:free</code> with a single account.',
-    'Documentazione rapida ideata e curata da <strong>ATON-FUX</strong>.':
-      'Quick operational documentation crafted and curated by <strong>ATON-FUX</strong>.',
-    'Google AI Studio regala 1 milione di token al giorno per ciascun account Google. Inserendo 3 account diversi in questo pool, hai <strong>3 milioni di token al giorno</strong> a costo zero!':
-      'Google AI Studio provides 1 million free tokens per day for each Google account. By adding 3 accounts to this pool, you get <strong>3 million tokens per day</strong> at zero cost!'
-  };
-
-  const DICT_IT_TO_EN = {
-    // Topbar & Nav
-    'Navigazione Principale': 'Main Navigation',
-    'Home & Motori AI': 'Home & AI Engines',
-    'Gemini Multi-Key & Quota': 'Gemini Multi-Key & Quota',
-    'Paracadute Riserva': 'Backup Parachute',
-    'Paracadute Modulare di Riserva': 'Modular Fallback Parachute',
-    'Come funziona il terminale': 'Terminal Architecture',
-    'Come Funziona il Terminale': 'Terminal Architecture',
-    'ℹ️ Come funziona il terminale': 'ℹ️ Terminal Architecture',
-    'Configurazione': 'Configuration',
-    'Chiavi API & OAuth': 'API Keys & OAuth',
-    '🔑 Chiavi API & Login OAuth': '🔑 API Keys & OAuth Login',
-    'Guida & FAQ': 'Guide & FAQ',
-    'Guida Ufficiale & Risoluzione Problemi': 'Official Guide & Troubleshooting',
-    '📖 Guida Ufficiale & FAQ — OMNICLAUDE': '📖 Official Guide & FAQ — OMNICLAUDE',
-    'Lingua / Language': 'Language / Lingua',
-    'Progetto Ufficiale': 'Official Project',
-    '⚡ Progetto Ufficiale ⚡': '⚡ Official Project ⚡',
-    'OMNICLAUDE Open Source Suite': 'OMNICLAUDE Open Source Suite',
-    'Licenza Protetta GNU GPL v3': 'Protected GNU GPL v3 License',
-    'Posto Riservato · Official Author': 'Reserved Spot · Official Author',
-    '🛡️ Posto Riservato · Official Author': '🛡️ Reserved Spot · Official Author',
-    'CREATO DA ATON-FUX': 'CREATED BY ATON-FUX',
-    'AI Terminal Command Center · Claude Code & OpenCode Gateway': 'AI Terminal Command Center · Claude Code & OpenCode Gateway',
-    'Chiudi Tutto': 'Stop All',
-    '🛑 Chiudi Tutto': '🛑 Stop All',
-    'DARK CYBER': 'DARK CYBER',
-    'LIGHT PRO': 'LIGHT PRO',
-    '🖤 DARK CYBER': '🖤 DARK CYBER',
-    '🤍 LIGHT PRO': '🤍 LIGHT PRO',
-    '🖤 DARK CYBER / 🤍 LIGHT PRO': '🖤 DARK CYBER / 🤍 LIGHT PRO',
-    'OmniRoute: Online': 'OmniRoute: Online',
-    'OmniRoute: Non attivo': 'OmniRoute: Offline',
-    'Terminale: Aperto': 'Terminal: Open',
-    'Terminale: Non avviato': 'Terminal: Inactive',
-    'INFINITY v2.0': 'INFINITY v2.0',
-    '⭐ INFINITY ATTIVO': '⭐ INFINITY ACTIVE',
-    '⭐ PRO ATTIVO': '⭐ INFINITY ACTIVE',
-
-    // Panel Headers & Subtitles
-    '— Pagina Iniziale & Scelta Motore': '— Home & AI Engine Selector',
-    'OMNICLAUDE — Pagina Iniziale & Scelta Motore': 'OMNICLAUDE — Home & AI Engine Selector',
-    'Orchestratore universale per Claude Code & OpenCode con gateway OmniRoute e Paracadute Modulare.': 'Universal orchestrator for Claude Code & OpenCode with OmniRoute gateway and Modular Parachute.',
-    'Gemini Multi-Key Hub & Live Quota': 'Gemini Multi-Key Hub & Live Quota',
-    'FAILOVER ZERO RATE-LIMIT': 'ZERO RATE-LIMIT FAILOVER',
-    'Aggiungi account Google AI Studio multipli gratuiti: se una chiave esaurisce la quota (HTTP 429), OMNICLAUDE passa istantaneamente alla successiva senza interrompere Claude Code!': 'Add multiple free Google AI Studio accounts: if one key hits daily quota (HTTP 429), OMNICLAUDE instantly switches to the next without stopping Claude Code!',
-    '🛡️ Paracadute di Riserva (Configurabile & Modulare)': '🛡️ Modular Fallback Parachute (Customizable)',
-    'Zero interruzioni: se un motore finisce i crediti, il prossimo parte automaticamente secondo la tua configurazione.': 'Zero downtime: if an engine runs out of credits, the next takes over automatically per your chain.',
-    'Guida rapida operativa per l\'utilizzo di Claude Code e OpenCode con OMNICLAUDE.': 'Quick operational guide for using Claude Code and OpenCode with OMNICLAUDE.',
-    'Inserisci le credenziali dei provider cloud per abilitarli nei motori di Claude Code e OpenCode.': 'Configure cloud provider credentials to enable them in Claude Code and OpenCode engines.',
-    'Inserisci le chiavi API per i motori che vuoi usare. Ti basta UNA sola chiave per iniziare (Gemini o Groq).': 'Configure API keys for the engines you want to use. You only need ONE key to start (Gemini or Groq).',
-    'Documentazione rapida ideata e curata da ATON-FUX.': 'Quick operational documentation crafted and curated by ATON-FUX.',
-
-    // Action Cards & Buttons (Avvia Panel)
-    'Pronto per Programmare': 'Ready to Code',
-    '🚀 Pronto per Programmare': '🚀 Ready to Code',
-    'Scegli quale strumento da terminale preferisci aprire: entrambi usano il gateway OmniRoute con zero costi a consumo!': 'Choose which terminal tool you want to launch: both route via OmniRoute with zero pay-per-token API costs!',
-    'Lancia Claude Code': 'Launch Claude Code',
-    '🚀 APRI CLAUDE CODE': '🚀 LAUNCH CLAUDE CODE',
-    'Lancia OpenCode': 'Launch OpenCode',
-    '⚡ APRI OPENCODE': '⚡ LAUNCH OPENCODE',
-    '⚡ Gestisci Multi-Key & Quota →': '⚡ Manage Multi-Key & Quota →',
-    '1. MOTORI CLOUD GRATUITI': '1. FREE CLOUD ENGINES',
-    '☁️ Motori Cloud Gratuiti': '☁️ Free Cloud Engines',
-    'Motori Cloud Gratuiti': 'Free Cloud Engines',
-    '2. MOTORI LOCALI SU QUESTO PC (OLLAMA) — RILEVAMENTO DINAMICO + MOTORE DI RICERCA UNIVERSALE': '2. LOCAL ENGINES ON THIS PC (OLLAMA) — DYNAMIC DETECTION + UNIVERSAL SEARCH ENGINE',
-    '🖥️ Motori Locali su questo PC (Ollama)': '🖥️ Local Engines on this PC (Ollama)',
-    'Motori Locali': 'Local Engines',
-    '🔄 Rileva Modelli PC': '🔄 Detect PC Models',
-    '💿 Installa / Aggiorna Ollama': '💿 Install / Update Ollama',
-    'HUB MODULARE DI RICERCA & INSTALLAZIONE LIBERA MODELLI (OLLAMA / HUGGINGFACE / GITHUB)': 'MODULAR SEARCH & FREE MODEL INSTALLER (OLLAMA / HUGGINGFACE / GITHUB)',
-    'Esplora, Cerca & Installa Qualsiasi Modello Locale (Ollama · HuggingFace GGUF · GitHub)': 'Explore, Search & Install Any Local Model (Ollama · HuggingFace GGUF · GitHub)',
-    'Nessun modello imposto: cerca liberamente qualsiasi motore AI nel mondo o incolla il nome/link da Ollama, HuggingFace o GitHub per installarlo sul tuo PC.': 'No imposed models: freely search any AI engine worldwide or paste model ID/link from Ollama, HuggingFace, or GitHub to install it on your PC.',
-    '🌐 Tutte le Sorgenti': '🌐 All Sources',
-    '📚 Ollama Library': '📚 Ollama Library',
-    '🤗 HuggingFace GGUF': '🤗 HuggingFace GGUF',
-    '🐙 GitHub Repositories': '🐙 GitHub Repositories',
-    '🔍 Cerca Modelli': '🔍 Search Models',
-    '⚡ Installazione Diretta (ID / URL):': '⚡ Direct Install (ID / URL):',
-    '📥 Scarica & Installa sul PC': '📥 Download & Install to PC',
-    '100% OFFLINE': '100% OFFLINE',
-    'ZERO RATE-LIMIT': 'ZERO RATE-LIMIT',
-    'MODULARE': 'MODULAR',
-    'MODULARE & LIBERO': 'MODULAR & FREE',
-    'NOVITÀ ASSOLUTA': 'NEW FEATURE',
-    'GRATIS': 'FREE',
-    'ATTIVO': 'ACTIVE',
-    'In Uso': 'In Use',
-    'Disponibile': 'Available',
-    'Nessun modello trovato in locale': 'No local models found',
-    '+ Aggiungi': '+ Add',
-
-    // Parachute Panel
-    'Stato Fallback Automatico Multi-Motore (`combo/paracadute-gratis`)': 'Multi-Engine Auto-Fallback Status (`combo/paracadute-gratis`)',
-    '✅ ATTIVO — Clicca per disattivare': '✅ ACTIVE — Click to disable',
-    '❌ DISATTIVATO — Clicca per attivare': '❌ DISABLED — Click to enable',
-    'Strategia Gateway:': 'Gateway Strategy:',
-    '🎯 Priority (Cascata sequenziale 1° → 2° → 3°)': '🎯 Priority (Sequential Cascade 1st → 2nd → 3rd)',
-    '🔄 Round-Robin (Alterna richieste in modo equo)': '🔄 Round-Robin (Balance requests evenly)',
-    '⚖️ Least-Used (Usa il motore meno carico)': '⚖️ Least-Used (Route to least busy engine)',
-    '⛓️ Catena di Fallback Attiva': '⛓️ Active Fallback Chain',
-    'Usa le frecce ⬆️ ⬇️ per cambiare la priorità dei motori o ✕ per rimuoverli. Il primo motore è il Primario, i successivi sono le Riserve automatiche.': 'Use arrows ⬆️ ⬇️ to reorder priority or ✕ to remove. The first engine is Primary; following ones are automatic fallbacks.',
-    '💾 Salva, Sincronizza & Attiva Paracadute': '💾 Save, Sync & Activate Parachute',
-    '🔄 Default': '🔄 Reset Default',
-    '➕ Aggiungi Motore dall\'App': '➕ Add Engine from App Catalog',
-    'Seleziona qualsiasi motore Cloud o Locale (Ollama) rilevato nell\'app per aggiungerlo alla tua catena Paracadute:': 'Select any Cloud or Local (Ollama) engine detected in the app to append to your Parachute chain:',
-    '🔧 Aggiungi ID Modello Personalizzato (OmniRoute / OpenRouter)': '🔧 Add Custom Model ID (OmniRoute / OpenRouter)',
-
-    // Terminal Architecture Cards
-    'Si apre una finestra nera': 'Interactive Terminal Window Opens',
-    'Se il motore finisce i crediti': 'If an Engine Runs Out of Credits',
-    'Per cambiare motore': 'To Switch Engines',
-    'Per chiudere tutto': 'To Close Everything',
-    '⚡ Scorciatoie Utili dentro il Terminale': '⚡ Useful Shortcuts inside Terminal',
-    '• Digita /help per vedere tutti i comandi disponibili in Claude Code o OpenCode.': '• Type /help to view all available commands in Claude Code or OpenCode.',
-    '• Digita /compact per comprimere la memoria della conversazione nelle sessioni lunghe.': '• Type /compact to compress conversation memory during long sessions.',
-    '• Premi Ctrl+C due volte per chiudere la sessione da terminale.': '• Press Ctrl+C twice to exit the terminal session.',
-
-    // Gemini Pool
-    'CHIAVE ATTIVA ORA': 'CURRENT ACTIVE KEY',
-    'RICHIESTE TOTALI': 'TOTAL REQUESTS',
-    'STATO AUTO-FAILOVER': 'AUTO-FAILOVER STATUS',
-    'CHIAVI REGISTRATE': 'REGISTERED KEYS',
-    'Chiavi nel Pool': 'Keys in Pool',
-    'ABILITATO': 'ENABLED',
-    'DISABILITATO': 'DISABLED',
-    '🔄 Aggiorna Live': '🔄 Live Refresh',
-    '🧪 Testa Tutte le Chiavi': '🧪 Test All Keys',
-    '➕ Aggiungi Account Gemini': '➕ Add Gemini Account',
-    '➕ Aggiungi Chiave al Pool': '➕ Add Key to Pool',
-    'Nome Account / Etichetta:': 'Account Name / Label:',
-    'API Key (AIza...):': 'API Key (AIza...):',
-    'Verifica chiave con Google prima di aggiungere': 'Validate key with Google before adding',
-    '📋 Chiavi Configurate nel Pool': '📋 Configured Keys in Pool',
-    'Nome / Account': 'Name / Account',
-    'Chiave Mascherata': 'Masked Key',
-    'Stato Quota': 'Quota Status',
-    'Azioni': 'Actions',
-    '📡 Registro Eventi & Failover Live': '📡 Live Event & Failover Log',
-    'Cronologia in tempo reale delle rotazioni automatiche e test di validità effettuati.': 'Real-time history of automatic key rotations and validity tests performed.',
-    'In attesa di eventi...': 'Waiting for events...',
-    'Auto-Failover su Errore 429': 'Auto-Failover on HTTP 429',
-    'Abilita': 'Enable',
-    'Chiave Attiva in Uso': 'Active Key in Use',
-    'Token Consumati Oggi': 'Tokens Consumed Today',
-    '0 / 1.000.000': '0 / 1,000,000',
-    '0% del limite giornaliero gratuito': '0% of daily free limit',
-    'CARICAMENTO QUOTA...': 'LOADING QUOTA...',
-    'Caricamento...': 'Loading...',
-    '0 Chiavi': '0 Keys',
-    '0 pronte · 0 in cooldown': '0 ready · 0 in cooldown',
-    'Segreto per Token Infiniti:': 'Secret for Infinite Tokens:',
-    'Novità Esclusiva:': 'Exclusive Feature:',
-    'Rotazione istantanea senza blocchi': 'Instant rotation without blocking',
-    'Tutte le chiavi salvate localmente nel tuo PC. Il failover passa automaticamente alla prossima chiave se una finisce la quota.': 'All keys saved locally on your PC. Failover automatically rotates to the next key if one exhausts quota.',
-    'Imposta come Attiva': 'Set as Active',
-    'Testa': 'Test',
-    'Elimina': 'Delete',
-    'Attiva': 'Active',
-    'In Cooldown': 'In Cooldown',
-    'Pronta': 'Ready',
-    'Non inserita': 'Not configured',
-    'Chiave non inserita': 'Key not configured',
-    'Prefisso mascherato': 'Masked prefix',
-
-    // INFINITY Banner & Badges
-    '⭐ OMNICLAUDE INFINITY EDITION': '⭐ OMNICLAUDE INFINITY EDITION',
-    '⭐ OMNICLAUDE INFINITY': '⭐ OMNICLAUDE INFINITY',
-    'Zero Rate-Limit & Multi-Account Failover Continuo': 'Zero Rate-Limit & Seamless Multi-Account Failover',
-    'Vetrina Web': 'Official Store',
-    '🌐 Vetrina Web': '🌐 Official Store',
-    'Acquista Licenza (14,99€)': 'Buy License (14.99€)',
-    '🛒 Acquista Licenza (14,99€)': '🛒 Buy License (14.99€)',
-    'Inserisci Chiave INFINITY': 'Enter INFINITY Key',
-    '🔑 Inserisci Chiave INFINITY': '🔑 Enter INFINITY Key',
-    '🟢 LICENZA INFINITY ATTIVA': '🟢 INFINITY LICENSE ACTIVE',
-    'PROTEZIONE 429 ATTIVA': '429 SHIELD ACTIVE',
-    'Rotazione Multi-Account illimitata e Zero Rate-Limit attivi.': 'Unlimited Multi-Account rotation and Zero Rate-Limit shield active.',
-
-    // Keys & Guide FAQ
-    'Anthropic Claude.ai (Abbonamento Web Pro / Max)': 'Anthropic Claude.ai (Web Subscription Pro / Max)',
-    '🌐 Connetti Account Claude (Login Web)': '🌐 Connect Claude Account (Web Login)',
-    'Salva / Aggiorna': 'Save / Update',
-    '⚡ Apri Gemini Multi-Key Hub →': '⚡ Open Gemini Multi-Key Hub →',
-    'Groq Cloud (Llama 3.3 70B)': 'Groq Cloud (Llama 3.3 70B)',
-    'DeepSeek (R1 + V3)': 'DeepSeek (R1 + V3)',
-    'OpenRouter (400+ modelli)': 'OpenRouter (400+ models)',
-    'Salva': 'Save',
-    'Gratis in 10 sec ↗': 'Free in 10 sec ↗',
-    'Ottieni chiave ↗': 'Get key ↗',
-    'Ottieni / Rinnova chiave gratis ↗': 'Get / Renew free key ↗',
-    'Cos\'è OMNICLAUDE creato da ATON-FUX?': 'What is OMNICLAUDE created by ATON-FUX?',
-    'Cos\'e OMNICLAUDE creato da ATON-FUX?': 'What is OMNICLAUDE created by ATON-FUX?',
-    'Cos’è OMNICLAUDE creato da ATON-FUX?': 'What is OMNICLAUDE created by ATON-FUX?',
-    'Come personalizzo il Paracadute di Riserva?': 'How do I customize the Fallback Parachute?',
-    'Cosa succede se premo "Apri Claude Code" o "Apri OpenCode" e non vedo la finestra?': 'What happens if I click "Launch Claude Code" or "Launch OpenCode" and don\'t see the window?',
-    'Come passo dal tema DARK CYBER al tema LIGHT PRO?': 'How do I switch between DARK CYBER and LIGHT PRO themes?',
-    'Come chiudo tutti i servizi liberando il 100% di RAM e VRAM?': 'How do I close all services and free 100% of RAM and VRAM?'
-  };
-
-  // Reverse maps for Italian restoration
-  const HTML_EN_TO_IT = {};
-  for (const [it, en] of Object.entries(HTML_IT_TO_EN)) {
-    HTML_EN_TO_IT[en] = it;
-  }
-  const DICT_EN_TO_IT = {};
-  for (const [it, en] of Object.entries(DICT_IT_TO_EN)) {
-    DICT_EN_TO_IT[en] = it;
-  }
-
-  function translateDom(targetNode, lang) {
-    if (!targetNode) return;
-    const isEn = lang === 'en';
-
-    // 1. Process Rich HTML Elements (term steps, FAQ body/summary, guide items)
-    const richElements = targetNode.querySelectorAll(
-      '.term-step-title, .term-step-desc, .faq-item summary, .faq-body, .panel-title, .panel-sub, .banner-title, .banner-desc, .kpi-label, .kpi-title, h1, h2, h3, h4'
-    );
-    richElements.forEach(el => {
-      const currentHtml = el.innerHTML.trim();
-      const currentText = el.textContent.trim();
-
-      if (isEn) {
-        if (!el._orig_html) el._orig_html = currentHtml;
-        if (!el._orig_text) el._orig_text = currentText;
-
-        if (HTML_IT_TO_EN[currentHtml]) {
-          el.innerHTML = HTML_IT_TO_EN[currentHtml];
-        } else if (DICT_IT_TO_EN[currentText]) {
-          el.textContent = DICT_IT_TO_EN[currentText];
-        }
-      } else {
-        if (el._orig_html) {
-          el.innerHTML = el._orig_html;
-        } else if (HTML_EN_TO_IT[currentHtml]) {
-          el.innerHTML = HTML_EN_TO_IT[currentHtml];
-        } else if (el._orig_text) {
-          el.textContent = el._orig_text;
-        } else if (DICT_EN_TO_IT[currentText]) {
-          el.textContent = DICT_EN_TO_IT[currentText];
-        }
-      }
-    });
-
-    // 2. Process all other Text Nodes
-    const walker = document.createTreeWalker(
-      targetNode,
-      NodeFilter.SHOW_TEXT,
-      null,
-      false
-    );
-
-    let node;
-    while ((node = walker.nextNode())) {
-      const parent = node.parentElement;
-      if (!parent) continue;
-      const tag = parent.tagName.toUpperCase();
-      if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'CODE' || tag === 'PRE') continue;
-
-      const text = node.textContent;
-      const trimmed = text.trim();
-      if (!trimmed) continue;
-
-      if (isEn) {
-        if (!node._orig_it) node._orig_it = text;
-        if (DICT_IT_TO_EN[trimmed]) {
-          node.textContent = text.replace(trimmed, DICT_IT_TO_EN[trimmed]);
-        }
-      } else {
-        if (node._orig_it) {
-          node.textContent = node._orig_it;
-        } else if (DICT_EN_TO_IT[trimmed]) {
-          node.textContent = text.replace(trimmed, DICT_EN_TO_IT[trimmed]);
-        }
-      }
-    }
-
-    // 3. Translate Placeholders
-    targetNode.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(inp => {
-      const ph = inp.getAttribute('placeholder');
-      if (!ph) return;
-      if (isEn) {
-        if (!inp._orig_ph) inp._orig_ph = ph;
-        if (DICT_IT_TO_EN[ph]) inp.setAttribute('placeholder', DICT_IT_TO_EN[ph]);
-      } else {
-        if (inp._orig_ph) inp.setAttribute('placeholder', inp._orig_ph);
-        else if (DICT_EN_TO_IT[ph]) inp.setAttribute('placeholder', DICT_EN_TO_IT[ph]);
-      }
-    });
-
-    // 4. Translate Titles & Tooltips
-    targetNode.querySelectorAll('button, a, span').forEach(btn => {
-      const title = btn.getAttribute('title');
-      if (title) {
-        if (isEn) {
-          if (!btn._orig_title) btn._orig_title = title;
-          if (DICT_IT_TO_EN[title]) btn.setAttribute('title', DICT_IT_TO_EN[title]);
-        } else {
-          if (btn._orig_title) btn.setAttribute('title', btn._orig_title);
-          else if (DICT_EN_TO_IT[title]) btn.setAttribute('title', DICT_EN_TO_IT[title]);
-        }
-      }
-    });
-  }
+  const I18N_EN = {
+  "topbar_sub": "AI Terminal Command Center · Claude Code &amp; OpenCode Gateway",
+  "btn_stop_all": "🛑 Stop All",
+  "sb_nav_main": "Main Navigation",
+  "nav_home": "🏠 Home &amp; AI Engines",
+  "nav_gpool": "⚡ Gemini Multi-Key &amp; Quota",
+  "nav_parachute": "🛡️ Backup Parachute",
+  "nav_terminal": "ℹ️ Terminal Architecture",
+  "sb_config": "Configuration",
+  "nav_keys": "🔑 API Keys &amp; OAuth",
+  "nav_guide": "📖 Guide &amp; FAQ",
+  "sb_lang": "Language / Lingua",
+  "author_label": "Architecture &amp; Design",
+  "hdr_avvia": "🚀 Home &amp; AI Engine Selector",
+  "sub_avvia": "Universal orchestrator for Claude Code &amp; OpenCode with OmniRoute gateway and Modular Parachute.",
+  "active_model_lbl": "Currently Active Engine (for Claude Code &amp; OpenCode)",
+  "gemini_banner_title": "Gemini Multi-Key Hub &amp; Automatic Failover",
+  "tag_exclusive": "EXCLUSIVE FEATURE",
+  "tag_zero_rl": "ZERO RATE-LIMIT",
+  "gemini_banner_desc": "Add multiple free Google accounts: if one key runs out of tokens (429), OMNICLAUDE switches to another in 0.1s without interrupting Claude Code!",
+  "btn_manage_gpool": "⚡ Manage Multi-Key &amp; Quota →",
+  "ready_to_code_h2": "Ready to Code",
+  "ready_to_code_p": "Choose which terminal tool you want to launch: both route through OmniRoute gateway with zero consumption API costs!",
+  "btn_open_claude": "🚀 LAUNCH CLAUDE CODE",
+  "btn_open_opencode": "⚡ LAUNCH OPENCODE",
+  "hero_footer_hint": "💡 <strong style=\"color:var(--text);\">Claude Code</strong>: Anthropic's interactive agent for pair programming &amp; bash · <strong style=\"color:var(--text);\">OpenCode</strong>: Modern open source terminal TUI agent.",
+  "cloud_engines_title": "☁️ Free Cloud Engines",
+  "cloud_engines_sub": "Click any engine to instantly activate it for both <strong>Claude Code</strong> and <strong>OpenCode</strong>.",
+  "tag_zero_api_cost": "ZERO CONSUMPTION API COSTS",
+  "local_engines_title": "🖥️ Local Engines on this PC (Ollama)",
+  "local_engines_sub": "Dynamic detection of models on your PC + Free Search &amp; Install Engine from <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> and <strong>GitHub</strong>.",
+  "btn_detect_models": "🔄 Detect PC Models",
+  "btn_install_ollama": "💿 Install / Update Ollama",
+  "search_hub_title": "Explore, Search &amp; Install Any Local Model (Ollama · HuggingFace GGUF · GitHub)",
+  "tag_modular_free": "MODULAR &amp; UNRESTRICTED",
+  "search_hub_sub": "No preset models enforced: freely discover any AI engine worldwide or paste model names/links from Ollama, HuggingFace, or GitHub to install on your PC.",
+  "src_all": "🌐 All Sources",
+  "src_ollama": "📚 Ollama Library",
+  "src_hf": "🤗 HuggingFace GGUF",
+  "src_gh": "🐙 GitHub Repositories",
+  "btn_search_models": "🔍 Search Models",
+  "direct_install_label": "⚡ Direct Install (ID / URL):",
+  "btn_pull_custom": "📥 Download &amp; Install on PC",
+  "ph_model_search": "🔍 Search any model (e.g. coder, llama, mistral, gemma, uncensored, phi, vision, deepseek...)",
+  "ph_direct_install": "E.g. codellama:7b, hf.co/bartowski/DeepSeek-R1-Distill-Qwen-7B-GGUF or GitHub URL",
+  "ph_custom_parachute": "e.g. openrouter/qwen/qwen-2.5-coder-32b-instruct:free",
+  "ph_gpool_name": "e.g. Personal Google Account 2, Work, etc.",
+  "ph_gpool_key": "Paste AIzaSy... key",
+  "ph_key_gemini": "Google Gemini API Key (AIza...)",
+  "ph_key_groq": "Groq API Key (gsk_...)",
+  "ph_key_deepseek": "DeepSeek API Key (sk-...)",
+  "ph_key_openrouter": "OpenRouter API Key (sk-or-...)",
+  "parachute_title": "🛡️ Backup Parachute (Configurable &amp; Modular)",
+  "parachute_sub": "Zero interruptions: when an engine exhausts its quota, the next one takes over automatically according to your setup.",
+  "parachute_status_h2": "Multi-Engine Auto-Fallback Status (`combo/paracadute-gratis`)",
+  "parachute_desc": "Freely customize engine order, routing strategy, and which Cloud or Local (Ollama) models to include in your safety chain. Every change is synced directly to the <strong>OmniRoute</strong> gateway.",
+  "active_chain_title": "⛓️ Active Fallback Chain",
+  "active_chain_sub": "Use ⬆️ ⬇️ arrows to reorder engine priority or ✕ to remove. The first engine is Primary, subsequent ones are automatic Backups.",
+  "gateway_strategy_lbl": "Gateway Strategy:",
+  "strat_opt_priority": "🎯 Priority Fallback (Cascading 1st → 2nd → 3rd)",
+  "strat_opt_rr": "🔄 Round-Robin (Balanced rotation)",
+  "strat_opt_lu": "⚖️ Least-Used (Route to least loaded engine)",
+  "btn_save_parachute": "💾 Save, Sync &amp; Activate Parachute",
+  "btn_reset_parachute": "🔄 Reset Defaults",
+  "add_engine_app_title": "➕ Add Engine from App",
+  "add_engine_app_sub": "Select any Cloud or Local (Ollama) engine detected in the app to add it to your Parachute chain:",
+  "custom_model_title": "🔧 Add Custom Model ID (OmniRoute / OpenRouter)",
+  "btn_add_custom": "+ Add",
+  "ti_panel_title": "ℹ️ Terminal Architecture",
+  "ti_panel_sub": "Quick operational guide for using Claude Code and OpenCode with OMNICLAUDE.",
+  "ti_step1_title": "A dedicated terminal window opens",
+  "ti_step1_desc": "The interactive <strong>Claude Code</strong> or <strong>OpenCode</strong> terminal opens in a dedicated console. Enter your prompts or commands and press <kbd>Enter</kbd>.",
+  "ti_step2_title": "If the engine exhausts credits",
+  "ti_step2_desc": "With the <strong>Backup Parachute active</strong>, the OmniRoute gateway automatically switches engines along your modular chain without interrupting your workflow.",
+  "ti_step3_title": "To switch AI engines",
+  "ti_step3_desc": "Go to <strong>Home &amp; AI Engines</strong> under \"Ready to Code\" (sections <em>Free Cloud Engines</em> or <em>Local Engines</em>), click your preferred engine, and launch the terminal.",
+  "ti_step4_title": "To shut down everything",
+  "ti_step4_desc": "Use the red <strong>\"Stop All\"</strong> button in the top right to free 100% of RAM and VRAM, or type <code style=\"font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)\">exit</code> in the terminal.",
+  "ti_shortcuts_title": "⚡ Useful Shortcuts inside the Terminal",
+  "ti_short1": "• Type <code style=\"font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)\">/help</code> to view all available commands in Claude Code or OpenCode.",
+  "ti_short2": "• Type <code style=\"font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)\">/compact</code> to compress conversation context in long coding sessions.",
+  "ti_short3": "• Type <code style=\"font-family:monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;color:var(--cyan)\">exit</code> or press <kbd>Ctrl+C</kbd> twice to terminate the terminal session.",
+  "gpool_hdr_title": "Gemini Multi-Key Hub &amp; Live Quota",
+  "gpool_hdr_tag1": "ZERO RATE-LIMIT FAILOVER",
+  "gpool_hdr_sub": "Add multiple free Google AI Studio accounts: if one key runs out of quota (HTTP 429), OMNICLAUDE instantly switches to the next without stopping Claude Code!",
+  "btn_refresh_gpool": "🔄 Refresh Live",
+  "btn_test_all_keys": "🧪 Test All Keys",
+  "kpi_active_key": "Active Key In Use",
+  "kpi_tokens_today": "Tokens Consumed Today",
+  "kpi_failover": "Auto-Failover on 429 Error",
+  "lbl_enable": "Enable",
+  "lbl_rotation_sub": "Instant rotation with zero stall",
+  "kpi_keys_pool": "Keys in Pool",
+  "add_gemini_title": "➕ Add Gemini Account",
+  "add_gemini_sub": "Create a free API key from any Google account on <a href=\"https:#aistudio.google.com/app/apikey\" target=\"_blank\" style=\"color:var(--cyan);text-decoration:underline;\">Google AI Studio ↗</a> and paste it here:",
+  "lbl_gpool_name": "Account Name / Label:",
+  "lbl_gpool_key": "API Key (AIza...):",
+  "lbl_gpool_val": "Verify key with Google before adding",
+  "btn_add_gemini_pool": "➕ Add Key to Pool",
+  "gemini_secret_box": "💡 <strong style=\"color:var(--text);\">Secret to Unlimited Tokens:</strong> Google AI Studio provides 1 million free tokens per day for each Google account. By adding 3 separate accounts to this pool, you get <strong>3 million tokens per day</strong> at zero cost!",
+  "configured_keys_title": "📋 Configured Pool Keys",
+  "configured_keys_sub": "All keys securely saved locally on your PC. Failover automatically rotates to the next key if one hits rate limits.",
+  "events_log_title": "📡 Live Event &amp; Failover Log",
+  "events_log_sub": "Real-time timeline of automatic rotations and key validity checks.",
+  "keys_panel_title": "🔑 API Keys &amp; OAuth Login",
+  "keys_panel_sub": "Enter API keys for the engines you wish to use. You only need ONE key to get started (Gemini or Groq).",
+  "key_claude_title": "Anthropic Claude.ai (Web Pro / Max Subscription)",
+  "link_open_claude": "Open Claude.ai ↗",
+  "key_claude_desc": "Connect your Claude Pro/Max web account via official OAuth without consumption API costs. If using a free tier, use <strong>Google Gemini Flash</strong>, <strong>Groq Llama 3.3</strong>, or <strong>local Ollama models</strong> with zero costs!",
+  "btn_claude_oauth": "🌐 Connect Claude Account (Web Login)",
+  "key_gemini_title": "Google Gemini",
+  "link_get_gemini": "Get / Renew free key ↗",
+  "key_gemini_desc": "Includes 1 million free tokens per day on Google AI Studio for limitless programming. Enter or update your `AIza...` key below.",
+  "btn_save_gemini": "Save / Update",
+  "key_gemini_hint": "⚡ <strong>Exclusive Feature:</strong> Configure multiple free Google accounts with <strong>Zero Rate-Limit Auto-Failover</strong> and live token monitoring!",
+  "btn_open_gemini_hub": "⚡ Open Gemini Multi-Key Hub →",
+  "key_groq_title": "Groq Cloud (Llama 3.3 70B)",
+  "link_get_groq": "Free in 10 sec ↗",
+  "key_groq_desc": "Groq is the fastest engine available (300+ tok/s). Adding this key reinforces your Backup Parachute with lightning-fast inference.",
+  "btn_save": "Save",
+  "key_deepseek_title": "DeepSeek (R1 + V3)",
+  "link_get_deepseek": "Get key ↗",
+  "key_deepseek_desc": "Unlocks DeepSeek R1 (advanced reasoning) and DeepSeek V3 (specialized coding). Highly recommended in the Parachute chain.",
+  "key_openrouter_title": "OpenRouter (400+ models)",
+  "link_get_openrouter": "Get key ↗",
+  "key_openrouter_desc": "With OpenRouter unlock hundreds of additional models including Qwen 2.5 Coder, Mistral, and Llama `:free` accessible with a single account.",
+  "guide_panel_title": "📖 Official Guide &amp; FAQ — OMNICLAUDE",
+  "guide_panel_sub": "Quick documentation designed and curated by <strong>ATON-FUX</strong>.",
+  "faq_q1": "What is OMNICLAUDE created by ATON-FUX?",
+  "faq_a1": "<strong>OMNICLAUDE</strong> is the web command center and local orchestrator created by <strong>ATON-FUX</strong> to run <strong>Claude Code</strong> and <strong>OpenCode</strong> powered by free Cloud AI engines (Gemini, Groq, DeepSeek, OpenRouter) and Local models (Ollama), featuring a modular anti-interruption <strong>Backup Parachute</strong> and automated RAM/VRAM lifecycle management.",
+  "faq_q2": "How do I customize the Backup Parachute?",
+  "faq_a2": "Open <strong>🛡️ Backup Parachute</strong> in the left sidebar. Reorder engines using ⬆️ ⬇️ arrows, remove unneeded engines, add Cloud or Local (Ollama) models from the app catalog, and select your gateway strategy (e.g. <code>Priority</code> cascading or <code>Round-Robin</code>). Click <strong>Save, Sync &amp; Activate Parachute</strong> to apply the chain directly to the OmniRoute gateway.",
+  "faq_q3": "What happens if I click \"Launch Claude Code\" or \"Launch OpenCode\" and don't see the window?",
+  "faq_a3": "The terminal window might open behind the browser: press <kbd>Alt+Tab</kbd> or look for the terminal icon in your Windows taskbar.",
+  "faq_q4": "How do I switch between DARK CYBER and LIGHT PRO themes?",
+  "faq_a4": "At the top right of the main bar, toggle the <strong>🖤 DARK CYBER / 🤍 LIGHT PRO</strong> selector. Your theme preference is automatically remembered by your browser.",
+  "faq_q5": "How do I stop all services and free 100% of RAM and VRAM?",
+  "faq_a5": "Click the red <strong>🛑 Stop All</strong> button in the top right or execute <code>FERMA.bat</code>. The system closes Claude Code, OpenCode, unloads Ollama models from GPU VRAM, and stops OmniRoute and the web server.",
+  "shutdown_h2": "All OMNICLAUDE Services Stopped",
+  "shutdown_p1": "OmniRoute, AI terminals, and the Control Center have been stopped successfully. RAM and VRAM have been released.",
+  "shutdown_p2": "To restart: double click START.bat in the folder.",
+  "badge_infinity_active": "⭐ INFINITY ACTIVE",
+  "side_official_proj": "⚡ Official Project ⚡",
+  "side_suite_sub": "OMNICLAUDE Open Source Suite<br>GNU GPL v3 Protected License",
+  "tag_status_verifying": "Checking...",
+  "tag_key_not_provided": "Key not provided",
+  "tag_optional": "Optional",
+  "tag_free": "FREE",
+  "title_search_ollama": "Open official Ollama library in browser",
+  "title_search_hf": "Explore all GGUF models on HuggingFace",
+  "title_search_gh": "Search repositories and Modelfiles on GitHub"
+};
 
   function setAppLanguage(lang) {
-    currentAppLang = lang === 'en' ? 'en' : 'it';
+    currentAppLang = (lang === 'en') ? 'en' : 'it';
     localStorage.setItem('omniclaude_app_lang', currentAppLang);
 
     const btnIt = document.getElementById('btn-app-lang-it');
@@ -2804,31 +2970,31 @@
     if (btnIt) btnIt.classList.toggle('active', currentAppLang === 'it');
     if (btnEn) btnEn.classList.toggle('active', currentAppLang === 'en');
 
-    // Run DOM translation across entire app
-    translateDom(document.querySelector('.app') || document.body, currentAppLang);
+    const dict = (currentAppLang === 'en' ? I18N_EN : I18N_IT);
 
-    // Re-render dynamic cards
+    // 1. Text elements
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if (dict[k] !== undefined) el.innerHTML = dict[k];
+    });
+
+    // 2. Placeholders
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const k = el.getAttribute('data-i18n-ph');
+      if (dict[k] !== undefined) el.setAttribute('placeholder', dict[k]);
+    });
+
+    // 3. Titles / tooltips
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+      const k = el.getAttribute('data-i18n-title');
+      if (dict[k] !== undefined) el.setAttribute('title', dict[k]);
+    });
+
+    // 4. Update status & dynamic cards in active language immediately
+    applyStatus();
     if (typeof loadGeminiPool === 'function') {
       loadGeminiPool();
     }
-  }
-
-  // Observe dynamic content additions so they automatically get translated
-  const appObserver = new MutationObserver(mutations => {
-    if (currentAppLang === 'en') {
-      mutations.forEach(m => {
-        m.addedNodes.forEach(node => {
-          if (node.nodeType === 1) { // Element node
-            translateDom(node, 'en');
-          }
-        });
-      });
-    }
-  });
-
-  const appRoot = document.querySelector('.app') || document.body;
-  if (appRoot) {
-    appObserver.observe(appRoot, { childList: true, subtree: true });
   }
 
   // ─── Init ───
