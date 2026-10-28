@@ -87,6 +87,38 @@
       transition: background-color 0.25s ease, color 0.25s ease;
     }
 
+    
+    /* ─── SIDEBAR LANGUAGE SWITCHER ─── */
+    .sidebar-lang-container {
+      display: flex; gap: 6px; padding: 2px 12px 14px;
+    }
+    .lang-toggle-btn {
+      flex: 1;
+      background: var(--surface2);
+      border: 1px solid var(--border-subtle);
+      color: var(--muted);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 7px 4px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    .lang-toggle-btn:hover {
+      border-color: var(--cyan);
+      color: var(--text);
+    }
+    .lang-toggle-btn.active {
+      background: var(--surface3);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan-dim);
+    }
+
     /* ─── LAYOUT ─── */
     .app { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
 
@@ -654,10 +686,10 @@
         <div>
           <div class="logo-title-row">
             <h1>OMNICLAUDE</h1>
-            <span class="version-pill">PRO EDITION v2.0</span>
+            <span class="version-pill">INFINITY v2.0</span>
             <span class="tag" id="topbar-pro-badge" style="display:none;background:rgba(255,184,0,0.18);color:#ffb800;border:1px solid rgba(255,184,0,0.4);font-weight:800;font-size:10px;">⭐ PRO ATTIVO</span>
           </div>
-          <p>AI Terminal Command Center · Claude Code &amp; OpenCode Gateway</p>
+          <p><span data-i18n="topbar_sub">AI Terminal Command Center · Claude Code &amp; OpenCode Gateway</span></p>
         </div>
       </div>
 
@@ -682,7 +714,7 @@
         <span class="dot dot-green" id="dot-status"></span>
         <span id="txt-status">OmniRoute: Online</span>
       </div>
-      <button class="btn-icon btn-red" onclick="stopAll()">🛑 Chiudi Tutto</button>
+      <button class="btn-icon btn-red" onclick="stopAll()" data-i18n="btn_stop_all">🛑 Chiudi Tutto</button>
     </div>
   </header>
 
@@ -690,27 +722,34 @@
 
     <!-- ─── SIDEBAR (PANNELLO SINISTRO) ─── -->
     <nav class="sidebar">
-      <div class="sidebar-section">Navigazione Principale</div>
+      <div class="sidebar-section" data-i18n="sb_nav_main">Navigazione Principale</div>
       <button class="nav-item active" onclick="showPanel('avvia')">
-        <span class="nav-icon">🚀</span> Home &amp; Motori AI
+        <span class="nav-icon">🚀</span> <span data-i18n="nav_home">Home &amp; Motori AI</span>
       </button>
       <button class="nav-item" onclick="showPanel('gemini-pool')">
-        <span class="nav-icon">⚡</span> Gemini Multi-Key &amp; Quota
+        <span class="nav-icon">⚡</span> <span data-i18n="nav_gpool">Gemini Multi-Key &amp; Quota</span>
       </button>
       <button class="nav-item" onclick="showPanel('parachute')">
-        <span class="nav-icon">🛡️</span> Paracadute Riserva
+        <span class="nav-icon">🛡️</span> <span data-i18n="nav_parachute">Paracadute Riserva</span>
       </button>
       <button class="nav-item" onclick="showPanel('terminal-info')">
-        <span class="nav-icon">ℹ️</span> Come funziona il terminale
+        <span class="nav-icon">ℹ️</span> <span data-i18n="nav_terminal">Come funziona il terminale</span>
       </button>
 
-      <div class="sidebar-section">Configurazione</div>
+      <div class="sidebar-section" data-i18n="sb_config">Configurazione</div>
       <button class="nav-item" onclick="showPanel('keys')">
-        <span class="nav-icon">🔑</span> Chiavi API &amp; OAuth
+        <span class="nav-icon">🔑</span> <span data-i18n="nav_keys">Chiavi API &amp; OAuth</span>
       </button>
       <button class="nav-item" onclick="showPanel('guide')">
-        <span class="nav-icon">📖</span> Guida &amp; FAQ
+        <span class="nav-icon">📖</span> <span data-i18n="nav_guide">Guida &amp; FAQ</span>
       </button>
+
+      <div class="sidebar-section" data-i18n="sb_lang">Lingua / Language</div>
+      <div class="sidebar-lang-container">
+        <button class="lang-toggle-btn active" id="btn-app-lang-it" onclick="setAppLanguage('it')">🇮🇹 Italiano</button>
+        <button class="lang-toggle-btn" id="btn-app-lang-en" onclick="setAppLanguage('en')">🇬🇧 English</button>
+      </div>
+
 
       <div class="sidebar-spacer"></div>
 
@@ -735,9 +774,9 @@
             <div>
               <div class="panel-title">
                 <span class="cyber-accent">OMNICLAUDE</span>
-                <span>— Pagina Iniziale &amp; Scelta Motore</span>
+                <span data-i18n="hdr_avvia">— Pagina Iniziale &amp; Scelta Motore</span>
               </div>
-              <div class="panel-sub">Orchestratore universale per Claude Code &amp; OpenCode con gateway OmniRoute e Paracadute Modulare.</div>
+              <div class="panel-sub" data-i18n="sub_avvia">Orchestratore universale per Claude Code &amp; OpenCode con gateway OmniRoute e Paracadute Modulare.</div>
             </div>
           </div>
           <div class="author-reserved-box" style="cursor:default;">
@@ -1024,7 +1063,7 @@
           </div>
         </div>
 
-        <!-- BANNER STATO LICENZA PRO / SBLOCCO (CREATO DA ATON-FUX) -->
+        <!-- BANNER STATO LICENZA INFINITY / SBLOCCO (CREATO DA ATON-FUX) -->
         <div id="gpool-pro-banner" style="margin-bottom: 20px;"></div>
 
         <!-- 4 CARDS KPI IN ALTO -->
@@ -2046,7 +2085,10 @@
   }
 
   async function promptActivateLicense() {
-    const key = prompt("🔑 Incolla qui il tuo Codice Licenza OMNICLAUDE PRO (acquistato su Gumroad o inviato da ATON-FUX):");
+    const msgPrompt = currentAppLang === 'en' 
+      ? "🔑 Paste your OMNICLAUDE INFINITY License Key here (purchased on Gumroad or sent by ATON-FUX):"
+      : "🔑 Incolla qui il tuo Codice Licenza OMNICLAUDE INFINITY (acquistato su Gumroad o inviato da ATON-FUX):";
+    const key = prompt(msgPrompt);
     if (!key || !key.trim()) return;
 
     showToast("Verifica licenza in corso...");
@@ -2089,11 +2131,11 @@
             <div style="background:linear-gradient(135deg,rgba(255,184,0,0.08),rgba(0,229,255,0.05));border:1px solid rgba(255,184,0,0.38);border-radius:12px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 0 16px rgba(255,184,0,0.08);">
               <div style="max-width:680px;">
                 <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-                  <span class="tag" style="background:rgba(255,184,0,0.2);color:#ffb800;border:1px solid rgba(255,184,0,0.5);font-weight:800;">⭐ OMNICLAUDE PRO EDITION</span>
+                  <span class="tag" style="background:rgba(255,184,0,0.2);color:#ffb800;border:1px solid rgba(255,184,0,0.5);font-weight:800;">⭐ OMNICLAUDE INFINITY EDITION</span>
                   <span style="font-size:13px;font-weight:700;color:var(--text);">Zero Rate-Limit &amp; Multi-Account Failover Continuo</span>
                 </div>
                 <div style="font-size:12px;color:var(--muted2);line-height:1.5;">
-                  La versione base include 1 account gratuito. Con <strong>OMNICLAUDE PRO (14,99€ Una Tantum)</strong> puoi collegare account Google multipli: quando una chiave tocca il rate limit (429), il sistema ruota all'istante senza bloccare Claude Code!
+                  La versione base include 1 account gratuito. Con <strong>OMNICLAUDE INFINITY (14,99€ Una Tantum)</strong> puoi collegare account Google multipli: quando una chiave tocca il rate limit (429), il sistema ruota all'istante senza bloccare Claude Code!
                 </div>
               </div>
               <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
@@ -2103,7 +2145,7 @@
                   🛒 Acquista Licenza (14,99€)
                 </a>
                 <button class="btn-secondary-cyber" onclick="promptActivateLicense()" style="border-color:rgba(255,184,0,0.5);color:#ffb800;font-size:12px;padding:8px 14px;">
-                  🔑 Inserisci Chiave PRO
+                  🔑 Inserisci Chiave INFINITY
                 </button>
               </div>
             </div>
@@ -2115,17 +2157,17 @@
                 <span style="font-size:22px;">⭐</span>
                 <div>
                   <div style="display:flex;align-items:center;gap:8px;">
-                    <span class="tag tag-green" style="font-weight:800;">🟢 LICENZA PRO ATTIVA</span>
+                    <span class="tag tag-green" style="font-weight:800;">🟢 ${currentAppLang === 'en' ? 'INFINITY LICENSE ACTIVE' : 'LICENZA INFINITY ATTIVA'}</span>
                     <span style="font-size:12.5px;font-weight:700;color:var(--text);">${escapeHtml(lic.licensed_to || 'ATON-FUX')}</span>
-                    <span class="tag tag-cyan" style="font-size:10px;">${escapeHtml(lic.license_type || 'Lifetime Pro')}</span>
+                    <span class="tag tag-cyan" style="font-size:10px;">${escapeHtml(lic.license_type || 'Lifetime Infinity')}</span>
                   </div>
                   <div style="font-size:11px;color:var(--muted2);margin-top:2px;">
-                    Chiave: <code>${escapeHtml(lic.license_key_masked || 'OMNI-PRO-***')}</code> · Rotazione Multi-Account illimitata e Zero Rate-Limit attivi.
+                    ${currentAppLang === 'en' ? 'Key' : 'Chiave'}: <code>${escapeHtml(lic.license_key_masked || 'OMNI-INF-***')}</code> · ${currentAppLang === 'en' ? 'Unlimited Multi-Account rotation and Zero Rate-Limit active.' : 'Rotazione Multi-Account illimitata e Zero Rate-Limit attivi.'}
                   </div>
                 </div>
               </div>
               <div>
-                <span class="tag tag-green" style="font-size:11px;">PROTEZIONE 429 ATTIVA</span>
+                <span class="tag tag-green" style="font-size:11px;">${currentAppLang === 'en' ? '429 SHIELD ACTIVE' : 'PROTEZIONE 429 ATTIVA'}</span>
               </div>
             </div>
           `;
@@ -2281,7 +2323,7 @@
         loadGeminiPool();
         loadStatus();
       } else if (d.pro_required) {
-        if (confirm("⭐ OMNICLAUDE PRO RICHIESTO\n\n" + d.error + "\n\nVuoi aprire la pagina Gumroad per acquistare la licenza a 14,99€?")) {
+        if (confirm("⭐ OMNICLAUDE INFINITY RICHIESTO\n\n" + d.error + "\n\nVuoi aprire la pagina Gumroad per acquistare la licenza a 14,99€?")) {
           window.open(d.gumroad_url || "https://kronostone.gumroad.com/l/omniclaude-pro", "_blank");
         }
       } else {
@@ -2387,7 +2429,7 @@
       } else if (d.pro_required) {
         const foToggle = document.getElementById("gpool-failover-toggle");
         if (foToggle) foToggle.checked = !enabled;
-        if (confirm("⭐ OMNICLAUDE PRO RICHIESTO\n\n" + d.error + "\n\nVuoi aprire la pagina Gumroad per acquistare la licenza a 14,99€?")) {
+        if (confirm("⭐ OMNICLAUDE INFINITY RICHIESTO\n\n" + d.error + "\n\nVuoi aprire la pagina Gumroad per acquistare la licenza a 14,99€?")) {
           window.open(d.gumroad_url || "https://kronostone.gumroad.com/l/omniclaude-pro", "_blank");
         }
       } else {
@@ -2398,7 +2440,122 @@
     }
   }
 
+  
+  // ═════════════════════════════════════════════════════════════════════════
+  // 🌐 MULTILINGUAL I18N SYSTEM (ITALIAN / ENGLISH)
+  // ═════════════════════════════════════════════════════════════════════════
+  let currentAppLang = localStorage.getItem('omniclaude_app_lang') || 'it';
+
+  const I18N_DICT = {
+    it: {
+      sb_nav_main: "Navigazione Principale",
+      nav_home: "Home & Motori AI",
+      nav_gpool: "Gemini Multi-Key & Quota",
+      nav_parachute: "Paracadute Riserva",
+      nav_terminal: "Come funziona il terminale",
+      sb_config: "Configurazione",
+      nav_keys: "Chiavi API & OAuth",
+      nav_guide: "Guida & FAQ",
+      sb_lang: "Lingua / Language",
+      topbar_sub: "AI Terminal Command Center · Claude Code & OpenCode Gateway",
+      btn_stop_all: "🛑 Chiudi Tutto",
+      hdr_avvia: "— Pagina Iniziale & Scelta Motore",
+      sub_avvia: "Orchestratore universale per Claude Code & OpenCode con gateway OmniRoute e Paracadute Modulare.",
+      hdr_gpool: "— Gemini Multi-Key Hub & Quota Rotator",
+      sub_gpool: "Gestione avanzata multi-account Google Gemini con failover automatico anti-429 e bilanciamento quota.",
+      hdr_para: "— Paracadute Modulare di Riserva",
+      sub_para: "Failover automatico a cascata: se il motore primario va in errore o supera i limiti, subentra la riserva.",
+      hdr_term: "— Come Funziona il Terminale",
+      sub_term: "Architettura, porte locali, comando CLI generato e flusso delle richieste tra Claude Code e OmniRoute.",
+      hdr_keys: "— Configurazione Chiavi API & Provider",
+      sub_keys: "Inserisci le credenziali dei provider cloud per abilitarli nei motori di Claude Code e OpenCode.",
+      hdr_guide: "— Guida Ufficiale & Risoluzione Problemi",
+      sub_guide: "Manuale passo-passo creato da ATON-FUX per l'utilizzo ottimale di Claude Code, OpenCode e OmniRoute.",
+      card_ready_title: "🚀 Pronto per Programmare",
+      card_ready_sub: "Seleziona il modello desiderato, verifica la connessione e lancia Claude Code o OpenCode con un clic.",
+      btn_launch_claude: "🚀 Lancia Claude Code",
+      btn_launch_opencode: "💻 Lancia OpenCode",
+      btn_test_conn: "⚡ Test Connessione",
+      card_cloud_title: "☁️ Motori Cloud Principali",
+      card_local_title: "💻 Modelli Locali Ollama (100% Offline)",
+      gpool_title_sub: "Zero Rate-Limit & Multi-Account Failover Continuo",
+      gpool_desc: "La versione base include 1 account gratuito. Con <strong>OMNICLAUDE INFINITY (14,99€ Una Tantum)</strong> puoi collegare account Google multipli: quando una chiave tocca il rate limit (429), il sistema ruota all'istante senza bloccare Claude Code!",
+      gpool_btn_web: "🌐 Vetrina Web",
+      gpool_btn_wa: "💬 WhatsApp",
+      gpool_btn_buy: "🛒 Acquista Licenza (14,99€)",
+      gpool_btn_enter_key: "🔑 Inserisci Chiave INFINITY",
+      gpool_active_badge: "🟢 LICENZA INFINITY ATTIVA",
+      gpool_active_sub: "Rotazione Multi-Account illimitata e Zero Rate-Limit attivi.",
+      gpool_shield_active: "PROTEZIONE 429 ATTIVA"
+    },
+    en: {
+      sb_nav_main: "Main Navigation",
+      nav_home: "Home & AI Engines",
+      nav_gpool: "Gemini Multi-Key & Quota",
+      nav_parachute: "Backup Parachute",
+      nav_terminal: "Terminal Architecture",
+      sb_config: "Configuration",
+      nav_keys: "API Keys & OAuth",
+      nav_guide: "Guide & FAQ",
+      sb_lang: "Language / Lingua",
+      topbar_sub: "AI Terminal Command Center · Claude Code & OpenCode Gateway",
+      btn_stop_all: "🛑 Stop All",
+      hdr_avvia: "— Home & Engine Selector",
+      sub_avvia: "Universal orchestrator for Claude Code & OpenCode with OmniRoute gateway and Modular Parachute.",
+      hdr_gpool: "— Gemini Multi-Key Hub & Quota Rotator",
+      sub_gpool: "Multi-account Google Gemini pool manager with auto-failover against HTTP 429 and live quota balancing.",
+      hdr_para: "— Modular Fallback Parachute",
+      sub_para: "Automatic cascading failover: if primary engine fails or exhausts quota, emergency backup takes over instantly.",
+      hdr_term: "— Terminal Architecture & Operation",
+      sub_term: "Architecture, local ports, generated CLI commands and request routing between Claude Code and OmniRoute.",
+      hdr_keys: "— API Keys & Provider Setup",
+      sub_keys: "Configure credentials for cloud providers to enable them in Claude Code and OpenCode engines.",
+      hdr_guide: "— Official Guide & Troubleshooting",
+      sub_guide: "Step-by-step user manual crafted by ATON-FUX for getting the best performance from Claude Code and OpenCode.",
+      card_ready_title: "🚀 Ready to Code",
+      card_ready_sub: "Select your desired AI model, verify connection and launch Claude Code or OpenCode with one click.",
+      btn_launch_claude: "🚀 Launch Claude Code",
+      btn_launch_opencode: "💻 Launch OpenCode",
+      btn_test_conn: "⚡ Test Connection",
+      card_cloud_title: "☁️ Primary Cloud Engines",
+      card_local_title: "💻 Local Ollama Models (100% Offline)",
+      gpool_title_sub: "Zero Rate-Limit & Continuous Multi-Account Failover",
+      gpool_desc: "The base community tier includes 1 free account. With <strong>OMNICLAUDE INFINITY (14.99€ One-Time)</strong> you can connect unlimited Google accounts: when a key hits 429 quota, the engine fails over seamlessly in milliseconds!",
+      gpool_btn_web: "🌐 Store Page",
+      gpool_btn_wa: "💬 WhatsApp",
+      gpool_btn_buy: "🛒 Buy License (14.99€)",
+      gpool_btn_enter_key: "🔑 Enter INFINITY Key",
+      gpool_active_badge: "🟢 INFINITY LICENSE ACTIVE",
+      gpool_active_sub: "Unlimited Multi-Account failover and Zero Rate-Limit shield active.",
+      gpool_shield_active: "429 SHIELD ACTIVE"
+    }
+  };
+
+  function setAppLanguage(lang) {
+    currentAppLang = lang === 'en' ? 'en' : 'it';
+    localStorage.setItem('omniclaude_app_lang', currentAppLang);
+
+    const btnIt = document.getElementById('btn-app-lang-it');
+    const btnEn = document.getElementById('btn-app-lang-en');
+    if (btnIt) btnIt.classList.toggle('active', currentAppLang === 'it');
+    if (btnEn) btnEn.classList.toggle('active', currentAppLang === 'en');
+
+    const dict = I18N_DICT[currentAppLang] || I18N_DICT.it;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key]) {
+        el.innerHTML = dict[key];
+      }
+    });
+
+    // Re-render dynamic elements that use language
+    if (typeof loadGeminiPool === 'function') {
+      loadGeminiPool();
+    }
+  }
+
   // ─── Init ───
+  setAppLanguage(currentAppLang);
   loadStatus();
   setInterval(loadStatus, 6000);
 </script>
