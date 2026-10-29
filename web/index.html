@@ -1416,6 +1416,7 @@
     }
   };
 
+  let currentAppLang = localStorage.getItem("omniclaude_app_lang") || "it";
   let currentStatus = {};
   let activePanel = "avvia";
   let editableParachuteModels = [
@@ -1905,9 +1906,25 @@
     const c = document.getElementById("local-models-grid");
     if (!c) return;
     c.innerHTML = "";
-    const ol = currentStatus.ollama || { installed: false, models: [] };
     const badge = document.getElementById("ollama-home-badge");
     const isEn = (currentAppLang === 'en');
+
+    if (!currentStatus || !currentStatus.ollama) {
+      if (badge) {
+        badge.textContent = isEn ? "DETECTING PC HARDWARE..." : "RILEVAMENTO HARDWARE PC...";
+        badge.className = "tag tag-cyan";
+      }
+      c.innerHTML = `
+        <div class="model-card no-click" style="grid-column:1/-1; border-color:var(--border-bright);">
+          <div class="mc-desc" style="padding:14px; color:var(--cyan); font-family:'JetBrains Mono',monospace;">
+            ⏳ ${isEn ? "Scanning local hardware for Ollama models..." : "Rilevamento motori locali Ollama sul tuo PC in corso..."}
+          </div>
+        </div>
+      `;
+      return;
+    }
+
+    const ol = currentStatus.ollama || { installed: false, models: [] };
 
     if (!ol.installed) {
       if (badge) {
@@ -2875,8 +2892,9 @@ async function installOllama() {
   }
 
   // ─── Init (Instant Zero-Lag Render) ───
-  renderCloudModels();
   setAppLanguage(currentAppLang);
+  renderCloudModels();
+  renderLocalModels();
   loadStatus();
   setInterval(loadStatus, 6000);
 
