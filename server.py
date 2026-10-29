@@ -166,7 +166,7 @@ GEMINI_KEYS_FILE = DIR / "gemini_keys.json"
 OMNIROUTE_DIR = Path(os.environ.get("USERPROFILE", "")) / ".omniroute"
 OMNIROUTE_DB = OMNIROUTE_DIR / "storage.sqlite"
 _POOL_LOCK = threading.Lock()
-_LAST_PROCESSED_CALL_ID = ""
+_LAST_PROCESSED_TIMESTAMP = ""
 
 
 def mask_key(k: str) -> str:
@@ -437,27 +437,38 @@ def rotate_to_next_gemini_key(reason: str = "Rate Limit 429 rilevato") -> dict:
 
 
 def _gemini_monitor_daemon():
-    """Background thread: monitors SQLite call_logs for 429 quota exhaustion and recovers cooled-down keys."""
-    global _LAST_PROCESSED_CALL_ID
-    # Inizializza con l'ultimo ID esistente per non scattare su vecchie chiamate storiche
+    """Background thread: monitors SQLite call_logs for live token consumption per key, handles 429 quota exhaustion, and recovers cooled-down keys."""
+    global _LAST_PROCESSED_TIMESTAMP
+    last_reset_day = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+
+    # Inizializza con l'ultimo timestamp per monitorare le chiamate successive
     if OMNIROUTE_DB.exists():
         try:
             conn = sqlite3.connect(f"file:{OMNIROUTE_DB}?mode=ro", uri=True, timeout=1.0)
-            row = conn.cursor().execute("SELECT id FROM call_logs WHERE provider = 'gemini' ORDER BY id DESC LIMIT 1").fetchone()
+            row = conn.cursor().execute("SELECT timestamp FROM call_logs WHERE provider = 'gemini' ORDER BY timestamp DESC LIMIT 1").fetchone()
             conn.close()
             if row:
-                _LAST_PROCESSED_CALL_ID = row[0]
+                _LAST_PROCESSED_TIMESTAMP = row[0]
         except Exception:
             pass
 
     while True:
         try:
-            time.sleep(3.0)
+            time.sleep(2.5)
             pool = load_gemini_pool()
             now_ts = int(time.time())
+            current_day = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
             dirty = False
 
-            # 1. Ripristina le chiavi il cui cooldown è terminato
+            # Reset giornaliero della quota a mezzanotte UTC (come Google AI Studio)
+            if current_day != last_reset_day:
+                last_reset_day = current_day
+                for k in pool.get("keys", []):
+                    k["calls_count"] = 0
+                    k["tokens_used"] = 0
+                dirty = True
+
+            # 1. Ripristina le chiavi il cui cooldown di 5 minuti è terminato
             for k in pool.get("keys", []):
                 if k.get("status") == "rate_limited":
                     until = k.get("rate_limited_until", 0)
@@ -466,32 +477,65 @@ def _gemini_monitor_daemon():
                         k["rate_limited_until"] = 0
                         dirty = True
 
+            # 2. Legge le chiamate recenti da OmniRoute SQLite per conteggio token live per chiave attiva
+            if OMNIROUTE_DB.exists():
+                try:
+                    conn = sqlite3.connect(f"file:{OMNIROUTE_DB}?mode=ro", uri=True, timeout=1.5)
+                    cur = conn.cursor()
+                    if _LAST_PROCESSED_TIMESTAMP:
+                        cur.execute('''
+                            SELECT id, status, timestamp, error_summary, model, tokens_in, tokens_out
+                            FROM call_logs 
+                            WHERE provider = 'gemini' AND timestamp > ?
+                            ORDER BY timestamp ASC LIMIT 50
+                        ''', (_LAST_PROCESSED_TIMESTAMP,))
+                    else:
+                        cur.execute('''
+                            SELECT id, status, timestamp, error_summary, model, tokens_in, tokens_out
+                            FROM call_logs 
+                            WHERE provider = 'gemini'
+                            ORDER BY timestamp DESC LIMIT 1
+                        ''')
+                    rows = cur.fetchall()
+                    conn.close()
+
+                    active_id = pool.get("active_id", "")
+                    active_key = None
+                    for k in pool.get("keys", []):
+                        if k.get("id") == active_id:
+                            active_key = k
+                            break
+
+                    rotate_reason = None
+                    for row in rows:
+                        call_id, status, call_time, err_sum, model, tok_in, tok_out = row
+                        _LAST_PROCESSED_TIMESTAMP = call_time
+
+                        # Assegna token e chiamata alla chiave attualmente attiva nel pool
+                        tok_sum = (tok_in or 0) + (tok_out or 0)
+                        if active_key:
+                            active_key["calls_count"] = active_key.get("calls_count", 0) + 1
+                            active_key["tokens_used"] = active_key.get("tokens_used", 0) + tok_sum
+                            dirty = True
+
+                        # Controlla eventuale saturazione quota / 429
+                        if pool.get("auto_failover", True):
+                            err_str = (err_sum or "").lower()
+                            if status in (429, 503) or "quota" in err_str or "exhausted" in err_str or "rate" in err_str:
+                                rotate_reason = f"Errore {status} su {model}: {err_sum or 'Quota esaurita'}"
+
+                    if rotate_reason:
+                        if dirty:
+                            save_gemini_pool(pool)
+                            dirty = False
+                        rotate_to_next_gemini_key(reason=rotate_reason)
+
+                except Exception:
+                    pass
+
             if dirty:
                 save_gemini_pool(pool)
 
-            # 2. Se auto_failover è attivo, controlla errori 429 recenti da OmniRoute
-            if pool.get("auto_failover", True) and OMNIROUTE_DB.exists():
-                try:
-                    conn = sqlite3.connect(f"file:{OMNIROUTE_DB}?mode=ro", uri=True, timeout=1.0)
-                    cur = conn.cursor()
-                    row = cur.execute('''
-                        SELECT id, status, timestamp, error_summary, model
-                        FROM call_logs 
-                        WHERE provider = 'gemini' 
-                        ORDER BY id DESC LIMIT 1
-                    ''').fetchone()
-                    conn.close()
-
-                    if row:
-                        call_id, status, call_time, err_sum, model = row
-                        if call_id != _LAST_PROCESSED_CALL_ID:
-                            _LAST_PROCESSED_CALL_ID = call_id
-                            err_str = (err_sum or "").lower()
-                            if status in (429, 503) or "quota" in err_str or "exhausted" in err_str or "rate" in err_str:
-                                reason = f"Errore {status} su {model}: {err_sum or 'Quota esaurita'}"
-                                rotate_to_next_gemini_key(reason=reason)
-                except Exception:
-                    pass
         except Exception:
             pass
 

@@ -1057,7 +1057,7 @@
 
           <!-- Card 2: Quota Token Oggi -->
           <div class="pstat-card">
-            <div class="pstat-label" data-i18n="kpi_tokens_today">Token Consumati Oggi</div>
+            <div class="pstat-label" data-i18n="kpi_tokens_today">Quota Chiave Attiva Oggi</div>
             <div class="pstat-val" id="gpool-kpi-tokens" style="color:var(--green);">0 / 1.000.000</div>
             <div style="width:100%;height:6px;background:var(--border-subtle);border-radius:3px;margin-top:6px;overflow:hidden;">
               <div id="gpool-token-bar" style="width:0%;height:100%;background:var(--green);transition:width 0.4s ease;"></div>
@@ -2276,23 +2276,38 @@ async function installOllama() {
         }
       }
 
-      // Tokens Today
+      // Tokens Today (Active Key Quota & Total Pool Quota)
       const stats = d.db_stats || {};
-      const todayTokens = stats.today_tokens || 0;
-      const limit = d.daily_free_limit || 1000000;
-      const pct = Math.min(100, Math.round((todayTokens / limit) * 100));
+      const poolTodayTokens = stats.today_tokens || 0;
+      const keyLimit = d.daily_free_limit || 1000000;
+      
+      const activeTokens = activeKey ? (activeKey.tokens_used || 0) : 0;
+      const activeCalls = activeKey ? (activeKey.calls_count || 0) : 0;
+      const activePct = Math.min(100, Math.round((activeTokens / keyLimit) * 100));
+
       const kpiTokens = document.getElementById("gpool-kpi-tokens");
       const tokenBar = document.getElementById("gpool-token-bar");
       const tokenPct = document.getElementById("gpool-token-pct");
-      if (kpiTokens) kpiTokens.textContent = todayTokens.toLocaleString() + " / " + (limit / 1000).toLocaleString() + "k";
+      const kpiTokensLabel = document.querySelector('[data-i18n="kpi_tokens_today"]');
+
+      if (kpiTokensLabel) {
+        kpiTokensLabel.textContent = isEn ? "Active Key Quota Today" : "Quota Chiave Attiva Oggi";
+      }
+
+      if (kpiTokens) {
+        kpiTokens.textContent = activeTokens.toLocaleString() + " / " + (keyLimit / 1000).toLocaleString() + "k";
+        kpiTokens.style.color = activePct > 90 ? "var(--red)" : (activePct > 70 ? "var(--amber)" : "var(--green)");
+      }
       if (tokenBar) {
-        tokenBar.style.width = pct + "%";
-        tokenBar.style.background = pct > 90 ? "var(--red)" : (pct > 70 ? "var(--amber)" : "var(--green)");
+        tokenBar.style.width = activePct + "%";
+        tokenBar.style.background = activePct > 90 ? "var(--red)" : (activePct > 70 ? "var(--amber)" : "var(--green)");
       }
       if (tokenPct) {
-        tokenPct.textContent = isEn 
-          ? `${pct}% quota consumed today · ${(stats.today_calls || 0)} API calls made`
-          : `${pct}% quota consumata oggi · ${(stats.today_calls || 0)} chiamate API effettuate`;
+        const poolKeysCount = (d.keys && d.keys.length) ? d.keys.length : 1;
+        const totalPoolCap = poolKeysCount * keyLimit;
+        tokenPct.innerHTML = isEn 
+          ? `<strong>${activePct}%</strong> key quota · ${activeCalls} calls <span style="opacity:0.75;margin-left:4px;">(Pool: ${poolTodayTokens.toLocaleString()} / ${(totalPoolCap/1000).toLocaleString()}k)</span>`
+          : `<strong>${activePct}%</strong> quota chiave · ${activeCalls} chiamate <span style="opacity:0.75;margin-left:4px;">(Pool tot: ${poolTodayTokens.toLocaleString()} / ${(totalPoolCap/1000).toLocaleString()}k)</span>`;
       }
 
       // Failover Toggle
@@ -2367,6 +2382,7 @@ async function installOllama() {
               <div style="font-size:11px;color:var(--muted2);display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px dashed var(--border-subtle);padding-top:6px;">
                 <span>${callsLabel} <strong style="color:var(--text);">${k.calls_count || 0}</strong></span>
                 <span>${tokensLabel} <strong style="color:var(--text);">${(k.tokens_used || 0).toLocaleString()}</strong></span>
+                <span>Quota: <strong style="color:${((k.tokens_used || 0) >= 900000) ? 'var(--red)' : (((k.tokens_used || 0) >= 700000) ? 'var(--amber)' : 'var(--green)')};">${Math.min(100, Math.round(((k.tokens_used || 0) / (d.daily_free_limit || 1000000)) * 100))}%</strong></span>
                 ${k.error_message ? `<span style="color:var(--red);">${escapeHtml(k.error_message)}</span>` : `<span style="color:var(--green);">${noErrLabel}</span>`}
               </div>
             `;
@@ -2634,7 +2650,7 @@ async function installOllama() {
   "btn_refresh_gpool": "🔄 Aggiorna Live",
   "btn_test_all_keys": "🧪 Testa Tutte le Chiavi",
   "kpi_active_key": "Chiave Attiva in Uso",
-  "kpi_tokens_today": "Token Consumati Oggi",
+  "kpi_tokens_today": "Quota Chiave Attiva Oggi",
   "kpi_failover": "Auto-Failover su Errore 429",
   "lbl_enable": "Abilita",
   "lbl_rotation_sub": "Rotazione istantanea senza blocchi",
@@ -2786,7 +2802,7 @@ async function installOllama() {
   "btn_refresh_gpool": "🔄 Refresh Live",
   "btn_test_all_keys": "🧪 Test All Keys",
   "kpi_active_key": "Active Key In Use",
-  "kpi_tokens_today": "Tokens Consumed Today",
+  "kpi_tokens_today": "Active Key Quota Today",
   "kpi_failover": "Auto-Failover on 429 Error",
   "lbl_enable": "Enable",
   "lbl_rotation_sub": "Instant rotation with zero stall",
