@@ -232,6 +232,102 @@
     }
     .theme-btn:hover:not(.active) { color: var(--text); }
 
+    /* ─── BOTTONE STAR GITHUB TOPBAR ─── */
+    .btn-github-star {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 6px 14px; border-radius: 8px;
+      background: linear-gradient(135deg, rgba(255, 184, 0, 0.16), rgba(255, 215, 0, 0.08));
+      border: 1px solid rgba(255, 184, 0, 0.45);
+      color: #ffca28;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px; font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 0 12px rgba(255, 184, 0, 0.2);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .btn-github-star:hover {
+      transform: translateY(-1px);
+      background: linear-gradient(135deg, rgba(255, 184, 0, 0.28), rgba(255, 215, 0, 0.18));
+      border-color: #ffd54f;
+      color: #ffffff;
+      box-shadow: 0 0 20px rgba(255, 184, 0, 0.45);
+    }
+
+    /* ─── BANNER SUPPORTO & STAR GITHUB SULLA PAGINA INIZIALE ─── */
+    .star-support-banner {
+      background: linear-gradient(135deg, rgba(255, 184, 0, 0.12) 0%, rgba(0, 229, 255, 0.07) 100%);
+      border: 1px solid rgba(255, 184, 0, 0.38);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .star-support-banner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, #ffb800, #00e5ff, transparent);
+    }
+    .star-support-left {
+      display: flex; align-items: center; gap: 14px; flex: 1; min-width: 260px;
+    }
+    .star-support-icon {
+      font-size: 32px;
+      line-height: 1;
+      filter: drop-shadow(0 0 10px rgba(255, 184, 0, 0.65));
+      animation: float-star 2.5s ease-in-out infinite;
+    }
+    @keyframes float-star {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-3px) rotate(6deg); }
+    }
+    .star-support-title {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .star-support-sub {
+      font-size: 12px;
+      color: var(--muted2);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+    .btn-star-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #ffb800, #ff8c00);
+      color: #0b0f19 !important;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      font-weight: 800;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(255, 184, 0, 0.4);
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .btn-star-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(255, 184, 0, 0.6);
+      filter: brightness(1.1);
+    }
+
+
     .badge {
       display: inline-flex; align-items: center; gap: 7px;
       padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700;
@@ -704,6 +800,11 @@
     </div>
 
     <div class="topbar-right">
+      <!-- PULSANTE RAPIDO STAR SU GITHUB -->
+      <a href="https://github.com/aton-fux/OMNICLAUDE" target="_blank" class="btn-github-star" title="Lascia una stella ⭐ su GitHub per supportare OMNICLAUDE!">
+        <span>⭐</span> <span data-i18n="star_github_btn">Star su GitHub</span>
+      </a>
+
       <!-- SELETTORE TEMA DARK / LIGHT -->
       <div class="theme-switcher" title="Personalizza Tema Dark Cyber o Light Pro">
         <button class="theme-btn active" id="theme-btn-black" onclick="setTheme('black')">🖤 DARK CYBER</button>
@@ -796,6 +897,21 @@
           <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
             <span class="mini-badge mini-green" id="parachute-badge-mini" onclick="showPanel('parachute')" title="Clicca per configurare il Paracadute">✅ Paracadute ON</span>
           </div>
+        </div>
+
+        
+        <!-- BANNER SUPPORTO & STAR GITHUB SULLA PAGINA INIZIALE -->
+        <div class="star-support-banner">
+          <div class="star-support-left">
+            <div class="star-support-icon">⭐</div>
+            <div>
+              <div class="star-support-title" data-i18n="star_banner_title">Ti piace OMNICLAUDE? Lascia una Stella ⭐ su GitHub!</div>
+              <div class="star-support-sub" data-i18n="star_banner_sub">Se trovi utile questo strumento, clicca sulla stellina in alto a destra su GitHub: è gratis, ci vuole 1 secondo e aiuta tantissimo a far crescere il progetto!</div>
+            </div>
+          </div>
+          <a href="https://github.com/aton-fux/OMNICLAUDE" target="_blank" class="btn-star-cta" title="Apri il repository GitHub e clicca sulla stellina ⭐ per supportare il progetto">
+            <span>⭐</span> <span data-i18n="btn_give_star">Lascia una Stella su GitHub</span>
+          </a>
         </div>
 
         <!-- PRONTO PER PROGRAMMARE -->

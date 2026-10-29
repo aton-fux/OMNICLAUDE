@@ -10,9 +10,17 @@
 
 [![Autore](https://img.shields.io/badge/CREATO_DA-ATON--FUX-00f59b?style=for-the-badge&logo=github&logoColor=black)](https://github.com/aton-fux)
 [![Repository](https://img.shields.io/badge/GitHub-OMNICLAUDE-00e5ff?style=for-the-badge&logo=github&logoColor=black)](https://github.com/aton-fux/OMNICLAUDE)
+[![Star on GitHub](https://img.shields.io/github/stars/aton-fux/OMNICLAUDE?style=for-the-badge&logo=github&color=ffb800&label=%E2%AD%90%20Star%20su%20GitHub)](https://github.com/aton-fux/OMNICLAUDE)
 [![Licenza](https://img.shields.io/badge/Licenza-GNU_GPL_v3.0_(Protetta)-b366ff?style=for-the-badge)](./LICENSE)
 [![Piattaforma](https://img.shields.io/badge/OS-Windows_10_%2F_11-0284c7?style=for-the-badge&logo=windows&logoColor=white)](#installazione-rapida)
 [![Zero Dipendenze Python](https://img.shields.io/badge/Python_3-Zero_External_Deps-ffb800?style=for-the-badge&logo=python&logoColor=black)](#architettura-e-concetto-del-tool)
+
+---
+
+
+> ### ⭐ Ti piace OMNICLAUDE? Supporta il progetto con una Stella!
+> Se trovi utile questo strumento per programmare senza blocchi di quota con Claude Code o OpenCode, **lascia una stella ⭐ in alto a destra su [GitHub](https://github.com/aton-fux/OMNICLAUDE)**!  
+> Ci vuole 1 secondo, è 100% gratuito e aiuta tantissimo a far conoscere il progetto nella community open-source internazionale.
 
 ---
 
