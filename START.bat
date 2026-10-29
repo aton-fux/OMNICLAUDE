@@ -31,7 +31,7 @@ netstat -ano | findstr /R ":%OMNIROUTE_PORT%.*LISTENING" >nul
 if errorlevel 1 (
     echo [1/2] Avvio gateway OmniRoute...
     start "OmniRoute" /MIN cmd /c "omniroute serve --no-open"
-    ping -n 4 127.0.0.1 >nul
+    timeout /t 1 >nul
     echo [1/2] Gateway avviato.
 ) else (
     echo [1/2] Gateway OmniRoute gia attivo.
@@ -42,7 +42,7 @@ netstat -ano | findstr /R ":3000.*LISTENING" >nul
 if errorlevel 1 (
     echo [2/2] Avvio interfaccia web OMNICLAUDE...
     start "" pythonw "%SCRIPT_DIR%server.py"
-    ping -n 3 127.0.0.1 >nul
+    timeout /t 1 >nul
     echo [2/2] Interfaccia web avviata.
 ) else (
     echo [2/2] Interfaccia web OMNICLAUDE gia attiva.
@@ -64,8 +64,8 @@ echo   Dal browser puoi scegliere il motore AI e avviare:
 echo   - [APRI CLAUDE CODE]
 echo   - [APRI OPENCODE]
 echo.
-echo   Questa finestra informativa si chiudera tra 4 secondi...
+echo   Questa finestra informativa si chiudera tra 2 secondi...
 echo ============================================================
 echo.
-timeout /t 4 >nul
+timeout /t 2 >nul
 exit /b 0

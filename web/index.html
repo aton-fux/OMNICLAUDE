@@ -869,6 +869,42 @@
             <!-- GRIGLIA MODELLI RILEVATI DINAMICAMENTE SUL PC DELL'UTENTE -->
             <div class="models-grid" id="local-models-grid"></div>
 
+            <!-- HUB MODULARE DI ESPLORAZIONE & INSTALLAZIONE DIRETTA MODELLI (OLLAMA / HUGGINGFACE / GITHUB) -->
+            <div id="ollama-modular-hub" style="margin-top:16px; padding:18px; border-radius:12px; background:var(--surface2); border:1px solid var(--border-bright); display:flex; flex-direction:column; gap:14px;">
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+                <div>
+                  <div style="font-size:13.5px; font-weight:800; color:var(--text); display:flex; align-items:center; gap:8px;">
+                    <span>🌐</span>
+                    <span data-i18n="search_hub_title">Esplora &amp; Installa Qualsiasi Modello Locale (Ollama · HuggingFace GGUF · GitHub)</span>
+                    <span class="tag tag-cyan" data-i18n="tag_modular_free">MODULARE &amp; LIBERO</span>
+                  </div>
+                  <div style="font-size:11.5px; color:var(--muted2); margin-top:3px;">
+                    <span data-i18n="search_hub_sub">Nessun modello imposto: esplora i cataloghi ufficiali o incolla qualsiasi ID / link da Ollama, HuggingFace o GitHub per installarlo direttamente sul tuo PC.</span>
+                  </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                  <button class="btn-step" style="width:auto;padding:5px 10px;font-size:11px;" onclick="openExternalSearch('ollama')" title="Apri la libreria ufficiale Ollama nel browser" data-i18n-title="title_search_ollama">📚 Ollama.com ↗</button>
+                  <button class="btn-step" style="width:auto;padding:5px 10px;font-size:11px;" onclick="openExternalSearch('huggingface')" title="Esplora tutti i modelli GGUF su HuggingFace" data-i18n-title="title_search_hf">🤗 HuggingFace GGUF ↗</button>
+                  <button class="btn-step" style="width:auto;padding:5px 10px;font-size:11px;" onclick="openExternalSearch('github')" title="Cerca repository e Modelfile su GitHub" data-i18n-title="title_search_gh">🐙 GitHub Models ↗</button>
+                </div>
+              </div>
+
+              <!-- BARRA: INSTALLAZIONE DIRETTA DA ID / TAG / LINK HUGGINGFACE O OLLAMA -->
+              <div style="padding-top:12px; border-top:1px solid var(--border-subtle); display:grid; grid-template-columns: auto 1fr auto; gap:10px; align-items:center;">
+                <div style="font-size:11.5px; font-weight:700; color:var(--muted2); white-space:nowrap;" data-i18n="direct_install_label">
+                  ⚡ Installazione Diretta (ID / URL):
+                </div>
+                <input
+                  class="key-input"
+                  type="text"
+                  id="custom-ollama-pull-input"
+                  placeholder="Incolla qualsiasi modello o URL (es. codellama:7b oppure hf.co/autore/modello-gguf)" data-i18n-ph="ph_direct_install"
+                  onkeydown="if(event.key==='Enter') pullCustomInputModel()"
+                >
+                <button class="btn-save" onclick="pullCustomInputModel()" data-i18n="btn_pull_custom">📥 Scarica &amp; Installa sul PC</button>
+              </div>
+            </div>
+
             </section>
 
         </div>
@@ -1961,7 +1997,47 @@
     });
   }
 
-  async function installOllama() {
+    // ─── External Catalog Openers & Direct Model Puller (ATON-FUX) ───
+  function openExternalSearch(platform) {
+    if (platform === "ollama") {
+      window.open("https://ollama.com/search", "_blank");
+    } else if (platform === "huggingface") {
+      window.open("https://huggingface.co/models?library=gguf&sort=trending", "_blank");
+    } else if (platform === "github") {
+      window.open("https://github.com/topics/ollama", "_blank");
+    }
+  }
+
+  function pullCustomInputModel() {
+    const inp = document.getElementById("custom-ollama-pull-input");
+    const val = inp ? inp.value.trim() : "";
+    if (!val) {
+      showToast(currentAppLang === 'en' ? "Enter a model name or HuggingFace URL to install!" : "Inserisci il nome del modello o l'URL HuggingFace/Ollama da installare!", true);
+      return;
+    }
+    pullOllamaModel(val);
+    inp.value = "";
+  }
+
+  async function pullOllamaModel(modelName) {
+    try {
+      const r = await fetch("/api/pull-ollama-model", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ model: modelName })
+      });
+      const d = await r.json();
+      if (d.ok) {
+        showToast(currentAppLang === 'en' ? "📥 Downloading " + d.model + " in terminal window!" : "📥 Download di " + d.model + " avviato nel terminale!");
+      } else {
+        showToast(d.error || (currentAppLang === 'en' ? "Failed to start model download" : "Errore avvio download modello"), true);
+      }
+    } catch (e) {
+      showToast(currentAppLang === 'en' ? "Server connection error" : "Errore connessione al server locale", true);
+    }
+  }
+
+async function installOllama() {
     try {
       const r = await fetch("/api/install-ollama", { method: "POST" });
       const d = await r.json();
@@ -2489,6 +2565,15 @@
   "local_engines_sub": "Rilevamento dinamico dei modelli presenti sul tuo PC (GPU/CPU). 100% Offline, zero costi e massima privacy.",
   "btn_detect_models": "🔄 Rileva Modelli PC",
   "btn_install_ollama": "💿 Installa / Aggiorna Ollama",
+  "search_hub_title": "Esplora &amp; Installa Qualsiasi Modello Locale (Ollama · HuggingFace GGUF · GitHub)",
+  "tag_modular_free": "MODULARE &amp; LIBERO",
+  "search_hub_sub": "Nessun modello imposto: esplora i cataloghi ufficiali o incolla qualsiasi ID / link da Ollama, HuggingFace o GitHub per installarlo direttamente sul tuo PC.",
+  "title_search_ollama": "Apri la libreria ufficiale Ollama nel browser",
+  "title_search_hf": "Esplora tutti i modelli GGUF su HuggingFace",
+  "title_search_gh": "Cerca repository e Modelfile su GitHub",
+  "direct_install_label": "⚡ Installazione Diretta (ID / URL):",
+  "ph_direct_install": "Incolla qualsiasi modello o URL (es. codellama:7b oppure hf.co/autore/modello-gguf)",
+  "btn_pull_custom": "📥 Scarica &amp; Installa sul PC",
   "ph_custom_parachute": "es. openrouter/qwen/qwen-2.5-coder-32b-instruct:free",
   "ph_gpool_name": "es. Account Google Personale 2, Lavoro, ecc.",
   "ph_gpool_key": "Incolla chiave AIzaSy...",
@@ -2632,6 +2717,15 @@
   "local_engines_sub": "Dynamic detection of models present on your PC (GPU/CPU). 100% Offline, zero costs and maximum privacy.",
   "btn_detect_models": "🔄 Detect PC Models",
   "btn_install_ollama": "💿 Install / Update Ollama",
+  "search_hub_title": "Explore &amp; Install Any Local Model (Ollama · HuggingFace GGUF · GitHub)",
+  "tag_modular_free": "MODULAR &amp; UNRESTRICTED",
+  "search_hub_sub": "No preset models enforced: explore official catalogs or paste any model name/link from Ollama, HuggingFace, or GitHub to install on your PC.",
+  "title_search_ollama": "Open official Ollama library in browser",
+  "title_search_hf": "Explore GGUF models on HuggingFace",
+  "title_search_gh": "Search repositories and Modelfiles on GitHub",
+  "direct_install_label": "⚡ Direct Install (ID / URL):",
+  "ph_direct_install": "Paste any model or URL (e.g. codellama:7b or hf.co/author/model-gguf)",
+  "btn_pull_custom": "📥 Download &amp; Install on PC",
   "ph_custom_parachute": "e.g. openrouter/qwen/qwen-2.5-coder-32b-instruct:free",
   "ph_gpool_name": "e.g. Personal Google Account 2, Work, etc.",
   "ph_gpool_key": "Paste AIzaSy... key",
@@ -2780,7 +2874,8 @@
     }
   }
 
-  // ─── Init ───
+  // ─── Init (Instant Zero-Lag Render) ───
+  renderCloudModels();
   setAppLanguage(currentAppLang);
   loadStatus();
   setInterval(loadStatus, 6000);

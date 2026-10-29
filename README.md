@@ -131,6 +131,9 @@ OMNICLAUDE **non impone modelli locali fissi**:
 1. Nella sezione **🖥️ Motori Locali su questo PC (Ollama)** della Pagina Iniziale, il sistema rileva dinamicamente in tempo reale i modelli effettivamente presenti sulla tua GPU/CPU (con possibilità di attivarli con un clic o disinstallarli con `🗑️`).
 2. Puoi installare o aggiornare Ollama con il pulsante dedicato **`💿 Installa / Aggiorna Ollama`**.
 3. Per aggiungere qualsiasi modello AI locale offline, ti basta eseguire da terminale `ollama run <nome-modello>` (es. `ollama run qwen2.5-coder` o `ollama run deepseek-r1:7b`): cliccando **`🔄 Rileva Modelli PC`**, OMNICLAUDE lo riconosce istantaneamente e lo rende utilizzabile sia su Claude Code che su OpenCode a costo zero e con privacy assoluta.
+4. Tramite l'**Hub Modulare di Esplorazione & Installazione Diretta**:
+   - Accedi con un clic alle librerie ufficiali online (**📚 Ollama.com**, **🤗 HuggingFace GGUF** e **🐙 GitHub Models**);
+   - Incolla qualsiasi nome o URL (es. `codellama:7b` o link HuggingFace `hf.co/...`) nella barra **`⚡ Installazione Diretta`** e clicca **`📥 Scarica & Installa sul PC`** per avviare il download automatico nel terminale.
 
 ### 4️⃣ ⚡ Gemini Multi-Key Hub & Rotazione Automatica (Zero Rate-Limit)
 Google Gemini offre 1 milione di token al giorno per account gratis, ma programmando intensamente si possono raggiungere i limiti di rate limit (HTTP 429). Con il **Gemini Multi-Key Hub**:

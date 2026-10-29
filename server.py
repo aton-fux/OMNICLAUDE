@@ -574,6 +574,16 @@ def get_ollama_status(force: bool = False) -> dict:
     _CACHE["ollama"] = (now, res)
     return res
 
+def warmup_cache():
+    """Asynchronously populate keys, oauth and ollama status in parallel threads on boot."""
+    t1 = threading.Thread(target=lambda: get_keys_status(force=True), daemon=True)
+    t2 = threading.Thread(target=lambda: get_oauth_status(force=True), daemon=True)
+    t3 = threading.Thread(target=lambda: get_ollama_status(force=True), daemon=True)
+    t1.start()
+    t2.start()
+    t3.start()
+
+
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -601,9 +611,28 @@ class Handler(BaseHTTPRequestHandler):
             parachute_csv = cfg.get("PARACHUTE_MODELS", DEFAULT_PARACHUTE_MODELS)
             parachute_models = [m.strip() for m in parachute_csv.split(",") if m.strip()]
             parachute_strategy = cfg.get("PARACHUTE_STRATEGY", DEFAULT_PARACHUTE_STRATEGY)
-            keys = get_keys_status(force=force_refresh)
-            oauth_info = get_oauth_status(force=force_refresh)
-            ollama_info = get_ollama_status(force=force_refresh)
+
+            now = time.time()
+            need_keys = force_refresh or (now - _CACHE["keys"][0] >= 15.0) or not _CACHE["keys"][1]
+            need_oauth = force_refresh or (now - _CACHE["oauth"][0] >= 15.0) or not _CACHE["oauth"][1]
+            need_ollama = force_refresh or (now - _CACHE["ollama"][0] >= 12.0) or not _CACHE["ollama"][1]
+
+            if need_keys or need_oauth or need_ollama:
+                threads = []
+                if need_keys:
+                    threads.append(threading.Thread(target=lambda: get_keys_status(force=force_refresh)))
+                if need_oauth:
+                    threads.append(threading.Thread(target=lambda: get_oauth_status(force=force_refresh)))
+                if need_ollama:
+                    threads.append(threading.Thread(target=lambda: get_ollama_status(force=force_refresh)))
+                for t in threads:
+                    t.start()
+                for t in threads:
+                    t.join(timeout=3.5)
+
+            keys = _CACHE["keys"][1] or {k: False for k in ("gemini", "groq", "deepseek", "openrouter", "anthropic", "openai")}
+            oauth_info = _CACHE["oauth"][1] or {"claude": False}
+            ollama_info = _CACHE["ollama"][1] or {"installed": False, "version": "", "models": []}
 
             # Gemini Multi-Key Hub snapshot
             g_pool = load_gemini_pool()
@@ -795,13 +824,16 @@ class Handler(BaseHTTPRequestHandler):
             self.send_json({"ok": True, "message": "Installazione di Ollama avviata in una nuova finestra!"})
             return
 
-            # Convert full HuggingFace URL or ollama pull prefix if user pasted it
+        if parsed.path == "/api/pull-ollama-model":
+            model_name = body.get("model", "").strip()
+            if not model_name:
+                self.send_json({"error": "Specifica il nome o link del modello da scaricare"}, status=400)
+                return
             for prefix in ("ollama pull ", "ollama run "):
                 if model_name.lower().startswith(prefix):
                     model_name = model_name[len(prefix):].strip()
             model_name = re.sub(r"^https?://(www\.)?huggingface\.co/", "hf.co/", model_name, flags=re.I)
             model_name = re.sub(r"^https?://(www\.)?ollama\.com/library/", "", model_name, flags=re.I)
-            # Sanitize basic shell chars
             safe_model = "".join(c for c in model_name if c.isalnum() or c in ("-", "_", ":", ".", "/"))
             cmd_str = (
                 f"title OMNICLAUDE - Download Modello Locale {safe_model} && color 0A && "
