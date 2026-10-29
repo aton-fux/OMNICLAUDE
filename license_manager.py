@@ -28,6 +28,7 @@ LICENSE_FILE = DIR / "license.json"
 # Master signing secret for offline cryptographic keys (Owned exclusively by ATON-FUX)
 _MASTER_SECRET = b"ATON-FUX_OMNICLAUDE_PRO_2026_MASTER_CRYPT_KEY_v2"
 GUMROAD_PRODUCT_PERMALINK = "omniclaude-pro"
+GUMROAD_PRODUCT_ID = "ph5_jemwJFTHsF9qYpJPqw=="
 GUMROAD_DEFAULT_URL = "https://kronostone.gumroad.com/l/omniclaude-pro"
 STORE_URL = "https://aton-fux.github.io/OMNICLAUDE/"
 
@@ -77,14 +78,18 @@ def verify_offline_license(key: str) -> Tuple[bool, str]:
     return False, "Firma licenza non valida o contraffatta"
 
 
-def verify_gumroad_license(license_key: str, product_permalink: str = GUMROAD_PRODUCT_PERMALINK) -> Tuple[bool, str, Dict[str, Any]]:
+def verify_gumroad_license(license_key: str, product_permalink: str = GUMROAD_PRODUCT_PERMALINK, product_id: str = GUMROAD_PRODUCT_ID) -> Tuple[bool, str, Dict[str, Any]]:
     """Verify a license key using Gumroad's official API."""
     url = "https://api.gumroad.com/v2/licenses/verify"
-    data = urllib.parse.urlencode({
-        "product_permalink": product_permalink,
+    payload = {
         "license_key": license_key.strip(),
         "increment_uses_count": "true"
-    }).encode("utf-8")
+    }
+    if product_id:
+        payload["product_id"] = product_id
+    else:
+        payload["product_permalink"] = product_permalink
+    data = urllib.parse.urlencode(payload).encode("utf-8")
     
     req = urllib.request.Request(
         url,
