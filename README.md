@@ -126,13 +126,11 @@ cd OMNICLAUDE
 3. Nella colonna di destra (**➕ Aggiungi Motore dall'App**) puoi aggiungere con un clic qualsiasi motore Cloud o qualsiasi modello locale **Ollama** installato sul tuo PC, oppure inserire un ID modello personalizzato (es. da OpenRouter).
 4. Clicca su **`💾 Salva, Sincronizza & Attiva Paracadute`**.
 
-### 3️⃣ Motore di Ricerca & Installazione Libera Modelli Locali (Ollama · HuggingFace GGUF · GitHub)
-OMNICLAUDE **non impone né ancora modelli locali fissi**:
-1. Nella sezione **🖥️ Motori Locali su questo PC (Ollama)** della Pagina Iniziale, il sistema rileva dinamicamente solo i modelli effettivamente installati sul tuo PC (con possibilità di attivarli o disinstallarli `🗑️`).
-2. Tramite l'**Hub Modulare di Ricerca Multi-Sorgente** integrato puoi:
-   - Cercare in tempo reale qualsiasi modello su **📚 Ollama Library**, **🤗 HuggingFace Hub (GGUF Direct Pull)** e **🐙 GitHub Repositories**;
-   - Scegliere la variante/taglia di parametri adatta alla tua scheda video (es. `:1.5b`, `:7b`, `:14b`, `:32b`, `:latest`) e installarla in 1 click;
-   - Incollare qualsiasi ID o URL diretto (`nome:tag` oppure `hf.co/autore/modello-gguf`) per scaricarlo e usarlo subito offline con Claude Code e OpenCode.
+### 3️⃣ Rilevamento Dinamico Modelli Locali su PC (Ollama 100% Offline)
+OMNICLAUDE **non impone modelli locali fissi**:
+1. Nella sezione **🖥️ Motori Locali su questo PC (Ollama)** della Pagina Iniziale, il sistema rileva dinamicamente in tempo reale i modelli effettivamente presenti sulla tua GPU/CPU (con possibilità di attivarli con un clic o disinstallarli con `🗑️`).
+2. Puoi installare o aggiornare Ollama con il pulsante dedicato **`💿 Installa / Aggiorna Ollama`**.
+3. Per aggiungere qualsiasi modello AI locale offline, ti basta eseguire da terminale `ollama run <nome-modello>` (es. `ollama run qwen2.5-coder` o `ollama run deepseek-r1:7b`): cliccando **`🔄 Rileva Modelli PC`**, OMNICLAUDE lo riconosce istantaneamente e lo rende utilizzabile sia su Claude Code che su OpenCode a costo zero e con privacy assoluta.
 
 ### 4️⃣ ⚡ Gemini Multi-Key Hub & Rotazione Automatica (Zero Rate-Limit)
 Google Gemini offre 1 milione di token al giorno per account gratis, ma programmando intensamente si possono raggiungere i limiti di rate limit (HTTP 429). Con il **Gemini Multi-Key Hub**:

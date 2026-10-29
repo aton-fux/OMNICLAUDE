@@ -857,7 +857,7 @@
             <div class="engine-section-header">
               <div>
                 <div class="engine-section-title" data-i18n="local_engines_title">🖥️ Motori Locali su questo PC (Ollama)</div>
-                <div class="engine-section-sub" data-i18n="local_engines_sub">Rilevamento dinamico dei modelli presenti sul tuo PC + Motore di Ricerca &amp; Installazione Libera da <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> e <strong>GitHub</strong>.</div>
+                <div class="engine-section-sub" data-i18n="local_engines_sub">Rilevamento dinamico dei modelli presenti sul tuo PC (GPU/CPU). 100% Offline, zero costi e massima privacy.</div>
               </div>
               <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
                 <span class="tag tag-amber" id="ollama-home-badge">100% OFFLINE</span>
@@ -869,63 +869,7 @@
             <!-- GRIGLIA MODELLI RILEVATI DINAMICAMENTE SUL PC DELL'UTENTE -->
             <div class="models-grid" id="local-models-grid"></div>
 
-            <!-- HUB MODULARE DI RICERCA & INSTALLAZIONE LIBERA MODELLI (OLLAMA / HUGGINGFACE / GITHUB) -->
-            <div id="ollama-modular-hub" style="margin-top:16px; padding:18px; border-radius:12px; background:var(--surface2); border:1px solid var(--border-bright); display:flex; flex-direction:column; gap:14px;">
-              <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-                <div>
-                  <div style="font-size:13.5px; font-weight:800; color:var(--text); display:flex; align-items:center; gap:8px;">
-                    <span>🌐</span>
-                    <span data-i18n="search_hub_title">Esplora, Cerca &amp; Installa Qualsiasi Modello Locale (Ollama · HuggingFace GGUF · GitHub)</span>
-                    <span class="tag tag-cyan" data-i18n="tag_modular_free">MODULARE &amp; LIBERO</span>
-                  </div>
-                  <div style="font-size:11.5px; color:var(--muted2); margin-top:3px;">
-                    <span data-i18n="search_hub_sub">Nessun modello imposto: cerca liberamente qualsiasi motore AI nel mondo o incolla il nome/link da Ollama, HuggingFace o GitHub per installarlo sul tuo PC.</span>
-                  </div>
-                </div>
-                <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
-                  <button class="btn-step" style="width:auto;padding:5px 10px;font-size:11px;" onclick="openExternalSearch('ollama')" title="Apri la libreria ufficiale Ollama nel browser" data-i18n-title="title_search_ollama">📚 Ollama.com ↗</button>
-                  <button class="btn-step" style="width:auto;padding:5px 10px;font-size:11px;" onclick="openExternalSearch('huggingface')" title="Esplora tutti i modelli GGUF su HuggingFace" data-i18n-title="title_search_hf">🤗 HuggingFace GGUF ↗</button>
-                  <button class="btn-step" style="width:auto;padding:5px 10px;font-size:11px;" onclick="openExternalSearch('github')" title="Cerca repository e Modelfile su GitHub" data-i18n-title="title_search_gh">🐙 GitHub Models ↗</button>
-                </div>
-              </div>
-
-              <!-- BARRA 1: MOTORE DI RICERCA LIVE MULTI-SORGENTE -->
-              <div style="display:grid; grid-template-columns: 1fr auto auto; gap:8px; align-items:center;">
-                <input
-                  class="key-input"
-                  type="text"
-                  id="model-search-query"
-                  placeholder="🔍 Cerca qualsiasi modello (es. coder, llama, mistral, gemma, uncensored, phi, vision, deepseek...)" data-i18n-ph="ph_model_search"
-                  onkeydown="if(event.key==='Enter') searchModelsOnline()"
-                >
-                <select id="model-search-source" class="strategy-select" style="max-width:230px; padding:10px 12px;" onchange="searchModelsOnline()">
-                  <option value="all" data-i18n="src_all">🌐 Tutte le Sorgenti</option>
-                  <option value="ollama" data-i18n="src_ollama">📚 Ollama Library</option>
-                  <option value="huggingface" data-i18n="src_hf">🤗 HuggingFace GGUF</option>
-                  <option value="github" data-i18n="src_gh">🐙 GitHub Repositories</option>
-                </select>
-                <button class="btn-primary-cyber" style="flex:0 0 auto; padding:10px 18px;" onclick="searchModelsOnline()" data-i18n="btn_search_models">🔍 Cerca Modelli</button>
-              </div>
-
-              <!-- CONTENITORE RISULTATI RICERCA LIVE -->
-              <div id="model-search-results" style="display:none; flex-direction:column; gap:10px; max-height:360px; overflow-y:auto; padding-right:4px;"></div>
-
-              <!-- BARRA 2: INSTALLAZIONE DIRETTA DA ID / TAG / LINK HUGGINGFACE O OLLAMA -->
-              <div style="padding-top:12px; border-top:1px solid var(--border-subtle); display:grid; grid-template-columns: auto 1fr auto; gap:10px; align-items:center;">
-                <div style="font-size:11.5px; font-weight:700; color:var(--muted2); white-space:nowrap;" data-i18n="direct_install_label">
-                  ⚡ Installazione Diretta (ID / URL):
-                </div>
-                <input
-                  class="key-input"
-                  type="text"
-                  id="custom-ollama-pull-input"
-                  placeholder="Incolla qualsiasi modello o URL (es. nome-modello:tag oppure hf.co/autore/modello-gguf)"
-                  onkeydown="if(event.key==='Enter') pullCustomInputModel()"
-                >
-                <button class="btn-save" onclick="pullCustomInputModel()" data-i18n="btn_pull_custom">📥 Scarica &amp; Installa sul PC</button>
-              </div>
-            </div>
-          </section>
+            </section>
 
         </div>
       </div>
@@ -1945,8 +1889,8 @@
           </div>
           <div class="mc-desc" style="margin-top:6px; line-height:1.65;">
             ${isEn 
-              ? "The <strong>Free Cloud Engines</strong> above are already ready to use! If you wish to run local models on your GPU/CPU:<br><strong>1️⃣ Step 1:</strong> Click <strong>&quot;💿 Install / Update Ollama&quot;</strong> at top right of this box (or download from <a href='https://ollama.com/download' target='_blank' style='color:var(--cyan);font-weight:700;'>ollama.com/download ↗</a>).<br><strong>2️⃣ Step 2:</strong> Use the <strong>Multi-Source Search Engine</strong> below to discover and install any model from <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> or <strong>GitHub</strong>!"
-              : "I <strong>Motori Cloud Gratuiti</strong> qui sopra sono già pronti all'uso! Se desideri usare modelli locali sulla tua GPU/CPU:<br><strong>1️⃣ Passo 1:</strong> Clicca <strong>&quot;💿 Installa / Aggiorna Ollama&quot;</strong> in alto a destra in questo box (o scaricalo da <a href='https://ollama.com/download' target='_blank' style='color:var(--cyan);font-weight:700;'>ollama.com/download ↗</a>).<br><strong>2️⃣ Passo 2:</strong> Usa il <strong>Motore di Ricerca Multi-Sorgente</strong> qui sotto per cercare e installare qualsiasi modello da <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> o <strong>GitHub</strong>!"
+              ? "The <strong>Free Cloud Engines</strong> above are already ready to use! If you wish to run local models on your GPU/CPU:<br><strong>1️⃣ Step 1:</strong> Click <strong>&quot;💿 Install / Update Ollama&quot;</strong> at top right of this box (or download from <a href='https://ollama.com/download' target='_blank' style='color:var(--cyan);font-weight:700;'>ollama.com/download ↗</a>).<br><strong>2️⃣ Step 2:</strong> In your terminal run <code>ollama run qwen2.5-coder</code> (or any other model) — OMNICLAUDE will dynamically detect it immediately!"
+              : "I <strong>Motori Cloud Gratuiti</strong> qui sopra sono già pronti all'uso! Se desideri usare modelli locali sulla tua GPU/CPU:<br><strong>1️⃣ Passo 1:</strong> Clicca <strong>&quot;💿 Installa / Aggiorna Ollama&quot;</strong> in alto a destra in questo box (o scaricalo da <a href='https://ollama.com/download' target='_blank' style='color:var(--cyan);font-weight:700;'>ollama.com/download ↗</a>).<br><strong>2️⃣ Passo 2:</strong> Apri il terminale ed esegui <code>ollama run qwen2.5-coder</code> (o qualsiasi altro modello) — OMNICLAUDE lo rileverà dinamicamente subito!"
             }
           </div>
         </div>
@@ -1970,8 +1914,8 @@
           </div>
           <div class="mc-desc" style="margin-top:6px; line-height:1.65;">
             ${isEn 
-              ? "This section never enforces hardcoded models: it automatically mirrors models on your PC. Use the <strong>🔍 Explore, Search & Install Any Local Model</strong> search hub below to browse <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> or <strong>GitHub</strong> and install your favorite models!"
-              : "Questa sezione non impone modelli predefiniti: mostra automaticamente i motori presenti sul tuo PC. Usa la barra <strong>🔍 Esplora, Cerca &amp; Installa Qualsiasi Modello Locale</strong> qui sotto per cercare liberamente su <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> o <strong>GitHub</strong> e installare i modelli che preferisci!"
+              ? "This section never enforces hardcoded models: it automatically mirrors models installed on your PC. Download any model via terminal with <code>ollama run &lt;model&gt;</code> and click <strong>🔄 Detect PC Models</strong> above!"
+              : "Questa sezione non impone modelli predefiniti: mostra automaticamente i motori presenti sul tuo PC. Scarica qualsiasi modello da terminale con <code>ollama run &lt;modello&gt;</code> e clicca <strong>🔄 Rileva Modelli PC</strong> in alto!"
             }
           </div>
         </div>
@@ -2017,133 +1961,6 @@
     });
   }
 
-  // ─── Multi-Source Online Model Search & Modular Installer (Ollama / HuggingFace GGUF / GitHub) ───
-  async function searchModelsOnline() {
-    const qInput = document.getElementById("model-search-query");
-    const srcSel = document.getElementById("model-search-source");
-    const resBox = document.getElementById("model-search-results");
-    if (!resBox) return;
-    const isEn = (currentAppLang === 'en');
-
-    const query = qInput ? qInput.value.trim() : "";
-    const source = srcSel ? srcSel.value : "all";
-
-    resBox.style.display = "flex";
-    const sourceText = source === 'all' 
-      ? (isEn ? 'Ollama Library, HuggingFace GGUF and GitHub' : 'Ollama Library, HuggingFace GGUF e GitHub')
-      : source.toUpperCase();
-    resBox.innerHTML = `
-      <div style="padding:14px; border-radius:9px; background:var(--surface); border:1px solid var(--border); font-size:12.5px; color:var(--cyan); font-family:'JetBrains Mono',monospace;">
-        ⚡ ${isEn ? 'Live search in progress on' : 'Ricerca live in corso su'} ${sourceText}...
-      </div>
-    `;
-
-    try {
-      const r = await fetch(`/api/search-models?q=${encodeURIComponent(query)}&source=${encodeURIComponent(source)}`);
-      const d = await r.json();
-      const items = (d && Array.isArray(d.results)) ? d.results : [];
-
-      if (items.length === 0) {
-        resBox.innerHTML = `
-          <div style="padding:14px; border-radius:9px; background:var(--surface); border:1px solid var(--border); font-size:12.5px; color:var(--muted2);">
-            ${isEn 
-              ? `No direct results found for "<strong>${escapeHtml(query || 'empty search')}</strong>". You can paste any model ID or HuggingFace/Ollama link directly into the <strong>Direct Install</strong> field below!`
-              : `Nessun risultato diretto trovato per "<strong>${escapeHtml(query || 'ricerca vuota')}</strong>". Puoi incollare qualsiasi ID modello o link HuggingFace/Ollama direttamente nel campo <strong>Installazione Diretta</strong> qui sotto!`
-            }
-          </div>
-        `;
-        return;
-      }
-
-      resBox.innerHTML = "";
-      items.forEach((item, idx) => {
-        const row = document.createElement("div");
-        row.className = "pool-item";
-        row.style.alignItems = "flex-start";
-        row.style.gap = "12px";
-
-        const badgeCls = item.source === "ollama" ? "tag-cyan" : (item.source === "huggingface" ? "tag-amber" : "tag-purple");
-        const selectId = `variant-sel-${idx}`;
-
-        let variantSelectorHtml = "";
-        if (item.installable && Array.isArray(item.variants) && item.variants.length > 1) {
-          variantSelectorHtml = `
-            <select id="${selectId}" class="strategy-select" style="padding:5px 8px; font-size:11px; width:auto; max-width:210px;">
-              ${item.variants.map(v => `<option value="${v}">${v}</option>`).join("")}
-            </select>
-          `;
-        } else if (item.installable && item.pull_id) {
-          variantSelectorHtml = `<input type="hidden" id="${selectId}" value="${item.pull_id}">`;
-        }
-
-        const actionBtnHtml = item.installable
-          ? `<button class="btn-add-pool" onclick="pullFromSearchResult('${selectId}', '${(item.pull_id || item.name).replace(/'/g, "\'")}')">${isEn ? '📥 Install on PC' : '📥 Installa sul PC'}</button>`
-          : `<a href="${item.url}" target="_blank" class="btn-add-pool" style="text-decoration:none;display:inline-flex;align-items:center;">${isEn ? '🔗 Open on GitHub ↗' : '🔗 Apri su GitHub ↗'}</a>`;
-
-        const officialSheet = isEn ? "Official Page ↗" : "Scheda Ufficiale ↗";
-        const cmdLabel = isEn ? "Command:" : "Comando:";
-
-        row.innerHTML = `
-          <div class="pool-item-info" style="flex:1;">
-            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-              <span class="pool-item-name" style="font-size:13px;">${item.name}</span>
-              <span class="tag ${badgeCls}">${item.source_label}</span>
-              ${item.stats ? `<span class="tag tag-green">${item.stats}</span>` : ""}
-              <a href="${item.url}" target="_blank" style="font-size:11px; color:var(--cyan); text-decoration:none; font-weight:700;">${officialSheet}</a>
-            </div>
-            <div style="font-size:11.5px; color:var(--muted2); margin-top:4px; line-height:1.45;">${item.desc}</div>
-            ${item.pull_id ? `<div class="pool-item-id" style="margin-top:4px;">${cmdLabel} ollama pull ${item.pull_id}</div>` : ""}
-          </div>
-          <div style="display:flex; align-items:center; gap:8px; flex-shrink:0; flex-wrap:wrap;">
-            ${variantSelectorHtml}
-            ${actionBtnHtml}
-          </div>
-        `;
-        resBox.appendChild(row);
-      });
-    } catch (e) {
-      resBox.innerHTML = `
-        <div style="padding:14px; border-radius:9px; background:var(--surface); border:1px solid var(--red); font-size:12.5px; color:var(--red);">
-          ${isEn 
-            ? "Error during online search. Check internet connection or use Ollama.com / HuggingFace / GitHub buttons at top right."
-            : "Errore durante la ricerca online. Verifica la connessione internet o usa i pulsanti Ollama.com / HuggingFace / GitHub in alto a destra."
-          }
-        </div>
-      `;
-    }
-  }
-
-  function pullFromSearchResult(selectId, fallbackId) {
-    const el = document.getElementById(selectId);
-    const modelToPull = (el && el.value) ? el.value : fallbackId;
-    if (modelToPull) {
-      pullOllamaModel(modelToPull);
-    }
-  }
-
-  function pullCustomInputModel() {
-    const inp = document.getElementById("custom-ollama-pull-input");
-    const val = inp ? inp.value.trim() : "";
-    if (!val) {
-      showToast("Inserisci il nome del modello o l'URL HuggingFace/Ollama da installare!", true);
-      return;
-    }
-    pullOllamaModel(val);
-    inp.value = "";
-  }
-
-  function openExternalSearch(platform) {
-    const qInput = document.getElementById("model-search-query");
-    const q = encodeURIComponent(qInput && qInput.value.trim() ? qInput.value.trim() : "");
-    if (platform === "ollama") {
-      window.open(q ? `https://ollama.com/search?q=${q}` : "https://ollama.com/search", "_blank");
-    } else if (platform === "huggingface") {
-      window.open(q ? `https://huggingface.co/models?library=gguf&search=${q}` : "https://huggingface.co/models?library=gguf&sort=trending", "_blank");
-    } else if (platform === "github") {
-      window.open(q ? `https://github.com/search?q=${q}+ollama+OR+gguf&type=repositories` : "https://github.com/topics/ollama", "_blank");
-    }
-  }
-
   async function installOllama() {
     try {
       const r = await fetch("/api/install-ollama", { method: "POST" });
@@ -2155,24 +1972,6 @@
       }
     } catch (e) {
       window.open("https://ollama.com/download", "_blank");
-    }
-  }
-
-  async function pullOllamaModel(modelName) {
-    try {
-      const r = await fetch("/api/pull-ollama-model", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ model: modelName })
-      });
-      const d = await r.json();
-      if (d.ok) {
-        showToast("📥 Download di " + d.model + " avviato nel terminale!");
-      } else {
-        showToast(d.error || "Errore avvio download modello", true);
-      }
-    } catch (e) {
-      showToast("Errore connessione al server locale", true);
     }
   }
 
@@ -2687,21 +2486,9 @@
   "cloud_engines_sub": "Clicca qualsiasi motore per attivarlo istantaneamente sia su <strong>Claude Code</strong> che su <strong>OpenCode</strong>.",
   "tag_zero_api_cost": "ZERO COSTI API A CONSUMO",
   "local_engines_title": "🖥️ Motori Locali su questo PC (Ollama)",
-  "local_engines_sub": "Rilevamento dinamico dei modelli presenti sul tuo PC + Motore di Ricerca &amp; Installazione Libera da <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> e <strong>GitHub</strong>.",
+  "local_engines_sub": "Rilevamento dinamico dei modelli presenti sul tuo PC (GPU/CPU). 100% Offline, zero costi e massima privacy.",
   "btn_detect_models": "🔄 Rileva Modelli PC",
   "btn_install_ollama": "💿 Installa / Aggiorna Ollama",
-  "search_hub_title": "Esplora, Cerca &amp; Installa Qualsiasi Modello Locale (Ollama · HuggingFace GGUF · GitHub)",
-  "tag_modular_free": "MODULARE &amp; LIBERO",
-  "search_hub_sub": "Nessun modello imposto: cerca liberamente qualsiasi motore AI nel mondo o incolla il nome/link da Ollama, HuggingFace o GitHub per installarlo sul tuo PC.",
-  "src_all": "🌐 Tutte le Sorgenti",
-  "src_ollama": "📚 Ollama Library",
-  "src_hf": "🤗 HuggingFace GGUF",
-  "src_gh": "🐙 GitHub Repositories",
-  "btn_search_models": "🔍 Cerca Modelli",
-  "direct_install_label": "⚡ Installazione Diretta (ID / URL):",
-  "btn_pull_custom": "📥 Scarica &amp; Installa sul PC",
-  "ph_model_search": "🔍 Cerca qualsiasi modello (es. coder, llama, mistral, gemma, uncensored, phi, vision, deepseek...)",
-  "ph_direct_install": "Es: codellama:7b, hf.co/bartowski/DeepSeek-R1-Distill-Qwen-7B-GGUF o link GitHub",
   "ph_custom_parachute": "es. openrouter/qwen/qwen-2.5-coder-32b-instruct:free",
   "ph_gpool_name": "es. Account Google Personale 2, Lavoro, ecc.",
   "ph_gpool_key": "Incolla chiave AIzaSy...",
@@ -2805,9 +2592,6 @@
   "tag_key_not_provided": "Chiave non inserita",
   "tag_optional": "Opzionale",
   "tag_free": "GRATIS",
-  "title_search_ollama": "Apri la libreria ufficiale Ollama nel browser",
-  "title_search_hf": "Esplora tutti i modelli GGUF su HuggingFace",
-  "title_search_gh": "Cerca repository e Modelfile su GitHub",
   "author_label": "Posto Riservato · Autore Ufficiale",
   "badge_loading_quota": "CARICAMENTO QUOTA...",
   "badge_three_engines": "3 Motori",
@@ -2845,21 +2629,9 @@
   "cloud_engines_sub": "Click any engine to instantly activate it for both <strong>Claude Code</strong> and <strong>OpenCode</strong>.",
   "tag_zero_api_cost": "ZERO CONSUMPTION API COSTS",
   "local_engines_title": "🖥️ Local Engines on this PC (Ollama)",
-  "local_engines_sub": "Dynamic detection of models on your PC + Free Search &amp; Install Engine from <strong>Ollama Library</strong>, <strong>HuggingFace GGUF</strong> and <strong>GitHub</strong>.",
+  "local_engines_sub": "Dynamic detection of models present on your PC (GPU/CPU). 100% Offline, zero costs and maximum privacy.",
   "btn_detect_models": "🔄 Detect PC Models",
   "btn_install_ollama": "💿 Install / Update Ollama",
-  "search_hub_title": "Explore, Search &amp; Install Any Local Model (Ollama · HuggingFace GGUF · GitHub)",
-  "tag_modular_free": "MODULAR &amp; UNRESTRICTED",
-  "search_hub_sub": "No preset models enforced: freely discover any AI engine worldwide or paste model names/links from Ollama, HuggingFace, or GitHub to install on your PC.",
-  "src_all": "🌐 All Sources",
-  "src_ollama": "📚 Ollama Library",
-  "src_hf": "🤗 HuggingFace GGUF",
-  "src_gh": "🐙 GitHub Repositories",
-  "btn_search_models": "🔍 Search Models",
-  "direct_install_label": "⚡ Direct Install (ID / URL):",
-  "btn_pull_custom": "📥 Download &amp; Install on PC",
-  "ph_model_search": "🔍 Search any model (e.g. coder, llama, mistral, gemma, uncensored, phi, vision, deepseek...)",
-  "ph_direct_install": "E.g. codellama:7b, hf.co/bartowski/DeepSeek-R1-Distill-Qwen-7B-GGUF or GitHub URL",
   "ph_custom_parachute": "e.g. openrouter/qwen/qwen-2.5-coder-32b-instruct:free",
   "ph_gpool_name": "e.g. Personal Google Account 2, Work, etc.",
   "ph_gpool_key": "Paste AIzaSy... key",
@@ -2963,9 +2735,6 @@
   "tag_key_not_provided": "Key not provided",
   "tag_optional": "Optional",
   "tag_free": "FREE",
-  "title_search_ollama": "Open official Ollama library in browser",
-  "title_search_hf": "Explore all GGUF models on HuggingFace",
-  "title_search_gh": "Search repositories and Modelfiles on GitHub",
   "author_label": "Reserved Seat · Official Author",
   "badge_loading_quota": "LOADING QUOTA...",
   "badge_three_engines": "3 Engines",
